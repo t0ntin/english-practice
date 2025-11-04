@@ -109,7 +109,7 @@ a {
 
 }
 
-.subject {
+.subject, .user-defined-subject {
   background-color: #93033b;
 }
 
@@ -121,7 +121,7 @@ a {
   background-color: #2a3bd3;
 }
 
-.subject, .verb, .object {
+.subject, .verb, .object, .user-defined-subject {
   padding: 3px;
 
 }
@@ -143,4 +143,5 @@ a {
 
 .new-sentence-section {
   display: flex;
+  border: 2px green solid;
 }
