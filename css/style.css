@@ -141,9 +141,31 @@ a {
 
 }
 
+.all-sentence-container {
+  display: flex;
+}
+
+.chosen-sentence-container {
+  display: flex;
+  gap: 3px;
+}
+
+.spanish-sentence-container {
+  display: flex;
+  gap: 3px;
+}
+
 .new-sentence-section {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
   border: 2px green solid;
+}
+
+
+.left-section {
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden {

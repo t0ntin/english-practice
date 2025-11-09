@@ -7,6 +7,7 @@ const subjectSectionEl = document.querySelector('.subject-section')
 const verbSectionEl = document.querySelector('.verb-section')
 const objectSectionEl = document.querySelector('.object-section')
 const newSentenceSectionEl = document.querySelector('.new-sentence-section')
+const chosenSentEl = document.querySelector('.chosen-sentence-container')
 // const userInputEl = makeElement('input', 'user-subject', subjectSectionEl);
 const optionButtonsCont = document.querySelector('.option-buttons-container');
 const dialogBoxEl = document.querySelector('.dialog-box');
@@ -19,7 +20,7 @@ const subjects = ['Mi mamá', 'Mis padres', 'El carro',  'Aprender un idioma', '
 
 const verbs = ['tiene(n)', 'hace(n)', 'cuesta(n)', 'abre(n)', 'reduce(n)'];
 
-const objects = ['comida en navidad', 'su tarea', 'una casa grande', 'puertas', 'congestión', 'mucho dinero'];
+const objects = ['comida en navidad', 'su tarea', 'una casa grande', 'puertas', 'la congestión', 'mucho dinero'];
 
 export function render() {
   subjects.forEach(subject  => {
@@ -50,15 +51,6 @@ export function render() {
 const subjectEls = document.querySelectorAll('.subject');
 console.log(subjectEls.length)
 
-function enableClick(elements) {
-  elements.forEach(subject => subject.clicked = false);
-}
-function disableClick(event, elements) {
-  if (event.target.clicked === true) return;
-  elements.forEach(subject => subject.clicked = true);
-}
-// enableClick(subjectEls);
-
 const verbEls = document.querySelectorAll('.verb');
 const objectEls = document.querySelectorAll('.object');
 
@@ -74,55 +66,56 @@ objectEls.forEach((object, index) => {
   object.dataset.id = index;
 });
 
-subjectSectionEl.addEventListener('click', event => {
-  if (!event.target.classList.contains('subject')) return;
-  if (subjectSectionEl.clicked === true) return;
-  subjectSectionEl.clicked = true;
+function handlePartOfSpeechClick(event, className, section, appendToEl,) {
+  if (!event.target.classList.contains(className)) return;
+  if (section.clicked === true) return;
+  section.clicked = true;
   event.target.remove();
-  newSentenceSectionEl.append(event.target);
-
+  appendToEl.append(event.target);
   keepCount();
+}
 
+
+
+subjectSectionEl.addEventListener('click', event => {
+  handlePartOfSpeechClick(event, 'subject', subjectSectionEl, chosenSentEl)
+  // keepCount();
 });
 
 verbSectionEl.addEventListener('click', event => {
-  if (!event.target.classList.contains('verb')) return;
-  if (verbSectionEl.clicked === true) return;
-  verbSectionEl.clicked = true;
-  event.target.remove();
-  newSentenceSectionEl.append(event.target);
-  keepCount();
+  handlePartOfSpeechClick(event, 'verb', verbSectionEl, chosenSentEl)
+  // keepCount();
 
 });
 
 objectSectionEl.addEventListener('click', event => {
-  if (!event.target.classList.contains('object')) return;
-  if (objectSectionEl.clicked === true) return;
-  objectSectionEl.clicked = true;
-  event.target.remove();
-  newSentenceSectionEl.append(event.target);
-  keepCount();
-
+  handlePartOfSpeechClick(event, 'object', objectSectionEl, chosenSentEl)
+  // keepCount();
 });
 
-optionButtonsCont.addEventListener('click', event => {
+
+optionButtonsCont.addEventListener('click', handleResetClick);
+
+function handleResetClick(event) {
   if (event.target.classList.contains('reset-button')) {
     subjectSectionEl.innerHTML = '';
     verbSectionEl.innerHTML = '';
     objectSectionEl.innerHTML = '';
     newSentenceSectionEl.innerHTML = '';
+    optionButtonsCont.innerHTML = '';
+
     subjectSectionEl.clicked = false;
     verbSectionEl.clicked = false;
     objectSectionEl.clicked = false;
     mainSection.classList.remove('hidden');
     render();
   }
-});
+}
 
 overlayEl.addEventListener('click', handleOverlayClick);
 
 function keepCount() {
-  let count = newSentenceSectionEl.children.length;
+  let count = chosenSentEl.children.length;
   if ( count === 3) {
     const resetButton = document.querySelector('.continue-button');
     if (!resetButton) {
@@ -135,31 +128,53 @@ function keepCount() {
 
 function handleContinueClick(event) {
   if (event.target.classList.contains('continue-button')) {
+    if (chosenSentEl.children.length === 0) return;
     mainSection.classList.add('hidden');
     objectSectionEl.clicked = false;
   }
-  const sentenceIsvalid = validateSentence();
+  const [sentenceIsvalid, cleanedSentence] = validateSentence();
+  console.log(sentenceIsvalid);
   if (!sentenceIsvalid) {
     openDialogBox();
     dialogBoxEl.textContent = 'Invald sentence. Click reset and try again.'
   }
+
+  validSentences[cleanedSentence].phrases.forEach(phraseObj => {
+    const spanishSentContainer = makeElement('div', 'spanish-sentence-container', newSentenceSectionEl);
+    phraseObj.spanish.forEach(chunk => {
+      makeElement('span', chunk.role, spanishSentContainer, chunk.text);
+    });
+});
 }
 
 function validateSentence() {
-  const sentence = [...newSentenceSectionEl.children].map(child => child.textContent).join(' ');
+  let isValid = false;
+  const sentence = [...chosenSentEl.children].map(child => child.textContent).join(' ');
   console.log(sentence);
-  for (const item of validSentences) {
-    // console.log(item);
-    if (item === sentence) {
-      // console.log(item);
-      // console.log('match');
-      return true;
-    }
-  }
+  const pluralTest = /Mis padres\s+[A-Za-z]+/g;
+  // const sentenceIsPlural = sentence.test(pluralTest);
   const extraLetters = /\(\w\)/g;
-  const result = sentence.replace(extraLetters, '');
-  console.log(result);
-  return false
+  const cleanedSentence = sentence.replace(extraLetters, '');
+  const sentenceIsPlural = pluralTest.test(cleanedSentence);
+  console.log(sentenceIsPlural);
+  console.log(cleanedSentence);
+  const test = cleanedSentence.match(pluralTest)
+  console.log(test);
+  if (cleanedSentence in validSentences ) {
+    console.log('it is there.');
+    isValid = true;
+  }
+
+  // for (const item of validSentences) {
+    //   // console.log(item);
+    //   if (item === cleanedSentence) {
+      //     console.log(item);
+      //     // console.log('match');
+      //     return true;
+      //   }
+      // }
+      return [isValid, cleanedSentence];
+
 }
 
 function openDialogBox() {
@@ -168,7 +183,7 @@ function openDialogBox() {
 
 }
 
-function handleOverlayClick(event) {
+function handleOverlayClick() {
     if (dialogBoxEl.classList.contains('visible')) {
   dialogBoxEl.classList.remove('visible');
   overlayEl.classList.remove('overlay-visible');
