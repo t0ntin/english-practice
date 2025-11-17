@@ -8,6 +8,8 @@ const verbSectionEl = document.querySelector('.verb-section')
 const objectSectionEl = document.querySelector('.object-section')
 const newSentenceSectionEl = document.querySelector('.new-sentence-section')
 const chosenSentEl = document.querySelector('.chosen-sentence-container')
+let englishContainerEl = document.querySelector('.english-container');
+let feedbackEl = document.querySelector('.feedback-container');
 // const userInputEl = makeElement('input', 'user-subject', subjectSectionEl);
 const optionButtonsCont = document.querySelector('.option-buttons-container');
 const dialogBoxEl = document.querySelector('.dialog-box');
@@ -15,6 +17,11 @@ const overlayEl = document.querySelector('.overlay');
 
 // userInputEl.setAttribute('placeholder', 'Add yours...');
 let userInputValue;
+let isValid = false;
+let currentSentence = '';
+// For draggable cover:
+let isDragging = false;
+let offsetX, offsetY;
 
 const subjects = ['Mi mamá', 'Mis padres', 'El carro',  'Aprender un idioma', 'El sistema de transporte público'];
 
@@ -132,23 +139,89 @@ function handleContinueClick(event) {
     mainSection.classList.add('hidden');
     objectSectionEl.clicked = false;
   }
-  const [sentenceIsvalid, cleanedSentence] = validateSentence();
-  console.log(sentenceIsvalid);
-  if (!sentenceIsvalid) {
+  // const [sentenceIsvalid, cleanedSentence] = validateSentence();
+  validateSentence();
+  console.log(isValid);
+  if (!isValid) {
     openDialogBox();
     dialogBoxEl.textContent = 'Invald sentence. Click reset and try again.'
   }
 
-  validSentences[cleanedSentence].phrases.forEach(phraseObj => {
+  validSentences[currentSentence].phrases.forEach(phraseObj => {
     const spanishSentContainer = makeElement('div', 'spanish-sentence-container', newSentenceSectionEl);
-    phraseObj.spanish.forEach(chunk => {
+    const englishSentContainer = makeElement('div', 'english-sentence-container', englishContainerEl);
+
+    phraseObj.spanish?.forEach(chunk => {
       makeElement('span', chunk.role, spanishSentContainer, chunk.text);
     });
-});
+    phraseObj.english.forEach(chunk => {
+      makeElement('span', chunk.role, englishSentContainer, chunk.text);
+    })
+  });
+
+  const cover = makeElement('div', 'cover', englishContainerEl);
+  cover.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    // offsetX = e.clientX - cover.offsetLeft;
+    offsetY = e.clientY - cover.offsetTop;
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    e.preventDefault(); 
+
+    // cover.style.left = (e.clientX - offsetX) + 'px';
+    cover.style.top = (e.clientY - offsetY) + 'px';
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  const typeModeBtn = makeElement('button', 'type-mode-button', optionButtonsCont, 'Type it in');
+  typeModeBtn.addEventListener('click', handleTypeModeClick);
+}
+
+
+function handleTypeModeClick(event) { 
+  if (event.target.matches('.type-mode-button')) {
+    englishContainerEl.innerHTML = '';
+    
+    validSentences[currentSentence].phrases.forEach((phraseObj, id) => {
+      
+      // const correctAnswer = phraseObj.complete;
+      
+      const input = makeInputEl('input', 'english-input', englishContainerEl, 'Translate here');
+      
+      input.dataset.id = id; 
+      
+      input.addEventListener('input', (event) => handleTypeInInput(event, phraseObj.complete));
+    });
+  }
+}
+
+
+function handleTypeInInput(event, complete) {
+  let translationInput = event.target.value;
+  const normalizedTrans = normalizeString(translationInput)
+  const normalizedCorrectAnswer = normalizeString(complete)
+  console.log(normalizedCorrectAnswer);
+  if (normalizedTrans === normalizedCorrectAnswer) {
+    console.log('correct');
+  }
+  // feedbackEl.textContent = translationInput;
+}
+
+function normalizeString(translation) {
+  if (!translation) return '';
+  let normalized = translation.toLowerCase().trim();
+  normalized = normalized.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"]/g, "");
+  return normalized;
 }
 
 function validateSentence() {
-  let isValid = false;
+  isValid = false;
   const sentence = [...chosenSentEl.children].map(child => child.textContent).join(' ');
   console.log(sentence);
   const pluralTest = /Mis padres\s+[A-Za-z]+/g;
@@ -164,7 +237,8 @@ function validateSentence() {
     console.log('it is there.');
     isValid = true;
   }
-
+  currentSentence = cleanedSentence;
+  console.log(currentSentence);
   // for (const item of validSentences) {
     //   // console.log(item);
     //   if (item === cleanedSentence) {

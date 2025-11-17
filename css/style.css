@@ -150,10 +150,12 @@ a {
   gap: 3px;
 }
 
-.spanish-sentence-container {
+.spanish-sentence-container, .english-sentence-container {
   display: flex;
   gap: 3px;
 }
+
+
 
 .new-sentence-section {
   display: flex;
@@ -162,6 +164,20 @@ a {
   border: 2px green solid;
 }
 
+.english-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.cover {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+}
 
 .left-section {
   display: flex;

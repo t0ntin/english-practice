@@ -1,10 +1,19 @@
 export const validSentences = {
   "Mi mamá tiene su tarea": {
     baseSentence: "Mi mamá tiene su tarea",
-
     phrases: [
       {
+        key: 'translation', // ¿Mi mamá tiene su tarea?
+        complete: 'My mom has the homework',
+        english: [
+          { text: 'My mom', role: 'subject' },
+          { text: 'has', role: 'verb' },
+          { text: 'the homework', role: 'object' }
+        ]
+      },
+      {
         key: 'interrogative', // ¿Mi mamá tiene su tarea?
+        complete: 'Does my mom have the homework?',
         spanish: [
           { text: '¿Mi mamá', role: 'subject' },
           { text: 'tiene', role: 'verb' },
@@ -14,11 +23,12 @@ export const validSentences = {
           { text: 'Does', role: 'auxiliary' },
           { text: 'my mom', role: 'subject' },
           { text: 'have', role: 'verb' },
-          { text: 'her homework?', role: 'object' }
+          { text: 'the homework?', role: 'object' }
         ]
       },
       {
         key: 'negation', // No, mi mamá no tiene su tarea
+        complete: 'No, my mom doesn\'t have the homework',
         spanish: [
           { text: 'No,', role: 'negation' },
           { text: 'mi mamá', role: 'subject' },
@@ -36,6 +46,7 @@ export const validSentences = {
       },
       {
         key: 'wh-object', // ¿Qué tiene mi mamá?
+        complete: 'What does my mom have?',
         spanish: [
           { text: '¿Qué', role: 'wh-word' },
           { text: 'tiene', role: 'verb' },
@@ -50,6 +61,7 @@ export const validSentences = {
       },
       {
         key: 'wh-subject', // ¿Quién tiene la tarea?
+        complete: 'Who has the homework',
         spanish: [
           { text: '¿Quién', role: 'wh-word' }, // 'Quién' replaces the subject
           { text: 'tiene', role: 'verb' },
