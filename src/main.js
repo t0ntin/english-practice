@@ -1,3 +1,3 @@
-import { render } from "./sections/do-does";
+import { render } from "./sections/do-does.js";
 
 render();
