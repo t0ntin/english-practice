@@ -161,7 +161,16 @@ a {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border: 2px green solid;
+  /* border: 2px green solid; */
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* gap: 10px; */
+  /* border: 1px solid white; */
+
 }
 
 .english-container {
@@ -174,6 +183,11 @@ a {
 .english-input {
   background-color: rgb(64, 64, 64);
   color: white;
+  height: 30px;
+}
+
+.trans-input-container {
+  display: flex;
 }
 
 .cover {
@@ -203,6 +217,7 @@ a {
 
 
 .dialog-box {
+  padding: .5em;
   position: absolute;
   top: 40%;
   z-index: 2;
@@ -210,8 +225,8 @@ a {
   transition:opacity 0.2s ease-in;
   pointer-events: none;
   border: 1px solid white;
-  width: 200px;
-  height: 100px;
+  max-width: 70%;
+  height: auto;
   color: white;
 
 }
@@ -227,4 +242,16 @@ a {
 .visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+.hint-container {
+  display: flex;
+  gap: 10px;
+}
+.hint-key {
+  font-weight: bold;
+}
+
+.hint-value {
+  color: rgb(140, 140, 140);
 }

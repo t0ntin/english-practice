@@ -1,5 +1,5 @@
 import { makeElement, makeInputEl } from "../components/createElements.js"
-import { validSentences } from "../components/valid-sentences.js";
+import { validSentences, hints } from "../components/valid-sentences.js";
 
 const mainEl = document.querySelector('.main');
 let mainSection = document.querySelector('.main-section');
@@ -26,7 +26,7 @@ const subjects = ['Mi mamá', 'Mis padres', 'El carro',  'Aprender un idioma', '
 
 const verbs = ['tiene(n)', 'hace(n)', 'cuesta(n)', 'abre(n)', 'reduce(n)'];
 
-const objects = ['comida en navidad', 'su tarea', 'una casa grande', 'puertas', 'la congestión', 'mucho dinero'];
+const objects = ['comida en navidad', 'la tarea', 'una casa grande', 'puertas', 'la congestión', 'mucho dinero'];
 
 export function render() {
   subjects.forEach(subject  => {
@@ -195,16 +195,45 @@ function handleTypeModeClick(event, cleanedSentence) {
     englishContainerEl.innerHTML = '';
     
     validSentences[cleanedSentence].phrases.forEach((phraseObj, id) => {
-      
-      const input = makeInputEl('input', 'english-input', englishContainerEl, 'Translate here');
+      const transInputEl = makeElement('div', 'trans-input-container', englishContainerEl)
+      const input = makeInputEl('input', 'english-input', transInputEl, 'Translate here');
       
       input.dataset.id = id; 
       
       input.addEventListener('input', (event) => handleTypeInInput(event, phraseObj.complete));
+
+      const showAnswerButton = makeElement('button', 'show-answer-button', transInputEl, 'Show');
+      showAnswerButton.addEventListener('click', (event) => handleShowAnswerClick(event, phraseObj))
     });
+  }
+  const showHintButton = makeElement('button', 'show-hint-button', optionButtonsCont, 'Show hints');
+  showHintButton.addEventListener('click', handleShowHints);
+}
+
+function handleShowHints(event) {
+  if (event.target.classList.contains('show-hint-button')) {
+    dialogBoxEl.innerHTML = '';
+    openDialogBox();
+    hints.forEach(hint => {
+      const hintContainer = makeElement('div', 'hint-container', dialogBoxEl);
+      Object.entries(hint).forEach(([key, value]) => {
+        makeElement('span', 'hint-key', hintContainer, key);
+        makeElement('span', 'hint-value', hintContainer, value);
+
+      })
+
+    })
   }
 }
 
+function handleShowAnswerClick(event, phraseObj) {
+  dialogBoxEl.innerHTML = '';
+  if (event.target.matches('.show-answer-button')){
+    console.log('matches');
+    openDialogBox();
+    dialogBoxEl.textContent = phraseObj.complete;
+  }
+}
 
 function handleTypeInInput(event, complete) {
   let translationInput = event.target.value;
