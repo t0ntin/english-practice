@@ -1,5 +1,5 @@
-import { makeElement, makeInputEl } from "../components/createElements"
-import { validSentences } from "../components/valid-sentences";
+import { makeElement, makeInputEl } from "../components/createElements.js"
+import { validSentences } from "../components/valid-sentences.js";
 
 const mainEl = document.querySelector('.main');
 let mainSection = document.querySelector('.main-section');
