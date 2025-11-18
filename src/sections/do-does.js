@@ -9,7 +9,7 @@ const objectSectionEl = document.querySelector('.object-section')
 const newSentenceSectionEl = document.querySelector('.new-sentence-section')
 const chosenSentEl = document.querySelector('.chosen-sentence-container')
 let englishContainerEl = document.querySelector('.english-container');
-let feedbackEl = document.querySelector('.feedback-container');
+const allSentenceContainer = document.querySelector('.all-sentence-container');
 // const userInputEl = makeElement('input', 'user-subject', subjectSectionEl);
 const optionButtonsCont = document.querySelector('.option-buttons-container');
 const dialogBoxEl = document.querySelector('.dialog-box');
@@ -17,8 +17,7 @@ const overlayEl = document.querySelector('.overlay');
 
 // userInputEl.setAttribute('placeholder', 'Add yours...');
 let userInputValue;
-let isValid = false;
-let currentSentence = '';
+
 // For draggable cover:
 let isDragging = false;
 let offsetX, offsetY;
@@ -52,7 +51,8 @@ export function render() {
     }
     subjectEl.textContent = userInputValue;
   });
-
+    englishContainerEl.innerHTML = '';
+  
 }
 
 const subjectEls = document.querySelectorAll('.subject');
@@ -108,9 +108,14 @@ function handleResetClick(event) {
     subjectSectionEl.innerHTML = '';
     verbSectionEl.innerHTML = '';
     objectSectionEl.innerHTML = '';
-    newSentenceSectionEl.innerHTML = '';
+    const spanishSentContainers = document.querySelectorAll('.spanish-sentence-container');
+    if (spanishSentContainers) {
+      spanishSentContainers.forEach(container => {
+        container.remove();
+      })
+    }
     optionButtonsCont.innerHTML = '';
-
+    chosenSentEl.innerHTML = '';
     subjectSectionEl.clicked = false;
     verbSectionEl.clicked = false;
     objectSectionEl.clicked = false;
@@ -130,24 +135,25 @@ function keepCount() {
       continueButton.addEventListener('click', handleContinueClick)
     }
   }
-  console.log(count);
+  count = 0;
 }
 
 function handleContinueClick(event) {
   if (event.target.classList.contains('continue-button')) {
+    event.target.classList.add('hidden');
     if (chosenSentEl.children.length === 0) return;
     mainSection.classList.add('hidden');
     objectSectionEl.clicked = false;
   }
-  // const [sentenceIsvalid, cleanedSentence] = validateSentence();
-  validateSentence();
-  console.log(isValid);
-  if (!isValid) {
+  const [sentenceIsvalid, cleanedSentence] = validateSentence();
+  // validateSentence();
+  // console.log(isValid);
+  if (!sentenceIsvalid) {
     openDialogBox();
     dialogBoxEl.textContent = 'Invald sentence. Click reset and try again.'
   }
 
-  validSentences[currentSentence].phrases.forEach(phraseObj => {
+  validSentences[cleanedSentence].phrases.forEach(phraseObj => {
     const spanishSentContainer = makeElement('div', 'spanish-sentence-container', newSentenceSectionEl);
     const englishSentContainer = makeElement('div', 'english-sentence-container', englishContainerEl);
 
@@ -180,17 +186,15 @@ function handleContinueClick(event) {
   });
 
   const typeModeBtn = makeElement('button', 'type-mode-button', optionButtonsCont, 'Type it in');
-  typeModeBtn.addEventListener('click', handleTypeModeClick);
+  typeModeBtn.addEventListener('click', (event) =>  handleTypeModeClick(event, cleanedSentence));
 }
 
 
-function handleTypeModeClick(event) { 
+function handleTypeModeClick(event, cleanedSentence) { 
   if (event.target.matches('.type-mode-button')) {
     englishContainerEl.innerHTML = '';
     
-    validSentences[currentSentence].phrases.forEach((phraseObj, id) => {
-      
-      // const correctAnswer = phraseObj.complete;
+    validSentences[cleanedSentence].phrases.forEach((phraseObj, id) => {
       
       const input = makeInputEl('input', 'english-input', englishContainerEl, 'Translate here');
       
@@ -208,9 +212,8 @@ function handleTypeInInput(event, complete) {
   const normalizedCorrectAnswer = normalizeString(complete)
   console.log(normalizedCorrectAnswer);
   if (normalizedTrans === normalizedCorrectAnswer) {
-    console.log('correct');
+    event.target.style.backgroundColor = 'darkgreen';
   }
-  // feedbackEl.textContent = translationInput;
 }
 
 function normalizeString(translation) {
@@ -221,7 +224,7 @@ function normalizeString(translation) {
 }
 
 function validateSentence() {
-  isValid = false;
+  let isValid = false;
   const sentence = [...chosenSentEl.children].map(child => child.textContent).join(' ');
   console.log(sentence);
   const pluralTest = /Mis padres\s+[A-Za-z]+/g;
@@ -237,8 +240,8 @@ function validateSentence() {
     console.log('it is there.');
     isValid = true;
   }
-  currentSentence = cleanedSentence;
-  console.log(currentSentence);
+  // currentSentence = cleanedSentence;
+  // console.log(currentSentence);
   // for (const item of validSentences) {
     //   // console.log(item);
     //   if (item === cleanedSentence) {

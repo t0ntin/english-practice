@@ -171,6 +171,11 @@ a {
   position: relative;
 }
 
+.english-input {
+  background-color: rgb(64, 64, 64);
+  color: white;
+}
+
 .cover {
   height: 100%;
   width: 100%;
