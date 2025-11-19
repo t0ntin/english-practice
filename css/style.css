@@ -110,21 +110,24 @@ a {
 
 .subject, .user-defined-subject {
   background-color: #93033b;
-  height: 30px;
+  /* min-height: 100%; */
+  height: auto;
 }
 
 .verb {
   background-color: #07a14c;
-  height: 30px;
+    /* min-height: 100%; */
+  height: auto;
 }
 
 .object {
   background-color: #2a3bd3;
-  height: 30px;
+    /* min-height: 100%; */
+  height: auto;
 }
 
 .subject, .verb, .object, .user-defined-subject {
-  padding: 3px;
+  padding: 7px 5px;
 
 }
 
