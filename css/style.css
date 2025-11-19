@@ -82,6 +82,7 @@ a {
   /* border: 2px solid green; */
   margin: 0 0 10px 0;
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -101,7 +102,8 @@ a {
 
 .subject-section, .verb-section, .object-section {
   padding: .7em;
-  border: 1px white solid;
+  border: 1px rgb(122, 122, 122) solid;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -110,25 +112,28 @@ a {
 
 .subject, .user-defined-subject {
   background-color: #93033b;
-  /* min-height: 100%; */
   height: auto;
 }
 
 .verb {
   background-color: #07a14c;
-    /* min-height: 100%; */
   height: auto;
 }
 
 .object {
   background-color: #2a3bd3;
-    /* min-height: 100%; */
   height: auto;
 }
 
 .subject, .verb, .object, .user-defined-subject {
   padding: 7px 5px;
-
+    word-break: break-word; 
+    display: inline-block;
+  max-width: 110px;
+  /* min-width: auto; */
+  /* white-space: normal; */
+  word-break: normal;
+  border-radius: 6px;
 }
 
 .user-subject {
@@ -153,6 +158,7 @@ a {
 
 .chosen-sentence-container {
   display: flex;
+  align-items: center;
   gap: 3px;
 }
 
@@ -162,35 +168,35 @@ a {
   align-items: center;
 }
 
-
-
 .new-sentence-section {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
-  /* border: 2px green solid; */
+
 }
 
 .right-section {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  /* gap: 10px; */
-  /* border: 1px solid white; */
 
 }
 
 .english-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   position: relative;
 }
 
 .english-input {
+  margin: 0 5px 0 0;
+  padding: 5px;
+  border: 1px solid gray;
   background-color: rgb(64, 64, 64);
   color: white;
-  height: 30px;
+  height: 35px;
+  border-radius: 6px;
 }
 
 .trans-input-container {
@@ -206,8 +212,9 @@ a {
 }
 
 .left-section {
+  /* height: 100%; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 /* ============== START BUTTONS ============ */
@@ -222,6 +229,7 @@ a {
   cursor: pointer;
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, transform 0.1s;
   flex-grow: 1;
+  max-width: 200px;
 }
 
 .reset-button:hover:not(:disabled) {
@@ -262,14 +270,16 @@ a {
 }
 
 .type-mode-button:hover:not(:disabled), 
+.show-answer-button:hover:not(:disabled), 
 .cover-answers-button:hover:not(:disabled), 
 .show-hints-button:hover:not(:disabled) {
   background-color: #000000;
-  border-color: #9ca3af;
+  border-color: #808080;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
 }
 
 .type-mode-button:active:not(:disabled), 
+.show-answer-button:active:not(:disabled), 
 .cover-answers-button:active:not(:disabled), 
 .show-hints-button:active:not(:disabled) {
   background-color: #3f3f3f;
@@ -287,7 +297,18 @@ a {
   opacity: 1;
 }
 
+.show-answer-button {
+  padding: .3em .6em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #222222;
+  border: 1px solid #7a7a7a;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, transform 0.1s;
 
+}
 /* ============== END BUTTONS ============ */
 
 .hidden {

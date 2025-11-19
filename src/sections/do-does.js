@@ -44,22 +44,22 @@ export function render() {
     const resetButton = makeElement('button', 'reset-button', optionButtonsCont, 'Reset');
   }
 
-  const userInputEl = makeInputEl('input', 'user-subject', subjectSectionEl, 'Add yours...');
+  // const userInputEl = makeInputEl('input', 'user-subject', subjectSectionEl, 'Add yours...');
 
+  // userInputEl.addEventListener('input', (event) => {
+  //   userInputValue = event.target.value;
+  //   let subjectEl = document.querySelector('.user-defined-subject');
+  //   if (!subjectEl) {
+  //     subjectEl = makeElement('div', 'user-defined-subject', newSentenceSectionEl);
 
-  userInputEl.addEventListener('input', (event) => {
-  userInputValue = event.target.value;
-  let subjectEl = document.querySelector('.user-defined-subject');
-    if (!subjectEl) {
-      subjectEl = makeElement('div', 'user-defined-subject', newSentenceSectionEl);
+  //   }
+  //   subjectEl.textContent = userInputValue;
+  // });
 
-    }
-    subjectEl.textContent = userInputValue;
-  });
-    englishContainerEl.innerHTML = '';
-    typeModeBtn.disabled = true;
-    showHintsButton.disabled = true;
-    coverAnswersButton.disabled = true;
+  englishContainerEl.innerHTML = '';
+  typeModeBtn.disabled = true;
+  showHintsButton.disabled = true;
+  coverAnswersButton.disabled = true;
 }
 
 const subjectEls = document.querySelectorAll('.subject');
