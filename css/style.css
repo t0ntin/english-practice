@@ -79,9 +79,8 @@ a {
 }
 
 .main-section {
-  border: 2px solid green;
-
-
+  /* border: 2px solid green; */
+  margin: 0 0 10px 0;
   display: flex;
   gap: 10px;
 }
@@ -111,14 +110,17 @@ a {
 
 .subject, .user-defined-subject {
   background-color: #93033b;
+  height: 30px;
 }
 
 .verb {
   background-color: #07a14c;
+  height: 30px;
 }
 
 .object {
   background-color: #2a3bd3;
+  height: 30px;
 }
 
 .subject, .verb, .object, .user-defined-subject {
@@ -143,6 +145,7 @@ a {
 
 .all-sentence-container {
   display: flex;
+  gap: 8px;
 }
 
 .chosen-sentence-container {
@@ -153,6 +156,7 @@ a {
 .spanish-sentence-container, .english-sentence-container {
   display: flex;
   gap: 3px;
+  align-items: center;
 }
 
 
@@ -193,7 +197,7 @@ a {
 .cover {
   height: 100%;
   width: 100%;
-  background-color: white;
+  background: linear-gradient(135deg, #226bd2 0%, #1d120d 100%);
   position: absolute;
   z-index: 1;
 }
@@ -202,6 +206,86 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+/* ============== START BUTTONS ============ */
+.reset-button {
+  background-color: #991b1b;
+  color: #fef2f2;
+  border: 1px solid rgb(154, 154, 154);
+    padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+    border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, transform 0.1s;
+  flex-grow: 1;
+}
+
+.reset-button:hover:not(:disabled) {
+  background-color: #b91c1c;
+  border-color: #991b1b;
+  box-shadow: 0 4px 6px -1px rgba(153, 27, 27, 0.2), 0 2px 4px -2px rgba(153, 27, 27, 0.1);
+}
+
+.reset-button:active:not(:disabled) {
+  background-color: #7f1d1d;
+  transform: translateY(1px);
+}
+
+.option-buttons-container {
+  margin: 15px 0 0 0;
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: #353535;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.type-mode-button, .cover-answers-button, .show-hints-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #222222;
+  border: 1px solid #7a7a7a;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, transform 0.1s;
+  flex-grow: 1;
+  max-width: 200px;
+}
+
+.type-mode-button:hover:not(:disabled), 
+.cover-answers-button:hover:not(:disabled), 
+.show-hints-button:hover:not(:disabled) {
+  background-color: #000000;
+  border-color: #9ca3af;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+.type-mode-button:active:not(:disabled), 
+.cover-answers-button:active:not(:disabled), 
+.show-hints-button:active:not(:disabled) {
+  background-color: #3f3f3f;
+  transform: translateY(1px);
+}
+
+.type-mode-button:disabled, 
+.cover-answers-button:disabled, 
+.show-hints-button:disabled {
+  background-color: #424242;
+  color: #7b7b7b;
+  border-color: #5f5f5f;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 1;
+}
+
+
+/* ============== END BUTTONS ============ */
 
 .hidden {
   display: none;
@@ -228,6 +312,7 @@ a {
   max-width: 70%;
   height: auto;
   color: white;
+  background-color: black;
 
 }
 
@@ -245,8 +330,10 @@ a {
 }
 
 .hint-container {
+  margin: 3px 0 0 0;
   display: flex;
   gap: 10px;
+  background-color: rgb(27, 27, 27);
 }
 .hint-key {
   font-weight: bold;

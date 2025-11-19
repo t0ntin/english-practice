@@ -12,6 +12,10 @@ let englishContainerEl = document.querySelector('.english-container');
 const allSentenceContainer = document.querySelector('.all-sentence-container');
 // const userInputEl = makeElement('input', 'user-subject', subjectSectionEl);
 const optionButtonsCont = document.querySelector('.option-buttons-container');
+const typeModeBtn = document.querySelector('.type-mode-button');
+const showHintsButton = document.querySelector('.show-hints-button');
+const coverAnswersButton = document.querySelector('.cover-answers-button');
+
 const dialogBoxEl = document.querySelector('.dialog-box');
 const overlayEl = document.querySelector('.overlay');
 
@@ -39,6 +43,7 @@ export function render() {
   if (!resetButton) {
     const resetButton = makeElement('button', 'reset-button', optionButtonsCont, 'Reset');
   }
+
   const userInputEl = makeInputEl('input', 'user-subject', subjectSectionEl, 'Add yours...');
 
 
@@ -52,7 +57,9 @@ export function render() {
     subjectEl.textContent = userInputValue;
   });
     englishContainerEl.innerHTML = '';
-  
+    typeModeBtn.disabled = true;
+    showHintsButton.disabled = true;
+    coverAnswersButton.disabled = true;
 }
 
 const subjectEls = document.querySelectorAll('.subject');
@@ -86,18 +93,15 @@ function handlePartOfSpeechClick(event, className, section, appendToEl,) {
 
 subjectSectionEl.addEventListener('click', event => {
   handlePartOfSpeechClick(event, 'subject', subjectSectionEl, chosenSentEl)
-  // keepCount();
 });
 
 verbSectionEl.addEventListener('click', event => {
   handlePartOfSpeechClick(event, 'verb', verbSectionEl, chosenSentEl)
-  // keepCount();
 
 });
 
 objectSectionEl.addEventListener('click', event => {
   handlePartOfSpeechClick(event, 'object', objectSectionEl, chosenSentEl)
-  // keepCount();
 });
 
 
@@ -114,7 +118,7 @@ function handleResetClick(event) {
         container.remove();
       })
     }
-    optionButtonsCont.innerHTML = '';
+    // optionButtonsCont.innerHTML = '';
     chosenSentEl.innerHTML = '';
     subjectSectionEl.clicked = false;
     verbSectionEl.clicked = false;
@@ -129,25 +133,19 @@ overlayEl.addEventListener('click', handleOverlayClick);
 function keepCount() {
   let count = chosenSentEl.children.length;
   if ( count === 3) {
-    const resetButton = document.querySelector('.continue-button');
-    if (!resetButton) {
-      const continueButton = makeElement('button', 'continue-button', optionButtonsCont, 'Continue');
-      continueButton.addEventListener('click', handleContinueClick)
-    }
+    // const resetButton = document.querySelector('.continue-button');
+    setTimeout(() => {
+      pickSentence()
+    }, 1000);
   }
   count = 0;
 }
 
-function handleContinueClick(event) {
-  if (event.target.classList.contains('continue-button')) {
-    event.target.classList.add('hidden');
-    if (chosenSentEl.children.length === 0) return;
-    mainSection.classList.add('hidden');
-    objectSectionEl.clicked = false;
-  }
+function pickSentence() {
+  mainSection.classList.add('hidden');
+  objectSectionEl.clicked = false;
   const [sentenceIsvalid, cleanedSentence] = validateSentence();
-  // validateSentence();
-  // console.log(isValid);
+
   if (!sentenceIsvalid) {
     openDialogBox();
     dialogBoxEl.textContent = 'Invald sentence. Click reset and try again.'
@@ -185,8 +183,8 @@ function handleContinueClick(event) {
     isDragging = false;
   });
 
-  const typeModeBtn = makeElement('button', 'type-mode-button', optionButtonsCont, 'Type it in');
   typeModeBtn.addEventListener('click', (event) =>  handleTypeModeClick(event, cleanedSentence));
+    typeModeBtn.disabled = false;
 }
 
 
@@ -206,12 +204,29 @@ function handleTypeModeClick(event, cleanedSentence) {
       showAnswerButton.addEventListener('click', (event) => handleShowAnswerClick(event, phraseObj))
     });
   }
-  const showHintButton = makeElement('button', 'show-hint-button', optionButtonsCont, 'Show hints');
-  showHintButton.addEventListener('click', handleShowHints);
+  
+  coverAnswersButton.disabled = false;
+  showHintsButton.disabled = false; 
 }
 
+coverAnswersButton.addEventListener('click', handleCoverAnsClick);
+
+function handleCoverAnsClick(event) {
+  if (event.target.matches('.cover-answers-button')){
+    newSentenceSectionEl.innerHTML = '';
+    englishContainerEl.innerHTML = '';
+    pickSentence();
+  }
+  event.target.disabled = true;
+}
+
+showHintsButton.addEventListener('click', handleShowHints);
+
 function handleShowHints(event) {
-  if (event.target.classList.contains('show-hint-button')) {
+  console.log('testing');
+  if (event.target.matches('.show-hints-button')) {
+  console.log('testing2');
+
     dialogBoxEl.innerHTML = '';
     openDialogBox();
     hints.forEach(hint => {
@@ -269,16 +284,7 @@ function validateSentence() {
     console.log('it is there.');
     isValid = true;
   }
-  // currentSentence = cleanedSentence;
-  // console.log(currentSentence);
-  // for (const item of validSentences) {
-    //   // console.log(item);
-    //   if (item === cleanedSentence) {
-      //     console.log(item);
-      //     // console.log('match');
-      //     return true;
-      //   }
-      // }
+
       return [isValid, cleanedSentence];
 
 }

@@ -1951,14 +1951,14 @@ export const validSentences = {
       },
       {
         key: 'wh-object',
-        complete: 'What does the car cost?',
+        complete: 'How much does the car cost?',
         spanish: [
-          { text: '¿Qué', role: 'wh-word' },
+          { text: '¿Cuánto', role: 'wh-word' },
           { text: 'cuesta', role: 'verb' },
           { text: 'el carro?', role: 'subject' },
         ],
         english: [
-          { text: 'What', role: 'wh-word' },
+          { text: 'How much', role: 'wh-word' },
           { text: 'does', role: 'auxiliary' },
           { text: 'the car', role: 'subject' },
           { text: 'cost?', role: 'verb' },
@@ -2103,14 +2103,14 @@ export const validSentences = {
       },
       {
         key: 'wh-object',
-        complete: 'What does learning a language cost?',
+        complete: 'How much does learning a language cost?',
         spanish: [
-          { text: '¿Qué', role: 'wh-word' },
+          { text: '¿Cuánto', role: 'wh-word' },
           { text: 'cuesta', role: 'verb' },
           { text: 'aprender un idioma?', role: 'subject' },
         ],
         english: [
-          { text: 'What', role: 'wh-word' },
+          { text: 'How much', role: 'wh-word' },
           { text: 'does', role: 'auxiliary' },
           { text: 'learning a language', role: 'subject' },
           { text: 'cost?', role: 'verb' },
@@ -2367,10 +2367,10 @@ export const hints = [
   { 'Mi mama:': 'My mom' },
   { 'Does:': 'He, She, It' },
   { 'Do:': 'I, You, We, They' },
-  { 'Has:': 'She, She, It' },
+  { 'Has:': 'He, She, It' },
   { 'Have:': 'I, You, We, They' },
-  { 'Aprender:': 'learning' },
-  { 'El sistema de transporte publico:': 'The public transportation system' },
+  { 'Aprender:': 'Learning' },
+  { 'El sistema de transporte público:': 'The public transportation system' },
   { 'Hacer tarea:': "'do'" },
   { 'Hacer comida:': " 'make'" },
 ];
