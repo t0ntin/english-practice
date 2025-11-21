@@ -2,25 +2,11 @@ import { makeElement, makeInputEl } from "../components/createElements.js"
 import { validSentences, hints } from "../components/valid-sentences.js";
 
 const mainEl = document.querySelector('.main');
-let mainSection = document.querySelector('.main-section');
-const subjectSectionEl = document.querySelector('.subject-section')
-const verbSectionEl = document.querySelector('.verb-section')
-const objectSectionEl = document.querySelector('.object-section')
-const newSentenceSectionEl = document.querySelector('.new-sentence-section')
-const chosenSentEl = document.querySelector('.chosen-sentence-container')
-let englishContainerEl = document.querySelector('.english-container');
-const allSentenceContainer = document.querySelector('.all-sentence-container');
-// const userInputEl = makeElement('input', 'user-subject', subjectSectionEl);
-const optionButtonsCont = document.querySelector('.option-buttons-container');
-const typeModeBtn = document.querySelector('.type-mode-button');
-const showHintsButton = document.querySelector('.show-hints-button');
-const coverAnswersButton = document.querySelector('.cover-answers-button');
-
-const dialogBoxEl = document.querySelector('.dialog-box');
-const overlayEl = document.querySelector('.overlay');
+let mainSection = makeElement('section', 'main-section', mainEl);
+const dialogBoxEl = makeElement('div', 'dialog-box', mainEl)
+const overlayEl = makeElement('div', 'overlay', mainEl)
 
 // userInputEl.setAttribute('placeholder', 'Add yours...');
-let userInputValue;
 
 // For draggable cover:
 let isDragging = false;
@@ -30,20 +16,52 @@ const subjects = ['Mi mamá', 'Mis padres', 'El carro',  'Aprender un idioma', '
 
 const verbs = ['tiene(n)', 'hace(n)', 'cuesta(n)', 'abre(n)', 'reduce(n)'];
 
-const objects = ['comida en navidad', 'la tarea', 'una casa grande', 'puertas', 'la congestión', 'mucho dinero'];
+const objects = ['la tarea', 'comida en navidad',  'una casa grande', 'puertas', 'la congestión', 'mucho dinero'];
 
-export function render() {
+export function renderDoDoes() {
+  mainSection.innerHTML = '';
+  // let mainSection = makeElement('section', 'main-section', mainEl);
+  const sectionOne = makeElement('div', 'section-one', mainSection);
+  const subjectSectionEl = makeElement('div', 'subject-section', sectionOne)
+  const verbSectionEl = makeElement('div', 'verb-section', sectionOne)
+  const objectSectionEl = makeElement('div', 'object-section', sectionOne)
+
+  const allSentenceContainer = makeElement('section', 'all-sentence-container', mainSection)
+  const leftSectionEl = makeElement('div', 'left-section', allSentenceContainer)
+  const newSentenceSectionEl = makeElement('div', 'new-sentence-section', leftSectionEl)
+
+  const chosenSentEl = makeElement('div', 'chosen-sentence-container', mainSection)
+
+  const rightSectionEl = makeElement('div', 'right-section', allSentenceContainer)
+  const englishContainerEl = makeElement('div', 'english-container', rightSectionEl)
+
+  const optionButtonsCont = makeElement('div', 'option-buttons-container', mainSection)
+
+  const resetButton = makeElement('button', 'reset-button', optionButtonsCont, 'Reset');
+
+  const typeModeBtn = makeElement('button', 'type-mode-button', optionButtonsCont, 'Type it in')
+  typeModeBtn.disabled = true;
+
+  const coverAnswersButton = makeElement('button', 'cover-answers-button', optionButtonsCont, 'Cover answers')
+  coverAnswersButton.disabled = true;
+  coverAnswersButton.addEventListener('click', handleCoverAnsClick);
+
+  const showHintsButton = makeElement('button', 'show-hints-button', optionButtonsCont, 'Show hints')
+  showHintsButton.disabled = true;
+  
   subjects.forEach(subject  => {
     makeElement('div', 'subject', subjectSectionEl, subject)});
   verbs.forEach(verb  => {
     makeElement('div', 'verb', verbSectionEl, verb)});
   objects.forEach(object  => {
     makeElement('div', 'object', objectSectionEl, object)});
-    const resetButton = document.querySelector('.reset-button');
-  if (!resetButton) {
-    const resetButton = makeElement('button', 'reset-button', optionButtonsCont, 'Reset');
-  }
 
+  optionButtonsCont.addEventListener('click', handleResetClick);
+
+  showHintsButton.addEventListener('click', handleShowHints);
+
+  addMainSectionEventListeners(subjectSectionEl, verbSectionEl, objectSectionEl, chosenSentEl);
+  
   // const userInputEl = makeInputEl('input', 'user-subject', subjectSectionEl, 'Add yours...');
 
   // userInputEl.addEventListener('input', (event) => {
@@ -55,15 +73,9 @@ export function render() {
   //   }
   //   subjectEl.textContent = userInputValue;
   // });
-
-  englishContainerEl.innerHTML = '';
-  typeModeBtn.disabled = true;
-  showHintsButton.disabled = true;
-  coverAnswersButton.disabled = true;
 }
 
 const subjectEls = document.querySelectorAll('.subject');
-console.log(subjectEls.length)
 
 const verbEls = document.querySelectorAll('.verb');
 const objectEls = document.querySelectorAll('.object');
@@ -90,59 +102,50 @@ function handlePartOfSpeechClick(event, className, section, appendToEl,) {
 }
 
 
+function addMainSectionEventListeners(subjectSectionEl, verbSectionEl, objectSectionEl, chosenSentEl) {
 
-subjectSectionEl.addEventListener('click', event => {
-  handlePartOfSpeechClick(event, 'subject', subjectSectionEl, chosenSentEl)
-});
+  subjectSectionEl.addEventListener('click', event => {
+    handlePartOfSpeechClick(event, 'subject', subjectSectionEl, chosenSentEl)
+  });
+  
+  verbSectionEl.addEventListener('click', event => {
+    handlePartOfSpeechClick(event, 'verb', verbSectionEl, chosenSentEl)
+  
+  });
+  
+  objectSectionEl.addEventListener('click', event => {
+    handlePartOfSpeechClick(event, 'object', objectSectionEl, chosenSentEl)
+  });
+}
 
-verbSectionEl.addEventListener('click', event => {
-  handlePartOfSpeechClick(event, 'verb', verbSectionEl, chosenSentEl)
 
-});
-
-objectSectionEl.addEventListener('click', event => {
-  handlePartOfSpeechClick(event, 'object', objectSectionEl, chosenSentEl)
-});
-
-
-optionButtonsCont.addEventListener('click', handleResetClick);
+// optionButtonsCont.addEventListener('click', handleResetClick);
 
 function handleResetClick(event) {
   if (event.target.classList.contains('reset-button')) {
-    subjectSectionEl.innerHTML = '';
-    verbSectionEl.innerHTML = '';
-    objectSectionEl.innerHTML = '';
-    const spanishSentContainers = document.querySelectorAll('.spanish-sentence-container');
-    if (spanishSentContainers) {
-      spanishSentContainers.forEach(container => {
-        container.remove();
-      })
-    }
-    // optionButtonsCont.innerHTML = '';
-    chosenSentEl.innerHTML = '';
-    subjectSectionEl.clicked = false;
-    verbSectionEl.clicked = false;
-    objectSectionEl.clicked = false;
-    mainSection.classList.remove('hidden');
-    render();
+    renderDoDoes();
   }
 }
 
-overlayEl.addEventListener('click', handleOverlayClick);
 
 function keepCount() {
+  const chosenSentEl = document.querySelector('.chosen-sentence-container')
   let count = chosenSentEl.children.length;
   if ( count === 3) {
     // const resetButton = document.querySelector('.continue-button');
     setTimeout(() => {
       pickSentence()
-    }, 1000);
+    }, 800);
   }
   count = 0;
 }
 
 function pickSentence() {
-  mainSection.classList.add('hidden');
+   const sectionOne = document.querySelector('.section-one')
+   const chosenSentEl = document.querySelector('.chosen-sentence-container')
+  sectionOne.classList.add('hidden');
+  chosenSentEl.classList.add('hidden');
+  const objectSectionEl = document.querySelector('.object-section');
   objectSectionEl.clicked = false;
   const [sentenceIsvalid, cleanedSentence] = validateSentence();
 
@@ -150,6 +153,10 @@ function pickSentence() {
     openDialogBox();
     dialogBoxEl.textContent = 'Invald sentence. Click reset and try again.'
   }
+  const newSentenceSectionEl = document.querySelector('.new-sentence-section')
+  console.log(newSentenceSectionEl);
+
+  const englishContainerEl = document.querySelector('.english-container')
 
   validSentences[cleanedSentence].phrases.forEach(phraseObj => {
     const spanishSentContainer = makeElement('div', 'spanish-sentence-container', newSentenceSectionEl);
@@ -182,7 +189,7 @@ function pickSentence() {
   document.addEventListener('mouseup', () => {
     isDragging = false;
   });
-
+  const typeModeBtn = document.querySelector('.type-mode-button');
   typeModeBtn.addEventListener('click', (event) =>  handleTypeModeClick(event, cleanedSentence));
     typeModeBtn.disabled = false;
 }
@@ -190,6 +197,7 @@ function pickSentence() {
 
 function handleTypeModeClick(event, cleanedSentence) { 
   if (event.target.matches('.type-mode-button')) {
+    const englishContainerEl = document.querySelector('.english-container')
     englishContainerEl.innerHTML = '';
     
     validSentences[cleanedSentence].phrases.forEach((phraseObj, id) => {
@@ -204,23 +212,26 @@ function handleTypeModeClick(event, cleanedSentence) {
       showAnswerButton.addEventListener('click', (event) => handleShowAnswerClick(event, phraseObj))
     });
   }
+  const coverAnswersButton = document.querySelector('.cover-answers-button');
+  const showHintsButton = document.querySelector('.show-hints-button');
   
   coverAnswersButton.disabled = false;
   showHintsButton.disabled = false; 
 }
 
-coverAnswersButton.addEventListener('click', handleCoverAnsClick);
 
 function handleCoverAnsClick(event) {
   if (event.target.matches('.cover-answers-button')){
+  const newSentenceSectionEl = document.querySelector('.new-sentence-section')
+  const englishContainerEl = document.querySelector('.english-container')
+
     newSentenceSectionEl.innerHTML = '';
+
     englishContainerEl.innerHTML = '';
     pickSentence();
   }
   event.target.disabled = true;
 }
-
-showHintsButton.addEventListener('click', handleShowHints);
 
 function handleShowHints(event) {
   console.log('testing');
@@ -269,6 +280,8 @@ function normalizeString(translation) {
 
 function validateSentence() {
   let isValid = false;
+  const chosenSentEl = document.querySelector('.chosen-sentence-container')
+  console.log(chosenSentEl);
   const sentence = [...chosenSentEl.children].map(child => child.textContent).join(' ');
   console.log(sentence);
   const pluralTest = /Mis padres\s+[A-Za-z]+/g;
@@ -294,6 +307,8 @@ function openDialogBox() {
   overlayEl.classList.toggle('overlay-visible');
 
 }
+
+overlayEl.addEventListener('click', handleOverlayClick);
 
 function handleOverlayClick() {
     if (dialogBoxEl.classList.contains('visible')) {

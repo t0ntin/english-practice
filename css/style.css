@@ -63,6 +63,7 @@ a {
 
 .main {
   padding: 1em;
+  /* position: relative; */
 }
 
 .header {
@@ -78,7 +79,7 @@ a {
   gap: 10px;
 }
 
-.main-section {
+.section-one {
   /* border: 2px solid green; */
   margin: 0 0 10px 0;
   display: flex;
@@ -318,16 +319,18 @@ a {
 .overlay {
   width: 0;
   display: none;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1;
 }
 
-
-
 .dialog-box {
   padding: .5em;
-  position: absolute;
-  top: 40%;
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
   opacity: 0;
   transition:opacity 0.2s ease-in;
@@ -364,5 +367,5 @@ a {
 }
 
 .hint-value {
-  color: rgb(140, 140, 140);
+  color: rgb(171, 171, 171);
 }

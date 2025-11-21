@@ -5,6 +5,13 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom has the homework',
+
+        spanish: [
+          { text: 'Mi mamá', role: 'subject' },
+          { text: 'tiene', role: 'verb' },
+          { text: 'la tarea', role: 'object' },
+        ],
+
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'has', role: 'verb' },
@@ -81,6 +88,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom has a big house',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "tiene", "role": "verb" },
+          { "text": "una casa grande", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'has', role: 'verb' },
@@ -158,6 +170,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom makes a big house',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "hace", "role": "verb" },
+          { "text": "una casa grande", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'makes', role: 'verb' },
@@ -234,6 +251,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom has doors',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "tiene", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'has', role: 'verb' },
@@ -310,6 +332,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom has congestion',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "tiene", "role": "verb" },
+          { "text": "congestión", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'has', role: 'verb' },
@@ -386,6 +413,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom has a lot of money',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "tiene", "role": "verb" },
+          { "text": "mucho dinero", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'has', role: 'verb' },
@@ -462,6 +494,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom makes food at Christmas',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "hace", "role": "verb" },
+          { "text": "comida en navidad", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'makes', role: 'verb' },
@@ -538,6 +575,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom does the homework',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "hace", "role": "verb" },
+          { "text": "la tarea", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'does', role: 'verb' },
@@ -614,6 +656,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom makes doors',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "hace", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'makes', role: 'verb' },
@@ -690,6 +737,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom makes a lot of money',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "hace", "role": "verb" },
+          { "text": "mucho dinero", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'makes', role: 'verb' },
@@ -766,6 +818,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom opens doors',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "abre", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'opens', role: 'verb' },
@@ -842,6 +899,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My mom reduces congestion',
+        spanish: [
+          { "text": "Mi mamá", "role": "subject" },
+          { "text": "reduce", "role": "verb" },
+          { "text": "la congestión", "role": "object" }
+        ],
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'reduces', role: 'verb' },
@@ -919,6 +981,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents have food at Christmas',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "tienen", "role": "verb" },
+          { "text": "comida en navidad", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'have', role: 'verb' },
@@ -995,6 +1062,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents have the homework',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "tienen", "role": "verb" },
+          { "text": "la tarea", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'have', role: 'verb' },
@@ -1071,6 +1143,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents have a big house',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "tienen", "role": "verb" },
+          { "text": "una casa grande", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'have', role: 'verb' },
@@ -1147,6 +1224,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents have doors',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "tienen", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'have', role: 'verb' },
@@ -1224,6 +1306,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents have a lot of money',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "tienen", "role": "verb" },
+          { "text": "mucho dinero", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'have', role: 'verb' },
@@ -1300,6 +1387,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents make food at Christmas',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "hacen", "role": "verb" },
+          { "text": "comida en navidad", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'make', role: 'verb' },
@@ -1376,6 +1468,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents do the homework',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "hacen", "role": "verb" },
+          { "text": "la tarea", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'do', role: 'verb' },
@@ -1452,6 +1549,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents make a big house',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "hacen", "role": "verb" },
+          { "text": "una casa grande", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'make', role: 'verb' },
@@ -1528,6 +1630,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents make doors',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "hacen", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'make', role: 'verb' },
@@ -1604,6 +1711,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents make a lot of money',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "hacen", "role": "verb" },
+          { "text": "mucho dinero", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'make', role: 'verb' },
@@ -1680,6 +1792,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents open doors',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "abren", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'open', role: 'verb' },
@@ -1756,6 +1873,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'My parents reduce congestion',
+        spanish: [
+          { "text": "Mis padres", "role": "subject" },
+          { "text": "reducen", "role": "verb" },
+          { "text": "la congestión", "role": "object" }
+        ],
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'reduce', role: 'verb' },
@@ -1833,6 +1955,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'The car has doors',
+        spanish: [
+          { "text": "El carro", "role": "subject" },
+          { "text": "tiene", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'The car', role: 'subject' },
           { text: 'has', role: 'verb' },
@@ -1910,6 +2037,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'The car costs a lot of money',
+        spanish: [
+          { "text": "El carro", "role": "subject" },
+          { "text": "cuesta", "role": "verb" },
+          { "text": "mucho dinero", "role": "object" }
+        ],
         english: [
           { text: 'The car', role: 'subject' },
           { text: 'costs', role: 'verb' },
@@ -1986,6 +2118,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'The car reduces congestion',
+        spanish: [
+          { "text": "El carro", "role": "subject" },
+          { "text": "reduce", "role": "verb" },
+          { "text": "la congestión", "role": "object" }
+        ],
         english: [
           { text: 'The car', role: 'subject' },
           { text: 'reduces', role: 'verb' },
@@ -2062,6 +2199,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'Learning a language costs a lot of money',
+        spanish: [
+          { "text": "Aprender un idioma", "role": "subject" },
+          { "text": "cuesta", "role": "verb" },
+          { "text": "mucho dinero", "role": "object" }
+        ],
         english: [
           { text: 'Learning a language', role: 'subject' },
           { text: 'costs', role: 'verb' },
@@ -2138,6 +2280,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'Learning a language opens doors',
+        spanish: [
+          { "text": "Aprender un idioma", "role": "subject" },
+          { "text": "abre", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'Learning a language', role: 'subject' },
           { text: 'opens', role: 'verb' },
@@ -2214,6 +2361,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'The public transportation system opens doors',
+        spanish: [
+          { "text": "El sistema de transporte público", "role": "subject" },
+          { "text": "abre", "role": "verb" },
+          { "text": "puertas", "role": "object" }
+        ],
         english: [
           { text: 'The public transportation system', role: 'subject' },
           { text: 'opens', role: 'verb' },
@@ -2290,6 +2442,11 @@ export const validSentences = {
       {
         key: 'translation',
         complete: 'The public transportation system reduces congestion',
+        spanish: [
+          { "text": "El sistema de transporte público", "role": "subject" },
+          { "text": "reduce", "role": "verb" },
+          { "text": "la congestión", "role": "object" }
+        ],
         english: [
           { text: 'The public transportation system', role: 'subject' },
           { text: 'reduces', role: 'verb' },
@@ -2371,6 +2528,6 @@ export const hints = [
   { 'Have:': 'I, You, We, They' },
   { 'Aprender:': 'Learning' },
   { 'El sistema de transporte público:': 'The public transportation system' },
-  { 'Hacer tarea:': "'do'" },
-  { 'Hacer comida:': " 'make'" },
+  { 'Hacer tarea:': 'do' },
+  { 'Hacer comida:': 'make' },
 ];
