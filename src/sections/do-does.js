@@ -2,7 +2,16 @@ import { makeElement, makeInputEl } from "../components/createElements.js"
 import { validSentences, hints } from "../components/valid-sentences.js";
 
 const mainEl = document.querySelector('.main');
-let mainSection = makeElement('section', 'main-section', mainEl);
+
+export function linkToDoDoes() {
+  const doDoesLink = document.querySelector('.do-does-link');
+  doDoesLink.addEventListener('click', (event) => {
+      event.preventDefault();     
+      renderDoDoes();              
+    });
+}
+const mainSection = document.querySelector('.main-section');
+
 const dialogBoxEl = makeElement('div', 'dialog-box', mainEl)
 const overlayEl = makeElement('div', 'overlay', mainEl)
 
@@ -20,7 +29,6 @@ const objects = ['la tarea', 'comida en navidad',  'una casa grande', 'puertas',
 
 export function renderDoDoes() {
   mainSection.innerHTML = '';
-  // let mainSection = makeElement('section', 'main-section', mainEl);
   const sectionOne = makeElement('div', 'section-one', mainSection);
   const subjectSectionEl = makeElement('div', 'subject-section', sectionOne)
   const verbSectionEl = makeElement('div', 'verb-section', sectionOne)

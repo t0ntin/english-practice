@@ -493,7 +493,7 @@ export const validSentences = {
     phrases: [
       {
         key: 'translation',
-        complete: 'My mom makes food at Christmas',
+        complete: 'My mom makes food on Christmas',
         spanish: [
           { "text": "Mi mamá", "role": "subject" },
           { "text": "hace", "role": "verb" },
@@ -502,12 +502,12 @@ export const validSentences = {
         english: [
           { text: 'My mom', role: 'subject' },
           { text: 'makes', role: 'verb' },
-          { text: 'food at Christmas', role: 'object' },
+          { text: 'food on Christmas', role: 'object' },
         ],
       },
       {
         key: 'interrogative',
-        complete: 'Does my mom make food at Christmas?',
+        complete: 'Does my mom make food on Christmas?',
         spanish: [
           { text: '¿Mi mamá', role: 'subject' },
           { text: 'hace', role: 'verb' },
@@ -517,7 +517,7 @@ export const validSentences = {
           { text: 'Does', role: 'auxiliary' },
           { text: 'my mom', role: 'subject' },
           { text: 'make', role: 'verb' },
-          { text: 'food at Christmas?', role: 'object' },
+          { text: 'food on Christmas?', role: 'object' },
         ],
       },
       {
