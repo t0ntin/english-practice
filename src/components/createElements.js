@@ -12,7 +12,7 @@ export function makeElement(elementTag, className, appendToEl, textInside) {
 }
 
 
-export function makeInputEl(elementTag, className, appendToEl, placeholder) {
+export function makeInputEl(elementTag, className, appendToEl, placeholder, value) {
   const element = document.createElement(elementTag);
   element.classList.add(className);
   if (appendToEl) {
@@ -20,6 +20,9 @@ export function makeInputEl(elementTag, className, appendToEl, placeholder) {
   }
   if (placeholder) {
     element.setAttribute('placeholder', placeholder);
+  }
+  if (value) {
+    element.setAttribute('value', value);
   }
   return element;
 }
