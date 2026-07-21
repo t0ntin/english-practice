@@ -1,5 +1,5 @@
-import { makeElement } from "../components/createElements";
-import { makeInputEl } from "../components/createElements";
+import { makeElement } from "../components/createElements.js";
+import { makeInputEl } from "../components/createElements.js";
 
 const mainSection = document.querySelector('.main-section');
 const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
