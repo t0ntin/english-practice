@@ -8,28 +8,36 @@ export function linkToTranslations() {
       renderInputEls(); 
       if (sentences[0]) {
         sentences.forEach(sentence => {
-          renderSentences(sentence)
+          if (sentence.isArchived === false){
+            renderSentences(sentence);
+
+          }
         });           
       }
     });
 }
 
 const mainSection = document.querySelector('.main-section');
+const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
+const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection)
 
 const sentences = [
   {  
     sentence: "My test sentence", 
-    translation: "Mi oracion de prueba"
+    translation: "Mi oracion de prueba",
+    isArchived: false,
   },
   {
     sentence: "My test sentence 2", 
     translation: "Mi oracion de prueba 2",
+    isArchived: false,
   }
 ];
 
+
+
 const renderInputEls = () => {
-  mainSection.innerHTML = '';
-  const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
+  containerForInputEls.innerHTML = '';
 
 
 
@@ -42,7 +50,8 @@ const renderInputEls = () => {
     const addSentenceButton =  makeElement('button', 'add-sentece-button', containerForInputEls, 'Add');
 
     const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle');
-    addSentenceButton.addEventListener('click', handleAddClick)
+    addSentenceButton.addEventListener('click', handleAddClick);
+
 
 }
 
@@ -51,7 +60,7 @@ const handleAddClick = () => {
 
   const singleSpanishTranslationEl = document.querySelector('.single-spanish-translation-input-element');
 
-  const newSentenceObj = {sentence: singleEnglishSentenceEl.value, translation: singleSpanishTranslationEl.value};
+  const newSentenceObj = {sentence: singleEnglishSentenceEl.value, translation: singleSpanishTranslationEl.value, isArchived: false};
 
   sentences.push(newSentenceObj);
   renderSentences(newSentenceObj); 
@@ -61,8 +70,8 @@ const handleAddClick = () => {
 }
 
 const renderSentences = (sentence) => {
-  
-  const containerOne =  makeElement('div', 'container-one', mainSection);
+  // const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection)
+  const containerOne =  makeElement('div', 'container-one', sentencesContainerOne);
   const englishSentenceEl = makeElement('input', 'single-english-sentence-input-element', containerOne);
   englishSentenceEl.value = sentence.sentence;
 
@@ -83,15 +92,30 @@ const renderSentences = (sentence) => {
     }
   });
   
-  const snoozeOne5min = makeElement('button', 'snooze-button-5min', containerOne, '5 min.');
+  const snoozeOne5min = makeElement('button', 'snooze-button-5min', containerOne, 'Snooze 5 min.');
 
   snoozeOne5min.addEventListener('click', () => {
     containerOne.classList.toggle('invisible');
     setTimeout(() => {
     containerOne.classList.toggle('invisible');
     }, 1000);
-  })
+  });
 
+  const archiveButton = makeElement('button', 'archive-button', containerOne, 'Archive');
+  
+  archiveButton.addEventListener('click', () => {
+    sentence.isArchived = !sentence.isArchived;
+    sentencesContainerOne.innerHTML = '';
+    sentences.forEach(sentence => {
+      if (sentence.isArchived === false) {
+
+        renderSentences(sentence);
+      }
+    })
+  });
+  
+
+console.log(sentences);
 }
 
 
