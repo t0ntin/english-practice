@@ -101,14 +101,14 @@ const renderSentences = (sentence) => {
   // const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection)
   const containerOne =  makeElement('div', 'container-one', sentencesContainerOne);
   const englishSentenceEl = makeElement('input', 'single-english-sentence-input-element', containerOne);
-  englishSentenceEl.value = sentence.sentence;
+  // englishSentenceEl.value = sentence.sentence;
 
   const spanishSentenceEl = makeElement('input', 'single-spanish-sentence-input-element', containerOne);  
   spanishSentenceEl.value = sentence.translation;
 
   const showHideOne = makeElement('button', 'show-hide-one-button', containerOne, 'Show/Hide');
 
-  let translationIsVisible = true;
+  let translationIsVisible = false;
 
   showHideOne.addEventListener('click', () => {
     translationIsVisible = !translationIsVisible;
@@ -142,8 +142,18 @@ const renderSentences = (sentence) => {
     })
   });
   
+  const speakButton = makeElement('button', 'speak-button', containerOne, 'Speak');
 
-console.log(sentences);
+    speakButton.addEventListener('click', () => {
+      console.log(sentence.sentence);
+      const utterance = new SpeechSynthesisUtterance(sentence.sentence);
+      const voice = speechSynthesis.getVoices().find(
+        v => v.name === "English (America)+Michael"
+      );    
+      utterance.voice = voice;
+      speechSynthesis.speak(utterance); 
+    });
+    console.log(sentences);
 }
 
 
