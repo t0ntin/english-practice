@@ -1,25 +1,28 @@
 import { makeElement } from "../components/createElements";
 import { makeInputEl } from "../components/createElements";
 
-export function linkToTranslations() {
-  const translationsLink = document.querySelector('.translations-link');
-  translationsLink.addEventListener('click', (event) => {
-      event.preventDefault();     
-      renderInputEls(); 
-      if (sentences[0]) {
-        sentences.forEach(sentence => {
-          if (sentence.isArchived === false){
-            renderSentences(sentence);
-
-          }
-        });           
-      }
-    });
-}
-
 const mainSection = document.querySelector('.main-section');
 const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
 const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection)
+
+export function linkToTranslations() {
+  const translationsLink = document.querySelector('.translations-link');
+  translationsLink.addEventListener('click', (event) => {
+    event.preventDefault();     
+    renderInputEls(); 
+    if (sentencesContainerOne.children.length >0) {
+      return;
+    }
+      sentences.forEach(sentence => {
+        if (sentence.isArchived === false){
+          renderSentences(sentence);
+
+        }
+      });           
+  });
+}
+
+
 
 const sentences = [
   {  
@@ -39,8 +42,6 @@ const sentences = [
 const renderInputEls = () => {
   containerForInputEls.innerHTML = '';
 
-
-
     const singleEnglishSentenceEl =  makeInputEl('input', 'single-english-sentence-input-element', containerForInputEls, 'Enter an English sentence...');
 
     const arrow =  makeElement('span', 'arrow', containerForInputEls, '➡');
@@ -49,9 +50,17 @@ const renderInputEls = () => {
 
     const addSentenceButton =  makeElement('button', 'add-sentece-button', containerForInputEls, 'Add');
 
-    const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle');
     addSentenceButton.addEventListener('click', handleAddClick);
 
+    const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle');
+
+    const showArchiveButton =  makeElement('button', 'show-archive-button', containerForInputEls, 'Show Archive');
+
+      showArchiveButton.addEventListener('click', handleShowArchive);
+
+    const showActiveButton =  makeElement('button', 'show-active-button', containerForInputEls, 'Show Active');
+
+      showActiveButton.addEventListener('click', handleShowActive);
 
 }
 
@@ -69,7 +78,26 @@ const handleAddClick = () => {
 
 }
 
+const handleShowArchive = () => {
+  sentencesContainerOne.innerHTML = '';
+  sentences.forEach(sentence => {
+    if (sentence.isArchived) {
+      renderSentences(sentence);
+    }
+  })
+};
+
+const handleShowActive = () => {
+  sentencesContainerOne.innerHTML = '';
+  sentences.forEach(sentence => {
+    if (!sentence.isArchived) {
+      renderSentences(sentence);
+    }
+  })
+}
+
 const renderSentences = (sentence) => {
+  // sentencesContainerOne.innerHTML = '';
   // const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection)
   const containerOne =  makeElement('div', 'container-one', sentencesContainerOne);
   const englishSentenceEl = makeElement('input', 'single-english-sentence-input-element', containerOne);
