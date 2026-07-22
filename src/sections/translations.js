@@ -1,18 +1,24 @@
 import { makeElement } from "../components/createElements.js";
 import { makeInputEl } from "../components/createElements.js";
 
+// I NEED TO MOVE CONTAINERFORINPUTELS AND SENTENCESCONTAINERONE INSIDE FUNCTIONS.
+
+
+
 const mainSection = document.querySelector('.main-section');
-const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
-const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection)
+
+
 
 export function linkToTranslations() {
   const translationsLink = document.querySelector('.translations-link');
   translationsLink.addEventListener('click', (event) => {
-    event.preventDefault();     
+    event.preventDefault();  
+    mainSection.innerHTML = '';
     renderInputEls(); 
-    if (sentencesContainerOne.children.length >0) {
-      return;
-    }
+
+    // if (sentencesContainerOne.children.length >0) {
+    //   return;
+    // }
       sentences.forEach(sentence => {
         if (sentence.isArchived === false){
           renderSentences(sentence);
@@ -40,7 +46,9 @@ const sentences = [
 
 
 const renderInputEls = () => {
+  const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
   containerForInputEls.innerHTML = '';
+  const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection);
 
     const singleEnglishSentenceEl =  makeInputEl('input', 'single-english-sentence-input-element', containerForInputEls, 'Enter an English sentence...');
 
@@ -48,11 +56,9 @@ const renderInputEls = () => {
 
     const singleSpanishTranslationEl =  makeInputEl('input', 'single-spanish-translation-input-element', containerForInputEls, 'Enter the Spanish translation...');
 
-    const addSentenceButton =  makeElement('button', 'add-sentece-button', containerForInputEls, 'Add');
+    const addSentenceButton =  makeElement('button', 'add-sentence-button', containerForInputEls, 'Add');
 
     addSentenceButton.addEventListener('click', handleAddClick);
-
-    const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle');
 
     const showArchiveButton =  makeElement('button', 'show-archive-button', containerForInputEls, 'Show Archive');
 
@@ -61,6 +67,8 @@ const renderInputEls = () => {
     const showActiveButton =  makeElement('button', 'show-active-button', containerForInputEls, 'Show Active');
 
       showActiveButton.addEventListener('click', handleShowActive);
+
+    const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle');
 
 }
 
@@ -79,6 +87,7 @@ const handleAddClick = () => {
 }
 
 const handleShowArchive = () => {
+  const sentencesContainerOne = document.querySelector('.sentences-container-one');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
     if (sentence.isArchived) {
@@ -88,6 +97,7 @@ const handleShowArchive = () => {
 };
 
 const handleShowActive = () => {
+  const sentencesContainerOne = document.querySelector('.sentences-container-one');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
     if (!sentence.isArchived) {
@@ -97,14 +107,17 @@ const handleShowActive = () => {
 }
 
 const renderSentences = (sentence) => {
-  // sentencesContainerOne.innerHTML = '';
-  // const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection)
-  const containerOne =  makeElement('div', 'container-one', sentencesContainerOne);
-  const englishSentenceEl = makeElement('input', 'single-english-sentence-input-element', containerOne);
-  // englishSentenceEl.value = sentence.sentence;
+  const sentencesContainerOne = document.querySelector('.sentences-container-one');
 
-  const spanishSentenceEl = makeElement('input', 'single-spanish-sentence-input-element', containerOne);  
-  spanishSentenceEl.value = sentence.translation;
+  const containerOne =  makeElement('div', 'container-one', sentencesContainerOne);
+    const topRowContainer =  makeElement('div', 'top-row-container', containerOne);
+
+      const englishSentenceEl = makeElement('textarea', 'single-english-sentence-input-element-2', topRowContainer);
+        englishSentenceEl.id = 'autoGrow';
+      const arrow =  makeElement('span', 'arrow', topRowContainer, '➡');
+
+      const spanishSentenceEl = makeElement('textarea', 'single-spanish-sentence-input-element-2', topRowContainer);  
+      spanishSentenceEl.value = sentence.translation;
 
   const showHideOne = makeElement('button', 'show-hide-one-button', containerOne, 'Show/Hide');
 
@@ -120,13 +133,13 @@ const renderSentences = (sentence) => {
     }
   });
   
-  const snoozeOne5min = makeElement('button', 'snooze-button-5min', containerOne, 'Snooze 5 min.');
+  const snoozeOne5min = makeElement('button', 'snooze-button-5min', containerOne, '😴  - 5 min.');
 
   snoozeOne5min.addEventListener('click', () => {
     containerOne.classList.toggle('invisible');
     setTimeout(() => {
     containerOne.classList.toggle('invisible');
-    }, 1000);
+    }, 300000);
   });
 
   const archiveButton = makeElement('button', 'archive-button', containerOne, 'Archive');
@@ -147,12 +160,23 @@ const renderSentences = (sentence) => {
     speakButton.addEventListener('click', () => {
       console.log(sentence.sentence);
       const utterance = new SpeechSynthesisUtterance(sentence.sentence);
-      const voice = speechSynthesis.getVoices().find(
-        v => v.name === "English (America)+Michael"
-      );    
-      utterance.voice = voice;
+      // const voice = speechSynthesis.getVoices().find(
+      //   v => v.name === "English (America)+Michael"
+      // );    
+      // utterance.voice = voice;
       speechSynthesis.speak(utterance); 
     });
+    
+    const deleteButton = makeElement('button', 'delete-button', containerOne, 'Delete');
+    deleteButton.addEventListener('click', () => {
+      sentencesContainerOne.innerHTML = '';
+      const index = sentences.indexOf(sentence);
+      sentences.splice(index, 1);
+      sentences.forEach(sentence => {
+        renderSentences(sentence);
+      });
+    });
+    
     console.log(sentences);
 }
 
