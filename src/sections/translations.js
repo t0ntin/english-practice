@@ -1,13 +1,8 @@
 import { makeElement } from "../components/createElements.js";
 import { makeInputEl } from "../components/createElements.js";
 
-// I NEED TO MOVE CONTAINERFORINPUTELS AND SENTENCESCONTAINERONE INSIDE FUNCTIONS.
-
-
 
 const mainSection = document.querySelector('.main-section');
-
-
 
 export function linkToTranslations() {
   const translationsLink = document.querySelector('.translations-link');
@@ -15,20 +10,24 @@ export function linkToTranslations() {
     event.preventDefault();  
     mainSection.innerHTML = '';
     renderInputEls(); 
-
-    // if (sentencesContainerOne.children.length >0) {
-    //   return;
-    // }
-      sentences.forEach(sentence => {
-        if (sentence.isArchived === false){
+    const localStorageSentences = localStorage.getItem('sentences');
+    if (localStorageSentences) {
+      const sentenceData = JSON.parse(localStorageSentences);
+      console.log(sentenceData);
+      sentenceData.forEach(sentence => {
+        if (sentence.isArchived === false) {
           renderSentences(sentence);
-
         }
-      });           
+      })
+    } else {
+      sentences.forEach(sentence => {
+        if (sentence.isArchived === false) {
+          renderSentences(sentence);
+        }
+      })
+    }
   });
 }
-
-
 
 const sentences = [
   {  
@@ -42,8 +41,6 @@ const sentences = [
     isArchived: false,
   }
 ];
-
-
 
 const renderInputEls = () => {
   const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
@@ -77,12 +74,20 @@ const handleAddClick = () => {
 
   const singleSpanishTranslationEl = document.querySelector('.single-spanish-translation-input-element');
 
+  if (singleEnglishSentenceEl.value === '' || singleSpanishTranslationEl.value === '') {
+    return
+  }
+
   const newSentenceObj = {sentence: singleEnglishSentenceEl.value, translation: singleSpanishTranslationEl.value, isArchived: false};
-
+  
+  
   sentences.push(newSentenceObj);
+  localStorage.setItem('sentences', JSON.stringify(sentences));
   renderSentences(newSentenceObj); 
-
+  singleEnglishSentenceEl.value = '';
+  singleSpanishTranslationEl.value = '';
   console.log(sentences);
+  console.log(localStorage.getItem('sentences'));
 
 }
 
@@ -149,7 +154,6 @@ const renderSentences = (sentence) => {
     sentencesContainerOne.innerHTML = '';
     sentences.forEach(sentence => {
       if (sentence.isArchived === false) {
-
         renderSentences(sentence);
       }
     })

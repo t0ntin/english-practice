@@ -71,6 +71,7 @@ a {
 }
 
 .header {
+  margin: 0 0 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,6 +84,18 @@ a {
   gap: 10px;
 }
 
+.do-does-link, .do-does-2-link {
+  font-size: 1.5rem;
+  color: rgb(203, 0, 0);
+  font-weight: bold;
+}
+
+.do-does-link:hover,
+.do-does-2-link:hover {
+  color: white;
+}
+
+
 .section-one {
   /* border: 2px solid green; */
   margin: 0 0 10px 0;
@@ -90,6 +103,7 @@ a {
   justify-content: center;
   gap: 10px;
 }
+
 
 .subject-section {
   flex-shrink: 5;
@@ -118,16 +132,19 @@ a {
 .subject, .user-defined-subject {
   background-color: #93033b;
   height: auto;
+  cursor: pointer;
 }
 
 .verb {
   background-color: #07a14c;
   height: auto;
+  cursor: pointer;
 }
 
 .object {
   background-color: #2a3bd3;
   height: auto;
+  cursor: pointer;
 }
 
 .subject, .verb, .object, .user-defined-subject {
