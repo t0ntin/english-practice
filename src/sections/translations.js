@@ -3,7 +3,7 @@ import { makeInputEl } from "../components/createElements.js";
 
 // ============================
 // TO DO:
-
+// 
 // ============================
 const mainSection = document.querySelector('.main-section');
 
@@ -48,6 +48,8 @@ let sentences = [
   }
 ];
 
+let activeView = true;
+
 const renderInputEls = () => {
   const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
   containerForInputEls.innerHTML = '';
@@ -71,6 +73,7 @@ const renderInputEls = () => {
 
       showActiveButton.addEventListener('click', handleShowActive);
       showActiveButton.classList.add('active');
+
     const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle');
 
       shuffleSentencesButton.addEventListener('click', handleShuffle);
@@ -88,15 +91,31 @@ const handleAddClick = () => {
 
   const newSentenceObj = {sentence: singleEnglishSentenceEl.value, translation: singleSpanishTranslationEl.value, isArchived: false, isArchivedDisabled: false};
   
-  
   sentences.push(newSentenceObj);
   saveToLocalStorage();
   renderSentences(newSentenceObj); 
   singleEnglishSentenceEl.value = '';
   singleSpanishTranslationEl.value = '';
   console.log(sentences);
-  // console.log(localStorage.getItem('sentences'));
+}
 
+
+const changeView = () => {
+  const showArchiveButton = document.querySelector('.show-archive-button');
+  const showActiveButton = document.querySelector('.show-active-button');
+  const shuffleSentencesButton = document.querySelector('.shuffle-sentences-button');
+  if (!activeView) {
+    showArchiveButton.classList.add('active');
+    showActiveButton.classList.remove('active');
+    shuffleSentencesButton.disabled = true;
+    shuffleSentencesButton.classList.add('disabled');
+
+  } else {
+  showActiveButton.classList.add('active');
+  showArchiveButton.classList.remove('active');
+  shuffleSentencesButton.disabled = false;
+  shuffleSentencesButton.classList.remove('disabled');
+  }
 }
 
 const handleShowArchive = () => {
@@ -108,13 +127,8 @@ const handleShowArchive = () => {
       renderSentences(sentence);
     }
   })
-  const showArchiveButton = document.querySelector('.show-archive-button');
-  showArchiveButton.classList.add('active');
-  const showActiveButton = document.querySelector('.show-active-button');
-  showActiveButton.classList.remove('active');
-  // sentencesContainerOne.classList.toggle('scaled');
-  shuffleSentencesButton.disabled = true;
-  shuffleSentencesButton.classList.add('disabled');
+  activeView = false;
+  changeView();
 };
 
 const handleShowActive = () => {
@@ -126,14 +140,9 @@ const handleShowActive = () => {
       renderSentences(sentence);
     }
   });
-  const showActiveButton = document.querySelector('.show-active-button');
-  showActiveButton.classList.add('active');
-  const showArchiveButton = document.querySelector('.show-archive-button');
-  showArchiveButton.classList.remove('active');
-  // showActiveButton.classList.toggle('scaled')
-  shuffleSentencesButton.disabled = false;
-  shuffleSentencesButton.classList.remove('disabled');
 
+  activeView = true;
+  changeView();
 }
 
 const handleShuffle = () => {
@@ -227,7 +236,11 @@ const renderSentences = (sentence) => {
       sentences.splice(index, 1);
       saveToLocalStorage();
       sentences.forEach(sentence => {
-        renderSentences(sentence);
+        if (activeView && !sentence.isArchived) {
+          renderSentences(sentence);
+        } else if (!activeView && sentence.isArchived){
+          renderSentences(sentence);
+        }
       });
     });
     
@@ -237,5 +250,3 @@ const renderSentences = (sentence) => {
 const saveToLocalStorage = () => {
   localStorage.setItem('sentences', JSON.stringify(sentences));
 }
-
-// localStorage.clear();
