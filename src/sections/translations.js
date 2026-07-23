@@ -1,7 +1,10 @@
 import { makeElement } from "../components/createElements.js";
 import { makeInputEl } from "../components/createElements.js";
 
+// ============================
+// TO DO:
 
+// ============================
 const mainSection = document.querySelector('.main-section');
 
       // The logic for this next function is:
@@ -87,7 +90,7 @@ const handleAddClick = () => {
   
   
   sentences.push(newSentenceObj);
-  localStorage.setItem('sentences', JSON.stringify(sentences));
+  saveToLocalStorage();
   renderSentences(newSentenceObj); 
   singleEnglishSentenceEl.value = '';
   singleSpanishTranslationEl.value = '';
@@ -138,7 +141,7 @@ const handleShuffle = () => {
     const j = Math.floor(Math.random() * (i + 1));
     [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
   }
-  localStorage.setItem('sentences', JSON.stringify(sentences));
+  saveToLocalStorage();
   const sentencesContainerOne = document.querySelector('.sentences-container-one');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
@@ -156,11 +159,22 @@ const renderSentences = (sentence) => {
 
       const englishSentenceEl = makeElement('textarea', 'single-english-sentence-input-element-2', topRowContainer);
         englishSentenceEl.id = 'autoGrow';
+
+        englishSentenceEl.addEventListener('input', (event) => {
+          const text = event.target.value;
+          sentence.sentence = text;
+          saveToLocalStorage();
+        });
+
       const arrow =  makeElement('span', 'arrow', topRowContainer, '➡');
 
       const spanishSentenceEl = makeElement('textarea', 'single-spanish-sentence-input-element-2', topRowContainer);  
       spanishSentenceEl.value = sentence.translation;
-
+        spanishSentenceEl.addEventListener('input', (event) => {
+          const text = event.target.value;
+          sentence.translation = text;
+          saveToLocalStorage();
+        })
   const showHideOne = makeElement('button', 'show-hide-one-button', containerOne, 'Show/Hide');
 
   let translationIsVisible = false;
@@ -188,7 +202,7 @@ const renderSentences = (sentence) => {
   archiveButton.addEventListener('click', () => {
     sentence.isArchived = true;
     sentence.isArchiveButtonDisabled = true;
-    localStorage.setItem('sentences', JSON.stringify(sentences));
+    saveToLocalStorage();
     sentencesContainerOne.innerHTML = '';
     sentences.forEach(sentence => {
       if (sentence.isArchived === false) {
@@ -203,10 +217,6 @@ const renderSentences = (sentence) => {
     speakButton.addEventListener('click', () => {
       console.log(sentence.sentence);
       const utterance = new SpeechSynthesisUtterance(sentence.sentence);
-      // const voice = speechSynthesis.getVoices().find(
-      //   v => v.name === "English (America)+Michael"
-      // );    
-      // utterance.voice = voice;
       speechSynthesis.speak(utterance); 
     });
     
@@ -215,15 +225,17 @@ const renderSentences = (sentence) => {
       sentencesContainerOne.innerHTML = '';
       const index = sentences.indexOf(sentence);
       sentences.splice(index, 1);
-      localStorage.setItem('sentences', JSON.stringify(sentences));
+      saveToLocalStorage();
       sentences.forEach(sentence => {
         renderSentences(sentence);
       });
     });
     
-    
-
     console.log(sentences);
+}
+
+const saveToLocalStorage = () => {
+  localStorage.setItem('sentences', JSON.stringify(sentences));
 }
 
 // localStorage.clear();
