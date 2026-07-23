@@ -4,32 +4,35 @@ import { makeInputEl } from "../components/createElements.js";
 
 const mainSection = document.querySelector('.main-section');
 
+      // The logic for this next function is:
+      // If localStorage has "sentences":
+      //     use those
+      // Else:
+      //     use the default array
 export function linkToTranslations() {
   const translationsLink = document.querySelector('.translations-link');
+
   translationsLink.addEventListener('click', (event) => {
-    event.preventDefault();  
+    event.preventDefault();
+
     mainSection.innerHTML = '';
-    renderInputEls(); 
+    renderInputEls();
+
     const localStorageSentences = localStorage.getItem('sentences');
+
     if (localStorageSentences) {
-      const sentenceData = JSON.parse(localStorageSentences);
-      console.log(sentenceData);
-      sentenceData.forEach(sentence => {
-        if (sentence.isArchived === false) {
-          renderSentences(sentence);
-        }
-      })
-    } else {
-      sentences.forEach(sentence => {
-        if (sentence.isArchived === false) {
-          renderSentences(sentence);
-        }
-      })
+      sentences = JSON.parse(localStorageSentences);
     }
+
+    sentences.forEach(sentence => {
+      if (sentence.isArchived === false) {
+        renderSentences(sentence);
+      }
+    });
   });
 }
 
-const sentences = [
+let sentences = [
   {  
     sentence: "My test sentence", 
     translation: "Mi oracion de prueba",
@@ -64,8 +67,10 @@ const renderInputEls = () => {
     const showActiveButton =  makeElement('button', 'show-active-button', containerForInputEls, 'Show Active');
 
       showActiveButton.addEventListener('click', handleShowActive);
-
+      showActiveButton.classList.add('active');
     const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle');
+
+      shuffleSentencesButton.addEventListener('click', handleShuffle);
 
 }
 
@@ -78,7 +83,7 @@ const handleAddClick = () => {
     return
   }
 
-  const newSentenceObj = {sentence: singleEnglishSentenceEl.value, translation: singleSpanishTranslationEl.value, isArchived: false};
+  const newSentenceObj = {sentence: singleEnglishSentenceEl.value, translation: singleSpanishTranslationEl.value, isArchived: false, isArchivedDisabled: false};
   
   
   sentences.push(newSentenceObj);
@@ -87,21 +92,53 @@ const handleAddClick = () => {
   singleEnglishSentenceEl.value = '';
   singleSpanishTranslationEl.value = '';
   console.log(sentences);
-  console.log(localStorage.getItem('sentences'));
+  // console.log(localStorage.getItem('sentences'));
 
 }
 
 const handleShowArchive = () => {
   const sentencesContainerOne = document.querySelector('.sentences-container-one');
+  const shuffleSentencesButton = document.querySelector('.shuffle-sentences-button');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
     if (sentence.isArchived) {
       renderSentences(sentence);
     }
   })
+  const showArchiveButton = document.querySelector('.show-archive-button');
+  showArchiveButton.classList.add('active');
+  const showActiveButton = document.querySelector('.show-active-button');
+  showActiveButton.classList.remove('active');
+  // sentencesContainerOne.classList.toggle('scaled');
+  shuffleSentencesButton.disabled = true;
+  shuffleSentencesButton.classList.add('disabled');
 };
 
 const handleShowActive = () => {
+  const sentencesContainerOne = document.querySelector('.sentences-container-one');
+  const shuffleSentencesButton = document.querySelector('.shuffle-sentences-button');
+  sentencesContainerOne.innerHTML = '';
+  sentences.forEach(sentence => {
+    if (!sentence.isArchived) {
+      renderSentences(sentence);
+    }
+  });
+  const showActiveButton = document.querySelector('.show-active-button');
+  showActiveButton.classList.add('active');
+  const showArchiveButton = document.querySelector('.show-archive-button');
+  showArchiveButton.classList.remove('active');
+  // showActiveButton.classList.toggle('scaled')
+  shuffleSentencesButton.disabled = false;
+  shuffleSentencesButton.classList.remove('disabled');
+
+}
+
+const handleShuffle = () => {
+  for (let i = sentences.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+  }
+  localStorage.setItem('sentences', JSON.stringify(sentences));
   const sentencesContainerOne = document.querySelector('.sentences-container-one');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
@@ -134,7 +171,6 @@ const renderSentences = (sentence) => {
       englishSentenceEl.value = sentence.sentence;
     } else {
       englishSentenceEl.value = "";
-      console.log(englishSentenceEl.value);
     }
   });
   
@@ -150,7 +186,9 @@ const renderSentences = (sentence) => {
   const archiveButton = makeElement('button', 'archive-button', containerOne, 'Archive');
   
   archiveButton.addEventListener('click', () => {
-    sentence.isArchived = !sentence.isArchived;
+    sentence.isArchived = true;
+    sentence.isArchiveButtonDisabled = true;
+    localStorage.setItem('sentences', JSON.stringify(sentences));
     sentencesContainerOne.innerHTML = '';
     sentences.forEach(sentence => {
       if (sentence.isArchived === false) {
@@ -158,7 +196,8 @@ const renderSentences = (sentence) => {
       }
     })
   });
-  
+  archiveButton.disabled = sentence.isArchiveButtonDisabled;
+
   const speakButton = makeElement('button', 'speak-button', containerOne, 'Speak');
 
     speakButton.addEventListener('click', () => {
@@ -176,138 +215,15 @@ const renderSentences = (sentence) => {
       sentencesContainerOne.innerHTML = '';
       const index = sentences.indexOf(sentence);
       sentences.splice(index, 1);
+      localStorage.setItem('sentences', JSON.stringify(sentences));
       sentences.forEach(sentence => {
         renderSentences(sentence);
       });
     });
     
+    
+
     console.log(sentences);
 }
 
-
-
-// const handleNewSentenceClick = () => {
-//   renderNewSentenceEls();
-// }
-
-// const renderNewSentenceEls = (sentence) => {
-//   const containerOne =  makeElement('div', 'container-one', mainSection);
-//     const wrapper1A = makeElement('div', 'wrapper-1A', containerOne);
-
-//       const newSentenceObj = {sentence: "", translation: ""};
-
-//       const singleEnglishSentenceEl =  makeInputEl('input', 'single-english-sentence-input-element', wrapper1A, '', sentence.sentence);
-
-//       singleEnglishSentenceEl.addEventListener('input', (event) => {
-//         newSentenceObj.sentence = event.target.value;
-//         console.log(sentences);
-//       });
-
-//       const arrow =  makeElement('span', 'arrow', wrapper1A, '➡');
-
-//       const singleSpanishTranslationEl =  makeInputEl('input', 'single-spanish-translation-input-element', wrapper1A, '', sentence.translation);   
-//       singleSpanishTranslationEl.addEventListener('input', (event) => {
-//         newSentenceObj.translation = event.target.value;
-//         console.log(sentences);
-//       });
-
-//       sentences.push(newSentenceObj); 
-
-
-
-
-
-
-//       const wrapper1B = makeElement('div', 'single-sentence-first-row-wrapper', containerOne);
-//         const showHideOne = makeElement('button', 'show-hide-one-button', wrapper1B, 'Show/Hide');
-//         let translationIsVisible = true;
-      
-//         showHideOne.addEventListener('click', () => {
-//           translationIsVisible = !translationIsVisible;
-//               if (translationIsVisible) {
-//         singleEnglishSentenceEl.value = sentence.sentence;
-//     } else {
-//         singleEnglishSentenceEl.value = "";
-//         console.log(singleEnglishSentenceEl.value);
-//     }
-//           // singleEnglishSentenceEl.value = '';
-//           // console.log(sentence);
-//           // singleEnglishSentenceEl.value = translationIsVisible ? sentence.translation : '';
-//         });
-
-
-
-
-
-
-
-//       const wrapper1B2 = makeElement('div', 'wrapper-1B2', containerOne);
-//         const snoozeEl = makeElement('span', 'snooze-text', wrapper1B2);
-//         const snoozeButton5Min = makeElement('button', 'snooze-button-5min', wrapper1B2, '5 min.');
-//         const snoozeButton24Hrs = makeElement('button', 'snooze-button-24Hrs', wrapper1B2, '24 h.');
-//         const snoozeButton1Week = makeElement('button', 'snooze-button-1week', wrapper1B2, '1 week');
-      
-//       const wrapper1C = makeElement('div', 'wrapper-1C', containerOne);
-//         const speakButton = makeElement('button', 'speak-button', wrapper1C, 'Speak');
-//         const deleteButton1 = makeElement('button', 'delete-button1', wrapper1C, 'Delete');
-// }
-
-// const renderSentences = (sentence) => {
-
-//   // Div element that contains single sentence controls.
-//   const containerOne =  makeElement('div', 'container-one', mainSection);
-//     // "Wrapper" is a div inside a main container. 
-//     // "1" is the first section. 
-//     // "A" is the line it's in.
-//     const wrapper1A = makeElement('div', 'wrapper-1A', containerOne);
-
-
-
-//       const singleEnglishSentenceEl =  makeInputEl('input', 'single-english-sentence-input-element', wrapper1A, '', sentence.sentence);
-
-
-//       // const newSentenceObj = {sentence: "", translation: ""};
-
-
-//       //   singleEnglishSentenceEl.addEventListener('input', (event) => {
-//       //     newSentenceObj.sentence = event.target.value;
-//       //     console.log(sentences);
-//       //   })
-
-//       const arrow =  makeElement('span', 'arrow', wrapper1A, '➡');
-
-//       const singleSpanishTranslationEl =  makeInputEl('input', 'single-spanish-translation-input-element', wrapper1A, '', sentence.translation);
-//       //   singleSpanishTranslationEl.addEventListener('input', (event) => {
-//       //     // sentences.translation = event.target.value;
-//       //     newSentenceObj.translation = event.target.value;
-//       //     console.log(sentences);
-//       //   });
-
-
-//       // sentences.push(newSentenceObj);
-
-
-
-
-      
-      
-//       const wrapper1B = makeElement('div', 'single-sentence-first-row-wrapper', containerOne);
-//         const showHideOne = makeElement('button', 'show-hide-one-button', wrapper1B, 'Show/Hide');
-      
-//       const wrapper1B2 = makeElement('div', 'wrapper-1B2', containerOne);
-//         const snoozeEl = makeElement('span', 'snooze-text', wrapper1B2);
-//         const snoozeButton5Min = makeElement('button', 'snooze-button-5min', wrapper1B2, '5 min.');
-//         const snoozeButton24Hrs = makeElement('button', 'snooze-button-24Hrs', wrapper1B2, '24 h.');
-//         const snoozeButton1Week = makeElement('button', 'snooze-button-1week', wrapper1B2, '1 week');
-      
-//       const wrapper1C = makeElement('div', 'wrapper-1C', containerOne);
-//         const speakButton = makeElement('button', 'speak-button', wrapper1C, 'Speak');
-//         const deleteButton1 = makeElement('button', 'delete-button1', wrapper1C, 'Delete');
-      
-      
-
-
-// }
-
-
-
+// localStorage.clear();

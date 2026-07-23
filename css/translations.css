@@ -32,12 +32,18 @@
   font-size: 1.3rem;
 }
 
+
+
 .sentences-container-one {
-  /* width: 100%; */
-  /* border: 1px solid gray; */
   border-radius: 10px;
   padding: 8px 8px 0 8px;
+  /* transition: transform 0.3s ease, opacity 0.3s ease; */
 }
+
+/* .sentences-container-one.scaled {
+  transform: scale(0);
+  opacity: 0;
+} */
 
 .container-one {
   margin: 0 0 8px 0;
@@ -86,6 +92,7 @@
   /* width: 300px; */
   max-height: 55px;
   padding: 3px 5px;
+  border-radius: 5px;
   background: rgb(38, 38, 38);
   border: none;
   border-bottom: 1px solid #2f2f2f;
@@ -95,8 +102,6 @@
   font-family: inherit;
   overflow-y: auto;
   flex: 1;
-
-
 }
 
 
@@ -128,7 +133,7 @@
 }
 
 .add-sentence-button:hover,
-.shuffle-button:hover,
+.shuffle-sentences-button:hover,
 .show-archive-button:hover,
 .show-active-button:hover {
   background: linear-gradient(180deg, #4a4a4a, #343434);
@@ -136,9 +141,14 @@
 }
 
 .add-sentence-button:active,
-.shuffle-button:active,
+.shuffle-sentences-button:active,
 .show-archive-button:active,
-.show-active-button:active {
+.show-active-button:active,
+.show-hide-one-button:active,
+.snooze-button-5min:active,
+.archive-button:active,
+.speak-button:active,
+.delete-button:active {
   transform: scale(0.97);
 }
 
@@ -197,3 +207,13 @@
 
 .delete-button {
 } */
+
+.active {
+  color: lightblue;
+  border: 2px solid lightblue;
+}
+
+.disabled {
+  color: rgb(41, 41, 41);
+  background: rgb(68, 68, 68);
+}
