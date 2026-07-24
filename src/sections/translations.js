@@ -3,7 +3,8 @@ import { makeInputEl } from "../components/createElements.js";
 
 // ============================
 // TO DO:
-// 
+
+
 // ============================
 const mainSection = document.querySelector('.main-section');
 
@@ -89,7 +90,7 @@ const handleAddClick = () => {
     return
   }
 
-  const newSentenceObj = {sentence: singleEnglishSentenceEl.value, translation: singleSpanishTranslationEl.value, isArchived: false, isArchivedDisabled: false};
+  const newSentenceObj = {sentence: singleEnglishSentenceEl.value, translation: singleSpanishTranslationEl.value, isArchived: false};
   
   sentences.push(newSentenceObj);
   saveToLocalStorage();
@@ -138,7 +139,7 @@ const handleShowActive = () => {
   sentences.forEach(sentence => {
     if (!sentence.isArchived) {
       renderSentences(sentence);
-    }
+    };
   });
 
   activeView = true;
@@ -158,7 +159,7 @@ const handleShuffle = () => {
       renderSentences(sentence);
     }
   })
-}
+};
 
 const renderSentences = (sentence) => {
   const sentencesContainerOne = document.querySelector('.sentences-container-one');
@@ -196,21 +197,11 @@ const renderSentences = (sentence) => {
       englishSentenceEl.value = "";
     }
   });
-  
-  const snoozeOne5min = makeElement('button', 'snooze-button-5min', containerOne, '😴  - 5 min.');
-
-  snoozeOne5min.addEventListener('click', () => {
-    containerOne.classList.toggle('invisible');
-    setTimeout(() => {
-    containerOne.classList.toggle('invisible');
-    }, 300000);
-  });
 
   const archiveButton = makeElement('button', 'archive-button', containerOne, 'Archive');
   
   archiveButton.addEventListener('click', () => {
     sentence.isArchived = true;
-    sentence.isArchiveButtonDisabled = true;
     saveToLocalStorage();
     sentencesContainerOne.innerHTML = '';
     sentences.forEach(sentence => {
@@ -219,9 +210,8 @@ const renderSentences = (sentence) => {
       }
     })
   });
-  archiveButton.disabled = sentence.isArchiveButtonDisabled;
 
-  const speakButton = makeElement('button', 'speak-button', containerOne, 'Speak');
+  const speakButton = makeElement('button', 'speak-button', containerOne, '📢');
 
     speakButton.addEventListener('click', () => {
       console.log(sentence.sentence);
@@ -229,7 +219,7 @@ const renderSentences = (sentence) => {
       speechSynthesis.speak(utterance); 
     });
     
-    const deleteButton = makeElement('button', 'delete-button', containerOne, 'Delete');
+    const deleteButton = makeElement('button', 'delete-button', containerOne, '🗑️');
     deleteButton.addEventListener('click', () => {
       sentencesContainerOne.innerHTML = '';
       const index = sentences.indexOf(sentence);

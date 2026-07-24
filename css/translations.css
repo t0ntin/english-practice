@@ -1,11 +1,11 @@
 .translations-link {
   font-size: 1.5rem;
-  color: rgb(203, 0, 0);
+  color: white;
   font-weight: bold;
 }
 
 .translations-link:hover {
-  color: white;
+  color: darkgray;
 }
 
 .invisible {
@@ -129,7 +129,13 @@
     box-shadow 0.2s ease;
 }
 .delete-button {
+  padding: 2px 25px;
   color: red;
+  font-size: 1.6rem;
+}
+
+.speak-button {
+  padding: 10px 25px;
 }
 
 .add-sentence-button:hover,
@@ -149,7 +155,7 @@
 .archive-button:active,
 .speak-button:active,
 .delete-button:active {
-  transform: scale(0.97);
+  transform: scale(0.95);
 }
 
 .add-sentence-button:focus-visible,
@@ -162,8 +168,9 @@
 
 .add-sentence-button {
   justify-self: start;
-  color: rgb(39, 201, 255);
+  color: rgb(7, 167, 221);
 }
+
 
 .show-archive-button {
   
@@ -172,33 +179,35 @@
 .shuffle-sentences-button {
   grid-column: 4 / 5;
   justify-self: start
-
+  
 }
 
 .show-archive-button {
   grid-column: 1 / 2;
   justify-self: start
-
+  
 }
 
 .show-active-button {
   grid-column: 3/4;
   justify-self: start
+  
+}
+/* ============SENTENCE BUTTONS ============== */
 
+.show-hide-one-button:hover, 
+.archive-button:hover,
+.speak-button:hover,
+.delete-button:hover {
+  background: linear-gradient(180deg, #4a4a4a, #343434);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
 }
 
-/* .show-hide-one-button {
-  grid-column: 1/2;
-}
-
-.archive-button {
-  grid-column: 3/4;
+/* .archive-button {
 
 }
 
 .snooze-button-5min {
-  grid-column: 4/5;
-  grid-row: 2/3;
 }
 
 
@@ -209,8 +218,8 @@
 } */
 
 .active {
-  color: lightblue;
-  border: 2px solid lightblue;
+  color: rgb(7, 167, 221);
+  border: 2px solid rgb(7, 167, 221);
 }
 
 .disabled {

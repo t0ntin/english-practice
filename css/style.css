@@ -86,15 +86,14 @@ a {
 
 .do-does-link, .do-does-2-link {
   font-size: 1.5rem;
-  color: rgb(203, 0, 0);
+  color: white;
   font-weight: bold;
 }
 
 .do-does-link:hover,
 .do-does-2-link:hover {
-  color: white;
+  color: darkgray;
 }
-
 
 .section-one {
   /* border: 2px solid green; */
