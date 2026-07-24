@@ -211,6 +211,16 @@ const renderSentences = (sentence) => {
     })
   });
 
+  if (sentence.isArchived === false) {
+    const snoozeButton = makeElement('button', 'snooze-button-5min', containerOne, '😴 - 5 min');
+      snoozeButton.addEventListener('click', () =>{
+        containerOne.classList.add('invisible');
+        setTimeout(() => {
+        containerOne.classList.remove('invisible');
+        }, 300000);
+      })
+  }
+
   const speakButton = makeElement('button', 'speak-button', containerOne, '📢');
 
     speakButton.addEventListener('click', () => {
@@ -240,3 +250,5 @@ const renderSentences = (sentence) => {
 const saveToLocalStorage = () => {
   localStorage.setItem('sentences', JSON.stringify(sentences));
 }
+
+// localStorage.clear();

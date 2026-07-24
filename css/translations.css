@@ -130,7 +130,7 @@
 }
 .delete-button {
   padding: 2px 25px;
-  color: red;
+  color: rgb(215, 0, 0);
   font-size: 1.6rem;
 }
 
