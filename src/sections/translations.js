@@ -161,9 +161,18 @@ const handleShuffle = () => {
   })
 };
 
+const transitionContainer = (sentencesContainerOne) =>{
+  sentencesContainerOne.classList.add('fade-out');
+  sentencesContainerOne.classList.remove('fade-in');
+  setTimeout(() => {
+    sentencesContainerOne.classList.remove('fade-out');
+    sentencesContainerOne.classList.add('fade-in');
+  }, 200);
+}
+
 const renderSentences = (sentence) => {
   const sentencesContainerOne = document.querySelector('.sentences-container-one');
-
+    transitionContainer(sentencesContainerOne);
   const containerOne =  makeElement('div', 'container-one', sentencesContainerOne);
     const topRowContainer =  makeElement('div', 'top-row-container', containerOne);
 

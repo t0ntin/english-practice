@@ -15,14 +15,15 @@
 .container-for-top-controls {
   display: grid;
   /* grid-template-columns: auto min-content repeat(2, auto); */
-    grid-template-columns: 1.5fr .1fr 1fr .5fr;
+        grid-template-columns: 1fr auto 1fr 1fr;
+    grid-template-rows: auto auto;
+    /* grid-template-columns: 1.5fr auto 1fr .5fr; */
   align-items: center;
   justify-items: center;
   gap: 5px;
   align-self: center;
   width: 100%;
 }
-
 
 .arrow {
   margin: 0 5px;
@@ -32,18 +33,21 @@
   font-size: 1.3rem;
 }
 
-
-
 .sentences-container-one {
   border-radius: 10px;
   padding: 8px 8px 0 8px;
-  /* transition: transform 0.3s ease, opacity 0.3s ease; */
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* .sentences-container-one.scaled {
-  transform: scale(0);
-  opacity: 0;
-} */
+.sentences-container-one.fade-out {
+  opacity: 0.3;
+  transform: scale(0.98);
+}
+
+.sentences-container-one.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
 
 .container-one {
   margin: 0 0 8px 0;
@@ -129,13 +133,15 @@
     box-shadow 0.2s ease;
 }
 .delete-button {
-  padding: 2px 25px;
+  padding: 1px 25px;
   color: rgb(215, 0, 0);
   font-size: 1.6rem;
 }
 
 .speak-button {
-  padding: 10px 25px;
+  padding: 1px 25px;
+  font-size: 1.5rem;
+
 }
 
 .add-sentence-button:hover,
@@ -197,6 +203,7 @@
 
 .show-hide-one-button:hover, 
 .archive-button:hover,
+.snooze-button-5min:hover,
 .speak-button:hover,
 .delete-button:hover {
   background: linear-gradient(180deg, #4a4a4a, #343434);
