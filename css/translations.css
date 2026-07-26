@@ -41,7 +41,7 @@
 
 .sentences-container-one.fade-out {
   opacity: 0.3;
-  transform: scale(0.98);
+  transform: scale(0.70);
 }
 
 .sentences-container-one.fade-in {
@@ -108,6 +108,11 @@
   flex: 1;
 }
 
+.bottom-row-container {
+  margin: 8px 0 0 0;
+  display: flex;
+  gap: 7px;
+}
 
 .add-sentence-button,
 .shuffle-sentences-button,

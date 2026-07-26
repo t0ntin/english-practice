@@ -194,64 +194,66 @@ const renderSentences = (sentence) => {
           sentence.translation = text;
           saveToLocalStorage();
         })
-  const showHideOne = makeElement('button', 'show-hide-one-button', containerOne, 'Show/Hide');
 
-  let translationIsVisible = false;
+    const bottomRowContainer = makeElement('div', 'bottom-row-container', containerOne);
+      const showHideOne = makeElement('button', 'show-hide-one-button', bottomRowContainer, 'Show/Hide');
 
-  showHideOne.addEventListener('click', () => {
-    translationIsVisible = !translationIsVisible;
-    if (translationIsVisible) {
-      englishSentenceEl.value = sentence.sentence;
-    } else {
-      englishSentenceEl.value = "";
-    }
-  });
+      let translationIsVisible = false;
 
-  const archiveButton = makeElement('button', 'archive-button', containerOne, 'Archive');
-  
-  archiveButton.addEventListener('click', () => {
-    sentence.isArchived = true;
-    saveToLocalStorage();
-    sentencesContainerOne.innerHTML = '';
-    sentences.forEach(sentence => {
-      if (sentence.isArchived === false) {
-        renderSentences(sentence);
-      }
-    })
-  });
-
-  if (sentence.isArchived === false) {
-    const snoozeButton = makeElement('button', 'snooze-button-5min', containerOne, '😴 - 5 min');
-      snoozeButton.addEventListener('click', () =>{
-        containerOne.classList.add('invisible');
-        setTimeout(() => {
-        containerOne.classList.remove('invisible');
-        }, 300000);
-      })
-  }
-
-  const speakButton = makeElement('button', 'speak-button', containerOne, '📢');
-
-    speakButton.addEventListener('click', () => {
-      console.log(sentence.sentence);
-      const utterance = new SpeechSynthesisUtterance(sentence.sentence);
-      speechSynthesis.speak(utterance); 
-    });
-    
-    const deleteButton = makeElement('button', 'delete-button', containerOne, '🗑️');
-    deleteButton.addEventListener('click', () => {
-      sentencesContainerOne.innerHTML = '';
-      const index = sentences.indexOf(sentence);
-      sentences.splice(index, 1);
-      saveToLocalStorage();
-      sentences.forEach(sentence => {
-        if (activeView && !sentence.isArchived) {
-          renderSentences(sentence);
-        } else if (!activeView && sentence.isArchived){
-          renderSentences(sentence);
+      showHideOne.addEventListener('click', () => {
+        translationIsVisible = !translationIsVisible;
+        if (translationIsVisible) {
+          englishSentenceEl.value = sentence.sentence;
+        } else {
+          englishSentenceEl.value = "";
         }
       });
-    });
+
+      const archiveButton = makeElement('button', 'archive-button', bottomRowContainer, 'Archive');
+      
+      archiveButton.addEventListener('click', () => {
+        sentence.isArchived = true;
+        saveToLocalStorage();
+        sentencesContainerOne.innerHTML = '';
+        sentences.forEach(sentence => {
+          if (sentence.isArchived === false) {
+            renderSentences(sentence);
+          }
+        })
+      });
+
+      if (sentence.isArchived === false) {
+        const snoozeButton = makeElement('button', 'snooze-button-5min', bottomRowContainer, '😴 - 5 min');
+          snoozeButton.addEventListener('click', () =>{
+            containerOne.classList.add('invisible');
+            setTimeout(() => {
+            containerOne.classList.remove('invisible');
+            }, 300000);
+          })
+      }
+
+      const speakButton = makeElement('button', 'speak-button', bottomRowContainer, '📢');
+
+        speakButton.addEventListener('click', () => {
+          console.log(sentence.sentence);
+          const utterance = new SpeechSynthesisUtterance(sentence.sentence);
+          speechSynthesis.speak(utterance); 
+        });
+        
+        const deleteButton = makeElement('button', 'delete-button', bottomRowContainer, '🗑️');
+        deleteButton.addEventListener('click', () => {
+          sentencesContainerOne.innerHTML = '';
+          const index = sentences.indexOf(sentence);
+          sentences.splice(index, 1);
+          saveToLocalStorage();
+          sentences.forEach(sentence => {
+            if (activeView && !sentence.isArchived) {
+              renderSentences(sentence);
+            } else if (!activeView && sentence.isArchived){
+              renderSentences(sentence);
+            }
+          });
+        });
     
     console.log(sentences);
 }
