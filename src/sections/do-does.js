@@ -11,6 +11,7 @@ export function linkToDoDoes() {
     });
 }
 const mainSection = document.querySelector('.main-section');
+const mainSection2 = document.querySelector('.main-section-2');
 
 const dialogBoxEl = makeElement('div', 'dialog-box', mainEl)
 const overlayEl = makeElement('div', 'overlay', mainEl)
@@ -29,6 +30,7 @@ const objects = ['la tarea', 'comida en navidad',  'una casa grande', 'puertas',
 
 export function renderDoDoes() {
   mainSection.innerHTML = '';
+  mainSection2.innerHTML = '';
   const sectionOne = makeElement('div', 'section-one', mainSection);
   const subjectSectionEl = makeElement('div', 'subject-section', sectionOne)
   const verbSectionEl = makeElement('div', 'verb-section', sectionOne)

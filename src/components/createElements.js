@@ -1,4 +1,4 @@
-export function makeElement(elementTag, className, appendToEl, textInside) {
+export function makeElement(elementTag, className, appendToEl, textInside, listenerFunctionName) {
   const element = document.createElement(elementTag);
   element.classList.add(className);
   if (appendToEl) {
@@ -7,7 +7,9 @@ export function makeElement(elementTag, className, appendToEl, textInside) {
   if (textInside) {
     element.innerText = textInside;
   }
-  
+    if (listenerFunctionName) {
+    element.addEventListener('click', listenerFunctionName);
+  }
   return element;
 }
 
@@ -24,6 +26,8 @@ export function makeInputEl(elementTag, className, appendToEl, placeholder, valu
   if (value) {
     element.setAttribute('value', value);
   }
+
+
   return element;
 }
 

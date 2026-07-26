@@ -3,10 +3,11 @@ import { makeInputEl } from "../components/createElements.js";
 
 // ============================
 // TO DO:
-
+// Newly added sentences should be styled differently.
 
 // ============================
 const mainSection = document.querySelector('.main-section');
+const mainSection2 = document.querySelector('.main-section-2');
 
       // The logic for this next function is:
       // If localStorage has "sentences":
@@ -20,6 +21,7 @@ export function linkToTranslations() {
     event.preventDefault();
 
     mainSection.innerHTML = '';
+    mainSection2.innerHTML = '';
     renderInputEls();
 
     const localStorageSentences = localStorage.getItem('sentences');
@@ -36,7 +38,7 @@ export function linkToTranslations() {
   });
 }
 
-let sentences = [
+export let sentences = [
   {  
     sentence: "My test sentence", 
     translation: "Mi oracion de prueba",
@@ -258,7 +260,7 @@ const renderSentences = (sentence) => {
     console.log(sentences);
 }
 
-const saveToLocalStorage = () => {
+export const saveToLocalStorage = () => {
   localStorage.setItem('sentences', JSON.stringify(sentences));
 }
 
