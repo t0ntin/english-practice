@@ -210,19 +210,22 @@ const renderSentences = (sentence) => {
           englishSentenceEl.value = "";
         }
       });
-
-      const archiveButton = makeElement('button', 'archive-button', bottomRowContainer, 'Archive');
       
-      archiveButton.addEventListener('click', () => {
-        sentence.isArchived = true;
-        saveToLocalStorage();
-        sentencesContainerOne.innerHTML = '';
-        sentences.forEach(sentence => {
-          if (sentence.isArchived === false) {
-            renderSentences(sentence);
-          }
-        })
-      });
+      if (sentence.isArchived === false) {
+        const archiveButton = makeElement('button', 'archive-button', bottomRowContainer, 'Archive');
+        
+        archiveButton.addEventListener('click', () => {
+          sentence.isArchived = true;
+          saveToLocalStorage();
+          sentencesContainerOne.innerHTML = '';
+          sentences.forEach(sentence => {
+            if (sentence.isArchived === false) {
+              renderSentences(sentence);
+            }
+          })
+        });
+      }
+      
 
       if (sentence.isArchived === false) {
         const snoozeButton = makeElement('button', 'snooze-button-5min', bottomRowContainer, '😴 - 5 min');

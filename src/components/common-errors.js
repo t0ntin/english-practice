@@ -1,6 +1,14 @@
 import { makeElement } from "../components/createElements.js"
 import { sentences, saveToLocalStorage } from "../sections/translations.js";
 
+
+// =============
+// TO DO 
+// ============
+// ADD QUESTIONS TO PRACTICE SENTENCES 
+// =============
+
+
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
 
@@ -17,8 +25,8 @@ const renderErrorsPage = () => {
   mainSection.innerHTML = '';
   mainSection2.innerHTML = '';
   const asideEl = makeElement('aside', 'aside', mainSection2);
-    const asideNavEl = makeElement('aside', 'aside-nav', asideEl);
-    const commonErrorsH2 = makeElement('h2', 'common-errors-h2', asideNavEl, 'Error Types:');
+    const asideNavEl = makeElement('nav', 'aside-nav', asideEl);
+    const commonErrorsH2 = makeElement('h2', 'error-types-h2', asideNavEl, 'Error Types:');
     const ulEl = makeElement('ul', 'ul-element', asideNavEl);
       const liEl = makeElement('li', 'grammar-li', ulEl); 
       const grammarButton = makeElement('button', 'grammar-button', liEl, 'Grammar');
@@ -37,16 +45,26 @@ const renderErrorsPage = () => {
 
 }
 
-
 const errors =[
   {
-  title: "Suggest and recommend",
-  incorrect: ['sentence one goes here', 'sentence 2 goes here'],
-  correct: ['sentence one goes here', 'sentence 2 goes here'],
-  practice: [{english: "my english sentence",
-              spanish: 'my spanish sentence'}
-            ],
-
+    title: "Suggest and recommend",
+    incorrect: ['I suggest you the sushi.', 'I suggest you to eat sushi.', 'I suggest to find a new job.'],
+    correct: ['I suggest the sushi.', 'I suggest eating sushi.', 'I suggest (that) you eat the sushi.'],
+    practice: [
+      {
+        english: "Mary suggests ordering chicken.",
+        spanish: 'Mary sugiere ordenar pollo.'
+      },
+      {
+        english: "Mary suggests ordering chicken, but she doesn't suggest ordering fish.",
+        spanish: 'Mary sugiere ordenar pollo, pero no sugiere ordenar pescado.'
+      },
+      {
+        english: "Mary suggested ordering chicken, but she didn't suggest ordering fish.",
+        spanish: 'Mary sugiriò ordenar pollo, pero no sugiriò ordenar pescado.'
+      },
+    ],
+    note: 'Recommend works the same way.'
   }
 ];
 
@@ -61,22 +79,31 @@ const renderTopic = (topicObj) => {
   const incorrectEl = makeElement('div', 'incorrect-div', contentSection);
     const incorrectTitle = makeElement('h3', 'incorrect-title', incorrectEl, 'Incorrect');
     topicObj.incorrect.forEach(item =>  {
-      makeElement('p', 'incorrect-sentence', incorrectEl, item);
+      const incorrectSentenceEl = makeElement('p', 'incorrect-sentence', incorrectEl, item);
+      makeElement('span', 'incorrect-x', incorrectSentenceEl, '❌');
 
     });
 
   const correctEl = makeElement('div', 'correct-div', contentSection);
-    const correctTitle = makeElement('h3', 'correct-title', incorrectEl, 'Correct');
+    const correctTitle = makeElement('h3', 'correct-title', correctEl, 'Correct');
     topicObj.correct.forEach(sentence =>  {
-      makeElement('p', 'correct-sentence', correctEl, sentence);
+     const correctsentenceEl = makeElement('p', 'correct-sentence', correctEl, sentence);
+      makeElement('span', 'correct-x', correctsentenceEl, '☑️');
     });
+  
+    if (topicObj.note) {
+      const noteEl = makeElement('p', 'note-element', correctEl, `Note: ${topicObj.note}`);
+    }
+
   const practiceEl = makeElement('div', 'practice-div', contentSection);
     const practiceTitleEl = makeElement('h3', 'practice-title-h3', practiceEl, 'Practice');
+    const practiceUl = makeElement('ul', 'practice-ul', practiceEl);
     topicObj.practice.forEach(practiceSentence => {
-      makeElement('p', 'practice-sentence-p', practiceEl, practiceSentence.english);
+      const practiceLi = makeElement('li', 'practice-sentence-li', practiceUl);
+      const bulletEl = makeElement('span', 'practice-bullet', practiceLi, '◉');
+      makeElement('div', 'practice-sentence-div', practiceLi, practiceSentence.english);
       
-      makeElement('button', 'add-to-practice-button', practiceEl, 'Add to practice', () => handleAddToPractice(practiceSentence));
-      console.log(topicObj.practice);
+      makeElement('button', 'add-to-practice-button', practiceLi, 'Add to practice', () => handleAddToPractice(practiceSentence));
     });
 
 }
@@ -86,10 +113,7 @@ const handleSuggestClick = () => {
 }
 
 const handleAddToPractice = (practiceSentence) => {
-  console.log(practiceSentence);
-
    const newSentenceObj = {sentence: practiceSentence.english, translation: practiceSentence.spanish, isArchived: false};
-  console.log(newSentenceObj);
    sentences.push(newSentenceObj);
   saveToLocalStorage();
   
