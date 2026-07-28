@@ -17,6 +17,7 @@
   --MAIN-COLOR: rgb(14, 162, 199);
   --NORMAL-TEXT: rgb(174, 174, 174);
   --BOX-SHADOW-1: 1px 1px 10px rgb(79, 79, 79);
+  --COMMON-ERRORS-BLUE: rgb(0, 50, 175);
 }
 
 html {
@@ -27,7 +28,7 @@ html {
 
 body {
   height: 100vh;
-  background-color: hsla(0, 0%, 0%, 0.925);
+  background-color: rgb(19, 19, 19);
   /* display: flex;
   flex-direction: column;
   align-items: center; */
