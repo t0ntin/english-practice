@@ -18,6 +18,8 @@
   --NORMAL-TEXT: rgb(174, 174, 174);
   --BOX-SHADOW-1: 1px 1px 10px rgb(79, 79, 79);
   --COMMON-ERRORS-BLUE: rgb(0, 50, 175);
+  --COMMON-ERRORS-BLUE-LIGHTER: rgb(22, 88, 255);
+  --BOX-SHADOW-TWO: 2px 5px 10px rgba(127, 127, 127, 0.45);
 }
 
 html {

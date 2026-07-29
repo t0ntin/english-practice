@@ -18,7 +18,7 @@
 .aside {
   padding: 10px 15px 15px 30px;
   border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(127, 127, 127, 0.45);
+  box-shadow: var(--BOX-SHADOW-TWO);
   background-color: rgb(19, 19, 19);
 }
 
@@ -50,11 +50,20 @@
   width: 100%;
   padding: 10px 10px 15px 23px;
   border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(127, 127, 127, 0.45);
+  box-shadow:  var(--BOX-SHADOW-TWO);
   background-color: rgb(19, 19, 19);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+  transition: transform 0.3s ease;
+}
+
+.content-section.scale-down {
+  transform: scale(0.9);
+}
+
+.content-section.scale-up {
+  transform: scale(1);
 }
 
 .title {
@@ -178,4 +187,36 @@ li > button:active {
 .add-to-practice-button:focus-visible {
   outline: 2px solid #6aa8ff;
   outline-offset: 2px;
+}
+
+
+/* ============ */
+.popup-div {
+  width: 200px;
+  height: 100px;
+  background-color: var(--SECONDARY-BACKGROUND);
+  border: 1px solid white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;     
+  color: white;
+  font-weight: bold;
+
+}
+
+.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.selected {
+  background-color: VAR(--COMMON-ERRORS-BLUE-LIGHTER);
+  /* background-color: red; */
 }

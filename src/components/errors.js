@@ -137,3 +137,14 @@ export const errors = [
   },
 ];
 
+export const suggestions = errors[0];
+export const advice = errors[1];
+export const conjugation = errors[2];
+export const objectPlusInf = errors[3];
+export const toHave = errors[4];
+
+export const flags =  {
+  lastSelectedTopic: null,
+  lastSelectedElement:null,
+  
+}

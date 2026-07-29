@@ -1,6 +1,6 @@
 import { makeElement } from "../components/createElements.js"
 import { sentences, saveToLocalStorage } from "../sections/translations.js";
-import { errors } from "./errors.js";
+import { flags, suggestions, advice, conjugation, objectPlusInf, toHave  } from "./errors.js";
 
 // =============
 // TO DO 
@@ -8,13 +8,15 @@ import { errors } from "./errors.js";
 // ADD QUESTIONS TO PRACTICE SENTENCES 
 //  - use of 'the' (next year, last year)
 // - in the same apartment that I live now.
+// - modals with 'to'
 // SET EXPRESSIONS:
 //  -We are in the work. We are in the home.
 // Pronunciation:
 //  - -ed sound
 //  - -es sound
 //  - an especial
-// make it so the buttons on the aside change color when they are pressed.
+// =======================
+
 // =============
 
 
@@ -26,9 +28,16 @@ export function linkToCommonErrors() {
   const commonErrorsLink = document.querySelector('.common-errors-link');
   commonErrorsLink.addEventListener('click', (event) => {
       event.preventDefault();     
-      renderErrorsPage();             
+      renderErrorsPage();    
+      if (flags.lastSelectedTopic !== null) {
+        const topic = flags.lastSelectedTopic;
+        renderTopic(topic)
+      } else {
+        renderTopic(suggestions);         
+      }
     });
 }
+
 
 const renderErrorsPage = () => {
   mainSection.innerHTML = '';
@@ -62,21 +71,14 @@ const renderErrorsPage = () => {
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order');
      
   const contentSection = makeElement('section', 'content-section', mainSection2);
-
 }
-
-
-// Topics:
-const suggestions = errors[0];
-const advice = errors[1];
-const conjugation = errors[2];
-const objectPlusInf = errors[3];
-const toHave = errors[4];
 
 
 const renderTopic = (topicObj) => {
   const contentSection = document.querySelector('.content-section');
   contentSection.innerHTML = '';
+  transitionContent(contentSection);
+
   const titleEl = makeElement('h2', 'title', contentSection, topicObj.title);
   
   const incorrectEl = makeElement('div', 'incorrect-div', contentSection);
@@ -107,36 +109,76 @@ const renderTopic = (topicObj) => {
       const bulletEl = makeElement('span', 'practice-bullet', practiceLi, '◉');
       makeElement('div', 'practice-sentence-div', practiceLi, practiceSentence.english);
       
-      makeElement('button', 'add-to-practice-button', practiceLi, 'Add to practice', () => handleAddToPractice(practiceSentence));
+      makeElement('button', 'add-to-practice-button', practiceLi, 'Add to practice', () => handleAddToPracticeClick(practiceSentence));
     });
 
 }
 
-const handleSuggestClick = () => {
+const handleSuggestClick = (event) => {
   renderTopic(suggestions);
+  changeColor(event);
+  flags.lastSelectedTopic = suggestions;
+  flags.lastSelectedElement = event.target;
+
 }
 
-const handleAdviceClick = () => {
+const handleAdviceClick = (event) => {
   renderTopic(advice);
+  changeColor(event);
+  flags.lastSelectedTopic = advice;
+  flags.lastSelectedElement = event.target;
 }
 
-const handleConjugationClick = () => {
+const handleConjugationClick = (event) => {
   renderTopic(conjugation);
+  changeColor(event);
+  flags.lastSelectedTopic = conjugation;
+  flags.lastSelectedElement = event.target;
 }
 
-const handleObjectPlusInfClick = () => {
+const handleObjectPlusInfClick = (event) => {
   renderTopic(objectPlusInf);
+  changeColor(event);
+  flags.lastSelectedTopic = objectPlusInf;
+  flags.lastSelectedElement = event.target;
 }
 
-const handleToHaveClick = () => {
+const handleToHaveClick = (event) => {
   renderTopic(toHave);
+  changeColor(event);
+  flags.lastSelectedTopic = toHave;
+  flags.lastSelectedElement = event.target;
 }
 
+const changeColor = (event) => {
+  if (flags.lastSelectedElement) {
+    flags.lastSelectedElement.classList.remove('selected');
+  }
+  event.target.classList.add('selected');
+}
 
-
-const handleAddToPractice = (practiceSentence) => {
-   const newSentenceObj = {sentence: practiceSentence.english, translation: practiceSentence.spanish, isArchived: false};
-   sentences.push(newSentenceObj);
+const handleAddToPracticeClick = (practiceSentence) => {
+  const newSentenceObj = {sentence: practiceSentence.english, translation: practiceSentence.spanish, isArchived: false};
+  sentences.push(newSentenceObj);
   saveToLocalStorage();
+  showNotification();
   
+}
+
+const showNotification = () => {
+  const popUpEl = makeElement('div', 'popup-div', mainSection2);
+  popUpEl.innerText = "Sentence added."
+  popUpEl.classList.toggle('active')
+  setTimeout(() => {
+    popUpEl.classList.toggle('active');
+  }, 2000);
+}
+
+const transitionContent = (contentSection) => {
+  contentSection.classList.add('scale-down');
+  contentSection.classList.remove('scale-up');
+  setTimeout(() => {
+    contentSection.classList.add('scale-up');
+    contentSection.classList.remove('scale-down');
+  }, 200);
 }
