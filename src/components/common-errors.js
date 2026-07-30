@@ -1,6 +1,6 @@
 import { makeElement } from "../components/createElements.js"
 import { sentences, saveToLocalStorage } from "../sections/translations.js";
-import { flags, suggestions, advice, conjugation, objectPlusInf, toHave  } from "./errors.js";
+import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals } from "./errors.js";
 
 // =============
 // TO DO 
@@ -22,7 +22,6 @@ import { flags, suggestions, advice, conjugation, objectPlusInf, toHave  } from 
 
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
-
 
 export function linkToCommonErrors() {
   const commonErrorsLink = document.querySelector('.common-errors-link');
@@ -64,6 +63,9 @@ const renderErrorsPage = () => {
 
         const subLiEl5 = makeElement('li', 'objectplusinf-li', ulEl2);
           const toHaveButton = makeElement('button', 'to-have-button', subLiEl5, 'To have', handleToHaveClick);
+
+        const subLiEl6 = makeElement('li', 'modals-li', ulEl2);
+          const modalsButton = makeElement('button', 'modals-button', subLiEl6, 'Modals', handleModalsClick);
 
       const liEl2 = makeElement('li', 'pronunciation-li', ulEl); 
       const pronunciationButton = makeElement('button', 'pronunciation-button', liEl2, 'Pronunciation');
@@ -150,6 +152,13 @@ const handleToHaveClick = (event) => {
   flags.lastSelectedElement = event.target;
 }
 
+const handleModalsClick = (event) => {
+  renderTopic(modals);
+  changeColor(event);
+  flags.lastSelectedTopic = modals;
+  flags.lastSelectedElement = event.target;
+}
+
 const changeColor = (event) => {
   if (flags.lastSelectedElement) {
     flags.lastSelectedElement.classList.remove('selected');
@@ -162,7 +171,6 @@ const handleAddToPracticeClick = (practiceSentence) => {
   sentences.push(newSentenceObj);
   saveToLocalStorage();
   showNotification();
-  
 }
 
 const showNotification = () => {
