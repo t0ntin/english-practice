@@ -66,6 +66,10 @@
   transform: scale(1);
 }
 
+/* .content-section.word-order {
+  
+} */
+
 .title {
   grid-column: 1/span 2;
 }
@@ -219,4 +223,90 @@ li > button:active {
 .selected {
   background-color: VAR(--COMMON-ERRORS-BLUE-LIGHTER);
   /* background-color: red; */
+}
+
+/* ============= WORD ORDER ========== */
+.table-container {
+  width: 600px;
+  grid-column: 2/4;
+
+}
+
+.table-wrapper-1 {
+  display: flex;
+  border: 1px solid white;
+}
+
+.person-div {
+  width: 125px;
+  text-align: center;
+  background-color: red;
+}
+
+.action-div {
+  width: 125px;
+  text-align: center;
+  background-color: blue;
+
+}
+
+.what-div {
+  width: 125px;
+  text-align: center;
+  background-color: green;
+}
+
+.other-info-div {
+  width: 225px;
+  text-align: center;
+  background-color: darkorange;
+
+}
+
+.table-wrapper-1 > div, .table-wrapper-2 > div {
+  border: 1px solid white;
+
+}
+
+.table-wrapper-2 {
+  display: flex;
+}
+
+.person-2-div {
+  width: 125px;
+  text-align: center;
+
+}
+
+.action-2-div {
+  width: 125px;
+  text-align: center;
+
+}
+
+.what-2-div {
+  width: 125px;
+  text-align: center;
+
+}
+
+.other-info-2-div {
+  width: 225px;
+  text-align: center;
+
+}
+
+.button-wrapper {
+  width: 200px;
+ border: 1px solid red;
+  grid-column: 2/4;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-self: center;
+
+}
+
+.yes-button, .no-button {
+
 }

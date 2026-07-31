@@ -167,5 +167,97 @@ export const modals = errors[5];
 export const flags =  {
   lastSelectedTopic: null,
   lastSelectedElement:null,
-  
+  userAnswer:null,
+  currentSentenceIndex: 0,
+  currentGroupIndex: 0,
+  chosenSentence: [],
 }
+
+export const wordOrderSentences = [
+  [
+    {
+      words: [
+        { text: 'John', color: 'red' },
+        { text: 'plays', color: 'blue' },
+        { text: 'in the park', color: 'orange' },
+        { text: 'soccer', color: 'green' }
+      ],
+      correct: false
+    },
+    {
+      words: [
+        { text: '___', color: 'red' },
+        { text: 'plays', color: 'blue' },
+        { text: 'in the park', color: 'orange' },
+        { text: 'soccer.', color: 'green' }
+      ],
+      correct: false
+    },
+    {
+      words: [
+        { text: 'In the park', color: 'orange' },
+        { text: '___', color: 'red' },
+        { text: 'plays', color: 'blue' },
+        { text: 'soccer.', color: 'green' }
+      ],
+      correct: false
+    },
+    {
+      words: [
+        { text: 'John', color: 'red' },
+        { text: 'plays', color: 'blue' },
+        { text: 'soccer', color: 'green' },
+        { text: 'in the park', color: 'orange' }
+      ],
+      correct: true
+    },
+    {
+      words: [
+        { text: 'In the park', color: 'orange' },
+        { text: 'plays', color: 'blue' },
+        { text: 'soccer', color: 'green' },
+        { text: 'John.', color: 'red' }
+      ],
+      correct: false
+    }
+  ],
+  [
+    {
+      words: [
+        { text: 'Mike', color: 'red' },
+        { text: 'plays', color: 'blue' },
+        { text: 'tennis', color: 'green' },
+        { text: 'with friends.', color: 'orange' }
+      ],
+      correct: true
+    },
+    {
+      words: [
+        { text: 'Mike', color: 'red' },
+        { text: 'plays', color: 'blue' },
+        { text: 'with friends.', color: 'orange' },
+        { text: 'tennis', color: 'green' }
+      ],
+      correct: false
+    },
+    {
+      words: [
+        { text: '___', color: 'red' },
+        { text: 'plays', color: 'blue' },
+        { text: 'with friends.', color: 'orange' },
+        { text: 'tennis.', color: 'green' }
+      ],
+      correct: false
+    },
+    {
+      words: [
+        { text: 'With friends,', color: 'orange' },
+        { text: 'plays', color: 'blue' },
+        { text: 'tennis', color: 'green' },
+        { text: 'Mike.', color: 'red' }
+      ],
+      correct: false
+    }
+  ],
+]
+

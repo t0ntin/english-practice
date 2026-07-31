@@ -1,6 +1,6 @@
 import { makeElement } from "../components/createElements.js"
 import { sentences, saveToLocalStorage } from "../sections/translations.js";
-import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals } from "./errors.js";
+import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals, wordOrderSentences } from "./errors.js";
 
 // =============
 // TO DO 
@@ -70,7 +70,7 @@ const renderErrorsPage = () => {
       const liEl2 = makeElement('li', 'pronunciation-li', ulEl); 
       const pronunciationButton = makeElement('button', 'pronunciation-button', liEl2, 'Pronunciation');
       const liEl3 = makeElement('li', 'word-order-li', ulEl); 
-      const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order');
+      const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
      
   const contentSection = makeElement('section', 'content-section', mainSection2);
 }
@@ -116,6 +116,71 @@ const renderTopic = (topicObj) => {
 
 }
 
+const renderWordOrder = () => {
+  const contentSection = document.querySelector('.content-section');
+  contentSection.innerHTML = '';
+  const tableContainer = makeElement('div', 'table-container', contentSection);
+  const tableWrapper1 = makeElement('div', 'table-wrapper-1', tableContainer);
+  const personEl = makeElement('div', 'person-div', tableWrapper1, 'Person');
+  const actionEl = makeElement('div', 'action-div', tableWrapper1, 'Action');
+  const whatEl = makeElement('div', 'what-div', tableWrapper1, 'What');
+  const otherInfoEl = makeElement('div', 'other-info-div', tableWrapper1, 'Other information');
+
+  const tableWrapper2 = makeElement('div', 'table-wrapper-2', tableContainer);
+  const personEl2 = makeElement('div', 'person-2-div', tableWrapper2);
+  const actionEl2 = makeElement('div', 'action-2-div', tableWrapper2);
+  const whatEl2 = makeElement('div', 'what-2-div', tableWrapper2);
+  const otherInfoEl2 = makeElement('div', 'other-info-2-div', tableWrapper2);
+
+  // const continueButton = makeElement('button', 'continue-button', contentSection, 'Continue', handleContinueClick);
+  const buttonWrapper = makeElement('div', 'button-wrapper', contentSection);
+  const yesButton = makeElement('button', 'yes-button', buttonWrapper, 'Yes', () => handleAnswer(true));
+  const noButton = makeElement('button', 'no-button', buttonWrapper, 'No', () => handleAnswer(false));
+
+  // const tableWrapper2 = document.querySelector('.table-wrapper-2').children;
+
+  // wordOrderSentences.forEach(sentenceGroup => {
+  //   for (let i = sentenceGroup.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [sentenceGroup[i], sentenceGroup[j]] = [sentenceGroup[j], sentenceGroup[i]];
+  //   }
+
+  // });
+
+showRandomSentence();
+
+  
+}
+
+const showRandomSentence = () => {
+  console.log(
+    flags.currentGroupIndex,
+    flags.currentSentenceIndex
+);
+  const currentSentence = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].words;
+  flags.chosenSentence = currentSentence;
+    const tableWrapper2 = document.querySelector('.table-wrapper-2');
+  const htmlCollection = tableWrapper2.children;
+  const sentenceParts = [...htmlCollection];
+  currentSentence.forEach((word, i) => {
+    const color = word.color;
+    sentenceParts[i].textContent = word.text;
+    sentenceParts[i].style.backgroundColor = color;
+
+  });
+
+  // OLD CODE STARTS HERE
+  // flags.chosenSentence = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex];
+  // const tableWrapper2 = document.querySelector('.table-wrapper-2');
+  // console.log(tableWrapper2);
+  // const htmlCollection = tableWrapper2.children;
+  // const sentenceParts = [...htmlCollection];
+
+  // for (let i = 0; i < flags.chosenSentence.length-1; i++) {
+  //   sentenceParts[i].textContent = flags.chosenSentence[i]
+  // } 
+}
+
 const handleSuggestClick = (event) => {
   renderTopic(suggestions);
   changeColor(event);
@@ -159,6 +224,15 @@ const handleModalsClick = (event) => {
   flags.lastSelectedElement = event.target;
 }
 
+const handleWordOrderClick = (event) => {
+  const contentSection = document.querySelector('.content-section');
+  contentSection.innerHTML = '';
+  changeColor(event);
+  flags.lastSelectedTopic = modals;
+  flags.lastSelectedElement = event.target;
+  renderWordOrder();
+}
+
 const changeColor = (event) => {
   if (flags.lastSelectedElement) {
     flags.lastSelectedElement.classList.remove('selected');
@@ -170,15 +244,32 @@ const handleAddToPracticeClick = (practiceSentence) => {
   const newSentenceObj = {sentence: practiceSentence.english, translation: practiceSentence.spanish, isArchived: false};
   sentences.push(newSentenceObj);
   saveToLocalStorage();
-  showNotification();
+  const message = 'Sentence added.';
+  showNotification(message);
 }
 
-const showNotification = () => {
-  const popUpEl = makeElement('div', 'popup-div', mainSection2);
-  popUpEl.innerText = "Sentence added."
-  popUpEl.classList.toggle('active')
+const showNotification = (message) => {
+  // let popupEl = document.querySelector('.popup-div');
+  // if (!popupEl) {
+  //    popupEl = makeElement('div', 'popup-div', mainSection2);
+  // }
+  // popupEl.innerText = message;
+  // popupEl.classList.toggle('active')
+  // setTimeout(() => {
+  //   popupEl.classList.toggle('active');
+  // }, 2000);
+    let popupEl = document.querySelector('.popup-div');
+
+  if (!popupEl) {
+    popupEl = makeElement('div', 'popup-div', mainSection2);
+  }
+
+  popupEl.innerText = message;
+
+  popupEl.classList.add('active'); // CHANGED
+
   setTimeout(() => {
-    popUpEl.classList.toggle('active');
+    popupEl.classList.remove('active'); // CHANGED
   }, 2000);
 }
 
@@ -190,3 +281,138 @@ const transitionContent = (contentSection) => {
     contentSection.classList.remove('scale-down');
   }, 200);
 }
+
+// =========== WORD ORDER ===========
+const handleAnswer = (userAnswer) => {
+
+  const answer = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].correct;
+  if (userAnswer === true && answer === true || userAnswer === false && answer === false) {
+    showNotification('Correct!');
+    // if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
+    //   goToNextGroup();
+    //   return;
+    // }
+    if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
+      goToNextGroup();
+
+      // If there is another group, immediately show its first sentence.
+      if (flags.currentGroupIndex < wordOrderSentences.length) {
+        showRandomSentence();
+      }
+
+      return;
+    }
+    flags.currentSentenceIndex++;
+    showRandomSentence();
+  };
+
+  if (userAnswer === true && answer === false) {
+    showNotification('That one is incorrect!');
+    //   if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
+    //     goToNextGroup();
+    //     return;
+    // }
+        if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
+      goToNextGroup();
+
+      // If there is another group, immediately show its first sentence.
+      if (flags.currentGroupIndex < wordOrderSentences.length) {
+        showRandomSentence();
+      }
+
+      return;
+    }
+    flags.currentSentenceIndex++;
+    showRandomSentence();
+  }
+
+  if (userAnswer === false && answer === true) {
+    showNotification('Oops! This one is the correct one.');
+    //   if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
+    //     goToNextGroup();
+    //     return;
+    // }
+        if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
+      goToNextGroup();
+
+      // If there is another group, immediately show its first sentence.
+      if (flags.currentGroupIndex < wordOrderSentences.length) {
+        showRandomSentence();
+      }
+
+      return;
+    }
+    flags.currentSentenceIndex++;
+    showRandomSentence();
+
+  }
+
+
+
+
+    // showNotification('That one is incorrect.')
+    // flags.currentSentenceIndex++;
+    //   if (flags.currentSentenceIndex === flags.currentGroupIndex.length) {
+    //     goToNextGroup();
+    //     showRandomSentence();
+    //   }
+  
+    // if (answer === true && flags.chosenSentence[flags.chosenSentence.length -1] === true) {
+    //   goToNextGroup()
+    // } else {
+    //   flags.currentSentenceIndex++;
+    //   showRandomSentence();
+    // }
+}
+
+const checkIfLastSentence = () => {
+    if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
+      goToNextGroup();
+      return;
+    }
+    flags.currentSentenceIndex++;
+    showRandomSentence();
+}
+
+// const handleAnswer = (answer) => {
+//   if (answer === flags.chosenSentence[flags.chosenSentence.length-1]) {
+//     console.log('both are the same');
+//     if (flags.chosenSentence.length-1 === true) {
+//       goToNextGroup();
+//     } else {
+//       console.log('testing2');
+//       flags.currentSentenceIndex++
+//       showRandomSentence();
+//     }
+//   } else {
+//     showRandomSentence();
+//   }
+
+// }
+
+function goToNextGroup() {
+
+  flags.currentGroupIndex++;
+  flags.currentSentenceIndex = 0;
+  if (flags.currentGroupIndex >= wordOrderSentences.length) {
+    alert('Finished!');
+    return;
+  }
+console.log(
+    flags.currentGroupIndex,
+    flags.currentSentenceIndex
+);
+  // showRandomSentence();
+
+}
+
+// click no. > if student is right, show next sentence in same group. 
+        //  > if student is wrong, display "this sentence is correct" go to next group of sentences.
+
+// click yes. > if student is right, go to next group of sentences.
+//            > if student is wrong, show message: this sentence is incorrect and show another sentence in the same group.
+
+
+
+
+
