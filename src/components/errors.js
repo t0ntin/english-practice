@@ -179,7 +179,7 @@ export const wordOrderSentences = [
       words: [
         { text: 'John', color: 'red' },
         { text: 'plays', color: 'blue' },
-        { text: 'in the park', color: 'orange' },
+        { text: 'in the park', color: 'rgb(227, 125, 0)' },
         { text: 'soccer', color: 'green' }
       ],
       correct: false
@@ -188,14 +188,14 @@ export const wordOrderSentences = [
       words: [
         { text: '___', color: 'red' },
         { text: 'plays', color: 'blue' },
-        { text: 'in the park', color: 'orange' },
+        { text: 'in the park', color: 'rgb(227, 125, 0)' },
         { text: 'soccer.', color: 'green' }
       ],
       correct: false
     },
     {
       words: [
-        { text: 'In the park', color: 'orange' },
+        { text: 'In the park', color: 'rgb(227, 125, 0)' },
         { text: '___', color: 'red' },
         { text: 'plays', color: 'blue' },
         { text: 'soccer.', color: 'green' }
@@ -207,13 +207,13 @@ export const wordOrderSentences = [
         { text: 'John', color: 'red' },
         { text: 'plays', color: 'blue' },
         { text: 'soccer', color: 'green' },
-        { text: 'in the park', color: 'orange' }
+        { text: 'in the park', color: 'rgb(227, 125, 0)' }
       ],
       correct: true
     },
     {
       words: [
-        { text: 'In the park', color: 'orange' },
+        { text: 'In the park', color: 'rgb(227, 125, 0)' },
         { text: 'plays', color: 'blue' },
         { text: 'soccer', color: 'green' },
         { text: 'John.', color: 'red' }
@@ -227,7 +227,7 @@ export const wordOrderSentences = [
         { text: 'Mike', color: 'red' },
         { text: 'plays', color: 'blue' },
         { text: 'tennis', color: 'green' },
-        { text: 'with friends.', color: 'orange' }
+        { text: 'with friends.', color: 'rgb(227, 125, 0)' }
       ],
       correct: true
     },
@@ -235,7 +235,7 @@ export const wordOrderSentences = [
       words: [
         { text: 'Mike', color: 'red' },
         { text: 'plays', color: 'blue' },
-        { text: 'with friends.', color: 'orange' },
+        { text: 'with friends.', color: 'rgb(227, 125, 0)' },
         { text: 'tennis', color: 'green' }
       ],
       correct: false
@@ -244,14 +244,14 @@ export const wordOrderSentences = [
       words: [
         { text: '___', color: 'red' },
         { text: 'plays', color: 'blue' },
-        { text: 'with friends.', color: 'orange' },
+        { text: 'with friends.', color: 'rgb(227, 125, 0)' },
         { text: 'tennis.', color: 'green' }
       ],
       correct: false
     },
     {
       words: [
-        { text: 'With friends,', color: 'orange' },
+        { text: 'With friends,', color: 'rgb(227, 125, 0)' },
         { text: 'plays', color: 'blue' },
         { text: 'tennis', color: 'green' },
         { text: 'Mike.', color: 'red' }
