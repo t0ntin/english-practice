@@ -171,6 +171,7 @@ export const flags =  {
   currentSentenceIndex: 0,
   currentGroupIndex: 0,
   chosenSentence: [],
+  correctAnswersCounter: 0,
 }
 
 export const wordOrderSentences = [
@@ -189,7 +190,7 @@ export const wordOrderSentences = [
         { text: '___', color: 'red' },
         { text: 'plays', color: 'blue' },
         { text: 'in the park', color: 'rgb(227, 125, 0)' },
-        { text: 'soccer.', color: 'green' }
+        { text: 'soccer', color: 'green' }
       ],
       correct: false
     },
@@ -207,7 +208,7 @@ export const wordOrderSentences = [
         { text: 'In the park', color: 'rgb(227, 125, 0)' },
         { text: '___', color: 'red' },
         { text: 'plays', color: 'blue' },
-        { text: 'soccer.', color: 'green' }
+        { text: 'soccer', color: 'green' }
       ],
       correct: false
     },
@@ -216,7 +217,7 @@ export const wordOrderSentences = [
         { text: 'In the park', color: 'rgb(227, 125, 0)' },
         { text: 'plays', color: 'blue' },
         { text: 'soccer', color: 'green' },
-        { text: 'John.', color: 'red' }
+        { text: 'John', color: 'red' }
       ],
       correct: false
     }
@@ -226,16 +227,7 @@ export const wordOrderSentences = [
       words: [
         { text: 'Mike', color: 'red' },
         { text: 'sweeps', color: 'blue' },
-        { text: 'the floor', color: 'green' },
-        { text: 'on weekends.', color: 'rgb(227, 125, 0)' }
-      ],
-      correct: true
-    },
-    {
-      words: [
-        { text: 'Mike', color: 'red' },
-        { text: 'sweeps', color: 'blue' },
-        { text: 'on weekends.', color: 'rgb(227, 125, 0)' },
+        { text: 'on weekends', color: 'rgb(227, 125, 0)' },
         { text: 'the floor', color: 'green' }
       ],
       correct: false
@@ -244,8 +236,8 @@ export const wordOrderSentences = [
       words: [
         { text: '___', color: 'red' },
         { text: 'sweeps', color: 'blue' },
-        { text: 'on weekends.', color: 'rgb(227, 125, 0)' },
-        { text: 'the floor.', color: 'green' }
+        { text: 'on weekends', color: 'rgb(227, 125, 0)' },
+        { text: 'the floor', color: 'green' }
       ],
       correct: false
     },
@@ -254,10 +246,19 @@ export const wordOrderSentences = [
         { text: 'on weekends,', color: 'rgb(227, 125, 0)' },
         { text: 'sweeps', color: 'blue' },
         { text: 'the floor', color: 'green' },
-        { text: 'Mike.', color: 'red' }
+        { text: 'Mike', color: 'red' }
       ],
       correct: false
-    }
+    },
+    {
+      words: [
+        { text: 'Mike', color: 'red' },
+        { text: 'sweeps', color: 'blue' },
+        { text: 'the floor', color: 'green' },
+        { text: 'on weekends', color: 'rgb(227, 125, 0)' }
+      ],
+      correct: true
+    },
   ],
   [
   {
@@ -290,32 +291,32 @@ export const wordOrderSentences = [
   {
     words: [
       { text: 'Twice a day,', color: 'rgb(227, 125, 0)' },
+      { text: 'I', color: 'red' },
       { text: 'brush', color: 'blue' },
-      { text: 'my teeth', color: 'green' },
-      { text: 'I', color: 'red' }
+      { text: 'my teeth', color: 'green' }
     ],
     correct: false
   }
   ],
   [
-  {
-    words: [
-      { text: 'Ana and Peter', color: 'red' },
-      { text: 'complete', color: 'blue' },
-      { text: 'assignments', color: 'green' },
-      { text: 'before the deadline', color: 'rgb(227, 125, 0)' }
-    ],
-    correct: true
-  },
-  {
-    words: [
-      { text: 'Ana and Peter', color: 'red' },
-      { text: 'complete', color: 'blue' },
-      { text: 'before the deadline', color: 'rgb(227, 125, 0)' },
-      { text: 'assignments', color: 'green' }
-    ],
-    correct: false
-  },
+    {
+      words: [
+        { text: 'Ana and Peter', color: 'red' },
+        { text: 'complete', color: 'blue' },
+        { text: 'before the deadline', color: 'rgb(227, 125, 0)' },
+        { text: 'assignments', color: 'green' }
+      ],
+      correct: false
+    },
+    {
+      words: [
+        { text: 'Ana and Peter', color: 'red' },
+        { text: 'complete', color: 'blue' },
+        { text: 'assignments', color: 'green' },
+        { text: 'before the deadline', color: 'rgb(227, 125, 0)' }
+      ],
+      correct: true
+    },
   {
     words: [
       { text: '___', color: 'red' },

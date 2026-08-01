@@ -1,6 +1,6 @@
 import { makeElement } from "../components/createElements.js"
 import { sentences, saveToLocalStorage } from "../sections/translations.js";
-import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals, wordOrderSentences } from "./errors.js";
+import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals, wordOrderSentences} from "./errors.js";
 
 // =============
 // TO DO 
@@ -137,6 +137,12 @@ const renderWordOrder = () => {
   const yesButton = makeElement('button', 'yes-button', buttonWrapper, 'Yes', () => handleAnswer(true));
   const noButton = makeElement('button', 'no-button', buttonWrapper, 'No', () => handleAnswer(false));
 
+  const counterWrapper = makeElement('div', 'counter-wrapper', contentSection);
+  const scoreEl = makeElement('span', 'score-span', counterWrapper, 'Score: ')
+  const rightAnswersEl = makeElement('span', 'right-answers-span', counterWrapper, '0');
+  const slashEl = makeElement('span', 'slash-span', counterWrapper,'/');
+  const totalItemsEl = makeElement('span', 'total-items', counterWrapper);
+  showTotalOfSentences();
   showRandomSentence();
 
 }
@@ -152,7 +158,7 @@ const showRandomSentence = () => {
     setTimeout(() => {
       sentenceParts[i].textContent = word.text;
       sentenceParts[i].style.backgroundColor = color;
-    }, 500);
+    }, 850);
     transitionText(sentenceParts[i]);
 
   });
@@ -252,11 +258,11 @@ const transitionContent = (contentSection) => {
 const handleAnswer = (userAnswer) => {
   const answer = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].correct;
   if (userAnswer === true && answer === true || userAnswer === false && answer === false) {
+    updateRightAnswersCounter();
     showNotification('Correct!');
-
     if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
       goToNextGroup();
-
+      
       if (flags.currentGroupIndex < wordOrderSentences.length) {
         showRandomSentence();
       }
@@ -314,4 +320,19 @@ setTimeout(() => {
   element.style.transform = 'translate(0)';
 element.classList.remove('text-slide');
 }, 500);
+}
+
+const showTotalOfSentences = () => {
+  let numberOfSentences = 0;
+  wordOrderSentences.forEach(sentence => {
+    numberOfSentences += sentence.length;
+  })
+  const totalItemsEl = document.querySelector('.total-items');
+  totalItemsEl.textContent = numberOfSentences;
+}
+
+const updateRightAnswersCounter = () => {
+  const rightAnswersEl = document.querySelector('.right-answers-span');
+  flags.correctAnswersCounter++;
+  rightAnswersEl.textContent = flags.correctAnswersCounter;
 }
