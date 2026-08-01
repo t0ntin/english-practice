@@ -195,21 +195,21 @@ export const wordOrderSentences = [
     },
     {
       words: [
-        { text: 'In the park', color: 'rgb(227, 125, 0)' },
-        { text: '___', color: 'red' },
-        { text: 'plays', color: 'blue' },
-        { text: 'soccer.', color: 'green' }
-      ],
-      correct: false
-    },
-    {
-      words: [
         { text: 'John', color: 'red' },
         { text: 'plays', color: 'blue' },
         { text: 'soccer', color: 'green' },
         { text: 'in the park', color: 'rgb(227, 125, 0)' }
       ],
       correct: true
+    },
+    {
+      words: [
+        { text: 'In the park', color: 'rgb(227, 125, 0)' },
+        { text: '___', color: 'red' },
+        { text: 'plays', color: 'blue' },
+        { text: 'soccer.', color: 'green' }
+      ],
+      correct: false
     },
     {
       words: [
@@ -225,39 +225,115 @@ export const wordOrderSentences = [
     {
       words: [
         { text: 'Mike', color: 'red' },
-        { text: 'plays', color: 'blue' },
-        { text: 'tennis', color: 'green' },
-        { text: 'with friends.', color: 'rgb(227, 125, 0)' }
+        { text: 'sweeps', color: 'blue' },
+        { text: 'the floor', color: 'green' },
+        { text: 'on weekends.', color: 'rgb(227, 125, 0)' }
       ],
       correct: true
     },
     {
       words: [
         { text: 'Mike', color: 'red' },
-        { text: 'plays', color: 'blue' },
-        { text: 'with friends.', color: 'rgb(227, 125, 0)' },
-        { text: 'tennis', color: 'green' }
+        { text: 'sweeps', color: 'blue' },
+        { text: 'on weekends.', color: 'rgb(227, 125, 0)' },
+        { text: 'the floor', color: 'green' }
       ],
       correct: false
     },
     {
       words: [
         { text: '___', color: 'red' },
-        { text: 'plays', color: 'blue' },
-        { text: 'with friends.', color: 'rgb(227, 125, 0)' },
-        { text: 'tennis.', color: 'green' }
+        { text: 'sweeps', color: 'blue' },
+        { text: 'on weekends.', color: 'rgb(227, 125, 0)' },
+        { text: 'the floor.', color: 'green' }
       ],
       correct: false
     },
     {
       words: [
-        { text: 'With friends,', color: 'rgb(227, 125, 0)' },
-        { text: 'plays', color: 'blue' },
-        { text: 'tennis', color: 'green' },
+        { text: 'on weekends,', color: 'rgb(227, 125, 0)' },
+        { text: 'sweeps', color: 'blue' },
+        { text: 'the floor', color: 'green' },
         { text: 'Mike.', color: 'red' }
       ],
       correct: false
     }
   ],
+  [
+  {
+    words: [
+      { text: 'I', color: 'red' },
+      { text: 'brush', color: 'blue' },
+      { text: 'my teeth', color: 'green' },
+      { text: 'twice a day', color: 'rgb(227, 125, 0)' }
+    ],
+    correct: true
+  },
+  {
+    words: [
+      { text: 'I', color: 'red' },
+      { text: 'brush', color: 'blue' },
+      { text: 'twice a day', color: 'rgb(227, 125, 0)' },
+      { text: 'my teeth', color: 'green' }
+    ],
+    correct: false
+  },
+  {
+    words: [
+      { text: '___', color: 'red' },
+      { text: 'brush', color: 'blue' },
+      { text: 'twice a day', color: 'rgb(227, 125, 0)' },
+      { text: 'my teeth', color: 'green' }
+    ],
+    correct: false
+  },
+  {
+    words: [
+      { text: 'Twice a day,', color: 'rgb(227, 125, 0)' },
+      { text: 'brush', color: 'blue' },
+      { text: 'my teeth', color: 'green' },
+      { text: 'I', color: 'red' }
+    ],
+    correct: false
+  }
+  ],
+  [
+  {
+    words: [
+      { text: 'Ana and Peter', color: 'red' },
+      { text: 'complete', color: 'blue' },
+      { text: 'assignments', color: 'green' },
+      { text: 'before the deadline', color: 'rgb(227, 125, 0)' }
+    ],
+    correct: true
+  },
+  {
+    words: [
+      { text: 'Ana and Peter', color: 'red' },
+      { text: 'complete', color: 'blue' },
+      { text: 'before the deadline', color: 'rgb(227, 125, 0)' },
+      { text: 'assignments', color: 'green' }
+    ],
+    correct: false
+  },
+  {
+    words: [
+      { text: '___', color: 'red' },
+      { text: 'complete', color: 'blue' },
+      { text: 'before the deadline', color: 'rgb(227, 125, 0)' },
+      { text: 'assignments', color: 'green' }
+    ],
+    correct: false
+  },
+  {
+    words: [
+      { text: 'Before the deadline,', color: 'rgb(227, 125, 0)' },
+      { text: 'complete', color: 'blue' },
+      { text: 'assignments', color: 'green' },
+      { text: 'Ana and Peter', color: 'red' }
+    ],
+    correct: false
+  }
+  ]
 ]
 
