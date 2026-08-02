@@ -1,24 +1,8 @@
-import { makeElement } from "../components/createElements.js"
-import { sentences, saveToLocalStorage } from "../sections/translations.js";
-import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals, wordOrderSentences} from "./errors.js";
-
-// =============
-// TO DO 
-// ============
-// ADD QUESTIONS TO PRACTICE SENTENCES 
-//  - use of 'the' (next year, last year)
-// - in the same apartment that I live now.
-// - modals with 'to'
-// SET EXPRESSIONS:
-//  -We are in the work. We are in the home.
-// Pronunciation:
-//  - -ed sound
-//  - -es sound
-//  - an especial
-// =======================
-
-// =============
-
+import { makeElement, showNotification } from "../components/reusableUI.js"
+import { sentences, saveToLocalStorage } from "./practice.js";
+import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals} from "../components/data/grammar-data.js";
+import { renderWordOrder } from "./word-order.js";
+import { renderRegVerbs } from "./reg-verbs.js";
 
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
@@ -36,7 +20,6 @@ export function linkToCommonErrors() {
       }
     });
 }
-
 
 const renderErrorsPage = () => {
   mainSection.innerHTML = '';
@@ -69,8 +52,15 @@ const renderErrorsPage = () => {
 
       const liEl2 = makeElement('li', 'pronunciation-li', ulEl); 
       const pronunciationButton = makeElement('button', 'pronunciation-button', liEl2, 'Pronunciation');
+        const ulEl3 = makeElement('ul', 'pronunciation-ul', liEl2);
+          const subLiEl7 = makeElement('li', 'reg-verbs-li', ulEl3);
+          const regVerbsButton = makeElement('button', 'reg-verbs-button', subLiEl7, 'Reg. verbs', handleRegVerbsClick);
+
       const liEl3 = makeElement('li', 'word-order-li', ulEl); 
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
+
+      
+
      
   const contentSection = makeElement('section', 'content-section', mainSection2);
 }
@@ -113,55 +103,6 @@ const renderTopic = (topicObj) => {
       
       makeElement('button', 'add-to-practice-button', practiceLi, 'Add to practice', () => handleAddToPracticeClick(practiceSentence));
     });
-
-}
-
-const renderWordOrder = () => {
-  const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
-  const tableContainer = makeElement('div', 'table-container', contentSection);
-  const tableWrapper1 = makeElement('div', 'table-wrapper-1', tableContainer);
-  const personEl = makeElement('div', 'person-div', tableWrapper1, 'Person');
-  const actionEl = makeElement('div', 'action-div', tableWrapper1, 'Action');
-  const whatEl = makeElement('div', 'what-div', tableWrapper1, 'What');
-  const otherInfoEl = makeElement('div', 'other-info-div', tableWrapper1, 'Other information');
-
-  const tableWrapper2 = makeElement('div', 'table-wrapper-2', tableContainer);
-  const personEl2 = makeElement('div', 'person-2-div', tableWrapper2);
-  const actionEl2 = makeElement('div', 'action-2-div', tableWrapper2);
-  const whatEl2 = makeElement('div', 'what-2-div', tableWrapper2);
-  const otherInfoEl2 = makeElement('div', 'other-info-2-div', tableWrapper2);
-
-  // const continueButton = makeElement('button', 'continue-button', contentSection, 'Continue', handleContinueClick);
-  const buttonWrapper = makeElement('div', 'button-wrapper', contentSection, 'Is this sentence correct?');
-  const yesButton = makeElement('button', 'yes-button', buttonWrapper, 'Yes', () => handleAnswer(true));
-  const noButton = makeElement('button', 'no-button', buttonWrapper, 'No', () => handleAnswer(false));
-
-  const counterWrapper = makeElement('div', 'counter-wrapper', contentSection);
-  const scoreEl = makeElement('span', 'score-span', counterWrapper, 'Score: ')
-  const rightAnswersEl = makeElement('span', 'right-answers-span', counterWrapper, '0');
-  const slashEl = makeElement('span', 'slash-span', counterWrapper,'/');
-  const totalItemsEl = makeElement('span', 'total-items', counterWrapper);
-  showTotalOfSentences();
-  showRandomSentence();
-
-}
-
-const showRandomSentence = () => {
-  const currentSentence = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].words;
-  flags.chosenSentence = currentSentence;
-    const tableWrapper2 = document.querySelector('.table-wrapper-2');
-  const htmlCollection = tableWrapper2.children;
-  const sentenceParts = [...htmlCollection];
-  currentSentence.forEach((word, i) => {
-    const color = word.color;
-    setTimeout(() => {
-      sentenceParts[i].textContent = word.text;
-      sentenceParts[i].style.backgroundColor = color;
-    }, 850);
-    transitionText(sentenceParts[i]);
-
-  });
 
 }
 
@@ -217,6 +158,12 @@ const handleWordOrderClick = (event) => {
   renderWordOrder();
 }
 
+const handleRegVerbsClick = () => {
+  const contentSection = document.querySelector('.content-section');
+  contentSection.innerHTML = '';
+  renderRegVerbs();
+}
+
 const changeColor = (event) => {
   if (flags.lastSelectedElement) {
     flags.lastSelectedElement.classList.remove('selected');
@@ -229,19 +176,7 @@ const handleAddToPracticeClick = (practiceSentence) => {
   sentences.push(newSentenceObj);
   saveToLocalStorage();
   const message = 'Sentence added.';
-  showNotification(message);
-}
-
-const showNotification = (message) => {
-  let popupEl = document.querySelector('.popup-div');
-  if (!popupEl) {
-    popupEl = makeElement('div', 'popup-div', mainSection2);
-  }
-  popupEl.innerText = message;
-  popupEl.classList.add('active'); // CHANGED
-  setTimeout(() => {
-    popupEl.classList.remove('active'); // CHANGED
-  }, 2000);
+  showNotification(message, mainSection2);
 }
 
 const transitionContent = (contentSection) => {
@@ -251,88 +186,4 @@ const transitionContent = (contentSection) => {
     contentSection.classList.add('scale-up');
     contentSection.classList.remove('scale-down');
   }, 200);
-}
-
-// =========== WORD ORDER ===========
-
-const handleAnswer = (userAnswer) => {
-  const answer = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].correct;
-  if (userAnswer === true && answer === true || userAnswer === false && answer === false) {
-    updateRightAnswersCounter();
-    showNotification('Correct!');
-    if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
-      goToNextGroup();
-      
-      if (flags.currentGroupIndex < wordOrderSentences.length) {
-        showRandomSentence();
-      }
-      return;
-    }
-    flags.currentSentenceIndex++;
-    showRandomSentence();
-  };
-
-  if (userAnswer === true && answer === false) {
-    showNotification('That one is incorrect!');
-        if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
-      goToNextGroup();
-
-      if (flags.currentGroupIndex < wordOrderSentences.length) {
-        showRandomSentence();
-      }
-      return;
-    }
-    flags.currentSentenceIndex++;
-    showRandomSentence();
-  }
-
-  if (userAnswer === false && answer === true) {
-    showNotification('Oops! This one is the correct one.');
-        if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
-      goToNextGroup();
-
-      if (flags.currentGroupIndex < wordOrderSentences.length) {
-        showRandomSentence();
-      }
-      return;
-    }
-    flags.currentSentenceIndex++;
-    showRandomSentence();
-
-  }
-
-}
-
-function goToNextGroup() {
-  flags.currentGroupIndex++;
-  flags.currentSentenceIndex = 0;
-  if (flags.currentGroupIndex >= wordOrderSentences.length) {
-    alert('Finished!');
-    return;
-  }
-
-}
-
-const transitionText = (element) => {
-element.style.transform = 'translate(50%)';
-element.classList.add('text-slide');
-setTimeout(() => {
-  element.style.transform = 'translate(0)';
-element.classList.remove('text-slide');
-}, 500);
-}
-
-const showTotalOfSentences = () => {
-  let numberOfSentences = 0;
-  wordOrderSentences.forEach(sentence => {
-    numberOfSentences += sentence.length;
-  })
-  const totalItemsEl = document.querySelector('.total-items');
-  totalItemsEl.textContent = numberOfSentences;
-}
-
-const updateRightAnswersCounter = () => {
-  const rightAnswersEl = document.querySelector('.right-answers-span');
-  flags.correctAnswersCounter++;
-  rightAnswersEl.textContent = flags.correctAnswersCounter;
 }

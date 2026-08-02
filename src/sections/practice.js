@@ -1,5 +1,5 @@
-import { makeElement } from "../components/createElements.js";
-import { makeInputEl } from "../components/createElements.js";
+import { makeElement } from "../components/reusableUI.js";
+import { makeInputEl } from "../components/reusableUI.js";
 
 // ============================
 // TO DO:

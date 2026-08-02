@@ -1,5 +1,5 @@
-import { makeElement, makeInputEl } from "../components/createElements.js"
-import { validSentences, hints } from "../components/valid-sentences.js";
+import { makeElement, makeInputEl } from "../components/reusableUI.js"
+import { validSentences, hints } from "../components/data/do-does-data.js";
 
 const mainEl = document.querySelector('.main');
 

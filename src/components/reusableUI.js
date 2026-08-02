@@ -38,3 +38,15 @@ export function makeImage (src, className, appendToeEl) {
   if (appendToeEl) appendToeEl.append(image);
   return image;
 }
+
+export const showNotification = (message, containingElement) => {
+  let popupEl = document.querySelector('.popup-div');
+  if (!popupEl) {
+    popupEl = makeElement('div', 'popup-div', containingElement);
+  }
+  popupEl.innerText = message;
+  popupEl.classList.add('active'); 
+  setTimeout(() => {
+    popupEl.classList.remove('active'); 
+  }, 2000);
+}

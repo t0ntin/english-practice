@@ -41,7 +41,7 @@
   white-space: nowrap;
 }
 
-.grammar-ul > li {
+.grammar-ul > li, .pronunciation-ul > li {
   margin: 0 0 0 10px;
   list-style: circle;
 }
