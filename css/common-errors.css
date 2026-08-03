@@ -29,7 +29,7 @@
   list-style: square;
 }
 
-.grammar-ul {
+.grammar-ul, .pronunciation-ul {
     margin: 8px 0 0 0;
   display: flex;
   flex-direction: column;
@@ -319,12 +319,10 @@ li > button:active, .button-wrapper > button:active {
 
 .button-wrapper {
   grid-column: 2/4;
-  display: flex;
-  gap: 10px;
-  justify-content: space-around;
-  align-items: center;
-  align-self: center;
   place-self: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .button-wrapper > .yes-button, .button-wrapper > .no-button {

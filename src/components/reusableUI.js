@@ -27,7 +27,6 @@ export function makeInputEl(elementTag, className, appendToEl, placeholder, valu
     element.setAttribute('value', value);
   }
 
-
   return element;
 }
 

@@ -38,23 +38,3 @@ export const allVerbs = {
   Wanted: ["Waited", "Started", "Created", "Rested", "Expected", "Jolted", "Tilted", "Gutted", "Knitted", "Netted"],
   Needed: ["Provided", "Reminded", "Included", "Sounded", "Added", "Nodded", "Wedded", "Padded", "Glided", "Welded"]
 };
-
-
-function buildVerbLists(allVerbs) {
-  const commonVerbs = [];
-  const uncommonVerbs = [];
-  
-  for (const key in allVerbs) {
-    const verbArray = allVerbs[key];
-    
-    // First 5 items go to commonVerbs
-    const firstFive = verbArray.slice(0, 5);
-    commonVerbs.push(...firstFive);
-    
-    // Last 5 items go to uncommonVerbs
-    const lastFive = verbArray.slice(-5);
-    uncommonVerbs.push(...lastFive);
-  }
-  
-  return { commonVerbs, uncommonVerbs };
-}

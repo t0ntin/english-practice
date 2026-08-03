@@ -20,6 +20,7 @@
   --COMMON-ERRORS-BLUE: rgb(0, 50, 175);
   --COMMON-ERRORS-BLUE-LIGHTER: rgb(22, 88, 255);
   --BOX-SHADOW-TWO: 2px 5px 10px rgba(127, 127, 127, 0.45);
+  --TABLE-BACKGROUND-COLOR: rgb(99, 0, 0);
 }
 
 html {

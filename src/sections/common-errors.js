@@ -158,9 +158,11 @@ const handleWordOrderClick = (event) => {
   renderWordOrder();
 }
 
-const handleRegVerbsClick = () => {
+const handleRegVerbsClick = (event) => {
   const contentSection = document.querySelector('.content-section');
   contentSection.innerHTML = '';
+  changeColor(event)
+  flags.lastSelectedElement = event.target;
   renderRegVerbs();
 }
 
