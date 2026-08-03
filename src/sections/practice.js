@@ -15,7 +15,7 @@ const mainSection2 = document.querySelector('.main-section-2');
       // Else:
       //     use the default array
 export function linkToTranslations() {
-  const translationsLink = document.querySelector('.translations-link');
+  const translationsLink = document.querySelector('.practice-link');
 
   translationsLink.addEventListener('click', (event) => {
     event.preventDefault();

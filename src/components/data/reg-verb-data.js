@@ -1,97 +1,60 @@
+export const regVerbFlags = {
+  currentVerb: 0,
+  currentVerbGroup: "common",
+}
+
 export const regVerbData = [
   {
-    mainVerbs1: ['Want', 'Need'],
-    mainVerbs2: ['Grab', 'Laugh', 'Plug', 'Work', 'Call', 'Seem', 'Clean', 'Stop', 'Offer', 'Pass', 'Live', 'Fix', 'Buzz', 'Wash'],
+    mainVerbs1: ['Wanted', 'Needed'],
+    mainVerbs2: ['Grabbed', 'Laughed', 'Plugged', 'Worked', 'Called', 'Seemed', 'Cleaned', 'Stopped', 'Offered', 'Passed', 'Lived', 'Fixed', 'Buzzed', 'Washed'],
   },
   {
-  commonVerbs: [
-    "Provide", "Push", "Wait", "Pull", "Mix", "Grab", "Beg", "Ask", "Kiss", "Love",
-    "Jump", "Answer", "Open", "Climb", "Realize", "Cough", "Stop", "Rest", "Add",
-    "Finish", "Start", "Fill", "Relax", "Rob", "Jog", "Look", "Race", "Move",
-    "Drop", "Remember", "Turn", "Dream", "Recognize", "Stuff", "Type", "Help",
-    "Consider", "Learn", "Hum", "Emphasize", "Puff", "Hope", "Deliver", "Listen",
-    "Ram", "Organize", "Snuff", "Calm", "Authorize", "Mail", "Spill", "Kill",
-    "Dance", "Place", "Promise", "Save", "Improve", "Serve", "Box", "Tax", "Flex",
-    "Polish", "Publish", "Cherish", "Zip", "Zoom", "Zero", "Bore"
+  commonVerbs: [ 
+    "Talked","Begged", "Provided", "Pushed", "Waited", "Pulled", "Jogged", "Mixed", "Stabbed", "Asked", "Kissed", "Loved", "Rained","Jumped", "Answered", "Opened", "Realized", "Coughed", "Added", "Finished", "Started", "Filled", "Relaxed", "Robbed", "Looked", "Raced", "Moved",
+    "Dropped", "Remembered", "Turned", "Dreamed", "Disturbed","Hugged", "Recognized", "Stuffed", "Typed", "Helped", "Considered", "Learned", "Hummed", "Emphasized", "Puffed", "Hoped", "Delivered", "Listened", "Rammed", "Organized", "Sounded","Snuffed", "Created", "Walked","Calmed", "Authorized", "Mailed", "Spilled", "Killed", "Danced", "Placed", "Promised", "Saved", "Improved", "Dragged", "Served", "Boxed", "Taxed", "Flexed", "Brushed", "Crashed", "Wished", "Scrubbed", "Zipped", "Liked", "Rested", "Zoomed", "Snagged", "Bored", "Reminded", "Absorbed","Toughed", "Included",
   ],
-  lessCommonVerbs: [
-    "Decide", "Protect", "Throb", "Rough", "Zigzag", "Crack", "Dwell", "Charm",
-    "Yearn", "Clip", "Whisper", "Hiss", "Weave", "Wax", "Quizz", "Bash",
-    "Include", "Invent", "Dub", "Scuff", "Tug", "Snack", "Yield", "Firm",
-    "Glisten", "Strip", "Bar", "Notice", "Carve", "Max", "Fizz", "Swoosh",
-    "Sound", "Predict", "Blab", "Buff", "Mug", "Peek", "Chill", "Harm",
-    "Summon", "Grip", "Blur", "Dismiss", "Starve", "Fax", "Jazz", "Mush",
-    "Attend", "Connect", "Bob", "Muff", "Shrug", "Lick", "Thrill", "Warm",
-    "Shun", "Snap", "Clutter", "Produce", "Observe", "Flux", "Whiz", "Demolish",
-    "Expand", "Inspect", "Curb", "Huff", "Clog", "Shack", "Puzzle", "Storm",
-    "Scorn", "Tap", "Flutter", "Reduce", "Reserve", "Plex", "Sympathize", "Abolish",
-    "Fold", "Pretend", "Remind", "Flash"
+
+  uncommonVerbs: [
+    "Jolted", "Roughed", "Zigzagged", "Cracked", "Padded","Dwelled", "Charmed", "Yearned", "Clipped", "Whispered", "Hissed", "Weaved", "Waxed", "Quizzed", "Bashed", "Tilted", "Dubbed", "Scuffed", "Tugged", "Snacked", "Yielded", "Firmed", "Glistened", "Stripped", "Barred", "Noticed", "Carved", "Maxed", "Fizzed", "Swooshed",  "Gutted", "Blabbed", "Buffed", "Mugged", "Peeked", "Chilled", "Harmed", "Summoned", "Gripped", "Blurred", "Dismissed", "Starved", "Faxed", "Jazzed", "Mushed", "Nodded", "Knitted", "Bobbed", "Muffed", "Shrugged", "Licked", "Thrilled", "Warmed", "Shunned", "Snapped", "Cluttered", "Welded", "Produced", "Observed", "Fluxed", "Whizzed", "Demolished", "Wedded", "Netted", "Curbed", "Huffed", "Clogged", "Shacked", "Puzzled", "Stormed", "Scorned", "Tapped", "Fluttered", "Reduced",  "Reserved", "Plexed", "Sympathized", "Abolished",  "Glided", "Dabbed"
   ]
+  }
+];
+
+export const allVerbs = {
+  Grabbed: ["Stabbed", "Robbed", "Absorbed", "Disturbed", "Scrubbed", "Dabbed", "Dubbed", "Blabbed", "Bobbed", "Curbed"],
+  Laughed: ["Coughed", "Stuffed", "Puffed", "Snuffed", "Toughed", "Roughed", "Scuffed", "Buffed", "Muffed", "Huffed"],
+  Plugged: ["Begged", "Jogged", "Hugged", "Dragged", "Snagged", "Zigzagged", "Tugged", "Mugged", "Shrugged", "Clogged"],
+  Worked: ["Asked", "Looked", "Walked", "Talked", "Liked", "Cracked", "Snacked", "Peeked", "Licked", "Shacked"],
+  Called: ["Pulled", "Filled", "Mailed", "Spilled", "Killed", "Dwelled", "Yielded", "Chilled", "Thrilled", "Puzzled"],
+  Seemed: ["Zoomed", "Dreamed", "Hummed", "Rammed", "Calmed", "Charmed", "Firmed", "Harmed", "Warmed", "Stormed"],
+  Cleaned: ["Opened", "Turned", "Learned", "Listened", "Rained", "Yearned", "Glistened", "Summoned", "Shunned", "Scorned"],
+  Stopped: ["Jumped", "Dropped", "Helped", "Hoped", "Typed", "Clipped", "Stripped", "Gripped", "Snapped", "Tapped"],
+  Offered: ["Answered", "Remembered", "Considered", "Delivered", "Bored", "Whispered", "Barred", "Blurred", "Cluttered", "Fluttered"],
+  Passed: ["Kissed", "Raced", "Danced", "Placed", "Promised", "Hissed", "Noticed", "Dismissed", "Produced", "Reduced"],
+  Lived: ["Loved", "Moved", "Saved", "Improved", "Served", "Weaved", "Carved", "Starved", "Observed", "Reserved"],
+  Fixed: ["Mixed", "Relaxed", "Boxed", "Taxed", "Flexed", "Waxed", "Maxed", "Faxed", "Fluxed", "Plexed"],
+  Buzzed: ["Realized", "Recognized", "Emphasized", "Organized", "Authorized", "Quizzed", "Fizzed", "Jazzed", "Whizzed", "Sympathized"],
+  Washed: ["Pushed", "Finished", "Brushed", "Crashed", "Wished", "Bashed", "Swooshed", "Mushed", "Demolished", "Abolished"],
+  Wanted: ["Waited", "Started", "Created", "Rested", "Expected", "Jolted", "Tilted", "Gutted", "Knitted", "Netted"],
+  Needed: ["Provided", "Reminded", "Included", "Sounded", "Added", "Nodded", "Wedded", "Padded", "Glided", "Welded"]
+};
+
+
+function buildVerbLists(allVerbs) {
+  const commonVerbs = [];
+  const uncommonVerbs = [];
+  
+  for (const key in allVerbs) {
+    const verbArray = allVerbs[key];
+    
+    // First 5 items go to commonVerbs
+    const firstFive = verbArray.slice(0, 5);
+    commonVerbs.push(...firstFive);
+    
+    // Last 5 items go to uncommonVerbs
+    const lastFive = verbArray.slice(-5);
+    uncommonVerbs.push(...lastFive);
+  }
+  
+  return { commonVerbs, uncommonVerbs };
 }
-//   {
-//     commonDVerbs: ["Provide", "Decide", "Include", "Sound", "Add"],
-//     uncommonDVerbs: ["Attend", "Expand", "Fold", "Pretend", "Remind"],
-//   },
-//   {
-//     commonTVerbs: ["Wait", "Start", "Create", "Accept", "Expect"],
-//     uncommonTVerbs: ["Protect", "Invent", "Predict", "Connect", "Inspect"],
-//   },
-//   {
-//     commonBVerbs: ["Grab", "Rob", "Absorb", "Disturb", "Scrub"],
-//     uncommonBVerbs: ["Throb", "Dub", "Blab", "Bob", "Curb"],
-//   },
-//   {
-//   commonFVerbs: ["Cough", "Stuff", "Puff", "Snuff", "Tough"],
-//   uncommonFVerbs: ["Rough", "Scuff", "Buff", "Muff", "Huff"]
-// },
-// {
-//   commonGVerbs: ["Beg", "Jog", "Hug", "Drag", "Snag"],
-//   uncommonGVerbs: ["Zigzag", "Tug", "Mug", "Shrug", "Clog"]
-// },
-// {
-// commonKVerbs: ["Ask", "Look", "Walk", "Talk", "Like"],
-// uncommonKVerbs: ["Crack", "Snack", "Peek", "Lick", "Shack"]
-// },
-// {
-// commonLVerbs: ["Pull", "Fill", "Mail", "Spill", "Kill"],
-// uncommonLVerbs: ["Dwell", "Yield", "Chill", "Thrill", "Puzzle"]
-// },
-// {
-//   commonMVerbs: ["Climb", "Dream", "Hum", "Ram", "Calm"],
-//   uncommonMVerbs: ["Charm", "Firm", "Harm", "Warm", "Storm"]
-// },
-
-// {
-//   commonNVerbs: ["Open", "Turn", "Learn", "Listen", "Rain"],
-//   uncommonNVerbs: ["Yearn", "Glisten", "Summon", "Shun", "Scorn"]
-// },
-// {
-//   commonPVerbs: ["Jump", "Drop", "Help", "Hope", "Type"],
-//   uncommonPVerbs: ["Clip", "Strip", "Grip", "Snap", "Tap"]
-// },
-// {
-// commonRVerbs: ["Answer", "Remember", "Consider", "Deliver", "Bore"],
-// uncommonRVerbs: ["Whisper", "Bar", "Blur", "Clutter", "Flutter"]
-// },
-// {
-// commonSVerbs: ["Kiss", "Race", "Dance", "Place", "Promise"],
-// uncommonSVerbs: ["Hiss", "Notice", "Dismiss", "Produce", "Reduce"]
-// },
-// {
-//   commonVVerbs: ["Love", "Move", "Save", "Improve", "Serve"],
-//   uncommonVVerbs: ["Weave", "Carve", "Starve", "Observe", "Reserve"]
-// },
-// {
-//   commonXVerbs: ["Mix", "Relax", "Box", "Tax", "Flex"],
-//   uncommonXVerbs: ["Wax", "Max", "Fax", "Flux", "Plex"]
-// },
-// {
-//   commonZVerbs: ["Realize", "Recognize", "Emphasize", "Organize", "Authorize"],
-//   uncommonZVerbs: ["Quizz", "Fizz", "Jazz", "Whiz", "Sympathize"]
-// },
-// {
-//   commonSHVerbs: ["Push", "Finish", "Polish", "Publish", "Cherish"],
-//   uncommonSHVerbs: ["Bash", "Swoosh", "Mush", "Demolish", "Abolish"]
-// },
-
-]

@@ -19,7 +19,7 @@ export function linkToCommonErrors() {
         renderTopic(suggestions);         
       }
     });
-}
+};
 
 const renderErrorsPage = () => {
   mainSection.innerHTML = '';
