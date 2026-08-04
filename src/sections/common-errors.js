@@ -29,7 +29,7 @@ const renderErrorsPage = () => {
     const commonErrorsH2 = makeElement('h2', 'error-types-h2', asideNavEl, 'Error Types:');
     const ulEl = makeElement('ul', 'ul-element', asideNavEl);
       const liEl = makeElement('li', 'grammar-li', ulEl); 
-      const grammarButton = makeElement('button', 'grammar-button', liEl, 'Grammar');
+      const grammarButton = makeElement('button', 'grammar-button', liEl, 'Grammar', handleGrammarClick);
         const ulEl2 = makeElement('ul', 'grammar-ul', liEl);
 
         const subLiEl = makeElement('li', 'suggest-recommend-li', ulEl2);
@@ -51,7 +51,7 @@ const renderErrorsPage = () => {
           const modalsButton = makeElement('button', 'modals-button', subLiEl6, 'Modals', handleModalsClick);
 
       const liEl2 = makeElement('li', 'pronunciation-li', ulEl); 
-      const pronunciationButton = makeElement('button', 'pronunciation-button', liEl2, 'Pronunciation');
+      const pronunciationButton = makeElement('button', 'pronunciation-button', liEl2, 'Pronunciation', handlePronunciationClick);
         const ulEl3 = makeElement('ul', 'pronunciation-ul', liEl2);
           const subLiEl7 = makeElement('li', 'reg-verbs-li', ulEl3);
           const regVerbsButton = makeElement('button', 'reg-verbs-button', subLiEl7, 'Reg. verbs', handleRegVerbsClick);
@@ -106,6 +106,11 @@ const renderTopic = (topicObj) => {
 
 }
 
+const handleGrammarClick = () => {
+  const grammarUl = document.querySelector('.grammar-ul');
+  grammarUl.classList.toggle('collapse');
+}
+
 const handleSuggestClick = (event) => {
   renderTopic(suggestions);
   changeColor(event);
@@ -158,6 +163,11 @@ const handleWordOrderClick = (event) => {
   renderWordOrder();
 }
 
+const handlePronunciationClick = () => {
+  const ulEl3 = document.querySelector('.pronunciation-ul');
+  ulEl3.classList.toggle('collapse');
+}
+
 const handleRegVerbsClick = (event) => {
   const contentSection = document.querySelector('.content-section');
   contentSection.innerHTML = '';
@@ -174,9 +184,10 @@ const changeColor = (event) => {
 }
 
 const handleAddToPracticeClick = (practiceSentence) => {
+  const contentSection = document.querySelector('.content-section');
   const newSentenceObj = {sentence: practiceSentence.english, translation: practiceSentence.spanish, isArchived: false};
   sentences.push(newSentenceObj);
   saveToLocalStorage();
   const message = 'Sentence added.';
-  showNotification(message, mainSection2);
+  showNotification(message, contentSection, 45, 45);
 }

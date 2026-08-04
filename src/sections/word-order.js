@@ -32,11 +32,11 @@ export const renderWordOrder = () => {
   const slashEl = makeElement('span', 'slash-span', counterWrapper,'/');
   const totalItemsEl = makeElement('span', 'total-items', counterWrapper);
   showTotalOfSentences();
-  showRandomSentence();
+  showSentence();
 
 }
 
-export const showRandomSentence = () => {
+export const showSentence = () => {
   const currentSentence = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].words;
   flags.chosenSentence = currentSentence;
   const tableWrapper2 = document.querySelector('.table-wrapper-2');
@@ -56,17 +56,18 @@ const handleAnswer = (userAnswer) => {
   const answer = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].correct;
   if (userAnswer === true && answer === true || userAnswer === false && answer === false) {
     updateRightAnswersCounter();
-    showNotification('Correct!', mainSection2);
+    const contentSection = document.querySelector('.content-section');
+    showNotification('Correct!', contentSection, 55, 40);
     if (flags.currentSentenceIndex === wordOrderSentences[flags.currentGroupIndex].length - 1) {
       goToNextGroup();
       
       if (flags.currentGroupIndex < wordOrderSentences.length) {
-        showRandomSentence();
+        showSentence();
       }
       return;
     }
     flags.currentSentenceIndex++;
-    showRandomSentence();
+    showSentence();
   };
 
   if (userAnswer === true && answer === false) {
@@ -75,12 +76,12 @@ const handleAnswer = (userAnswer) => {
       goToNextGroup();
 
       if (flags.currentGroupIndex < wordOrderSentences.length) {
-        showRandomSentence();
+        showSentence();
       }
       return;
     }
     flags.currentSentenceIndex++;
-    showRandomSentence();
+    showSentence();
   }
 
   if (userAnswer === false && answer === true) {
@@ -89,12 +90,12 @@ const handleAnswer = (userAnswer) => {
       goToNextGroup();
 
       if (flags.currentGroupIndex < wordOrderSentences.length) {
-        showRandomSentence();
+        showSentence();
       }
       return;
     }
     flags.currentSentenceIndex++;
-    showRandomSentence();
+    showSentence();
 
   }
 

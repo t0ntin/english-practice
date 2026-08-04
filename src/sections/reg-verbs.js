@@ -9,11 +9,11 @@ export const renderRegVerbs = () => {
   const allVerbsWrapper = makeElement('div', 'all-verbs-wrapper', contentSection);
 
   const mainVerbsWrapper = makeElement('div', 'main-verbs-wrapper', allVerbsWrapper);
-  const note1El = makeElement('div', 'note-1', mainVerbsWrapper, 'We pronounce the "e":');
+  const note1El = makeElement('div', 'note-1', mainVerbsWrapper, 'Pronounce the "e":');
       const mainVerbs1 = makeElement('div', 'verb-div', mainVerbsWrapper, 'Wanted');
       const mainVerbs2 = makeElement('div', 'verb-div', mainVerbsWrapper, "Needed");
       const otherVerbsWrapper = makeElement('div', 'other-verbs-wrapper', allVerbsWrapper);
-      const note2El = makeElement('div', 'note-2', otherVerbsWrapper, 'We don\'t pronounce the "e":');
+      const note2El = makeElement('div', 'note-2', otherVerbsWrapper, 'Don\'t pronounce the "e":');
 
       const grab = makeElement('div', 'verb-div', otherVerbsWrapper, 'Grabbed');
       const laugh = makeElement('div', 'verb-div', otherVerbsWrapper, 'Laughed');
@@ -33,7 +33,7 @@ export const renderRegVerbs = () => {
       
   const currentVerbWrapper = makeElement('div', 'current-verb-wrapper', contentSection);
     const currentVerbEl = makeElement('span', 'current-verb-span', currentVerbWrapper);
-    const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match the ending of this verb to the ending of one of a verb on the left. Focus on the last sound. Example: The last sound in talk is "k", so you would drag it into "Worked". You will see a list of common verbs. If you want uncommon verbs, hit the Show Uncommon Verbs button.');
+    const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match the ending of this verb to the ending of one of a verb on the left. Focus on the last sound. Example: The last sound in talk is "k", so you would drag it into "Worked". To practice with uncommon verbs, hit the Show Uncommon Verbs button.');
     const buttonWrapper = makeElement('div', 'button-wrapper-2', currentVerbWrapper); //Had to add a 2 to this because of a conflict with another element in the app.
     const commonVerbsButton = makeElement('button', 'common-verbs-button', buttonWrapper, 'Show Common Verbs', handleShowCommonVerbsClick);
     const uncommonVerbsButton = makeElement('button', 'uncommon-verbs-button', buttonWrapper, 'Show Uncommon Verbs', handleShowUncommonVerbsClick);
@@ -89,11 +89,11 @@ const initialize = () => {
       const isInArray = (element) => element === draggedElement.textContent;
       const found = allVerbs[event.target.textContent].some(isInArray)
       if (found) {
-        showNotification('That\'s right!', document.body);
+        showNotification('That\'s right!', contentSection, 50, 63);
         regVerbFlags.currentVerb++;
         speakBothWords(event.target.textContent, draggedElement.textContent)
       } else {
-        showNotification('Try again.', document.body);
+        showNotification('Try again.', contentSection, 50, 63);
       }
       switchVerbGroup(currentVerbEl);
     });

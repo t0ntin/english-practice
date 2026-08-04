@@ -38,10 +38,17 @@ export function makeImage (src, className, appendToeEl) {
   return image;
 }
 
-export const showNotification = (message, containingElement) => {
+export const showNotification = (message, containingElement, top, left) => {
   let popupEl = document.querySelector('.popup-div');
   if (!popupEl) {
     popupEl = makeElement('div', 'popup-div', containingElement);
+  }
+  if (top) {
+    popupEl.style.top = `${top}%`;
+  }
+
+  if (left) {
+    popupEl.style.left = `${left}%`;
   }
   popupEl.innerText = message;
   popupEl.classList.add('active'); 
@@ -51,7 +58,6 @@ export const showNotification = (message, containingElement) => {
 }
 
 export const transitionContent = (element, class1, class2) => {
-  
   element.classList.remove(class1);
   element.classList.add(class2);
   setTimeout(() => {
@@ -59,12 +65,3 @@ export const transitionContent = (element, class1, class2) => {
     element.classList.add(class1);
   }, 200);
 }
-
-// export const transitionContent = (element, class1, class2) => {
-//   element.classList.add(class2);
-//   element.classList.remove(class1);
-//   setTimeout(() => {
-//     element.classList.add(class1);
-//     element.classList.remove(class2);
-//   }, 200);
-// }
