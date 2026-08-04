@@ -49,3 +49,22 @@ export const showNotification = (message, containingElement) => {
     popupEl.classList.remove('active'); 
   }, 2000);
 }
+
+export const transitionContent = (element, class1, class2) => {
+  
+  element.classList.remove(class1);
+  element.classList.add(class2);
+  setTimeout(() => {
+    element.classList.remove(class2);
+    element.classList.add(class1);
+  }, 200);
+}
+
+// export const transitionContent = (element, class1, class2) => {
+//   element.classList.add(class2);
+//   element.classList.remove(class1);
+//   setTimeout(() => {
+//     element.classList.add(class1);
+//     element.classList.remove(class2);
+//   }, 200);
+// }

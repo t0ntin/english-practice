@@ -1,4 +1,4 @@
-import { makeElement, showNotification } from "../components/reusableUI.js"
+import { makeElement, showNotification, transitionContent } from "../components/reusableUI.js"
 import { sentences, saveToLocalStorage } from "./practice.js";
 import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals} from "../components/data/grammar-data.js";
 import { renderWordOrder } from "./word-order.js";
@@ -69,7 +69,7 @@ const renderErrorsPage = () => {
 const renderTopic = (topicObj) => {
   const contentSection = document.querySelector('.content-section');
   contentSection.innerHTML = '';
-  transitionContent(contentSection);
+  transitionContent(contentSection, 'scale-up', 'scale-down');
 
   const titleEl = makeElement('h2', 'title', contentSection, topicObj.title);
   
@@ -179,13 +179,4 @@ const handleAddToPracticeClick = (practiceSentence) => {
   saveToLocalStorage();
   const message = 'Sentence added.';
   showNotification(message, mainSection2);
-}
-
-const transitionContent = (contentSection) => {
-  contentSection.classList.add('scale-down');
-  contentSection.classList.remove('scale-up');
-  setTimeout(() => {
-    contentSection.classList.add('scale-up');
-    contentSection.classList.remove('scale-down');
-  }, 200);
 }

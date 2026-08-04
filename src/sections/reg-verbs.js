@@ -1,8 +1,9 @@
-import { makeElement, showNotification } from "../components/reusableUI.js";
+import { makeElement, showNotification, transitionContent } from "../components/reusableUI.js";
 import { regVerbData,regVerbFlags, allVerbs } from "../components/data/reg-verb-data.js";
 
 export const renderRegVerbs = () => {
   const contentSection = document.querySelector('.content-section');
+  transitionContent(contentSection, 'scale-up', 'scale-down');
   const mainSection2 = document.querySelector('.main-section-2');
   const regVerbsTitleEl = makeElement('h2', 'reg-verbs-title-h2', contentSection, 'Pronunciation of regular verbs (-d, -ed)');
   const allVerbsWrapper = makeElement('div', 'all-verbs-wrapper', contentSection);
@@ -31,19 +32,19 @@ export const renderRegVerbs = () => {
 
       
   const currentVerbWrapper = makeElement('div', 'current-verb-wrapper', contentSection);
-    const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match the ending of this verb to the ending of one of a verb on the left. Focus on the last sound. Example: The last sound in talk is "k", so you would drag it into "Worked". You will see a list of common verbs. If you want uncommon verbs, hit the Show Uncommon Verbs button.');
     const currentVerbEl = makeElement('span', 'current-verb-span', currentVerbWrapper);
-  const buttonWrapper = makeElement('div', 'button-wrapper-2', contentSection); //Had to add a 2 to this because of a conflict with another element in the app.
-  const commonVerbsButton = makeElement('button', 'common-verbs-button', buttonWrapper, 'Show Common Verbs', handleShowCommonVerbsClick);
-  const uncommonVerbsButton = makeElement('button', 'uncommon-verbs-button', buttonWrapper, 'Show Uncommon Verbs', handleShowUncommonVerbsClick);
+    const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match the ending of this verb to the ending of one of a verb on the left. Focus on the last sound. Example: The last sound in talk is "k", so you would drag it into "Worked". You will see a list of common verbs. If you want uncommon verbs, hit the Show Uncommon Verbs button.');
+    const buttonWrapper = makeElement('div', 'button-wrapper-2', currentVerbWrapper); //Had to add a 2 to this because of a conflict with another element in the app.
+    const commonVerbsButton = makeElement('button', 'common-verbs-button', buttonWrapper, 'Show Common Verbs', handleShowCommonVerbsClick);
+    const uncommonVerbsButton = makeElement('button', 'uncommon-verbs-button', buttonWrapper, 'Show Uncommon Verbs', handleShowUncommonVerbsClick);
 
   initialize();
 }
 
 const initialize = () => {
-  // const mainSection2 = document.querySelector('.main-section-2');
   const contentSection = document.querySelector('.content-section');
   const currentVerbEl = document.querySelector('.current-verb-span');
+  
   currentVerbEl.setAttribute('draggable', 'true');
   currentVerbEl.setAttribute('id', 'current-verb');
   switchVerbGroup(currentVerbEl);
@@ -84,8 +85,7 @@ const initialize = () => {
       
       const data = event.dataTransfer.getData('text/plain');
       const draggedElement = document.getElementById(data);
-      console.log(draggedElement.textContent);
-      console.log(event.target.textContent);
+      transitionContent(currentVerbEl, 'scale-up', 'scale-down');
       const isInArray = (element) => element === draggedElement.textContent;
       const found = allVerbs[event.target.textContent].some(isInArray)
       if (found) {
@@ -98,7 +98,6 @@ const initialize = () => {
       switchVerbGroup(currentVerbEl);
     });
     allVerbsWrapper.listenersAttached = true;
-
   }
 }
 
@@ -129,5 +128,3 @@ const handleShowUncommonVerbsClick = () => {
   regVerbFlags.currentVerbGroup = 'uncommon';
   initialize();
 }
-
-

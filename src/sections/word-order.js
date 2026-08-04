@@ -1,4 +1,4 @@
-import { makeElement, showNotification } from "../components/reusableUI.js";
+import { makeElement, showNotification, transitionContent } from "../components/reusableUI.js";
 import { wordOrderSentences } from "../components/data/word-order-data.js";
 import { flags } from "../components/data/grammar-data.js";
 
@@ -8,6 +8,7 @@ const mainSection2 = document.querySelector('.main-section-2');
 export const renderWordOrder = () => {
   const contentSection = document.querySelector('.content-section');
   contentSection.innerHTML = '';
+  transitionContent(contentSection, 'scale-up', 'scale-down');
   const tableContainer = makeElement('div', 'table-container', contentSection);
   const tableWrapper1 = makeElement('div', 'table-wrapper-1', tableContainer);
   const personEl = makeElement('div', 'person-div', tableWrapper1, 'Person');
@@ -21,7 +22,6 @@ export const renderWordOrder = () => {
   const whatEl2 = makeElement('div', 'what-2-div', tableWrapper2);
   const otherInfoEl2 = makeElement('div', 'other-info-2-div', tableWrapper2);
 
-  // const continueButton = makeElement('button', 'continue-button', contentSection, 'Continue', handleContinueClick);
   const buttonWrapper = makeElement('div', 'button-wrapper', contentSection, 'Is this sentence correct?');
   const yesButton = makeElement('button', 'yes-button', buttonWrapper, 'Yes', () => handleAnswer(true));
   const noButton = makeElement('button', 'no-button', buttonWrapper, 'No', () => handleAnswer(false));
@@ -39,7 +39,7 @@ export const renderWordOrder = () => {
 export const showRandomSentence = () => {
   const currentSentence = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].words;
   flags.chosenSentence = currentSentence;
-    const tableWrapper2 = document.querySelector('.table-wrapper-2');
+  const tableWrapper2 = document.querySelector('.table-wrapper-2');
   const htmlCollection = tableWrapper2.children;
   const sentenceParts = [...htmlCollection];
   currentSentence.forEach((word, i) => {
@@ -49,10 +49,9 @@ export const showRandomSentence = () => {
       sentenceParts[i].style.backgroundColor = color;
     }, 700);
     transitionText(sentenceParts[i]);
-
   });
-
 }
+
 const handleAnswer = (userAnswer) => {
   const answer = wordOrderSentences[flags.currentGroupIndex][flags.currentSentenceIndex].correct;
   if (userAnswer === true && answer === true || userAnswer === false && answer === false) {
