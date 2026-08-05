@@ -91,7 +91,9 @@ const initialize = () => {
       if (found) {
         showNotification('That\'s right!', contentSection, 50, 63);
         regVerbFlags.currentVerb++;
-        speakBothWords(event.target.textContent, draggedElement.textContent)
+        // speakBothWords(event.target.textContent, draggedElement.textContent);
+        speak(event.target.textContent, draggedElement.textContent);
+        speak(draggedElement.textContent);
       } else {
         showNotification('Try again.', contentSection, 50, 63);
       }
@@ -127,4 +129,67 @@ const handleShowCommonVerbsClick = () => {
 const handleShowUncommonVerbsClick = () => {
   regVerbFlags.currentVerbGroup = 'uncommon';
   initialize();
+}
+
+let selectedVoice = null;
+
+function loadBestVoice() {
+    const voices = speechSynthesis.getVoices();
+
+    const preferred = [
+        "Microsoft Jenny",
+        "Microsoft Aria",
+        "Microsoft Guy",
+        "Google UK English Female",
+        "Google US English",
+        "Google UK English Male",
+        "Samantha",
+        "Karen",
+        "Daniel"
+    ];
+
+    // Try preferred voices first
+    for (const name of preferred) {
+        const voice = voices.find(v => v.name.includes(name));
+        if (voice) {
+            selectedVoice = voice;
+            return;
+        }
+    }
+
+    // Any English female voice
+    selectedVoice = voices.find(v =>
+        v.lang.startsWith("en") &&
+        /female|woman|samantha|karen|jenny|aria/i.test(v.name)
+    );
+
+    if (selectedVoice) return;
+
+    // Any English voice
+    selectedVoice = voices.find(v => v.lang.startsWith("en"));
+
+    if (selectedVoice) return;
+
+    // Fallback
+    selectedVoice = voices[0];
+}
+
+// Chrome loads voices asynchronously
+speechSynthesis.onvoiceschanged = loadBestVoice;
+loadBestVoice();
+
+console.table(
+    speechSynthesis.getVoices().map(v => ({
+        name: v.name,
+        lang: v.lang,
+        default: v.default
+    }))
+);
+
+function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = selectedVoice;
+    utterance.rate = 0.95;
+    utterance.pitch = 1;
+    speechSynthesis.speak(utterance);
 }

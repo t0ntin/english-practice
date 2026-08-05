@@ -44,7 +44,7 @@
   background-color: rgb(161, 0, 0);
   font-size: 1.1rem;
   font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 1px;
 }
 
 .current-verb-wrapper {
@@ -73,12 +73,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Courier New', Courier, monospace;
   background-color: rgba(254, 3, 3, 1);
   font-weight: bold;
   font-size: 1.1rem;
   transition: transform 0.3s ease;
   text-align: center;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 
 .current-verb-span.scale-down {
@@ -96,8 +97,8 @@
 
 .button-wrapper-2 button {
   background: transparent;
-  color: #8B1A1A; /* Dark red */
-  border: 1.5px solid #6B0F0F;
+  color: #b01111; /* Dark red */
+  border: 1.5px solid #b01111;
   padding: 10px 28px;
   font-size: 16px;
   font-weight: 500;
