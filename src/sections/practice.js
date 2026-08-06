@@ -1,4 +1,4 @@
-import { makeElement } from "../components/reusableUI.js";
+import { makeElement, speak } from "../components/reusableUI.js";
 import { makeInputEl } from "../components/reusableUI.js";
 
 // ============================
@@ -238,11 +238,9 @@ const renderSentences = (sentence) => {
       }
 
       const speakButton = makeElement('button', 'speak-button', bottomRowContainer, '📢');
-
         speakButton.addEventListener('click', () => {
           console.log(sentence.sentence);
-          const utterance = new SpeechSynthesisUtterance(sentence.sentence);
-          speechSynthesis.speak(utterance); 
+          speak(sentence.sentence)
         });
         
         const deleteButton = makeElement('button', 'delete-button', bottomRowContainer, '🗑️');
@@ -266,5 +264,3 @@ const renderSentences = (sentence) => {
 export const saveToLocalStorage = () => {
   localStorage.setItem('sentences', JSON.stringify(sentences));
 }
-
-// localStorage.clear();

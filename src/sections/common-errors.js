@@ -3,7 +3,7 @@ import { sentences, saveToLocalStorage } from "./practice.js";
 import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals} from "../components/data/grammar-data.js";
 import { renderWordOrder } from "./word-order.js";
 import { renderRegVerbs } from "./reg-verbs.js";
-
+import { renderSWords } from "./s-words.js";
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
 
@@ -55,6 +55,8 @@ const renderErrorsPage = () => {
         const ulEl3 = makeElement('ul', 'pronunciation-ul', liEl2);
           const subLiEl7 = makeElement('li', 'reg-verbs-li', ulEl3);
           const regVerbsButton = makeElement('button', 'reg-verbs-button', subLiEl7, 'Reg. verbs', handleRegVerbsClick);
+          const subLiEl8 = makeElement('li', 's-words-li', ulEl3);
+          const sWordsButton = makeElement('button', 's-words-button', subLiEl8, 'S-words', handleSWordsClick);
 
       const liEl3 = makeElement('li', 'word-order-li', ulEl); 
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
@@ -174,6 +176,14 @@ const handleRegVerbsClick = (event) => {
   changeColor(event)
   flags.lastSelectedElement = event.target;
   renderRegVerbs();
+}
+
+const handleSWordsClick = (event) => {
+  const contentSection = document.querySelector('.content-section');
+  contentSection.innerHTML = '';
+  changeColor(event);
+  flags.lastSelectedElement = event.target;
+  renderSWords();
 }
 
 const changeColor = (event) => {
