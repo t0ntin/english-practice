@@ -4,6 +4,8 @@ import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals}
 import { renderWordOrder } from "./word-order.js";
 import { renderRegVerbs } from "./reg-verbs.js";
 import { renderSWords } from "./s-words.js";
+import { renderPlurals } from "./plurals.js";
+
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
 
@@ -57,6 +59,8 @@ const renderErrorsPage = () => {
           const regVerbsButton = makeElement('button', 'reg-verbs-button', subLiEl7, 'Reg. verbs', handleRegVerbsClick);
           const subLiEl8 = makeElement('li', 's-words-li', ulEl3);
           const sWordsButton = makeElement('button', 's-words-button', subLiEl8, 'S-words', handleSWordsClick);
+          const subLiEl9 = makeElement('li', 'plurals-li', ulEl3);
+          const pluralsButton = makeElement('button', 'plurals-button', subLiEl9, 'Plurals', handlePluralsClick);
 
       const liEl3 = makeElement('li', 'word-order-li', ulEl); 
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
@@ -184,6 +188,14 @@ const handleSWordsClick = (event) => {
   changeColor(event);
   flags.lastSelectedElement = event.target;
   renderSWords();
+}
+
+const handlePluralsClick = (event) => {
+  const contentSection = document.querySelector('.content-section');
+  contentSection.innerHTML = '';
+  changeColor(event);
+  flags.lastSelectedElement = event.target;
+  renderPlurals();
 }
 
 const changeColor = (event) => {
