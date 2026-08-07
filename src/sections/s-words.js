@@ -1,5 +1,5 @@
-import { sWordsData } from "../components/data/s-words-data";
-import { makeElement, speak } from "../components/reusableUI"
+import { sWordsData } from "../components/data/s-words-data.js";
+import { makeElement, speak } from "../components/reusableUI.js"
 
 
 export const renderSWords = () => {

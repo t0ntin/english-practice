@@ -1,14 +1,14 @@
 export const sWordsData = [
   {
-   "step": "Listen to the words and try to say them." ,
+   "step": "Listen to the words and try to say them:" ,
    "practiceContent": ["a school ", "a story ", "a space ", "a stomach ", "a square ", "a skill ", "a smell ", "a snack ", "a snake ", "sneaky ", "small ", "slow ", "smart ", "slide ", "slid ", "stare "],
   },
   {
-   "step": "Create a simple sentence, listen to it, and try to say it." ,
+   "step": "Create a simple sentence, listen to it, and try to say it:" ,
    "practiceContent": ["My sister told me a story."],
   },
   {
-   "step": "Add more words to it." ,
+   "step": "Add more words to it:" ,
    "practiceContent": ["My step sister told me a story at school."],
   },
   {
