@@ -5,6 +5,7 @@ import { makeElement, speak, transitionContent } from "../components/reusableUI.
 export const renderSWords = () => {
   const contentSection = document.querySelector('.content-section');
   transitionContent(contentSection, 'scale-up', 'scale-down');
+  
   const titleEl = makeElement('h2', 's-words-title', contentSection, 'S-Words');
   const topTextEl = makeElement('div', 'top-text-div', contentSection)
   topTextEl.innerHTML = `<h3>The problem:</h3><p>

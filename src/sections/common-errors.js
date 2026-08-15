@@ -5,6 +5,7 @@ import { renderWordOrder } from "./word-order.js";
 import { renderRegVerbs } from "./reg-verbs.js";
 import { renderSWords } from "./s-words.js";
 import { renderPlurals } from "./plurals.js";
+import {renderQuestions} from "./questions.js"
 
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
@@ -51,6 +52,9 @@ const renderErrorsPage = () => {
 
         const subLiEl6 = makeElement('li', 'modals-li', ulEl2);
           const modalsButton = makeElement('button', 'modals-button', subLiEl6, 'Modals', handleModalsClick);
+
+        const subLiEl10 = makeElement('li', 'modals-li', ulEl2);
+          const questionsButton = makeElement('button', 'questions-button', subLiEl10, 'Questions', handleQuestionsClick);
 
       const liEl2 = makeElement('li', 'pronunciation-li', ulEl); 
       const pronunciationButton = makeElement('button', 'pronunciation-button', liEl2, 'Pronunciation', handlePronunciationClick);
@@ -196,6 +200,14 @@ const handlePluralsClick = (event) => {
   changeColor(event);
   flags.lastSelectedElement = event.target;
   renderPlurals();
+}
+
+const handleQuestionsClick = (event) => {
+  const contentSection = document.querySelector('.content-section');
+  contentSection.innerHTML = '';
+  changeColor(event);
+  flags.lastSelectedElement = event.target;
+  renderQuestions();
 }
 
 const changeColor = (event) => {

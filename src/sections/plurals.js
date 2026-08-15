@@ -5,6 +5,7 @@ import { pluralsData } from "../components/data/plurals-data.js";
 export const renderPlurals = () => {
   const contentSection = document.querySelector('.content-section');
   transitionContent(contentSection, 'scale-up', 'scale-down');
+
   const titleEl = makeElement('h2', 'plurals-title', contentSection, 'Plurals');
   const topTextEl = makeElement('div', 'top-text-div', contentSection)
   topTextEl.innerHTML = `<h3>The problem:</h3><p>
@@ -13,9 +14,10 @@ export const renderPlurals = () => {
 <h3> Practice</h3`;
   const listOl = makeElement('ol', 'steps-ol', contentSection);
   const listLi = makeElement('li', 'list-li', listOl);
-  pluralsData[0].practiceContent.forEach(pair => {
-    const pairButton = makeElement('button', 'pair-button', listLi, pair, handlePairButtonClick)
-  })
+    const listStepEl = makeElement('p', 'list-step', listLi, pluralsData[0].step);
+    pluralsData[0].practiceContent.forEach(pair => {
+      const pairButton = makeElement('button', 'pair-button', listLi, pair, handlePairButtonClick)
+    })
   pluralsData.slice(1).forEach(element => {
     const listLi = makeElement('li', 'list-li', listOl);
     const listStepEl = makeElement('p', 'list-step', listLi, element.step);

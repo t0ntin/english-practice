@@ -14,7 +14,6 @@
 .practice-content-div {
   margin: 0 0 0 5px;
   display: flex;
-  align-items: center;
   gap: 10px;
 }
 
@@ -45,10 +44,9 @@
 }
 
 .practice-content-div > .speak-button {
- /* background: red; */
-  /* margin: 200px; */
   padding: 5px 10px;
+  height: 33px;
   font-size: 1rem;
-  /* width: 100%; */
   min-width: 91px;
+  flex-shrink: 0;
 }

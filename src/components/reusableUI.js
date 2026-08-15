@@ -14,8 +14,8 @@ export function makeElement(elementTag, className, appendToEl, textInside, liste
 }
 
 
-export function makeInputEl(elementTag, className, appendToEl, placeholder, value) {
-  const element = document.createElement(elementTag);
+export function makeInputEl(className, appendToEl, placeholder, value) {
+  const element = document.createElement('input');
   element.classList.add(className);
   if (appendToEl) {
     appendToEl.append(element);

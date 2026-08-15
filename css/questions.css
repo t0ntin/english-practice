@@ -1,0 +1,68 @@
+.content-section > * {
+  /* border: 1px solid red; */
+}
+.sentence-container > * {
+  /* border: 1px solid red; */
+}
+
+.sentence-container {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  grid-column: 1/4;
+}
+.subject-2 {
+  background-color: #e6b800;
+}
+
+.verb-2 {
+  background-color: #7c0075;
+}
+
+.object-2 {
+  background-color: #007914;
+}
+
+.prep-phrase {
+  background-color: #1100aa;
+}
+
+.frequency {
+  background-color: #F25912;
+}
+
+.interrogative {
+  background-color: #c500c2;
+}
+
+.subject-2, .verb-2, .object-2, .prep-phrase, .frequency, .interrogative {
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.sentence-input {
+  grid-column: 1/4;
+  height: 50px;
+}
+
+.output-div {
+  grid-column: 1/5;
+}
+
+.incorrect {
+  background-color:  none;
+  border: 1px solid rgb(168, 0, 0);
+  color: rgb(168, 0, 0);
+  text-decoration: line-through;
+
+}
+/* .interrogative {
+  height: 30px;
+  background-color: rgb(176, 0, 0);
+} */
+
+.instructions-p {
+  margin: 0 0 15px 0;
+}

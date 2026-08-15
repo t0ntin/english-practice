@@ -17,7 +17,7 @@ export const pluralsData = [
   },
   {
    "step": "Make it longer:" ,
-   "practiceContent": ["The princess washes and boxes the dishes, the glasses, and the matches before she pushes the boxes onto the shelves and wishes waitresses a nice day."],
+   "practiceContent": ["The princess washes and boxes the dishes, the glasses, and the matches before she pushes the boxes onto the shelves and wishes the waitresses a nice day."],
   },
   {
    "step": "Make the grammar or pronunciation more challenging:" ,
