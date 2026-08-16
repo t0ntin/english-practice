@@ -1,10 +1,13 @@
 import { questions, questionsFlags } from "../components/data/questions-data.js";
-import { makeElement, makeInputEl, showNotification } from "../components/reusableUI.js";
+import { makeElement, makeInputEl, showNotification, transitionContent } from "../components/reusableUI.js";
+import { saveToLocalStorage, sentences } from "./practice.js";
 
 export const  renderQuestions = () => {
   const contentSection = document.querySelector('.content-section');
+  // transitionContent(contentSection, 'scale-up', 'scale-down');
   contentSection.innerHTML = '';
   const sentenceContainer = makeElement('div', 'sentence-container', contentSection);
+  const correctSentenceContainer = makeElement('div', 'correct-sentence-container', contentSection);
 
   const currentSentence = questionsFlags.currentSentence;
   const currentQuestion = questions[currentSentence].questions[questionsFlags.currentQuestion];
@@ -13,41 +16,44 @@ export const  renderQuestions = () => {
     const element = makeElement('span', chunk.role, sentenceContainer, chunk.text);
   });
 
-  const outputEl = makeElement('div', 'output-div', contentSection);
+  const wrapper1 = makeElement('div', 'wrapper1-div', contentSection);
 
-  const instructionsEl = makeElement('p', 'instructions-p', outputEl, currentQuestion.instruction);
-
+    const instructionsEl = makeElement('p', 'instructions-p', wrapper1, currentQuestion.instruction);
+    transitionContent(instructionsEl, 'slide1', 'slide2');
     const partOfSpeechEl = makeElement('span', currentQuestion.role, instructionsEl, currentQuestion.partOfSpeech);
 
-  const inputEl = makeInputEl('sentence-input', contentSection, 'Type your question here...');
+    const inputEl = makeInputEl('sentence-input', wrapper1, 'Type your question here...');
 
-  // inputEl.addEventListener('input', handleInputElValue);
-  const checkSencenceButton = makeElement('button', 'check-sentence-button', contentSection, 'Check', handleCheckSentenceClick);
-  const previousButton = makeElement('button', 'previous-button', contentSection, 'Previous Sentence', handlePreviousButtonClick);
-  const nextButton = makeElement('button', 'next-button', contentSection, 'Next Sentence', handleNextButtonClick);
+    const checkSencenceButton = makeElement('button', 'check-sentence-button', wrapper1, 'Check \u00A0 ✔️', handleCheckSentenceClick);
+    const hint1Button = makeElement('button', 'hint1-button', wrapper1, '💡 \u00A0 Hint 1', handleHint1Buttonclick);
+    const hint2Button = makeElement('button', 'hint2-button', wrapper1, '💡 \u00A0 Hint 2', handleHint2Buttonclick);
+    const showAnswserButton = makeElement('button', 'show-answer-button', wrapper1, 'Show Answer', handleShowAnswerButtonclick);
+    const addToPracticeButton = makeElement('button', 'add-to-practice-button', wrapper1, '📌 \u00A0 Add to practice', handleAddToPracticeButtonclick);
+
+
+    const previousButton = makeElement('button', 'previous-button', wrapper1, '⬅️ \u00A0 Previous Sentence', handlePreviousButtonClick);
+    const nextButton = makeElement('button', 'next-button', wrapper1, 'Next Sentence \u00A0 ➡️', handleNextButtonClick);
 }
 
 const handleCheckSentenceClick = (event) => {
   const contentSection = document.querySelector('.content-section');
-  const outputEl = document.querySelector('.output-div');
-   if (outputEl.children.length > 1) return;
+  const correctSentenceContainer = document.querySelector('.correct-sentence-container');
+  correctSentenceContainer.innerHTML = '';
   
   const inputEl = document.querySelector('.sentence-input');
   const currentQuestion = questions[questionsFlags.currentSentence].questions[questionsFlags.currentQuestion];
 
   const cleanedInput = normalizeString(inputEl.value);
-  console.log(cleanedInput);
-  console.log(currentQuestion.text);
-  // const answerIsCorrect = null;
   if (cleanedInput === currentQuestion.text.toLowerCase()) {
+    console.log('testing');
     currentQuestion.chunks.forEach((chunk, i) => {
-      makeElement('span', chunk.role, outputEl, chunk.text);
+      makeElement('span', chunk.role, correctSentenceContainer, chunk.text);
+      showNotification('Correct!', contentSection, 45, 45);
     });
 
-    makeElement('span', 'correct-response', outputEl, 'Correct! ☑️')
+    makeElement('span', 'correct-response', correctSentenceContainer, '☑️')
   } else {
-    console.log('testing');
-    showNotification('Try again', contentSection, 50, 50);
+    showNotification('Try again or get a hint.', contentSection, 50, 50);
   }
 }
 
@@ -78,14 +84,39 @@ const handleNextButtonClick = (event) => {
   }
 }
 
+const handleHint1Buttonclick = () => {
+  const correctSentenceContainer = document.querySelector('.correct-sentence-container');
+  correctSentenceContainer.innerHTML = '';
+  correctSentenceContainer.innerText = questions[questionsFlags.currentSentence].questions[questionsFlags.currentQuestion].hint1;
+  transitionContent(correctSentenceContainer, 'scale-up', 'scale-down');
+
+}
+
+const handleHint2Buttonclick = () => {
+  const correctSentenceContainer = document.querySelector('.correct-sentence-container');
+  correctSentenceContainer.innerHTML = '';
+  correctSentenceContainer.innerText = questions[questionsFlags.currentSentence].questions[questionsFlags.currentQuestion].hint2;
+  transitionContent(correctSentenceContainer, 'scale-up', 'scale-down');
+}
+
+const handleShowAnswerButtonclick = () => {
+  const correctSentenceContainer = document.querySelector('.correct-sentence-container');
+  correctSentenceContainer.innerHTML = '';
+  correctSentenceContainer.innerText = questions[questionsFlags.currentSentence].questions[questionsFlags.currentQuestion].text + '?';
+  transitionContent(correctSentenceContainer, 'scale-up', 'scale-down');
+}
+
+const handleAddToPracticeButtonclick = () => {
+  const contentSection = document.querySelector('.content-section')
+  const sentenceObj = {sentence: questions[questionsFlags.currentSentence].questions[questionsFlags.currentQuestion].text + '?', translation: questions[questionsFlags.currentSentence].questions[questionsFlags.currentQuestion].hint2, isArchived: false};
+  sentences.push(sentenceObj);
+  saveToLocalStorage();
+  showNotification('Sentence added.', contentSection, 45, 45);
+}
+
 function normalizeString(string) {
   if (!string) return '';
   let normalized = string.toLowerCase().trim();
   normalized = normalized.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"]/g, "");
   return normalized;
 }
-// console.log(questions[0].sentences[1].sentenceParts[0].text);
-
-const myString = 'my sentence';
-const test = myString.split(' ')[0];
-// console.log(questions[0].subjectQuestion);

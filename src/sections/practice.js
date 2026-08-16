@@ -12,7 +12,7 @@ const mainSection2 = document.querySelector('.main-section-2');
       // The logic for this next function is:
       // If localStorage has "sentences":
       //     use those
-      // Else:
+      // Else:questions[questionsFlags.currentSentence].questions[questionsFlags.currentQuestion]
       //     use the default array
 export function linkToTranslations() {
   const translationsLink = document.querySelector('.practice-link');
@@ -24,11 +24,11 @@ export function linkToTranslations() {
     mainSection2.innerHTML = '';
     renderInputEls();
 
-    const localStorageSentences = localStorage.getItem('sentences');
+    // const localStorageSentences = localStorage.getItem('sentences');
 
-    if (localStorageSentences) {
-      sentences = JSON.parse(localStorageSentences);
-    }
+    // if (localStorageSentences) {
+    //   sentences = JSON.parse(localStorageSentences);
+    // }
 
     sentences.forEach(sentence => {
       if (sentence.isArchived === false) {
@@ -44,12 +44,14 @@ export let sentences = [
     translation: "Mi oracion de prueba",
     isArchived: false,
   },
-  {
-    sentence: "My test sentence 2", 
-    translation: "Mi oracion de prueba 2",
-    isArchived: false,
-  }
 ];
+
+// THIS WAS MOVED OUT OF linkToTranslations() to attempt to fix localstorage issue. (It was suddenly deleting the data);
+const localStorageSentences = localStorage.getItem('sentences');
+
+if (localStorageSentences) {
+  sentences = JSON.parse(localStorageSentences);
+}
 
 let activeView = true;
 
@@ -58,11 +60,11 @@ const renderInputEls = () => {
   containerForInputEls.innerHTML = '';
   const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection);
 
-    const singleEnglishSentenceEl =  makeInputEl('input', 'single-english-sentence-input-element', containerForInputEls, 'Enter an English sentence...');
+    const singleEnglishSentenceEl =  makeInputEl( 'single-english-sentence-input-element', containerForInputEls, 'Enter an English sentence...');
 
     const arrow =  makeElement('span', 'arrow', containerForInputEls, '➡');
 
-    const singleSpanishTranslationEl =  makeInputEl('input', 'single-spanish-translation-input-element', containerForInputEls, 'Enter the Spanish translation...');
+    const singleSpanishTranslationEl =  makeInputEl( 'single-spanish-translation-input-element', containerForInputEls, 'Enter the Spanish translation...');
 
     const addSentenceButton =  makeElement('button', 'add-sentence-button', containerForInputEls, 'Add');
 
