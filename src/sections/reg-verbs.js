@@ -14,22 +14,25 @@ export const renderRegVerbs = () => {
       const mainVerbs2 = makeElement('div', 'verb-div', mainVerbsWrapper, "Needed");
       const otherVerbsWrapper = makeElement('div', 'other-verbs-wrapper', allVerbsWrapper);
       const note2El = makeElement('div', 'note-2', otherVerbsWrapper, 'Don\'t pronounce the "e":');
-
-      const grab = makeElement('div', 'verb-div', otherVerbsWrapper, 'Grabbed');
-      const laugh = makeElement('div', 'verb-div', otherVerbsWrapper, 'Laughed');
-      const plug = makeElement('div', 'verb-div', otherVerbsWrapper, 'Plugged');
-      const work = makeElement('div', 'verb-div', otherVerbsWrapper, 'Worked');
-      const call = makeElement('div', 'verb-div', otherVerbsWrapper, 'Called');
-      const seem = makeElement('div', 'verb-div', otherVerbsWrapper, 'Seemed');
-      const clean = makeElement('div', 'verb-div', otherVerbsWrapper, 'Cleaned');
-      const stop = makeElement('div', 'verb-div', otherVerbsWrapper, 'Stopped');
-      const offer = makeElement('div', 'verb-div', otherVerbsWrapper, 'Offered');
-      const pass = makeElement('div', 'verb-div', otherVerbsWrapper, 'Passed');
-      const live = makeElement('div', 'verb-div', otherVerbsWrapper, 'Lived');
-      const fix = makeElement('div', 'verb-div', otherVerbsWrapper, 'Fixed');
-      const buzz = makeElement('div', 'verb-div', otherVerbsWrapper, 'Buzzed');
-      const wash = makeElement('div', 'verb-div', otherVerbsWrapper, 'Washed');
-
+        const verbs = [
+          'Grabbed',
+          'Laughed',
+          'Plugged',
+          'Worked',
+          'Called',
+          'Seemed',
+          'Cleaned',
+          'Stopped',
+          'Offered',
+          'Passed',
+          'Lived',
+          'Fixed',
+          'Buzzed',
+          'Washed'
+        ];
+        verbs.forEach(verb => {
+          makeElement('div', 'verb-div', otherVerbsWrapper, verb);
+        })
       
   const currentVerbWrapper = makeElement('div', 'current-verb-wrapper', contentSection);
     const currentVerbEl = makeElement('span', 'current-verb-span', currentVerbWrapper);
