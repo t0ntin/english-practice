@@ -2,6 +2,8 @@
   border: 1px solid red;
 }
 .story-wrapper {
+  margin: 80px 0 0 0;
+  grid-row: 1/2;
   padding: 0 0 0 15px;
   display: flex;
   grid-column: 1/5;
@@ -19,27 +21,51 @@
 
 .popup-div-2 {
   margin: 0 0 5px 0;
+  padding: 10px;
   width: max-content;
   border: 1px solid red;
   left: 0;
-  /* top: -65px; */
-  bottom: 100%;
+  bottom: 80%;
   position:absolute;
   z-index: 1;
   background-color: var(--SECONDARY-BACKGROUND);
-  background-color: red;
+  background-color: rgb(36, 36, 36);
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   /* width: fit-content; */
 }
 
 .sentence-div {
+  padding: 5px;
   position: relative;
+
 }
 
 .choices-div {
+  padding: 5px;
   /* position: absolute; */
   color: white;
+}
+
+.suggestion-div {
+  grid-column: 1/2;
+  grid-row: 2/2;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-self: center;
+  /* position: fixed;
+  bottom: 5%;
+  left: 5%;
+  z-index: 1; */
+}
+
+.suggestion-wrapper {
+  display: flex;
+  gap: 15px;
 }
 
 .invisible {
   display: none;
 }
+

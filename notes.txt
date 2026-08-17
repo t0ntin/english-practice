@@ -16,6 +16,9 @@
 
 	Ayer fui al parque porque queria que mi perro hiciera ejercicio. No habia mucha gente allí. Íbamos por un camino cuando vimos un pájaro rojo. El pájaro voló hacia un árbol. Mi perro ladró y corrió detrás de él. Yo grité su nombre y él regresó rápidamente. Después, nos sentamos en un banco. Comí un sándwich y mi perro bebió agua. De repente, una ardilla loca saltó sobre mi cabeza y me robó el sándwich. La ardilla corrió por el árbol y tiró el sándwich encima de un hombre que dormía en la grama. El hombre gritó y se levantó. Mi perro ladró y la ardilla chilló. Yo me reí mucho y el hombre también se rió. Después, el hombre me dio que le diera el sandwich a mi perro. El sol brilló todo el día y nosotros disfrutamos mucho el paseo.
 	
+
+
+ If user gets the anwer wrong, he should get a popup toward the bottom of the screen with a suggestion to add it to practice.
 // =============
 // =============
 
