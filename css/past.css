@@ -1,0 +1,45 @@
+.content-section > * {
+  border: 1px solid red;
+}
+.story-wrapper {
+  padding: 0 0 0 15px;
+  display: flex;
+  grid-column: 1/5;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  align-content: center;
+  /* text-align: center; */
+  justify-content: flex-start;
+  gap: 15px;
+}
+.story-wrapper > * {
+  border: 1px solid red;
+
+}
+
+.popup-div-2 {
+  margin: 0 0 5px 0;
+  width: max-content;
+  border: 1px solid red;
+  left: 0;
+  /* top: -65px; */
+  bottom: 100%;
+  position:absolute;
+  z-index: 1;
+  background-color: var(--SECONDARY-BACKGROUND);
+  background-color: red;
+  /* width: fit-content; */
+}
+
+.sentence-div {
+  position: relative;
+}
+
+.choices-div {
+  /* position: absolute; */
+  color: white;
+}
+
+.invisible {
+  display: none;
+}

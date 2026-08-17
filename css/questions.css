@@ -7,6 +7,7 @@
   transition: transform 0.5s ease;
   transform-origin: left;
   margin: 20px 0 0 20px;
+  width: fit-content;
 }
 
 .scale-up {
@@ -23,10 +24,12 @@
 
 .verb-2 {
   background-color: #7c0075;
+
 }
 
 .object-2 {
   background-color: #1B5E20;
+
 }
 
 .prep-phrase {
@@ -62,6 +65,8 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  /* justify-self: start; */
+  /* width: fit-content; */
 }
 
 .instructions-p {
@@ -72,13 +77,15 @@
   align-items: center;
   gap: 15px;
   transition: transform 0.5s ease-in-out;
+  width: fit-content;
+  /* justify-self: start; */
 }
 
 .slide1 {
   transform: translateX(0%);
 }
 .slide2 {
-  transform: translateX(10%);
+  transform: translateX(30%);
 }
 
 .sentence-input {

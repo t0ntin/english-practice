@@ -25,8 +25,6 @@ function handleInput(e) {
   let userInput = e.target.value;
   const output = document.querySelector('.output-element')
   output.innerHTML = '';
-  // const userWords = userInput.split(' ');
-
 
   userInput.split(' ').forEach((inputWord, i) => {
     if (i === userInput.length - 1 && !userInput.endsWith(' ')) return;
