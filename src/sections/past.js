@@ -16,30 +16,33 @@ export const renderPast = () => {
   const currentStory = pastStories[pastFlags.currentStory];
   const titleEl = makeElement('h2', 'story-title', contentSection, currentStory.title);
   const suggestionEl = makeElement('div', 'suggestion-div', contentSection);
-  const suggestionWrapper = makeElement('div', 'suggestion-wrapper', suggestionEl)
-      currentStory.sentences.forEach((sentence, index ) => {
-        const sentenceEl = makeElement('div', 'sentence-div', storyWrapper, sentence.spanish);
-        sentenceEl.dataset.id = index;
-        // console.log(currentStory.sentences[pastFlags.currentSentence]);
-        if (sentence.done === true) {
-          sentenceEl.classList.add('show-check');
-        }
-        if (sentence.toPractice === true) {
-          const suggestion = makeElement('span', 'suggestion', suggestionWrapper, sentence.spanish);
-          suggestion.english = sentence.correct;
-          const addToPracticeButton = makeElement('button', 'add-to-practice-button', suggestionWrapper, 'Add to practice', handleAddToPracticeClick);
-
-        }
-        const popupEl = makeElement('div', 'popup-div-2', sentenceEl);
-        popupEl.classList.add('invisible');
+    const practiceEl = makeElement('h2', 'practice-h2', suggestionEl, 'Practice')
+    currentStory.sentences.forEach((sentence, index ) => {
+      const sentenceEl = makeElement('div', 'sentence-div', storyWrapper, sentence.spanish);
+      sentenceEl.dataset.id = index;
+      if (sentence.done === true) {
+        sentenceEl.classList.add('show-check');
+      } 
+      
+      if (sentence.toPractice === true) {
+        const suggestionWrapper = makeElement('div', 'suggestion-wrapper', suggestionEl);
+        const suggestion = makeElement('span', 'suggestion', suggestionWrapper, sentence.spanish);
+        suggestion.english = sentence.correct;
+        const addToPracticeButton = makeElement('button', 'add-to-practice-button', suggestionWrapper, 'Add to practice', handleAddToPracticeClick);
+        sentenceEl.classList.add('show-x');
+      }
+      const popupEl = makeElement('div', 'popup-div-2', sentenceEl);
+      popupEl.classList.add('invisible');
+      if (sentence.done === false) {
         sentenceEl.addEventListener('mouseenter', handleSentenceMouseenter);
-        sentenceEl.addEventListener('mouseleave', handleSentenceMouseleave);
-      });
+      }
+      sentenceEl.addEventListener('mouseleave', handleSentenceMouseleave);
+    });
 
   shuffleTranslations();
   const storyControlsWrapper = makeElement('div', 'next-story-div', contentSection);
-    const previousStoryButton = makeElement('button', 'previous-story-button', storyControlsWrapper, 'Previous Story', handlePreviousStoryButtonClick);
-    const nextStoryButton = makeElement('button', 'next-story-button', storyControlsWrapper, 'Next Story', handleNextStoryButtonClick);
+    const previousStoryButton = makeElement('button', 'previous-story-button', storyControlsWrapper, '⬅️ \u00A0Previous Story', handlePreviousStoryButtonClick);
+    const nextStoryButton = makeElement('button', 'next-story-button', storyControlsWrapper, 'Next Story \u00A0 ➡️', handleNextStoryButtonClick);
 }
 
 const handleSentenceMouseenter = (event) => {
@@ -65,6 +68,7 @@ const handleSentenceMouseleave = (event) => {
 
 const handleChoiceClick = (event) => {
   const contentSection = document.querySelector('.content-section');
+  const sentenceEl = event.target.closest('.sentence-div');
   const chosenTranslation = event.target.innerText;
   const correct = pastStories[pastFlags.currentStory].sentences[pastFlags.currentSentence].correct;
   const currentSentence = pastStories[pastFlags.currentStory].sentences[pastFlags.currentSentence];
@@ -72,12 +76,14 @@ const handleChoiceClick = (event) => {
     const popupEl = event.target.closest('.popup-div-2');
     popupEl.classList.add('invisible');
     const sentenceEl = event.target.closest('.sentence-div');
-    sentenceEl.classList.add('show-check')
+    sentenceEl.classList.add('show-check');
     showNotification('Correct! 🎉 🥳', contentSection, 70, 85);
     speak(correct);
     currentSentence.done = true;
+    sentenceEl.removeEventListener('mouseenter', handleSentenceMouseenter);
     savePastStoriesToLocalStorage();
   } else {
+    sentenceEl.classList.add('show-x');
     showNotification('Try again...', contentSection, 70, 85);
     addToPracticeSuggestions();
     currentSentence.toPractice = true;
@@ -90,7 +96,6 @@ const addToPracticeSuggestions = () => {
   const suggestionWrapper = makeElement('div', 'suggestion-wrapper', suggestionEl);
   const spanishSentence = pastStories[pastFlags.currentStory].sentences[pastFlags.currentSentence].spanish;
   const suggestion = makeElement('span', 'suggestion', suggestionWrapper, spanishSentence);
-  // suggestion.english = pastStories[pastFlags.currentStory].sentences[pastFlags.currentSentence].correct;
   const addToPracticeButton = makeElement('button', 'add-to-practice-button', suggestionWrapper, 'Add to practice', handleAddToPracticeClick);
 }
 

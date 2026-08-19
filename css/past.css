@@ -1,41 +1,37 @@
 .content-section > * {
-  /* border: 1px solid red; */
+
+}
+.story-title {
+  /* justify-self: end; */
+  padding: 10px 0 0 20px;
+  grid-column: 4/5;
 }
 .story-wrapper {
-  margin: 80px 0 0 0;
+  margin: 100px 0 30px 0;
+  border: 1px solid var(--LIGHT-GRAY);
+  border-radius: 5px;
+  background-color: var(--SECONDARY-BACKGROUND);
   grid-row: 1/2;
-  padding: 0 10px 0 5px;
+  padding: 10px;
   display: flex;
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   grid-column: 1/5;
   flex-wrap: wrap;
-  /* align-items: center; */
   align-content: center;
-  /* text-align: center; */
   justify-content: flex-start;
   gap: 15px;
-  
-}
-.story-wrapper > * {
-  
-  /* background-color: aquamarine; */
-  /* width: fit-content; */
-  /* justify-self: start; */
-  /* border: 1px solid red; */
-
 }
 
 .popup-div-2 {
-  margin: 0 0 5px 0;
+  border-radius: 5px;
+  margin: 0 0 7px 0;
   padding: 10px;
   width: max-content;
-  border: 1px solid red;
+  border: 1px solid var(--LIGHT-GRAY);
   left: 0;
   bottom: 80%;
   position:absolute;
   z-index: 1;
   background-color: var(--SECONDARY-BACKGROUND);
-  background-color: rgb(36, 36, 36);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -45,16 +41,21 @@
 }
 
 .sentence-div {
+  border: 1px solid var(--LIGHT-GRAY);
+  border-radius: 5px;
   padding: 5px;
   position: relative;
   cursor: pointer;
-  border: 1px solid red;
   position: relative;
 }
 
 .sentence-div:hover {
-  background-color: rgb(0, 184, 201);
+  background-color: rgb(107, 107, 107);
+  color: black;
 }
+
+
+/* ======== PSEUDO ELEMENTS: First the check mark======  */
 
 .sentence-div::after {
   content: '';
@@ -62,12 +63,9 @@
 }
 
 .sentence-div.show-check::after {
-  background-color: rgb(119, 25, 25);
   content: '✅';
   z-index: 1;
-  /* padding: 2px; */
   visibility: visible;
-  color: rgb(27, 244, 27);
   font-weight: bold;
   font-size: 1.2rem;
   position: absolute;
@@ -75,41 +73,132 @@
   right: 50%;
   width: 26px;
   height: 26px;
-  border: 1px solid white;
   border-radius: 50%;
   text-align: center;
+  border: 2px solid #3A6FA5;
+  background-color: hsla(0, 0%, 0%, 0.515);
+  color: #4A7FB5;
+}
+/* ======== THEN THE 'X' ======  */
+
+.sentence-div::before {
+  content: '';
+  visibility: hidden;
+}
+
+.sentence-div.show-x::before {
+  content: '✖️';
+  z-index: 1;
+  visibility: visible;
+  font-size: 1.2rem;
+  position: absolute;
+  top: -35%;
+  right: 50%;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  text-align: center;
+  border: 2px solid #d60040;
+  background-color: transparent;
+  color: #d60040;
 }
 
 .choices-div {
+  border: 1px solid var(--LIGHT-GRAY);
+  border-radius: 5px;
   padding: 5px;
   color: white;
   cursor: pointer;
 }
 
 .choices-div:hover {
-  background-color: darkgray;
+  background-color: rgb(107, 107, 107);
+  color: black;
 }
 
 .suggestion-div {
+  padding: 10px;
+  border: 1px solid var(--LIGHT-GRAY);
+  border-radius: 5px;
+  background-color: var(--SECONDARY-BACKGROUND);
   grid-column: 1/4;
   grid-row: 2/2;
   display: flex;
   flex-direction: column;
   gap: 10px;
-
-  /* justify-self: center; */
-  /* position: fixed;
-  bottom: 5%;
-  left: 5%;
-  z-index: 1; */
 }
 
 .suggestion-wrapper {
+  padding: 5px 0 5px 10px;
+  border: 1px solid var(--LIGHT-GRAY);
+  border-radius: 5px;
+  background-color: rgb(33, 33, 33);
   display: flex;
   align-items: center;
-  /* align-content: center; */
-
+  justify-content: space-between;
   gap: 15px;
+}
+
+.suggestion-wrapper > .add-to-practice-button, .previous-story-button, .next-story-button {
+  background: transparent;
+  color: var(--COMMON-ERRORS-BLUE);
+  border: 1.5px solid var(--COMMON-ERRORS-BLUE);
+  padding: 6px 16px;
+  /* font-size: 12px; */
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.suggestion-wrapper > .add-to-practice-button, .previous-story-button, .next-story-button {
+  margin: 0 5px 0 0;
+  background: transparent;
+  color: #4A7FB5;
+  border: 1.5px solid #3A6FA5;
+  padding: 5px 10px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.suggestion-wrapper > .add-to-practice-button:hover, .previous-story-button:hover, .next-story-button:hover {
+  background: rgba(74, 127, 181, 0.08);
+  border-color: #5A8FC5;
+  color: #5A8FC5;
+  box-shadow: 0 0 20px rgba(74, 127, 181, 0.15);
+}
+
+.suggestion-wrapper > .add-to-practice-button:active, .previous-story-button:active, .next-story-button:active {
+  background: rgba(74, 127, 181, 0.2);
+  border-color: #4A7FB5;
+  transform: scale(0.97);
+  box-shadow: 0 0 30px rgba(74, 127, 181, 0.25);
+}
+
+.suggestion-wrapper > .add-to-practice-button:focus-visible, .previous-story-button:focus-visible, .next-story-button:focus-visible{
+  outline: 2px solid #5A8FC5;
+  outline-offset: 2px;
+}
+
+.next-story-div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  place-self: center;
+}
+
+.previous-story-button {
+
+}
+
+.next-story-button {
+
 }
 
 .invisible {

@@ -238,6 +238,277 @@ export let pastStories = [
     ]
   },
   {
+    title: "La caja misteriosa",
+    sentences: [
+      {
+        done: false,
+        toPractice: false,
+        spanish: "El jueves pasado, Elena llegó tarde al trabajo.",
+        correct: "Last Thursday, Elena got to work late.",
+        translations: [
+          "Last Thursday, Elena got to work late.",
+          "The last Thursday, Elena got to work late.",
+          "The last Thursday, Elena get to work late.",
+          "The last Thursday, Elena did get to work late."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "Cuando abrió la puerta,",
+        correct: "When she opened the door,",
+        translations: [
+          "When she opened the door,",
+          "When she open the door,",
+          "When she did open the door,"
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "todos se quedaron en silencio",
+        correct: "everyone went silent",
+        translations: [
+          "everyone went silent",
+          "everyone go silent",
+          "everyone did go silent"
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "y la miraron sorprendidos.",
+        correct: "and looked at her in surprise.",
+        translations: [
+          "and looked at her in surprise.",
+          "and look at her in surprise.",
+          "and did look at her in surprise."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "Llevaba una caja enorme y misteriosa.",
+        correct: "She was carrying a huge, mysterious box.",
+        translations: [
+          "She was carrying a huge, mysterious box.",
+          "She did was carrying a huge, mysterious box.",
+          "She carry a huge, mysterious box."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "—¿Dónde estabas?",
+        correct: '—"Where were you?"',
+        translations: [
+          '—"Where were you?"',
+          '—"Where are you?"',
+          '—"Where did you be?"'
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "su jefe preguntó  con la cara seria.",
+        correct: "her boss asked with a serious face.",
+        translations: [
+          "her boss asked with a serious face.",
+          "her boss ask with a serious face.",
+          "her boss did ask with a serious face."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "—¿Compraste pastel para todos?",
+        correct: '—"Did you buy cake for everyone?"',
+        translations: [
+          '—"Did you buy cake for everyone?"',
+          '—"Did you bought cake for everyone?"',
+          '—"You buy cake for everyone?"',
+          '—"Were you buying cake for everyone?"'
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "un compañero preguntó emocionado.",
+        correct: "an excited coworker asked.",
+        translations: [
+          "an excited coworker asked.",
+          "an excited coworker ask.",
+          "an excited coworker did ask."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "—¿Esa caja se acaba de mover sola?",
+        correct: '—"Did that box just move by itself?"',
+        translations: [
+          '—"Did that box just move by itself?"',
+          '—"Does that box just move by itself?"',
+          '—"That box just moved by itself?"'
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "la secretaria preguntó asustada.",
+        correct: "the scared secretary asked.",
+        translations: [
+          "the scared secretary asked.",
+          "the scared secretary ask.",
+          "the scared secretary did ask."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "Elena sonrió con picardía",
+        correct: "Elena smiled mischievously",
+        translations: [
+          "Elena smiled mischievously",
+          "Elena smile mischievously",
+          "Elena did smile mischievously"
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "antes de contestar.",
+        correct: "before she answered.",
+        translations: [
+          "before she answered.",
+          "before she answer.",
+          "before to answer."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "—¿Ustedes creyeron",
+        correct: '—"Did you guys think',
+        translations: [
+          '—"Did you guys think',
+          '—"Did you guys thought',
+          '—"You think'
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "que se me había olvidado el cumpleaños nuestro jefe?",
+        correct: 'that I had forgotten our boss\'s birthday?"',
+        translations: [
+          'that I had forgotten the boss\'s birthday?"',
+          'that I forget the boss\'s birthday?"',
+          'that I did forget the boss\'s birthday?"'
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "ella preguntó.",
+        correct: "she asked.",
+        translations: [
+          "she asked.",
+          "she ask.",
+          "she did ask."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "Resulta que la pastelería cometió un error",
+        correct: "It turns out the bakery made a mistake",
+        translations: [
+          "It turns out the bakery made a mistake",
+          "It turn out the bakery make a mistake",
+          "It turn out the bakery did make a mistake"
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "y le dió un pastel con una broma mecánica adentro.",
+        correct: "and gave her a cake with a mechanical joke inside.",
+        translations: [
+          "and gave her a cake with a mechanical joke inside.",
+          "and give her a cake with a mechanical joke inside.",
+          "and did hand her a cake with a mechanical joke inside."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "—¿Esa cosa va a explotar?",
+        correct: '—"Is that thing going to explode?"',
+        translations: [
+          '—"Is that thing going to explode?"',
+          '—"Does that thing go to explode?"',
+          '—"Did that thing go to explode?"'
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "el jefe preguntó preocupado .",
+        correct: "the worried boss asked.",
+        translations: [
+          "the worried boss asked.",
+          "the worried boss ask.",
+          "the worried boss did ask."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "De repente, la caja se abrió sola",
+        correct: "Suddenly, the box opened on its own",
+        translations: [
+          "Suddenly, the box opened on its own",
+          "Suddenly, the box open on its own",
+          "Suddenly, the box did open on its own"
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "y un payaso de juguete saltó a la cara del jefe.",
+        correct: "and a toy clown jumped into the boss's face.",
+        translations: [
+          "and a toy clown jumped into the boss's face.",
+          "and a toy clown jump into the boss's face.",
+          "and a toy clown did jump into the boss's face."
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "Elena lo oyó gritar del susto",
+        correct: "Elena heard him scream in fear",
+        translations: [
+          "Elena heard him scream in fear",
+          "Elena hear him scream in fear",
+          "Elena did hear him scream in fear"
+        ]
+      },
+      {
+        done: false,
+        toPractice: false,
+        spanish: "mientras todo el equipo la vio reírse a carcajadas.",
+        correct: "while the whole team saw her laugh out loud.",
+        translations: [
+          "while the whole team saw her laugh out loud.",
+          "while the whole team see her laugh out loud.",
+          "while the whole team did see her laugh out loud."
+        ]
+      }
+    ]
+  },
+  {
     title: "El desastre de la lavadora",
     sentences: [
       {
@@ -247,7 +518,7 @@ export let pastStories = [
         correct: "Last week, Juan decided to do the laundry.",
         translations: [
           "Last week, Juan decided to do the laundry.",
-          "The week, Juan decided to do the laundry.",
+          "The last week, Juan decided to do the laundry.",
           "The last week, Juan decide to do the laundry.",
           "The last week, Juan did decide to do the laundry."
         ]
@@ -423,3 +694,4 @@ export let pastStories = [
     ]
   }
 ];
+// localStorage.removeItem('pastStories');

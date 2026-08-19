@@ -1,7 +1,4 @@
-// =============
-// TO DO 
-// ============
-// ADD QUESTIONS TO PRACTICE SENTENCES 
+
 //  - use of 'the' (next year, last year)
 // - in the same apartment that I live now.
 // - 
@@ -10,12 +7,11 @@
 //  -We are in the work. We are in the home.
 // Pronunciation:
     - minimal pairs
+// COULD ADD SECTIONS FOR THE USE OF DIFFERENT PROBLEMATIC WORDS OR EXPRESSIONS LIKE WHEN TO USE OTHER, ANOTHER AND OTHERS
 
 //	PAST TENSE
-	( I WAS WORKING ON ADDING THE CHECK MARK AFTER IT'S CHOSEN CORRECTLY)
+	
 
-// =============
-// =============
 
 everybody, someone, no one, people
 
@@ -28,3 +24,23 @@ cattle	somebody
 	    each
 	    either
 	    neither
+
+======  TO DO ==========
+Fix suggestion-div, suggestion wrapper problem 
+
+=========================
+El jueves pasado, Elena llegó tarde al trabajo. Cuando abrió la puerta, todos se quedaron en silencio y la miraron sorprendidos. Llevaba una caja enorme y misteriosa.
+
+—¿Dónde estabas? — su jefe preguntó con la cara seria.
+—¿Compraste pastel para todos? — un compañero —preguntó emocionado.
+—¿Esa caja se acaba de mover sola? — la secretaria preguntó asustada.
+
+Elena sonrió con picardía antes de contestar.
+
+—¿Ustedes creían que se me había olvidado el cumpleaños del jefe? — ella preguntó .
+
+Resulta que la pastelería cometió un gran error y le entregó un pastel con una broma mecánica adentro.
+
+—¿Esa cosa va a explotar? —el preguntó jefe preocupado.
+
+De repente la caja se abrió sola y un payaso de juguete saltó directo a la cara del jefe. Elena lo oyó gritar del susto mientras todo el equipo la vio reírse a carcajadas.

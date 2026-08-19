@@ -89,7 +89,8 @@
 }
 
 .sentence-input {
-  grid-column: 1/5;
+  margin: 0 0 15px 0;
+  grid-column: 1/4;
   width: 100%;
   min-width: 50px;
   padding: 12px 16px;
@@ -137,7 +138,12 @@
 }
 
 .check-sentence-button {
-  grid-column: 5/6;
+  margin: 0 0 15px 0;
+  grid-column: 4/5;
+}
+
+.hint1-button {
+  grid-column: 1/2;
 }
 
 .previous-button {
