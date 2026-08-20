@@ -1,5 +1,5 @@
 import { pastFlags} from "../components/data/past-data.js"
-import { makeElement, showNotification, speak } from "../components/reusableUI.js";
+import { makeElement, showNotification, speak, transitionContent } from "../components/reusableUI.js";
 import { saveToLocalStorage, sentences } from "./practice.js";
 import { pastStories as importedPastStories } from '../components/data/past-data.js'
 
@@ -12,6 +12,7 @@ if (localStoragePastStories) {
 
 export const renderPast = () => {
   const contentSection = document.querySelector('.content-section');
+    transitionContent(contentSection, 'scale-up', 'scale-down');
   const storyWrapper = makeElement('div', 'story-wrapper', contentSection);
   const currentStory = pastStories[pastFlags.currentStory];
   const titleEl = makeElement('h2', 'story-title', contentSection, currentStory.title);
@@ -32,6 +33,7 @@ export const renderPast = () => {
         sentenceEl.classList.add('show-x');
       }
       const popupEl = makeElement('div', 'popup-div-2', sentenceEl);
+      popupEl.addEventListener('mouseleave', handlePopupElMouseleave);
       popupEl.classList.add('invisible');
       if (sentence.done === false) {
         sentenceEl.addEventListener('mouseenter', handleSentenceMouseenter);
@@ -60,9 +62,20 @@ const handleSentenceMouseenter = (event) => {
 }
 
 const handleSentenceMouseleave = (event) => {
+  const rect = event.target.getBoundingClientRect();
+  if (event.clientY < rect.top) {
+    return; 
+  }
+
   if (event.target.matches('.sentence-div')) {
     const popupEl = event.target.querySelector('.popup-div-2');
     popupEl.classList.add('invisible');
+  }
+}
+
+const handlePopupElMouseleave = (event) => {
+  if (event.target.matches('.popup-div-2')) {
+    event.target.classList.add('invisible');
   }
 }
 
@@ -76,10 +89,14 @@ const handleChoiceClick = (event) => {
     const popupEl = event.target.closest('.popup-div-2');
     popupEl.classList.add('invisible');
     const sentenceEl = event.target.closest('.sentence-div');
+    sentenceEl.classList.remove('show-x');
     sentenceEl.classList.add('show-check');
     showNotification('Correct! 🎉 🥳', contentSection, 70, 85);
     speak(correct);
     currentSentence.done = true;
+    if (currentSentence.toPractice === true){
+      currentSentence.toPractice = false;
+    }
     sentenceEl.removeEventListener('mouseenter', handleSentenceMouseenter);
     savePastStoriesToLocalStorage();
   } else {
@@ -93,10 +110,12 @@ const handleChoiceClick = (event) => {
 
 const addToPracticeSuggestions = () => {
   const suggestionEl = document.querySelector('.suggestion-div');
+  if (suggestionEl.added) return;
   const suggestionWrapper = makeElement('div', 'suggestion-wrapper', suggestionEl);
   const spanishSentence = pastStories[pastFlags.currentStory].sentences[pastFlags.currentSentence].spanish;
   const suggestion = makeElement('span', 'suggestion', suggestionWrapper, spanishSentence);
   const addToPracticeButton = makeElement('button', 'add-to-practice-button', suggestionWrapper, 'Add to practice', handleAddToPracticeClick);
+  suggestionEl.added = true;
 }
 
 const handleAddToPracticeClick = (event) => {
@@ -136,3 +155,5 @@ const shuffleTranslations = () => {
 const savePastStoriesToLocalStorage = () => {
   localStorage.setItem('pastStories', JSON.stringify(pastStories));
 };
+
+// console.log(localStorage.getItem('pastStories'));
