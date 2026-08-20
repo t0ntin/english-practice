@@ -1,5 +1,6 @@
-export const regVerbFlags = {
-  currentVerb: 0,
+export let regVerbFlags = {
+  currentVerbCommon: 0,
+  currentVerbUncommon: 0,
   currentVerbGroup: "common",
 }
 

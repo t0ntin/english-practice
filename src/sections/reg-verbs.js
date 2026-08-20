@@ -1,5 +1,12 @@
 import { makeElement, showNotification, transitionContent, speak } from "../components/reusableUI.js";
-import { regVerbData,regVerbFlags, allVerbs } from "../components/data/reg-verb-data.js";
+import { regVerbData, allVerbs } from "../components/data/reg-verb-data.js";
+import { regVerbFlags as importedRegVerbFlags } from "../components/data/reg-verb-data.js";
+
+let regVerbFlags = {...importedRegVerbFlags};
+const localStorageRegVerbData = localStorage.getItem('regVerbFlags')
+if (localStorageRegVerbData) {
+  regVerbFlags = JSON.parse(localStorageRegVerbData); 
+}
 
 export const renderRegVerbs = () => {
   const contentSection = document.querySelector('.content-section');
@@ -38,8 +45,9 @@ export const renderRegVerbs = () => {
     const currentVerbEl = makeElement('span', 'current-verb-span', currentVerbWrapper);
     const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match the ending of this verb to the ending of one of a verb on the left. Focus on the last sound. Example: The last sound in talk is "k", so you would drag it into "Worked". To practice with uncommon verbs, hit the Show Uncommon Verbs button.');
     const buttonWrapper = makeElement('div', 'button-wrapper-2', currentVerbWrapper); //Had to add a 2 to this because of a conflict with another element in the app.
-    const commonVerbsButton = makeElement('button', 'common-verbs-button', buttonWrapper, 'Show Common Verbs', handleShowCommonVerbsClick);
-    const uncommonVerbsButton = makeElement('button', 'uncommon-verbs-button', buttonWrapper, 'Show Uncommon Verbs', handleShowUncommonVerbsClick);
+      const commonVerbsButton = makeElement('button', 'common-verbs-button', buttonWrapper, 'Show Common Verbs', handleShowCommonVerbsClick);
+      const uncommonVerbsButton = makeElement('button', 'uncommon-verbs-button', buttonWrapper, 'Show Uncommon Verbs', handleShowUncommonVerbsClick);
+      const resetVerbsButton = makeElement('button', 'reset-verbs-button', buttonWrapper, 'Reset', handleResetVerbsClick);
 
   initialize();
 }
@@ -93,8 +101,13 @@ const initialize = () => {
       const found = allVerbs[event.target.textContent].some(isInArray)
       if (found) {
         showNotification('That\'s right!', contentSection, 50, 63);
-        regVerbFlags.currentVerb++;
-        // speakBothWords(event.target.textContent, draggedElement.textContent);
+        if (regVerbFlags.currentVerbGroup === 'common') {
+          regVerbFlags.currentVerbCommon++;
+        } else {
+          regVerbFlags.currentVerbUncommon++;
+        }
+        // regVerbFlags.currentVerb++;
+        saveRegVerFlagsToLocalStorage();
         speak(event.target.textContent);
         speak(draggedElement.textContent);
       } else {
@@ -108,20 +121,14 @@ const initialize = () => {
 
 const switchVerbGroup = (currentVerbEl) => {
   if (regVerbFlags.currentVerbGroup === 'uncommon') {
-    const currentVerb = regVerbData[1].uncommonVerbs[regVerbFlags.currentVerb];
+    const currentVerb = regVerbData[1].uncommonVerbs[regVerbFlags.currentVerbUncommon];
     currentVerbEl.textContent = currentVerb;
+    console.log(currentVerb);
   } else {
-    const currentVerb = regVerbData[1].commonVerbs[regVerbFlags.currentVerb];
+    const currentVerb = regVerbData[1].commonVerbs[regVerbFlags.currentVerbCommon];
     currentVerbEl.textContent = currentVerb;
+    console.log(currentVerb);
   }
-}
-
-const speakBothWords = (word1, word2) => {
-  const utterance = new SpeechSynthesisUtterance(word1);
-  speechSynthesis.speak(utterance); 
-
-  const utterance2 = new SpeechSynthesisUtterance(word2);
-  speechSynthesis.speak(utterance2); 
 }
 
 const handleShowCommonVerbsClick = () => {
@@ -134,7 +141,11 @@ const handleShowUncommonVerbsClick = () => {
   initialize();
 }
 
-
+const handleResetVerbsClick = () => {
+  regVerbFlags.currentVerbCommon = 0;
+  regVerbFlags.currentVerbUncommon = 0;
+  initialize();
+}
 
 console.table(
     speechSynthesis.getVoices().map(v => ({
@@ -143,3 +154,12 @@ console.table(
         default: v.default
     }))
 );
+
+const saveRegVerFlagsToLocalStorage = () => {
+  localStorage.setItem('regVerbFlags', JSON.stringify(regVerbFlags));
+
+}
+
+// console.log(regVerbData[1].commonVerbs[regVerbFlags.currentVerb]);
+
+// localStorage.removeItem('regVerbFlags');

@@ -119,11 +119,13 @@ const addToPracticeSuggestions = () => {
 }
 
 const handleAddToPracticeClick = (event) => {
+  const contentSection = document.querySelector('.content-section');
   const englishSentence = event.target.previousElementSibling.english;
   const spanishSentence = event.target.previousElementSibling.innerText;
   const obj = {sentence: englishSentence, translation: spanishSentence, isArchived: false};
   sentences.push(obj);
   saveToLocalStorage();
+  showNotification('Sentence added.', contentSection, 70, 85)
 }
 
 const handlePreviousStoryButtonClick = () => {
