@@ -18,7 +18,9 @@ export const renderRegVerbs = () => {
   const mainVerbsWrapper = makeElement('div', 'main-verbs-wrapper', allVerbsWrapper);
   const note1El = makeElement('div', 'note-1', mainVerbsWrapper, 'Pronounce the "e":');
       const mainVerbs1 = makeElement('div', 'verb-div', mainVerbsWrapper, 'Wanted');
+        underlineLastConsonant(mainVerbs1);
       const mainVerbs2 = makeElement('div', 'verb-div', mainVerbsWrapper, "Needed");
+        underlineLastConsonant(mainVerbs2);
       const otherVerbsWrapper = makeElement('div', 'other-verbs-wrapper', allVerbsWrapper);
       const note2El = makeElement('div', 'note-2', otherVerbsWrapper, 'Don\'t pronounce the "e":');
         const verbs = [
@@ -35,10 +37,12 @@ export const renderRegVerbs = () => {
           'Lived',
           'Fixed',
           'Buzzed',
-          'Washed'
+          'Washed',
+          'Watched',
         ];
         verbs.forEach(verb => {
-          makeElement('div', 'verb-div', otherVerbsWrapper, verb);
+          const verbEl = makeElement('div', 'verb-div', otherVerbsWrapper, verb);
+          underlineLastConsonant(verbEl);
         })
       
   const currentVerbWrapper = makeElement('div', 'current-verb-wrapper', contentSection);
@@ -78,27 +82,29 @@ const initialize = () => {
     allVerbsWrapper.addEventListener('dragover', (event) => {
       event.preventDefault();
       if (event.target.classList.contains('verb-div')) {
-        event.target.style.backgroundColor = 'rgba(254, 3, 3, 1)';
+        event.target.style.backgroundColor = '#007efcff';
       }
     });
 
     allVerbsWrapper.addEventListener('dragleave', (event) => {
       if (event.target.classList.contains('verb-div')) {
-        event.target.style.backgroundColor = 'rgb(161, 0, 0)';
+        event.target.style.backgroundColor = '#004489';
       }
     });
 
     allVerbsWrapper.addEventListener('drop', (event) => {
       event.preventDefault();
       if (event.target.classList.contains('verb-div')) {
-        event.target.style.backgroundColor = 'rgb(161, 0, 0)';
+        event.target.style.backgroundColor = '#004489';
       }
       
       const data = event.dataTransfer.getData('text/plain');
       const draggedElement = document.getElementById(data);
       transitionContent(currentVerbEl, 'scale-up', 'scale-down');
-      const isInArray = (element) => element === draggedElement.textContent;
-      const found = allVerbs[event.target.textContent].some(isInArray)
+      const draggedElementText = draggedElement.innerText.replace(/\s+/g, '');
+      const isInArray = (element) => element === draggedElementText;  
+      const found = allVerbs[event.target.innerText].some(isInArray);
+      console.log(found);
       if (found) {
         showNotification('That\'s right!', contentSection, 50, 63);
         if (regVerbFlags.currentVerbGroup === 'common') {
@@ -123,11 +129,12 @@ const switchVerbGroup = (currentVerbEl) => {
   if (regVerbFlags.currentVerbGroup === 'uncommon') {
     const currentVerb = regVerbData[1].uncommonVerbs[regVerbFlags.currentVerbUncommon];
     currentVerbEl.textContent = currentVerb;
-    console.log(currentVerb);
+      underlineLastConsonant(currentVerbEl);
   } else {
     const currentVerb = regVerbData[1].commonVerbs[regVerbFlags.currentVerbCommon];
     currentVerbEl.textContent = currentVerb;
-    console.log(currentVerb);
+      underlineLastConsonant(currentVerbEl);
+    // console.log(currentVerb);
   }
 }
 
@@ -144,6 +151,7 @@ const handleShowUncommonVerbsClick = () => {
 const handleResetVerbsClick = () => {
   regVerbFlags.currentVerbCommon = 0;
   regVerbFlags.currentVerbUncommon = 0;
+  saveRegVerFlagsToLocalStorage();
   initialize();
 }
 
@@ -159,6 +167,34 @@ const saveRegVerFlagsToLocalStorage = () => {
   localStorage.setItem('regVerbFlags', JSON.stringify(regVerbFlags));
 
 }
+
+const underlineLastConsonant = (verbEl) => {
+  const verbELText = verbEl.textContent.trim();
+  const thirdTolastChar = verbELText[verbELText.length -3];
+  const fourthTolastChar = verbELText[verbELText.length -4];
+  const beginning = verbELText.slice(0, verbELText.length -4);
+  const beginningOfNormalVerb = verbELText.slice(0, verbELText.length -3);
+
+  if ((thirdTolastChar === 'h' && fourthTolastChar === 's') || (thirdTolastChar === 'h' && fourthTolastChar === 'g') || (thirdTolastChar === 'h' && fourthTolastChar === 'c')) {
+    console.log(verbELText,'sh or gh');
+    verbEl.innerHTML = `
+      ${beginning}<span class="underlined-consonants-span">${fourthTolastChar + thirdTolastChar}</span>ed
+    `;
+    return;
+  }
+  if (thirdTolastChar === fourthTolastChar) {
+    console.log(verbELText,'double consonant');
+    verbEl.innerHTML = `
+      ${beginning}<span class="underlined-consonants-span">${fourthTolastChar + thirdTolastChar}</span>ed
+    `;
+  } else  if (thirdTolastChar !== fourthTolastChar) {
+    console.log(verbELText,'normal');
+    verbEl.innerHTML = `
+      ${beginningOfNormalVerb}<span class="underlined-consonants-span">${thirdTolastChar}</span>ed
+    `;
+  }
+}
+
 
 // console.log(regVerbData[1].commonVerbs[regVerbFlags.currentVerb]);
 

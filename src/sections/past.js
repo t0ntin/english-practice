@@ -45,6 +45,9 @@ export const renderPast = () => {
   const storyControlsWrapper = makeElement('div', 'next-story-div', contentSection);
     const previousStoryButton = makeElement('button', 'previous-story-button', storyControlsWrapper, '⬅️ \u00A0Previous Story', handlePreviousStoryButtonClick);
     const nextStoryButton = makeElement('button', 'next-story-button', storyControlsWrapper, 'Next Story \u00A0 ➡️', handleNextStoryButtonClick);
+    const resetStoryButton = makeElement('button', 'reset-story-button', storyControlsWrapper, 'Reset', handleResetStoryButtonClick);
+
+
 }
 
 const handleSentenceMouseenter = (event) => {
@@ -74,6 +77,8 @@ const handleSentenceMouseleave = (event) => {
 }
 
 const handlePopupElMouseleave = (event) => {
+  const rect = event.target.getBoundingClientRect();
+  if (event.clientY > rect.bottom) return;
   if (event.target.matches('.popup-div-2')) {
     event.target.classList.add('invisible');
   }
@@ -148,6 +153,19 @@ const handleNextStoryButtonClick = () => {
   renderPast();
 }
 
+const handleResetStoryButtonClick = () => {
+  const contentSection = document.querySelector('.content-section');
+  pastStories.forEach(story => {
+    story.sentences.forEach(sentence => {
+      sentence.done = false;
+      sentence.toPractice = false;
+    });
+  });
+  contentSection.innerHTML = '';
+  renderPast();
+  savePastStoriesToLocalStorage();
+}
+
 const shuffleTranslations = () => {
   pastStories[pastFlags.currentStory].sentences.forEach(item => {
     item.translations.sort(() => Math.random() - 0.5);
@@ -159,3 +177,5 @@ const savePastStoriesToLocalStorage = () => {
 };
 
 // console.log(localStorage.getItem('pastStories'));
+
+

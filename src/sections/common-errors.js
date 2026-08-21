@@ -236,3 +236,5 @@ const handleAddToPracticeClick = (practiceSentence) => {
   const message = 'Sentence added.';
   showNotification(message, contentSection, 45, 45);
 }
+
+

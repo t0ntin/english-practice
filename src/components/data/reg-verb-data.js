@@ -11,16 +11,16 @@ export const regVerbData = [
   },
   {
   commonVerbs: [ 
-    "Talked","Begged", "Provided", "Pushed", "Waited", "Pulled", "Jogged", "Mixed", "Stabbed", "Asked", "Kissed", "Loved", "Rained","Jumped", "Answered", "Opened", "Realized", "Coughed", "Added", "Finished", "Started", "Filled", "Relaxed", "Robbed", "Looked", "Raced", "Moved",
-    "Dropped", "Remembered", "Turned", "Dreamed", "Disturbed","Hugged", "Recognized", "Stuffed", "Typed", "Helped", "Considered", "Learned", "Hummed", "Emphasized", "Puffed", "Hoped", "Delivered", "Listened", "Rammed", "Organized", "Sounded","Snuffed", "Created", "Walked","Calmed", "Authorized", "Mailed", "Spilled", "Killed", "Danced", "Placed", "Promised", "Saved", "Improved", "Dragged", "Served", "Boxed", "Taxed", "Flexed", "Brushed", "Crashed", "Wished", "Scrubbed", "Zipped", "Liked", "Rested", "Zoomed", "Snagged", "Bored", "Reminded", "Absorbed","Toughed", "Included",
+    "Talked","Begged", "Touched", "Provided", "Pushed", "Waited", "Pulled", "Jogged", "Mixed", "Stabbed", "Asked", "Kissed", "Loved", "Rained","Jumped", "Answered", "Opened", "Reached","Realized", "Coughed", "Added", "Finished", "Started", "Filled", "Relaxed", "Robbed", "Looked", "Raced", "Moved",
+    "Dropped", "Remembered", "Turned", "Dreamed", "Disturbed","Hugged", "Recognized", "Stuffed", "Punched","Typed", "Helped", "Considered", "Learned", "Hummed", "Emphasized", "Puffed", "Hoped", "Delivered", "Listened", "Rammed", "Organized", "Sounded","Snuffed", "Created", "Walked","Calmed", "Authorized", "Mailed", "Spilled", "Searched","Killed", "Danced", "Placed", "Promised", "Saved", "Improved", "Dragged", "Served", "Boxed", "Taxed", "Flexed", "Brushed", "Crashed", "Wished", "Marched","Scrubbed", "Zipped", "Liked", "Rested", "Zoomed", "Snagged", "Bored", "Reminded", "Absorbed","Toughed", "Included",
   ],
 
   uncommonVerbs: [
-    "Jolted", "Roughed", "Zigzagged", "Ducked", "Padded","Dwelled", "Charmed", "Yearned", "Clipped", "Whispered", "Hissed", "Weaved", "Waxed", "Quizzed", "Bashed", "Tilted", "Dubbed", "Scuffed", "Tugged", "Snacked", "Yielded", "Firmed", "Glistened", "Stripped", "Barred", "Noticed", "Carved", "Maxed", "Fizzed", "Swooshed",  "Gutted", "Blabbed", "Buffed", "Mugged", "Peeked", "Chilled", "Harmed", "Summoned", "Gripped", "Blurred", "Dismissed", "Starved", "Faxed", "Jazzed", "Mushed", "Nodded", "Knitted", "Bobbed", "Muffed", "Shrugged", "Licked", "Thrilled", "Warmed", "Shunned", "Snapped", "Cluttered", "Welded", "Produced", "Observed", "Fluxed", "Whizzed", "Demolished", "Wedded", "Netted", "Curbed", "Huffed", "Clogged", "Shacked", "Puzzled", "Stormed", "Scorned", "Tapped", "Fluttered", "Reduced",  "Reserved", "Plexed", "Sympathized", "Abolished",  "Glided", "Dabbed"
+    "Jolted", "Roughed", "Itched", "Zigzagged", "Ducked", "Padded","Dwelled", "Charmed", "Yearned", "Clipped", "Whispered", "Hissed", "Weaved", "Waxed", "Quizzed", "Bashed", "Tilted", "Dubbed", "Scuffed", "Tugged", "Snacked", "Yielded", "Firmed", "Glistened", "Belched", "Stripped", "Barred", "Noticed", "Carved", "Maxed", "Fizzed", "Swooshed",  "Gutted", "Blabbed", "Buffed", "Mugged", "Peeked", "Chilled", "Bleached","Harmed", "Summoned", "Gripped", "Blurred", "Dismissed", "Starved", "Faxed", "Jazzed", "Mushed", "Nodded", "Knitted", "Bobbed", "Muffed", "Shrugged", "Licked", "Thrilled", "Warmed", "Shunned", "Snapped", "Cluttered", "Broached", "Welded", "Produced", "Observed", "Fluxed", "Whizzed", "Demolished", "Wedded", "Netted", "Curbed", "Huffed", "Clogged", "Shacked", "Puzzled", "Stormed", "Scorned", "Tapped", "Fluttered", "Reduced",  "Reserved", "Plexed",  "Leeched","Sympathized", "Abolished",  "Glided", "Dabbed"
   ]
   }
 ];
-//hook, peeked, licked, 
+
 export const allVerbs = {
   Grabbed: ["Stabbed", "Robbed", "Absorbed", "Disturbed", "Scrubbed", "Dabbed", "Dubbed", "Blabbed", "Bobbed", "Curbed"],
   Laughed: ["Coughed", "Stuffed", "Puffed", "Snuffed", "Toughed", "Roughed", "Scuffed", "Buffed", "Muffed", "Huffed"],
@@ -37,5 +37,6 @@ export const allVerbs = {
   Buzzed: ["Realized", "Recognized", "Emphasized", "Organized", "Authorized", "Quizzed", "Fizzed", "Jazzed", "Whizzed", "Sympathized"],
   Washed: ["Pushed", "Finished", "Brushed", "Crashed", "Wished", "Bashed", "Swooshed", "Mushed", "Demolished", "Abolished"],
   Wanted: ["Waited", "Started", "Created", "Rested", "Expected", "Jolted", "Tilted", "Gutted", "Knitted", "Netted"],
-  Needed: ["Provided", "Reminded", "Included", "Sounded", "Added", "Nodded", "Wedded", "Padded", "Glided", "Welded"]
+  Needed: ["Provided", "Reminded", "Included", "Sounded", "Added", "Nodded", "Wedded", "Padded", "Glided", "Welded"],
+  Watched: ["Touched", "Reached", "Punched", "Searched", "Marched", "Itched", "Belched", "Bleached", "Broached", "Leeched"],
 };

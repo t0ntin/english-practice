@@ -38,13 +38,23 @@
 }
 
 .verb-div {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   width: 100%;
   padding: 7px 15px;
   text-align: center;
-  background-color: rgb(161, 0, 0);
+  background-color: #004489;
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 1px;
+}
+
+.underlined-consonants-span {
+  text-decoration: underline;
+  color: rgb(253, 131, 0);
+  padding-bottom: 1px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  font-size: inherit;
 }
 
 .current-verb-wrapper {
@@ -74,12 +84,14 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(254, 3, 3, 1);
+  background-color: #004489;
   font-weight: bold;
   font-size: 1.1rem;
   transition: transform 0.3s ease;
   text-align: center;
   letter-spacing: 1px;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
 .current-verb-span.scale-down {
