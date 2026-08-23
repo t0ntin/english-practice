@@ -27,5 +27,6 @@ cattle	somebody
 
 ======  TO DO ==========
 
-
+RE RENDER THE SPANISH SENTENCES WHEN CLICKING THE TYPE IT IN BUTTON
+RERENDER EVERYTHING, IT'S PROBABLY THE ONLY WAY
 =========================
