@@ -3,13 +3,13 @@ import { validSentences, hints } from "../components/data/do-does-data.js";
 
 const mainEl = document.querySelector('.main');
 
-export function linkToDoDoes() {
-  const doDoesLink = document.querySelector('.do-does-link');
-  doDoesLink.addEventListener('click', (event) => {
-      event.preventDefault();     
-      renderDoDoes();              
-    });
-}
+// export function linkToDoDoes() {
+//   const doDoesLink = document.querySelector('.do-does-link');
+//   doDoesLink.addEventListener('click', (event) => {
+//       event.preventDefault();     
+//       renderDoDoes();              
+//     });
+// }
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
 
@@ -29,23 +29,25 @@ const verbs = ['tiene(n)', 'hace(n)', 'cuesta(n)', 'abre(n)', 'reduce(n)'];
 const objects = ['la tarea', 'comida en navidad',  'una casa grande', 'puertas', 'la congestión', 'mucho dinero'];
 
 export function renderDoDoes() {
-  mainSection.innerHTML = '';
-  mainSection2.innerHTML = '';
-  const sectionOne = makeElement('div', 'section-one', mainSection);
+  // mainSection.innerHTML = '';
+  const contentSection = document.querySelector('.content-section');
+  contentSection.innerHTML = '';
+  console.log(contentSection);
+  const sectionOne = makeElement('div', 'section-one', contentSection);
   const subjectSectionEl = makeElement('div', 'subject-section', sectionOne)
   const verbSectionEl = makeElement('div', 'verb-section', sectionOne)
   const objectSectionEl = makeElement('div', 'object-section', sectionOne)
 
-  const allSentenceContainer = makeElement('section', 'all-sentence-container', mainSection)
+  const allSentenceContainer = makeElement('section', 'all-sentence-container', contentSection)
   const leftSectionEl = makeElement('div', 'left-section', allSentenceContainer)
-  const newSentenceSectionEl = makeElement('div', 'new-sentence-section', leftSectionEl)
+  // const newSentenceSectionEl = makeElement('div', 'new-sentence-section', leftSectionEl)
 
-  const chosenSentEl = makeElement('div', 'chosen-sentence-container', mainSection)
+  const chosenSentEl = makeElement('div', 'chosen-sentence-container', contentSection)
 
   const rightSectionEl = makeElement('div', 'right-section', allSentenceContainer)
-  const englishContainerEl = makeElement('div', 'english-container', rightSectionEl)
+  // const rightSectionEl = makeElement('div', 'right-section', rightSectionEl)
 
-  const optionButtonsCont = makeElement('div', 'option-buttons-container', mainSection)
+  const optionButtonsCont = makeElement('div', 'option-buttons-container', contentSection)
 
   const resetButton = makeElement('button', 'reset-button', optionButtonsCont, 'Reset');
 
@@ -71,18 +73,6 @@ export function renderDoDoes() {
   showHintsButton.addEventListener('click', handleShowHints);
 
   addMainSectionEventListeners(subjectSectionEl, verbSectionEl, objectSectionEl, chosenSentEl);
-  
-  // const userInputEl = makeInputEl('input', 'user-subject', subjectSectionEl, 'Add yours...');
-
-  // userInputEl.addEventListener('input', (event) => {
-  //   userInputValue = event.target.value;
-  //   let subjectEl = document.querySelector('.user-defined-subject');
-  //   if (!subjectEl) {
-  //     subjectEl = makeElement('div', 'user-defined-subject', newSentenceSectionEl);
-
-  //   }
-  //   subjectEl.textContent = userInputValue;
-  // });
 }
 
 const subjectEls = document.querySelectorAll('.subject');
@@ -163,15 +153,13 @@ function pickSentence() {
     openDialogBox();
     dialogBoxEl.textContent = 'Invald sentence. Click reset and try again.'
   }
-  const newSentenceSectionEl = document.querySelector('.new-sentence-section')
-  console.log(newSentenceSectionEl);
+  // const newSentenceSectionEl = document.querySelector('.new-sentence-section')
+  const leftSectionEl = document.querySelector('.left-section')
 
-  const englishContainerEl = document.querySelector('.english-container')
-
+  const rightSectionEl = document.querySelector('.right-section')
   validSentences[cleanedSentence].phrases.forEach(phraseObj => {
-    const spanishSentContainer = makeElement('div', 'spanish-sentence-container', newSentenceSectionEl);
-    const englishSentContainer = makeElement('div', 'english-sentence-container', englishContainerEl);
-
+    const spanishSentContainer = makeElement('div', 'spanish-sentence-container', leftSectionEl);
+    const englishSentContainer = makeElement('div', 'english-sentence-container', rightSectionEl);
     phraseObj.spanish?.forEach(chunk => {
       makeElement('span', chunk.role, spanishSentContainer, chunk.text);
     });
@@ -180,23 +168,21 @@ function pickSentence() {
     })
   });
 
-  const cover = makeElement('div', 'cover', englishContainerEl);
-  cover.addEventListener('mousedown', (e) => {
+  const cover = makeElement('div', 'cover', rightSectionEl);
+  cover.addEventListener('pointerdown', (e) => {
     isDragging = true;
-    // offsetX = e.clientX - cover.offsetLeft;
     offsetY = e.clientY - cover.offsetTop;
   });
 
-  document.addEventListener('mousemove', (e) => {
+  document.addEventListener('pointermove', (e) => {
     if (!isDragging) return;
 
     e.preventDefault(); 
 
-    // cover.style.left = (e.clientX - offsetX) + 'px';
     cover.style.top = (e.clientY - offsetY) + 'px';
   });
 
-  document.addEventListener('mouseup', () => {
+  document.addEventListener('pointerup', () => {
     isDragging = false;
   });
   const typeModeBtn = document.querySelector('.type-mode-button');
@@ -207,12 +193,12 @@ function pickSentence() {
 
 function handleTypeModeClick(event, cleanedSentence) { 
   if (event.target.matches('.type-mode-button')) {
-    const englishContainerEl = document.querySelector('.english-container')
-    englishContainerEl.innerHTML = '';
+    const rightSectionEl = document.querySelector('.right-section')
+    rightSectionEl.innerHTML = '';
     
     validSentences[cleanedSentence].phrases.forEach((phraseObj, id) => {
-      const transInputEl = makeElement('div', 'trans-input-container', englishContainerEl)
-      const input = makeInputEl('input', 'english-input', transInputEl, 'Translate here');
+      const transInputEl = makeElement('div', 'trans-input-container', rightSectionEl)
+      const input = makeInputEl('english-input', transInputEl, 'Translate here');
       
       input.dataset.id = id; 
       
@@ -233,11 +219,11 @@ function handleTypeModeClick(event, cleanedSentence) {
 function handleCoverAnsClick(event) {
   if (event.target.matches('.cover-answers-button')){
   const newSentenceSectionEl = document.querySelector('.new-sentence-section')
-  const englishContainerEl = document.querySelector('.english-container')
+  const rightSectionEl = document.querySelector('.right-section')
 
     newSentenceSectionEl.innerHTML = '';
 
-    englishContainerEl.innerHTML = '';
+    rightSectionEl.innerHTML = '';
     pickSentence();
   }
   event.target.disabled = true;
@@ -291,20 +277,20 @@ function normalizeString(translation) {
 function validateSentence() {
   let isValid = false;
   const chosenSentEl = document.querySelector('.chosen-sentence-container')
-  console.log(chosenSentEl);
+  // console.log(chosenSentEl);
   const sentence = [...chosenSentEl.children].map(child => child.textContent).join(' ');
-  console.log(sentence);
+  // console.log(sentence);
   const pluralTest = /Mis padres\s+[A-Za-z]+/g;
   // const sentenceIsPlural = sentence.test(pluralTest);
   const extraLetters = /\(\w\)/g;
   const cleanedSentence = sentence.replace(extraLetters, '');
   const sentenceIsPlural = pluralTest.test(cleanedSentence);
-  console.log(sentenceIsPlural);
-  console.log(cleanedSentence);
+  // console.log(sentenceIsPlural);
+  // console.log(cleanedSentence);
   const test = cleanedSentence.match(pluralTest)
-  console.log(test);
+  // console.log(test);
   if (cleanedSentence in validSentences ) {
-    console.log('it is there.');
+    // console.log('it is there.');
     isValid = true;
   }
 

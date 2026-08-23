@@ -5,16 +5,6 @@
   margin: 0 auto;
 }
 
-.common-errors-link {
-  color: white;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.common-errors-link:hover {
-  color: darkgray;
-}
-
 .aside {
   padding: 10px 15px 15px 30px;
   border-radius: 10px;
@@ -45,11 +35,6 @@
   transform: scale(0);
   height: 0;
   opacity: 0; 
-}
-
-.error-types-h2 {
-  margin: 0 0 10px 0;
-  white-space: nowrap;
 }
 
 .grammar-ul > li, .pronunciation-ul > li {

@@ -114,7 +114,7 @@
 }
 
 .check-sentence-button, .hint1-button, .hint2-button, .wrapper1-div > .add-to-practice-button, .previous-button, .next-button, .show-answer-button {
-  padding: 0.75rem 1.5rem;
+  padding: 5px;
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;

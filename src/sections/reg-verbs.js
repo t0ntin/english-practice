@@ -1,6 +1,7 @@
 import { makeElement, showNotification, transitionContent, speak } from "../components/reusableUI.js";
 import { regVerbData, allVerbs } from "../components/data/reg-verb-data.js";
 import { regVerbFlags as importedRegVerbFlags } from "../components/data/reg-verb-data.js";
+import { ssrExportAllKey } from "vite/module-runner";
 
 let regVerbFlags = {...importedRegVerbFlags};
 const localStorageRegVerbData = localStorage.getItem('regVerbFlags')
@@ -23,31 +24,15 @@ export const renderRegVerbs = () => {
         underlineLastConsonant(mainVerbs2);
       const otherVerbsWrapper = makeElement('div', 'other-verbs-wrapper', allVerbsWrapper);
       const note2El = makeElement('div', 'note-2', otherVerbsWrapper, 'Don\'t pronounce the "e":');
-        const verbs = [
-          'Grabbed',
-          'Laughed',
-          'Plugged',
-          'Worked',
-          'Called',
-          'Seemed',
-          'Cleaned',
-          'Stopped',
-          'Offered',
-          'Passed',
-          'Lived',
-          'Fixed',
-          'Buzzed',
-          'Washed',
-          'Watched',
-        ];
-        verbs.forEach(verb => {
-          const verbEl = makeElement('div', 'verb-div', otherVerbsWrapper, verb);
-          underlineLastConsonant(verbEl);
-        })
+      const verbs = Object.keys(allVerbs);
+      verbs.forEach(verb => {
+        const verbEl = makeElement('div', 'verb-div', otherVerbsWrapper, verb);
+        underlineLastConsonant(verbEl);
+      });
       
   const currentVerbWrapper = makeElement('div', 'current-verb-wrapper', contentSection);
     const currentVerbEl = makeElement('span', 'current-verb-span', currentVerbWrapper);
-    const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match the ending of this verb to the ending of one of a verb on the left. Focus on the last sound. Example: The last sound in talk is "k", so you would drag it into "Worked". To practice with uncommon verbs, hit the Show Uncommon Verbs button.');
+    const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match this underlined consonant sound to the to one of the verbs on the left. Example: Talk and walk end in a "k", so you would drag the word Talked into Walked. The last sound of laugh is an "f", not a "g" or an "h". To practice with uncommon verbs, hit the Show Uncommon Verbs button.');
     const buttonWrapper = makeElement('div', 'button-wrapper-2', currentVerbWrapper); //Had to add a 2 to this because of a conflict with another element in the app.
       const commonVerbsButton = makeElement('button', 'common-verbs-button', buttonWrapper, 'Show Common Verbs', handleShowCommonVerbsClick);
       const uncommonVerbsButton = makeElement('button', 'uncommon-verbs-button', buttonWrapper, 'Show Uncommon Verbs', handleShowUncommonVerbsClick);
@@ -94,32 +79,31 @@ const initialize = () => {
 
     allVerbsWrapper.addEventListener('drop', (event) => {
       event.preventDefault();
-      if (event.target.classList.contains('verb-div')) {
+      if (event.target.matches('.verb-div')) {
         event.target.style.backgroundColor = '#004489';
+        const data = event.dataTransfer.getData('text/plain');
+        const draggedElement = document.getElementById(data);
+        transitionContent(currentVerbEl, 'scale-up', 'scale-down');
+        const draggedElementText = draggedElement.innerText.replace(/\s+/g, '');
+        const isInArray = (element) => element === draggedElementText;  
+        const found = allVerbs[event.target.innerText].some(isInArray);
+        console.log(found);
+        if (found) {
+          showNotification('That\'s right!', contentSection, 50, 63);
+          if (regVerbFlags.currentVerbGroup === 'common') {
+            regVerbFlags.currentVerbCommon++;
+          } else {
+            regVerbFlags.currentVerbUncommon++;
+          }
+          saveRegVerFlagsToLocalStorage();
+          speak(event.target.textContent);
+          speak(draggedElement.textContent);
+        } else {
+          showNotification('Try again.', contentSection, 50, 63);
+        }
+        switchVerbGroup(currentVerbEl);
       }
       
-      const data = event.dataTransfer.getData('text/plain');
-      const draggedElement = document.getElementById(data);
-      transitionContent(currentVerbEl, 'scale-up', 'scale-down');
-      const draggedElementText = draggedElement.innerText.replace(/\s+/g, '');
-      const isInArray = (element) => element === draggedElementText;  
-      const found = allVerbs[event.target.innerText].some(isInArray);
-      console.log(found);
-      if (found) {
-        showNotification('That\'s right!', contentSection, 50, 63);
-        if (regVerbFlags.currentVerbGroup === 'common') {
-          regVerbFlags.currentVerbCommon++;
-        } else {
-          regVerbFlags.currentVerbUncommon++;
-        }
-        // regVerbFlags.currentVerb++;
-        saveRegVerFlagsToLocalStorage();
-        speak(event.target.textContent);
-        speak(draggedElement.textContent);
-      } else {
-        showNotification('Try again.', contentSection, 50, 63);
-      }
-      switchVerbGroup(currentVerbEl);
     });
     allVerbsWrapper.listenersAttached = true;
   }
@@ -176,19 +160,16 @@ const underlineLastConsonant = (verbEl) => {
   const beginningOfNormalVerb = verbELText.slice(0, verbELText.length -3);
 
   if ((thirdTolastChar === 'h' && fourthTolastChar === 's') || (thirdTolastChar === 'h' && fourthTolastChar === 'g') || (thirdTolastChar === 'h' && fourthTolastChar === 'c')) {
-    console.log(verbELText,'sh or gh');
     verbEl.innerHTML = `
       ${beginning}<span class="underlined-consonants-span">${fourthTolastChar + thirdTolastChar}</span>ed
     `;
     return;
   }
   if (thirdTolastChar === fourthTolastChar) {
-    console.log(verbELText,'double consonant');
     verbEl.innerHTML = `
       ${beginning}<span class="underlined-consonants-span">${fourthTolastChar + thirdTolastChar}</span>ed
     `;
   } else  if (thirdTolastChar !== fourthTolastChar) {
-    console.log(verbELText,'normal');
     verbEl.innerHTML = `
       ${beginningOfNormalVerb}<span class="underlined-consonants-span">${thirdTolastChar}</span>ed
     `;

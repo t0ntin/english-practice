@@ -1,3 +1,4 @@
+import { flags } from "../components/data/grammar-data.js";
 import { makeElement, speak } from "../components/reusableUI.js";
 import { makeInputEl } from "../components/reusableUI.js";
 
@@ -14,10 +15,10 @@ const mainSection2 = document.querySelector('.main-section-2');
       //     use those
       // Else:questions[questionsFlags.currentSentence].questions[questionsFlags.currentQuestion]
       //     use the default array
-export function linkToTranslations() {
-  const translationsLink = document.querySelector('.practice-link');
-
-  translationsLink.addEventListener('click', (event) => {
+export function linkToPractice() {
+  const practiceLink = document.querySelector('.practice-link');
+  const commonErrorsLink = document.querySelector('.common-errors-link');
+  practiceLink.addEventListener('click', (event) => {
     event.preventDefault();
 
     mainSection.innerHTML = '';
@@ -35,6 +36,13 @@ export function linkToTranslations() {
         renderSentences(sentence);
       }
     });
+    flags.currentSection = "Practice";
+    practiceLink.classList.add('active-page');
+    commonErrorsLink.classList.toggle('active-page');
+    // Add this after toggling
+console.log(practiceLink.classList);
+// Should show 'active-page' in the list
+
   });
 }
 
@@ -56,6 +64,10 @@ if (localStorageSentences) {
 let activeView = true;
 
 const renderInputEls = () => {
+  const practiceLink = document.querySelector('.practice-link');
+    // practiceLink.classList.toggle('active-page');
+    // flags.currentSection = "Practice";
+
   const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
   containerForInputEls.innerHTML = '';
   const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection);

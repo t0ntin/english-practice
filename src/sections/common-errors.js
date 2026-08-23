@@ -7,6 +7,7 @@ import { renderSWords } from "./s-words.js";
 import { renderPlurals } from "./plurals.js";
 import {renderQuestions} from "./questions.js"
 import { renderPast } from "./past.js";
+import { renderDoDoes } from "./do-does.js";
 
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
@@ -25,12 +26,12 @@ export function linkToCommonErrors() {
     });
 };
 
-const renderErrorsPage = () => {
+export const renderErrorsPage = () => {
   mainSection.innerHTML = '';
   mainSection2.innerHTML = '';
+  toggleLinkStyles();
   const asideEl = makeElement('aside', 'aside', mainSection2);
     const asideNavEl = makeElement('nav', 'aside-nav', asideEl);
-    const commonErrorsH2 = makeElement('h2', 'error-types-h2', asideNavEl, 'Error Types:');
     const ulEl = makeElement('ul', 'ul-element', asideNavEl);
       const liEl = makeElement('li', 'grammar-li', ulEl); 
       const grammarButton = makeElement('button', 'grammar-button', liEl, 'Grammar', handleGrammarClick);
@@ -58,6 +59,8 @@ const renderErrorsPage = () => {
           const questionsButton = makeElement('button', 'questions-button', subLiEl10, 'Questions', handleQuestionsClick);
         const subLiEl11 = makeElement('li', 'past-li', ulEl2);
           const pastButton = makeElement('button', 'past-button', subLiEl11, 'The Past', handlePastClick);
+        const subLiEl12 = makeElement('li', 'do-does-li', ulEl2);
+          const doDoesButton = makeElement('button', 'do-does-button', subLiEl12, 'Do-Does', handleDoDoesClick);
 
       const liEl2 = makeElement('li', 'pronunciation-li', ulEl); 
       const pronunciationButton = makeElement('button', 'pronunciation-button', liEl2, 'Pronunciation', handlePronunciationClick);
@@ -72,14 +75,11 @@ const renderErrorsPage = () => {
       const liEl3 = makeElement('li', 'word-order-li', ulEl); 
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
 
-      
-
-     
   const contentSection = makeElement('section', 'content-section', mainSection2);
 }
 
 
-const renderTopic = (topicObj) => {
+export const renderTopic = (topicObj) => {
   const contentSection = document.querySelector('.content-section');
   contentSection.innerHTML = '';
   transitionContent(contentSection, 'scale-up', 'scale-down');
@@ -221,6 +221,14 @@ const handlePastClick = (event) => {
   renderPast();
 }
 
+const handleDoDoesClick = (event) => {
+  const contentSection = document.querySelector('.content-section');
+  contentSection.innerHTML = '';
+  changeColor(event);
+  flags.lastSelectedElement = event.target;
+  renderDoDoes();
+}
+
 const changeColor = (event) => {
   if (flags.lastSelectedElement) {
     flags.lastSelectedElement.classList.remove('selected');
@@ -238,3 +246,9 @@ const handleAddToPracticeClick = (practiceSentence) => {
 }
 
 
+const toggleLinkStyles = () => {
+  const commonErrorsLink = document.querySelector('.common-errors-link');
+  const practiceLink = document.querySelector('.practice-link');
+  commonErrorsLink.classList.add('active-page');
+  practiceLink.classList.remove('active-page');
+}

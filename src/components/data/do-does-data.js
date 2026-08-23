@@ -522,7 +522,7 @@ export const validSentences = {
       },
       {
         key: 'negation',
-        complete: "No, my mom doesn't make food at Christmas",
+        complete: "No, my mom doesn't make food on Christmas",
         spanish: [
           { text: 'No,', role: 'negation' },
           { text: 'mi mamá', role: 'subject' },
@@ -535,7 +535,7 @@ export const validSentences = {
           { text: 'my mom', role: 'subject' },
           { text: "doesn't", role: 'verb-negation' },
           { text: 'make', role: 'verb' },
-          { text: 'food at Christmas.', role: 'object' },
+          { text: 'food on Christmas.', role: 'object' },
         ],
       },
       {
@@ -555,7 +555,7 @@ export const validSentences = {
       },
       {
         key: 'wh-subject',
-        complete: 'Who makes food at Christmas?',
+        complete: 'Who makes food on Christmas?',
         spanish: [
           { text: '¿Quién', role: 'wh-word' },
           { text: 'hace', role: 'verb' },
@@ -564,7 +564,7 @@ export const validSentences = {
         english: [
           { text: 'Who', role: 'wh-word' },
           { text: 'makes', role: 'verb' },
-          { text: 'food at Christmas?', role: 'object' },
+          { text: 'food on Christmas?', role: 'object' },
         ],
       },
     ],
@@ -980,7 +980,7 @@ export const validSentences = {
     phrases: [
       {
         key: 'translation',
-        complete: 'My parents have food at Christmas',
+        complete: 'My parents have food on Christmas',
         spanish: [
           { "text": "Mis padres", "role": "subject" },
           { "text": "tienen", "role": "verb" },
@@ -989,12 +989,12 @@ export const validSentences = {
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'have', role: 'verb' },
-          { text: 'food at Christmas', role: 'object' },
+          { text: 'food on Christmas', role: 'object' },
         ],
       },
       {
         key: 'interrogative',
-        complete: 'Do my parents have food at Christmas?',
+        complete: 'Do my parents have food on Christmas?',
         spanish: [
           { text: '¿Mis padres', role: 'subject' },
           { text: 'tienen', role: 'verb' },
@@ -1004,12 +1004,12 @@ export const validSentences = {
           { text: 'Do', role: 'auxiliary' },
           { text: 'my parents', role: 'subject' },
           { text: 'have', role: 'verb' },
-          { text: 'food at Christmas?', role: 'object' },
+          { text: 'food on Christmas?', role: 'object' },
         ],
       },
       {
         key: 'negation',
-        complete: "No, my parents don't have food at Christmas",
+        complete: "No, my parents don't have food on Christmas",
         spanish: [
           { text: 'No,', role: 'negation' },
           { text: 'mis padres', role: 'subject' },
@@ -1022,7 +1022,7 @@ export const validSentences = {
           { text: 'my parents', role: 'subject' },
           { text: "don't", role: 'verb-negation' },
           { text: 'have', role: 'verb' },
-          { text: 'food at Christmas.', role: 'object' },
+          { text: 'food on Christmas.', role: 'object' },
         ],
       },
       {
@@ -1042,7 +1042,7 @@ export const validSentences = {
       },
       {
         key: 'wh-subject',
-        complete: 'Who has food at Christmas?',
+        complete: 'Who has food on Christmas?',
         spanish: [
           { text: '¿Quién', role: 'wh-word' },
           { text: 'tiene', role: 'verb' },
@@ -1051,7 +1051,7 @@ export const validSentences = {
         english: [
           { text: 'Who', role: 'wh-word' },
           { text: 'has', role: 'verb' },
-          { text: 'food at Christmas?', role: 'object' },
+          { text: 'food on Christmas?', role: 'object' },
         ],
       },
     ],
@@ -1386,7 +1386,7 @@ export const validSentences = {
     phrases: [
       {
         key: 'translation',
-        complete: 'My parents make food at Christmas',
+        complete: 'My parents make food on Christmas',
         spanish: [
           { "text": "Mis padres", "role": "subject" },
           { "text": "hacen", "role": "verb" },
@@ -1395,12 +1395,12 @@ export const validSentences = {
         english: [
           { text: 'My parents', role: 'subject' },
           { text: 'make', role: 'verb' },
-          { text: 'food at Christmas', role: 'object' },
+          { text: 'food on Christmas', role: 'object' },
         ],
       },
       {
         key: 'interrogative',
-        complete: 'Do my parents make food at Christmas?',
+        complete: 'Do my parents make food on Christmas?',
         spanish: [
           { text: '¿Mis padres', role: 'subject' },
           { text: 'hacen', role: 'verb' },
@@ -1410,12 +1410,12 @@ export const validSentences = {
           { text: 'Do', role: 'auxiliary' },
           { text: 'my parents', role: 'subject' },
           { text: 'make', role: 'verb' },
-          { text: 'food at Christmas?', role: 'object' },
+          { text: 'food on Christmas?', role: 'object' },
         ],
       },
       {
         key: 'negation',
-        complete: "No, my parents don't make food at Christmas",
+        complete: "No, my parents don't make food on Christmas",
         spanish: [
           { text: 'No,', role: 'negation' },
           { text: 'mis padres', role: 'subject' },
@@ -1428,7 +1428,7 @@ export const validSentences = {
           { text: 'my parents', role: 'subject' },
           { text: "don't", role: 'verb-negation' },
           { text: 'make', role: 'verb' },
-          { text: 'food at Christmas.', role: 'object' },
+          { text: 'food on Christmas.', role: 'object' },
         ],
       },
       {
@@ -1448,7 +1448,7 @@ export const validSentences = {
       },
       {
         key: 'wh-subject',
-        complete: 'Who makes food at Christmas?',
+        complete: 'Who makes food on Christmas?',
         spanish: [
           { text: '¿Quién', role: 'wh-word' },
           { text: 'hace', role: 'verb' },
@@ -1457,7 +1457,7 @@ export const validSentences = {
         english: [
           { text: 'Who', role: 'wh-word' },
           { text: 'makes', role: 'verb' },
-          { text: 'food at Christmas?', role: 'object' },
+          { text: 'food on Christmas?', role: 'object' },
         ],
       },
     ],

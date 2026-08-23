@@ -38,9 +38,8 @@
 }
 
 .verb-div {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   width: 100%;
-  padding: 7px 15px;
+  padding: 10px 0 ;
   text-align: center;
   background-color: #004489;
   font-size: 1.1rem;
@@ -78,8 +77,8 @@
 }
 
 .current-verb-span {
-  width: 140px;
-  height: 50px;
+  padding: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
