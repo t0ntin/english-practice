@@ -124,7 +124,6 @@ function keepCount() {
   const chosenSentEl = document.querySelector('.chosen-sentence-container')
   let count = chosenSentEl.children.length;
   if ( count === 3) {
-    // const resetButton = document.querySelector('.continue-button');
     setTimeout(() => {
       pickSentence()
     }, 800);
@@ -144,6 +143,7 @@ function pickSentence() {
   if (!sentenceIsvalid) {
     openDialogBox();
     dialogBoxEl.textContent = 'Invald sentence. Click reset and try again.'
+    return;
   }
 
   renderAllSentences(cleanedSentence);
