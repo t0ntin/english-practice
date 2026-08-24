@@ -1,7 +1,6 @@
 import { makeElement, showNotification, transitionContent, speak } from "../components/reusableUI.js";
 import { regVerbData, allVerbs } from "../components/data/reg-verb-data.js";
 import { regVerbFlags as importedRegVerbFlags } from "../components/data/reg-verb-data.js";
-import { ssrExportAllKey } from "vite/module-runner";
 
 let regVerbFlags = {...importedRegVerbFlags};
 const localStorageRegVerbData = localStorage.getItem('regVerbFlags')
