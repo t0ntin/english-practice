@@ -7,7 +7,7 @@ const mainSection2 = document.querySelector('.main-section-2');
 
 export const renderWordOrder = () => {
   const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
+  // contentSection.innerHTML = '';
   transitionContent(contentSection, 'scale-up', 'scale-down');
   const tableContainer = makeElement('div', 'table-container', contentSection);
   const tableWrapper1 = makeElement('div', 'table-wrapper-1', tableContainer);

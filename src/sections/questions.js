@@ -24,7 +24,7 @@ export const  renderQuestions = () => {
 
     const inputEl = makeInputEl('sentence-input', wrapper1, 'Type your question here...');
 
-    const checkSencenceButton = makeElement('button', 'check-sentence-button', wrapper1, 'Check \u00A0 ✔️', handleCheckSentenceClick);
+    const checkSencenceButton = makeElement('button', 'check-sentence-button', wrapper1, 'Check \u00A0 ✔', handleCheckSentenceClick);
     const hint1Button = makeElement('button', 'hint1-button', wrapper1, '💡 \u00A0 Hint 1', handleHint1Buttonclick);
     const hint2Button = makeElement('button', 'hint2-button', wrapper1, '💡 \u00A0 Hint 2', handleHint2Buttonclick);
     const showAnswserButton = makeElement('button', 'show-answer-button', wrapper1, 'Show Answer', handleShowAnswerButtonclick);

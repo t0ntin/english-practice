@@ -46,8 +46,6 @@ export const renderPast = () => {
     const previousStoryButton = makeElement('button', 'previous-story-button', storyControlsWrapper, '⬅️ \u00A0Previous Story', handlePreviousStoryButtonClick);
     const nextStoryButton = makeElement('button', 'next-story-button', storyControlsWrapper, 'Next Story \u00A0 ➡️', handleNextStoryButtonClick);
     const resetStoryButton = makeElement('button', 'reset-story-button', storyControlsWrapper, 'Reset', handleResetStoryButtonClick);
-
-
 }
 
 const handleSentenceMouseenter = (event) => {

@@ -1,7 +1,10 @@
 .sentence-container, .correct-sentence-container {
   height: 50px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  place-self: center;
+  justify-self: center;
   gap: 10px;
   grid-column: 1/5;
   transition: transform 0.5s ease;

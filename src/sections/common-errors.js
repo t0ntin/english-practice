@@ -76,16 +76,17 @@ export const renderErrorsPage = () => {
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
 
   const contentSection = makeElement('section', 'content-section', mainSection2);
+  const menuButton = makeElement('button', 'menu-button', document.body, '----', handleMenuButtonClick);
 }
 
 
 export const renderTopic = (topicObj) => {
   const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
+  // contentSection.innerHTML = '';
   transitionContent(contentSection, 'scale-up', 'scale-down');
 
   const titleEl = makeElement('h2', 'title', contentSection, topicObj.title);
-  
+    console.log('testing');
   const incorrectEl = makeElement('div', 'incorrect-div', contentSection);
     const incorrectTitle = makeElement('h3', 'incorrect-title', incorrectEl, 'Incorrect');
     topicObj.incorrect.forEach(item =>  {
@@ -125,54 +126,37 @@ const handleGrammarClick = () => {
 }
 
 const handleSuggestClick = (event) => {
+  runClickHelper(event);
   renderTopic(suggestions);
-  changeColor(event);
-  flags.lastSelectedTopic = suggestions;
-  flags.lastSelectedElement = event.target;
-
 }
 
 const handleAdviceClick = (event) => {
+  runClickHelper(event);
   renderTopic(advice);
-  changeColor(event);
-  flags.lastSelectedTopic = advice;
-  flags.lastSelectedElement = event.target;
 }
 
 const handleConjugationClick = (event) => {
+  runClickHelper(event);
   renderTopic(conjugation);
-  changeColor(event);
-  flags.lastSelectedTopic = conjugation;
-  flags.lastSelectedElement = event.target;
 }
 
 const handleObjectPlusInfClick = (event) => {
+  runClickHelper(event);
   renderTopic(objectPlusInf);
-  changeColor(event);
-  flags.lastSelectedTopic = objectPlusInf;
-  flags.lastSelectedElement = event.target;
 }
 
 const handleToHaveClick = (event) => {
+  runClickHelper(event);
   renderTopic(toHave);
-  changeColor(event);
-  flags.lastSelectedTopic = toHave;
-  flags.lastSelectedElement = event.target;
 }
 
 const handleModalsClick = (event) => {
+  runClickHelper(event);
   renderTopic(modals);
-  changeColor(event);
-  flags.lastSelectedTopic = modals;
-  flags.lastSelectedElement = event.target;
 }
 
 const handleWordOrderClick = (event) => {
-  const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
-  changeColor(event);
-  flags.lastSelectedTopic = modals;
-  flags.lastSelectedElement = event.target;
+  runClickHelper(event);
   renderWordOrder();
 }
 
@@ -182,51 +166,41 @@ const handlePronunciationClick = () => {
 }
 
 const handleRegVerbsClick = (event) => {
-  const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
-  changeColor(event)
-  flags.lastSelectedElement = event.target;
+  runClickHelper(event);
   renderRegVerbs();
 }
 
 const handleSWordsClick = (event) => {
-  const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
-  changeColor(event);
-  flags.lastSelectedElement = event.target;
+  runClickHelper(event);
   renderSWords();
 }
 
 const handlePluralsClick = (event) => {
-  const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
-  changeColor(event);
-  flags.lastSelectedElement = event.target;
+  runClickHelper(event);
   renderPlurals();
 }
 
 const handleQuestionsClick = (event) => {
-  const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
-  changeColor(event);
-  flags.lastSelectedElement = event.target;
+  runClickHelper(event);
   renderQuestions();
 }
 
 const handlePastClick = (event) => {
-  const contentSection = document.querySelector('.content-section');
-  contentSection.innerHTML = '';
-  changeColor(event);
-  flags.lastSelectedElement = event.target;
+  runClickHelper(event);
   renderPast();
 }
 
 const handleDoDoesClick = (event) => {
+  runClickHelper(event)
+  renderDoDoes();
+}
+
+const runClickHelper = (event) => {
   const contentSection = document.querySelector('.content-section');
   contentSection.innerHTML = '';
   changeColor(event);
   flags.lastSelectedElement = event.target;
-  renderDoDoes();
+  hideAsideOnMobile();
 }
 
 const changeColor = (event) => {
@@ -245,6 +219,31 @@ const handleAddToPracticeClick = (practiceSentence) => {
   showNotification(message, contentSection, 45, 45);
 }
 
+const handleMenuButtonClick = () => {
+  const asideEl = document.querySelector('.aside');
+  asideEl.classList.toggle('active-aside');
+  let overlay2El = document.querySelector('.overlay-2');
+  if (!overlay2El) {
+    overlay2El = makeElement('div', 'overlay-2', document.body, '', handleOverlay2Click);
+  }
+    overlay2El.classList.toggle('active-overlay-2');
+}
+
+const handleOverlay2Click = (event) => {
+  const asideEl = document.querySelector('.aside');
+  event.target.classList.toggle('active-overlay-2');
+  asideEl.classList.toggle('active-aside');
+}
+
+const hideAsideOnMobile = () => {
+  const asideEl = document.querySelector('.aside');
+  const overlay2El = document.querySelector('.overlay-2');
+  const userIsOnMobile = window.matchMedia('(max-width: 600px)').matches;
+  if (userIsOnMobile) {
+    asideEl.classList.toggle('active-aside');
+    overlay2El.classList.toggle('active-overlay-2');
+  }
+}
 
 const toggleLinkStyles = () => {
   const commonErrorsLink = document.querySelector('.common-errors-link');

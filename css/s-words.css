@@ -3,6 +3,10 @@
   /* background-color: white; */
 }
 
+.s-words-title {
+  grid-column: 1/5;
+}
+
 .top-text-div {
   grid-column: 1/5;
 }
@@ -41,6 +45,11 @@
 .list-step {
   margin: 0 0 5px 5px;
   font-weight: bold;
+}
+
+.practice-content-div {
+  display: flex;
+  align-items: center;
 }
 
 .practice-content-div > .speak-button {
