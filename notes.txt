@@ -26,8 +26,11 @@ cattle	somebody
 	    neither
 
 ======  TO DO ==========
-go to past.js >
-fix this: .suggestion-wrapper > .add-to-practice-button, .previous-story-button, .next-story-button 
-make them separate because they are causing problems.
-continue writing media query for past.js
+
+
+
+// TO DO:
+// Newly added sentences(added to the practice section) should be styled differently.
+
+// ============================
 =========================

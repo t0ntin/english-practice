@@ -1,8 +1,11 @@
-import { makeElement, speak, transitionContent } from "../components/reusableUI.js";
+import { makeElement, speak, transitionContent, toggleLinkStyles } from "../components/reusableUI.js";
 import { pluralsData } from "../components/data/plurals-data.js";
+import { flags } from "../components/data/grammar-data.js";
 
 
 export const renderPlurals = () => {
+  flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   const contentSection = document.querySelector('.content-section');
   transitionContent(contentSection, 'scale-up', 'scale-down');
 

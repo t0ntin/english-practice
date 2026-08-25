@@ -1,12 +1,7 @@
 import { flags } from "../components/data/grammar-data.js";
-import { makeElement, speak } from "../components/reusableUI.js";
+import { makeElement, speak, toggleLinkStyles } from "../components/reusableUI.js";
 import { makeInputEl } from "../components/reusableUI.js";
 
-// ============================
-// TO DO:
-// Newly added sentences should be styled differently.
-
-// ============================
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
 
@@ -18,31 +13,19 @@ const mainSection2 = document.querySelector('.main-section-2');
 export function linkToPractice() {
   const practiceLink = document.querySelector('.practice-link');
   const commonErrorsLink = document.querySelector('.common-errors-link');
+  const contentSection = document.querySelector('.content-section');
+
   practiceLink.addEventListener('click', (event) => {
     event.preventDefault();
 
     mainSection.innerHTML = '';
-    mainSection2.innerHTML = '';
     renderInputEls();
-
-    // const localStorageSentences = localStorage.getItem('sentences');
-
-    // if (localStorageSentences) {
-    //   sentences = JSON.parse(localStorageSentences);
-    // }
 
     sentences.forEach(sentence => {
       if (sentence.isArchived === false) {
         renderSentences(sentence);
       }
     });
-    flags.currentSection = "Practice";
-    practiceLink.classList.add('active-page');
-    commonErrorsLink.classList.toggle('active-page');
-    // Add this after toggling
-console.log(practiceLink.classList);
-// Should show 'active-page' in the list
-
   });
 }
 
@@ -64,13 +47,13 @@ if (localStorageSentences) {
 let activeView = true;
 
 const renderInputEls = () => {
-  const practiceLink = document.querySelector('.practice-link');
-    // practiceLink.classList.toggle('active-page');
-    // flags.currentSection = "Practice";
-
-  const containerForInputEls = makeElement('div', 'container-for-top-controls', mainSection);
+  flags.currentSection = "Practice"
+  toggleLinkStyles();
+  const contentSection = document.querySelector('.content-section');
+    contentSection.innerHTML = '';
+  const containerForInputEls = makeElement('div', 'container-for-top-controls', contentSection);
   containerForInputEls.innerHTML = '';
-  const sentencesContainerOne = makeElement('div', 'sentences-container-one', mainSection);
+  const sentencesContainerOne = makeElement('div', 'sentences-container-one', contentSection);
 
     const singleEnglishSentenceEl =  makeInputEl( 'single-english-sentence-input-element', containerForInputEls, 'Enter an English sentence...');
 
@@ -78,23 +61,14 @@ const renderInputEls = () => {
 
     const singleSpanishTranslationEl =  makeInputEl( 'single-spanish-translation-input-element', containerForInputEls, 'Enter the Spanish translation...');
 
-    const addSentenceButton =  makeElement('button', 'add-sentence-button', containerForInputEls, 'Add');
+    const addSentenceButton =  makeElement('button', 'add-sentence-button', containerForInputEls, 'Add', handleAddClick);
 
-    addSentenceButton.addEventListener('click', handleAddClick);
+    const showArchiveButton =  makeElement('button', 'show-archive-button', containerForInputEls, 'Show Archive', handleShowArchive);
 
-    const showArchiveButton =  makeElement('button', 'show-archive-button', containerForInputEls, 'Show Archive');
-
-      showArchiveButton.addEventListener('click', handleShowArchive);
-
-    const showActiveButton =  makeElement('button', 'show-active-button', containerForInputEls, 'Show Active');
-
-      showActiveButton.addEventListener('click', handleShowActive);
+    const showActiveButton =  makeElement('button', 'show-active-button', containerForInputEls, 'Show Active', handleShowActive);
       showActiveButton.classList.add('active');
 
-    const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle');
-
-      shuffleSentencesButton.addEventListener('click', handleShuffle);
-
+    const shuffleSentencesButton =  makeElement('button', 'shuffle-sentences-button', containerForInputEls, 'Shuffle', handleShuffleClick);
 }
 
 const handleAddClick = () => {
@@ -113,9 +87,10 @@ const handleAddClick = () => {
   renderSentences(newSentenceObj); 
   singleEnglishSentenceEl.value = '';
   singleSpanishTranslationEl.value = '';
-  console.log(sentences);
-}
+  // console.log(sentences);
+  styleNewlyAddedSentence();
 
+}
 
 const changeView = () => {
   const showArchiveButton = document.querySelector('.show-archive-button');
@@ -162,7 +137,7 @@ const handleShowActive = () => {
   changeView();
 }
 
-const handleShuffle = () => {
+const handleShuffleClick = () => {
   for (let i = sentences.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
@@ -212,7 +187,7 @@ const renderSentences = (sentence) => {
         })
 
     const bottomRowContainer = makeElement('div', 'bottom-row-container', containerOne);
-      const showHideOne = makeElement('button', 'show-hide-one-button', bottomRowContainer, 'Show/Hide');
+      const showHideOne = makeElement('button', 'show-hide-one-button', bottomRowContainer, 'Show / Hide');
 
       let translationIsVisible = false;
 
@@ -271,8 +246,12 @@ const renderSentences = (sentence) => {
             }
           });
         });
-    
-    console.log(sentences);
+}
+      
+const styleNewlyAddedSentence = () => {
+  const containerEls = document.querySelectorAll('.container-one');
+  const lastContainer = [...containerEls][containerEls.length -1];
+  lastContainer.classList.add('new-sentence');
 }
 
 export const saveToLocalStorage = () => {

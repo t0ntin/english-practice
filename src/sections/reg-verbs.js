@@ -1,6 +1,7 @@
-import { makeElement, showNotification, transitionContent, speak } from "../components/reusableUI.js";
+import { makeElement, showNotification, transitionContent, speak, toggleLinkStyles } from "../components/reusableUI.js";
 import { regVerbData, allVerbs } from "../components/data/reg-verb-data.js";
 import { regVerbFlags as importedRegVerbFlags } from "../components/data/reg-verb-data.js";
+import { flags } from "../components/data/grammar-data.js";
 
 let regVerbFlags = {...importedRegVerbFlags};
 const localStorageRegVerbData = localStorage.getItem('regVerbFlags')
@@ -9,6 +10,8 @@ if (localStorageRegVerbData) {
 }
 
 export const renderRegVerbs = () => {
+  flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   const contentSection = document.querySelector('.content-section');
   transitionContent(contentSection, 'scale-up', 'scale-down');
   const mainSection2 = document.querySelector('.main-section-2');

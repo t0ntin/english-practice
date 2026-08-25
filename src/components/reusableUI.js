@@ -1,3 +1,5 @@
+import { flags } from "./data/grammar-data.js";
+
 export function makeElement(elementTag, className, appendToEl, textInside, listenerFunctionName) {
   const element = document.createElement(elementTag);
   element.classList.add(className);
@@ -64,6 +66,19 @@ export const transitionContent = (element, class1, class2) => {
     element.classList.remove(class2);
     element.classList.add(class1);
   }, 200);
+}
+
+export const toggleLinkStyles = () => {
+  const commonErrorsLink = document.querySelector('.common-errors-link');
+  const practiceLink = document.querySelector('.practice-link');
+  const links = [practiceLink, commonErrorsLink];
+  if (flags.currentSection === 'Common Errors') {
+    commonErrorsLink.classList.add('active-page');
+    practiceLink.classList.remove('active-page');
+  } else {
+    commonErrorsLink.classList.remove('active-page');
+    practiceLink.classList.add('active-page');
+  }
 }
 
 let selectedVoice = null;

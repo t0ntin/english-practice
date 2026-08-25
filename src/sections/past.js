@@ -1,7 +1,8 @@
 import { pastFlags} from "../components/data/past-data.js"
-import { makeElement, showNotification, speak, transitionContent } from "../components/reusableUI.js";
+import { makeElement, showNotification, speak, transitionContent, toggleLinkStyles } from "../components/reusableUI.js";
 import { saveToLocalStorage, sentences } from "./practice.js";
 import { pastStories as importedPastStories } from '../components/data/past-data.js'
+import { flags } from "../components/data/grammar-data.js";
 
 let pastStories = [...importedPastStories];
 const localStoragePastStories = localStorage.getItem('pastStories');
@@ -11,6 +12,8 @@ if (localStoragePastStories) {
 }
 
 export const renderPast = () => {
+  flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   const contentSection = document.querySelector('.content-section');
     transitionContent(contentSection, 'scale-up', 'scale-down');
   const storyWrapper = makeElement('div', 'story-wrapper', contentSection);

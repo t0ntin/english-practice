@@ -1,15 +1,9 @@
-import { makeElement, makeInputEl } from "../components/reusableUI.js"
+import { makeElement, makeInputEl, toggleLinkStyles } from "../components/reusableUI.js"
 import { validSentences, hints } from "../components/data/do-does-data.js";
+import { flags } from "../components/data/grammar-data.js";
 
 const mainEl = document.querySelector('.main');
 
-// export function linkToDoDoes() {
-//   const doDoesLink = document.querySelector('.do-does-link');
-//   doDoesLink.addEventListener('click', (event) => {
-//       event.preventDefault();     
-//       renderDoDoes();              
-//     });
-// }
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
 
@@ -27,10 +21,10 @@ const verbs = ['tiene(n)', 'hace(n)', 'cuesta(n)', 'abre(n)', 'reduce(n)'];
 const objects = ['la tarea', 'comida en navidad',  'una casa grande', 'puertas', 'la congestión', 'mucho dinero'];
 
 export function renderDoDoes() {
-  // mainSection.innerHTML = '';
   const contentSection = document.querySelector('.content-section');
   contentSection.innerHTML = '';
-  console.log(contentSection);
+  flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   const sectionOne = makeElement('div', 'section-one', contentSection);
   const subjectSectionEl = makeElement('div', 'subject-section', sectionOne)
   const verbSectionEl = makeElement('div', 'verb-section', sectionOne)
@@ -39,9 +33,6 @@ export function renderDoDoes() {
   const allSentenceContainer = makeElement('section', 'all-sentence-container', contentSection)
 
   const chosenSentEl = makeElement('div', 'chosen-sentence-container', contentSection)
-
-  // const rightSectionEl = makeElement('div', 'right-section', allSentenceContainer)
-  // const rightSectionEl = makeElement('div', 'right-section', rightSectionEl)
 
   const optionButtonsCont = makeElement('div', 'option-buttons-container', contentSection)
 

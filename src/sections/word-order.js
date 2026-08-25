@@ -1,4 +1,4 @@
-import { makeElement, showNotification, transitionContent } from "../components/reusableUI.js";
+import { makeElement, showNotification, transitionContent, toggleLinkStyles } from "../components/reusableUI.js";
 import { wordOrderSentences } from "../components/data/word-order-data.js";
 import { flags } from "../components/data/grammar-data.js";
 
@@ -6,6 +6,8 @@ const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
 
 export const renderWordOrder = () => {
+  flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   const contentSection = document.querySelector('.content-section');
   transitionContent(contentSection, 'scale-up', 'scale-down');
   const tableContainer = makeElement('div', 'table-container', contentSection);

@@ -1,8 +1,11 @@
+import { flags } from "../components/data/grammar-data.js";
 import { sWordsData } from "../components/data/s-words-data.js";
-import { makeElement, speak, transitionContent } from "../components/reusableUI.js"
+import { makeElement, speak, transitionContent, toggleLinkStyles } from "../components/reusableUI.js"
 
 
 export const renderSWords = () => {
+  flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   const contentSection = document.querySelector('.content-section');
   transitionContent(contentSection, 'scale-up', 'scale-down');
   

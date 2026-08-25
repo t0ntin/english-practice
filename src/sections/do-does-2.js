@@ -1,4 +1,4 @@
-import { makeElement, makeInputEl } from "../components/createElements.js";
+import { makeElement, makeInputEl, toggleLinkStyles } from "../components/createElements.js";
 
 export function linkToDoDoes2() {
   const doDoes2Link = document.querySelector('.do-does-2-link');
@@ -12,6 +12,8 @@ const mainSection = document.querySelector('.main-section');
 
 function renderDoDoes2() {
   mainSection.innerHTML = '';
+  flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   const container = makeElement('div', 'container', mainSection, 'John come manzanas, pero no come bananas.');
   const input = makeInputEl('input', 'sentence-input', mainSection, 'try it');
   input.addEventListener('input', handleInput);

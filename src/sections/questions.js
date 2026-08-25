@@ -1,10 +1,13 @@
+import { flags } from "../components/data/grammar-data.js";
 import { questions, questionsFlags } from "../components/data/questions-data.js";
-import { makeElement, makeInputEl, showNotification, transitionContent } from "../components/reusableUI.js";
+import { makeElement, makeInputEl, showNotification, transitionContent, toggleLinkStyles } from "../components/reusableUI.js";
 import { saveToLocalStorage, sentences } from "./practice.js";
 
 export const  renderQuestions = () => {
+  flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   const contentSection = document.querySelector('.content-section');
-  // transitionContent(contentSection, 'scale-up', 'scale-down');
+  transitionContent(contentSection, 'scale-up', 'scale-down');
   contentSection.innerHTML = '';
   const sentenceContainer = makeElement('div', 'sentence-container', contentSection);
   const correctSentenceContainer = makeElement('div', 'correct-sentence-container', contentSection);

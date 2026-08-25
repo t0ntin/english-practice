@@ -165,6 +165,7 @@ export const toHave = errors[4];
 export const modals = errors[5];
 
 export const flags =  {
+  currentSection: null,
   lastSelectedTopic: null,
   lastSelectedElement:null,
   userAnswer:null,

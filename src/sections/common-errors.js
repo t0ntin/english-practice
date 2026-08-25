@@ -1,4 +1,4 @@
-import { makeElement, showNotification, transitionContent } from "../components/reusableUI.js"
+import { makeElement, showNotification, transitionContent, toggleLinkStyles } from "../components/reusableUI.js"
 import { sentences, saveToLocalStorage } from "./practice.js";
 import { flags, suggestions, advice, conjugation, objectPlusInf, toHave, modals} from "../components/data/grammar-data.js";
 import { renderWordOrder } from "./word-order.js";
@@ -24,12 +24,12 @@ export function linkToCommonErrors() {
         renderTopic(suggestions);         
       }
     });
+
 };
 
 export const renderErrorsPage = () => {
   mainSection.innerHTML = '';
   mainSection2.innerHTML = '';
-  toggleLinkStyles();
   const asideEl = makeElement('aside', 'aside', mainSection2);
     const asideNavEl = makeElement('nav', 'aside-nav', asideEl);
     const ulEl = makeElement('ul', 'ul-element', asideNavEl);
@@ -76,12 +76,17 @@ export const renderErrorsPage = () => {
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
   const mainEl = document.querySelector('.main')
   const contentSection = makeElement('section', 'content-section', mainSection2);
-  const menuButton = makeElement('button', 'menu-button', document.body, '----', handleMenuButtonClick);
+  let menuButton = document.querySelector('.menu-button');
+  if (!menuButton) {
+    menuButton = makeElement('button', 'menu-button', document.body, '----', handleMenuButtonClick);
+  }
 }
 
 export const renderTopic = (topicObj) => {
   const contentSection = document.querySelector('.content-section');
   // contentSection.innerHTML = '';
+    flags.currentSection = "Common Errors"
+  toggleLinkStyles();
   transitionContent(contentSection, 'scale-up', 'scale-down');
 
   const titleEl = makeElement('h2', 'title', contentSection, topicObj.title);
@@ -244,9 +249,9 @@ const hideAsideOnMobile = () => {
   }
 }
 
-const toggleLinkStyles = () => {
-  const commonErrorsLink = document.querySelector('.common-errors-link');
-  const practiceLink = document.querySelector('.practice-link');
-  commonErrorsLink.classList.add('active-page');
-  practiceLink.classList.remove('active-page');
-}
+// const toggleLinkStyles = () => {
+//   const commonErrorsLink = document.querySelector('.common-errors-link');
+//   const practiceLink = document.querySelector('.practice-link');
+//   commonErrorsLink.classList.add('active-page');
+//   practiceLink.classList.remove('active-page');
+// }
