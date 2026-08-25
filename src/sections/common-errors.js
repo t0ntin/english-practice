@@ -74,11 +74,10 @@ export const renderErrorsPage = () => {
 
       const liEl3 = makeElement('li', 'word-order-li', ulEl); 
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
-
+  const mainEl = document.querySelector('.main')
   const contentSection = makeElement('section', 'content-section', mainSection2);
   const menuButton = makeElement('button', 'menu-button', document.body, '----', handleMenuButtonClick);
 }
-
 
 export const renderTopic = (topicObj) => {
   const contentSection = document.querySelector('.content-section');

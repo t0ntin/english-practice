@@ -52,6 +52,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   transition: transform 0.3s ease;
+  overflow-x: hidden;
 }
 
 .content-section.scale-down {
@@ -353,11 +354,8 @@ li > button:active, .button-wrapper > button:active {
   width: 35px;
   height: 40px;
   position:fixed;
-  /* THESE TWO CALC FUNCTIONS ARE KEEPING THE BUTTON FROM SHIFTING DUE TO THE TRANSFORM ON A DIFFERENT ELEMENT (THE ONES IN WORD ORDER AND QUESTIONS.JS */
-  left: calc(100vw - 65px);
-  top: calc(100vh - 70px);
-  /* bottom: 30px; */
-  /* right: 30px; */
+  bottom: 30px;
+  right: 30px;
   color: var(--COMMON-ERRORS-BLUE-LIGHTER);
   letter-spacing: -2px;
   border-radius: 5px;
