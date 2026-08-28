@@ -30,9 +30,8 @@ cattle	somebody
 
 
 // TO DO:
-Give me an object from which I will be able to create two columns: English column: I, Spanish column: Yo.
-Then another table: English column: I am. Spanish column: Yo soy / estoy.
-Then another table: Title: contractions: English column: I'm. Spanish column: Yo soy / estoy.
+
+
 
 // ============================
 =========================

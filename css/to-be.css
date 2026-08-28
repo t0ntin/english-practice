@@ -44,17 +44,31 @@ table {
 
 .third-section-div {
   grid-column: 1/5;
+}
+
+.trans-div-1 {
+  position: relative;
+}
+
+.trans-div-2 {
   position: relative;
 }
 
 .choice-popup-div {
   position: absolute;
-  bottom: 100%;
-  /* visibility: visible;
-  pointer-events: auto; */
+  bottom: 80%;
 }
-
+.choice-popup-div-2 {
+    position: absolute;
+  bottom: 80%;
+}
 .choice-popup-div.hidden {
   visibility: hidden;
   pointer-events: none;
 }
+
+.choice-popup-div-2.hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
