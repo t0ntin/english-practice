@@ -37,9 +37,8 @@
   opacity: 0; 
 }
 
-.grammar-ul > li, .pronunciation-ul > li {
+.grammar-ul > li, .pronunciation-ul > li, .word-order-ul > li, .basic-ul > li {
   margin: 0 0 0 10px;
-  list-style: circle;
 }
 
 .content-section {
@@ -152,8 +151,6 @@
   padding: 4px 3px 4px 5px;
   border-radius: 5px;
   box-shadow: 2px 2px 8px  var(--COMMON-ERRORS-BLUE);
-
-
 }
 
 li > button, .button-wrapper > button {

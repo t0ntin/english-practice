@@ -30,7 +30,9 @@ cattle	somebody
 
 
 // TO DO:
-// Newly added sentences(added to the practice section) should be styled differently.
+Give me an object from which I will be able to create two columns: English column: I, Spanish column: Yo.
+Then another table: English column: I am. Spanish column: Yo soy / estoy.
+Then another table: Title: contractions: English column: I'm. Spanish column: Yo soy / estoy.
 
 // ============================
 =========================

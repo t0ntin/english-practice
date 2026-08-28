@@ -1,0 +1,60 @@
+*{
+  outline: 1px solid red;
+}
+
+table {
+  width: 100%;
+}
+
+.first-section-div {
+  width: 100%;
+  /* display: flex; */
+  grid-column: 1/5;
+  /* justify-content: center; */
+  /* gap: 5px; */
+}
+
+.english-wrapper, .spanish-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.english-wrapper-2 {
+  display: flex;
+  gap: 10px;
+}
+
+.spanish-wrapper {
+}
+
+.english-subject-button {
+
+  
+}
+
+.spanish-subject-span {
+
+}
+
+.second-section-div {
+  grid-column: 1/5;
+}
+
+.third-section-div {
+  grid-column: 1/5;
+  position: relative;
+}
+
+.choice-popup-div {
+  position: absolute;
+  bottom: 100%;
+  /* visibility: visible;
+  pointer-events: auto; */
+}
+
+.choice-popup-div.hidden {
+  visibility: hidden;
+  pointer-events: none;
+}

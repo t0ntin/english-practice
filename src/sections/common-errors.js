@@ -8,6 +8,7 @@ import { renderPlurals } from "./plurals.js";
 import {renderQuestions} from "./questions.js"
 import { renderPast } from "./past.js";
 import { renderDoDoes } from "./do-does.js";
+import { renderToBe } from "./to-be.js";
 
 const mainSection = document.querySelector('.main-section');
 const mainSection2 = document.querySelector('.main-section-2');
@@ -28,7 +29,7 @@ export function linkToCommonErrors() {
 };
 
 export const renderErrorsPage = () => {
-  mainSection.innerHTML = '';
+  // mainSection.innerHTML = '';
   mainSection2.innerHTML = '';
   const asideEl = makeElement('aside', 'aside', mainSection2);
     const asideNavEl = makeElement('nav', 'aside-nav', asideEl);
@@ -74,23 +75,34 @@ export const renderErrorsPage = () => {
 
       const liEl3 = makeElement('li', 'word-order-li', ulEl); 
       const wordOrderButton = makeElement('button', 'word-order-button', liEl3, 'Word order', handleWordOrderClick);
+        const ulEl4 = makeElement('ul', 'word-order-ul', liEl3);
+          const subLiEl13 = makeElement('li', 'svo-li', ulEl4);
+          const svoButton = makeElement('button', 'svo-button', subLiEl13, 'S.V.O', handleSvoClick);
+
+      const liEl4 = makeElement('li', 'basic-li', ulEl); 
+      const basicButton = makeElement('button', 'basic-button', liEl4, 'Basic', handleBasicClick);
+        const ulEl5 = makeElement('ul', 'basic-ul', liEl4);
+          const subLiEl14 = makeElement('li', 'to-be-li', ulEl5);
+          const toBeButton = makeElement('button', 'to-be-button', subLiEl14, 'To Be', handleToBeClick);
+
+
+      // const liEl4 = makeElement('li', 'word-order-li', ulEl); 
+      // const basicEl = makeElement('button', 'basic-button', liEl3, 'Basic', handleWordOrderClick);
   const mainEl = document.querySelector('.main')
   const contentSection = makeElement('section', 'content-section', mainSection2);
   let menuButton = document.querySelector('.menu-button');
   if (!menuButton) {
-    menuButton = makeElement('button', 'menu-button', document.body, '----', handleMenuButtonClick);
+    menuButton = makeElement('button', 'menu-button', mainSection2, '----', handleMenuButtonClick);
   }
 }
 
 export const renderTopic = (topicObj) => {
   const contentSection = document.querySelector('.content-section');
-  // contentSection.innerHTML = '';
-    flags.currentSection = "Common Errors"
+  flags.currentSection = "Common Errors"
   toggleLinkStyles();
   transitionContent(contentSection, 'scale-up', 'scale-down');
 
   const titleEl = makeElement('h2', 'title', contentSection, topicObj.title);
-    console.log('testing');
   const incorrectEl = makeElement('div', 'incorrect-div', contentSection);
     const incorrectTitle = makeElement('h3', 'incorrect-title', incorrectEl, 'Incorrect');
     topicObj.incorrect.forEach(item =>  {
@@ -160,6 +172,11 @@ const handleModalsClick = (event) => {
 }
 
 const handleWordOrderClick = (event) => {
+  const ulEl4 = document.querySelector('.word-order-ul');
+  ulEl4.classList.toggle('collapse');
+}
+
+const handleSvoClick = (event) => {
   runClickHelper(event);
   renderWordOrder();
 }
@@ -197,6 +214,16 @@ const handlePastClick = (event) => {
 const handleDoDoesClick = (event) => {
   runClickHelper(event)
   renderDoDoes();
+}
+
+const handleBasicClick = (event) => {
+  const ulEl5 = document.querySelector('.basic-ul');
+  ulEl5.classList.toggle('collapse');
+}
+
+const handleToBeClick = (event) => {
+  runClickHelper(event);
+  renderToBe();
 }
 
 const runClickHelper = (event) => {

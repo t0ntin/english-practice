@@ -1,5 +1,5 @@
 import { flags } from "../components/data/grammar-data.js";
-import { makeElement, speak, toggleLinkStyles } from "../components/reusableUI.js";
+import { makeElement, shuffleArray, speak, toggleLinkStyles } from "../components/reusableUI.js";
 import { makeInputEl } from "../components/reusableUI.js";
 
 const mainSection = document.querySelector('.main-section');
@@ -138,10 +138,7 @@ const handleShowActive = () => {
 }
 
 const handleShuffleClick = () => {
-  for (let i = sentences.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
-  }
+  shuffleArray(sentences)
   saveToLocalStorage();
   const sentencesContainerOne = document.querySelector('.sentences-container-one');
   sentencesContainerOne.innerHTML = '';
