@@ -54,7 +54,11 @@ export const toBeData = {
   },
   translate3: {
     title: "Traduzca del español al inglés",
-    instructions: "Toque una palabra en la izquierda y escoja la traducción en la derecha."
+    instructions: "Toque una palabra de la izquierda y escoja la traducción en la derecha."
+  },
+  translate4: {
+    title: "Traduzca del inglés al español",
+    instructions: "Toque una palabra de la izquierda y escoja la traducción en la derecha."
   }
 };
 

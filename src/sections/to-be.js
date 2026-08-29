@@ -33,22 +33,38 @@ export const renderToBe = () => {
 
     const translateTitleEl3 = makeElement('h2', 'translate-title-3-h2', thirdSectionWrapper, toBeData.translate3.title);
     const translateInstructionsEl3 = makeElement('p', 'translate-instructions-3-p', thirdSectionWrapper, toBeData.translate3.instructions);
+    const transWrapper3 = makeElement('div', 'trans-div-3', thirdSectionWrapper);
+      renderButtons(transWrapper3, 'english', toBeData.verbToBe, handleVerbToBeButtonClick);
+    const transWrapper4 = makeElement('div', 'trans-div-4', thirdSectionWrapper);
+      renderButtons(transWrapper4, 'spanish', toBeData.verbToBe, handleVerbToBeButtonClick2);
+
+    const translateTitleEl4 = makeElement('h2', 'translate-title-4-h2', thirdSectionWrapper, toBeData.translate4.title);
+    const translateInstructionsEl4 = makeElement('p', 'translate-instructions-4-p', thirdSectionWrapper, toBeData.translate4.instructions);
+    const transWrapper5 = makeElement('div', 'trans-div-5', thirdSectionWrapper);
+      renderButtons(transWrapper5, 'spanish', toBeData.verbToBe, handleVerbToBeButtonClick3);
+    const transWrapper6 = makeElement('div', 'trans-div-6', thirdSectionWrapper);
+      renderButtons(transWrapper6, 'english', toBeData.verbToBe, handleVerbToBeButtonClick4);
+
+
+    
 }
 
 const renderButtons = (element, language, obj, clickHandler) => {
   shuffleArray(obj.pairs);
-  obj.pairs.forEach(pair => {
+  obj.pairs.forEach((pair, i) => {
     const practicePronounButton = makeElement('button', 'practice-pronoun-button', element, pair[language], clickHandler);
     practicePronounButton.chosenObject = pair;
-    // practicePronounButton.language = language;
-  })
-}
+    if (language === 'spanish') {
+      practicePronounButton.translation = pair.english;
+    } else {
+      practicePronounButton.translation = pair.spanish;
+    }
+  });
+};
 
 const handlePronounButtonClick = (event) => {
   speak(event.target.textContent);
-}
-
-
+};
 
 const handlePracticePronounButtonClick = (event) => {
   const parent = event.target.parentElement;
@@ -67,7 +83,6 @@ const handlePracticePronounButtonClick = (event) => {
       popupPronounButtons.translation = pair.english; 
       popupPronounButtons.choicePopupEl = choicePopupEl;
   });
-
 }
 
 const handlePracticePronounButtonClick2 = (event) => {
@@ -82,7 +97,6 @@ const handlePracticePronounButtonClick2 = (event) => {
 
   toBeData.subjectPronouns.pairs.forEach((pair, i) => {
       const popupPronounButtons = makeElement('button', 'popup-pronoun-button', choicePopupEl2, pair.english, handlePopupPronounButtonClick);
-      console.log('testing');
       popupPronounButtons.pronounClicked = event.target; 
       popupPronounButtons.translation = pair.spanish; 
       popupPronounButtons.choicePopupEl = choicePopupEl2;
@@ -92,15 +106,68 @@ const handlePracticePronounButtonClick2 = (event) => {
 const handlePopupPronounButtonClick = (event) => {
   const thirdSectionWrapper = document.querySelector('.third-section-div');
   const choicePopupEl = event.target.choicePopupEl;
-  console.log(choicePopupEl);
   if (event.target.pronounClicked.textContent === event.target.translation) {
-    console.log('testing');
     showNotification('Correct!', thirdSectionWrapper, 50, 50);
     choicePopupEl.classList.toggle('hidden');
     event.target.pronounClicked.style.backgroundColor = 'red';
   } else {
     showNotification('Try again!', thirdSectionWrapper, 50, 50);
   }
+}
+
+const handleVerbToBeButtonClick = (event) => {
+  event.target.style.backgroundColor = 'red';
+  event.target.selected = true;
+  const englishPronouns = event.target.closest('.trans-div-3').querySelectorAll('.practice-pronoun-button');
+  toggleButtonState(englishPronouns);
+}
+
+const handleVerbToBeButtonClick2 = (event) => {
+  const transWrapper3 = document.querySelector('.trans-div-3');
+  const englishPronouns = transWrapper3.querySelectorAll('.practice-pronoun-button');
+  const tappedButton = [...englishPronouns].find(button => (button.selected === true));
+
+  if (tappedButton.selected === true && tappedButton.textContent === event.target.translation) {
+    event.target.style.backgroundColor = 'red';
+    showNotification('Correct!', transWrapper3, 50, 50);
+    tappedButton.selected = false;
+  toggleButtonState(englishPronouns);
+  } else {
+    event.target.style.backgroundColor = 'none';
+    showNotification('Try again', transWrapper3, 50, 50);
+  }
+}
+
+const handleVerbToBeButtonClick3 = (event) => {
+  const spanishPronouns = event.target.closest('.trans-div-5').querySelectorAll('.practice-pronoun-button');
+  event.target.style.backgroundColor = 'red';
+  event.target.selected = true;
+  toggleButtonState(spanishPronouns);
+}
+
+const handleVerbToBeButtonClick4 = (event) => {
+  const transWrapper5 = document.querySelector('.trans-div-5');
+  const spanishEls = transWrapper5.querySelectorAll('.practice-pronoun-button');
+  const tappedButton = [...spanishEls].find(button => (button.selected === true));
+  if (tappedButton.selected === true && tappedButton.textContent === event.target.translation) {
+      event.target.style.backgroundColor = 'red';
+      showNotification('Correct!', transWrapper5, 50, 50);
+      tappedButton.selected = false;
+      toggleButtonState(spanishEls);
+    } else {
+      event.target.style.backgroundColor = 'none';
+      showNotification('Try again', transWrapper5, 50, 50);
+    }
+}
+
+const toggleButtonState = (element) => {
+  element.forEach(item => {
+    if (item.disabled === true) {
+      item.disabled = false;
+    } else if (item.disabled === false) {
+      item.disabled = true;
+    }
+  })
 }
 
 const renderTable = (tableData) => {
