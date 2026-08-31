@@ -155,6 +155,7 @@ tr:nth-child(even) {
 
 .choice-popup-div {
   padding: 10px;
+  width: 80%;
   background-color: var(--SECONDARY-BACKGROUND);
   border: 1px solid darkgray;
   border-radius: 5px;
@@ -180,9 +181,9 @@ tr:nth-child(even) {
   flex-wrap: wrap;
 }
 
-.trans-div-9 {
+/* .trans-div-9 {
   position: relative;
-}
+} */
 
 
 
@@ -191,7 +192,7 @@ tr:nth-child(even) {
   bottom: 80%;
 } */
 
-.choice-popup-div-3 {
+/* .choice-popup-div-3 {
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -202,7 +203,7 @@ tr:nth-child(even) {
   border: 1px solid darkgray;
   border-radius: 5px;
 
-}
+} */
 
 .choice-popup-div.hidden {
   visibility: hidden;
