@@ -1,17 +1,77 @@
 *{
-  outline: 1px solid red;
-}
-
-table {
-  width: 100%;
+  /* outline: 1px solid red; */
 }
 
 .first-section-div {
-  width: 100%;
+  /* width: 100%; */
   /* display: flex; */
   grid-column: 1/5;
   /* justify-content: center; */
   /* gap: 5px; */
+}
+
+table {
+  width: 100%;
+  /* border-collapse: separate; */
+  border-spacing: 0;
+  font-family: Arial, sans-serif;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+th {
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  text-align: left;
+}
+
+td {
+  width: 40%;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(39, 39, 39);
+}
+
+/* ==========  BUTTONS ============ */
+
+.pronoun-button, .practice-pronoun-button, .popup-pronoun-button, .practice-sentence-button, .eng-to-span-button, .span-to-eng-button, .popup-sentence-translation {
+  padding: 10px 15px;
+  background-color: var(--COMMON-ERRORS-BLUE);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.pronoun-button:hover, .practice-pronoun-button:hover, .popup-pronoun-button:hover, .practice-sentence-button:hover, .eng-to-span-button:hover, .span-to-eng-button:hover, .popup-sentence-translation:hover {
+  background-color: var(--COMMON-ERRORS-BLUE-LIGHTER);
+}
+
+.pronoun-button:active, .practice-pronoun-button:active, .popup-pronoun-button:active, .practice-sentence-button:active, .eng-to-span-button:active, .span-to-eng-button:active, .popup-sentence-translation:active {
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+.pronoun-button:focus, .practice-pronoun-button:focus, .popup-pronoun-button:focus, .practice-sentence-button:focus, .eng-to-span-button:focus, .span-to-eng-button:focus, .popup-sentence-translation:focus {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+.pronoun-button:disabled, .practice-pronoun-button:disabled, .popup-pronoun-button:disabled, .practice-sentence-button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.eng-to-span-button {
+  margin: 0 15px 0 5px;
 }
 
 .english-wrapper, .spanish-wrapper {
@@ -43,31 +103,113 @@ table {
 }
 
 .third-section-div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   grid-column: 1/5;
 }
 
-.trans-div-1 {
+.wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e {
+  padding: 0 0 0 8px;
+  border-left: 1px solid darkgray;
+  border-radius: 5px;
+}   
+
+.trans-div-1, .trans-div-2, .trans-div-5, .trans-div-6, .trans-div-9 {
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   position: relative;
 }
 
-.trans-div-2 {
-  position: relative;
+/* .translate-title-h2 {
+  margin: 15px 0 0 0;
+} */
+
+/* .translate-instructions-p {
+  margin: 0 0 10px 0;
+} */
+
+.clear-overlay {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  background-color: transparent;
+  z-index: 3;
+  transform: scale(0);
+  visibility: hidden;
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.clear-overlay-active {
+  background-color: rgba(0, 0, 0, 0.526);
+  transform: scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .choice-popup-div {
-  position: absolute;
-  bottom: 80%;
+  padding: 10px;
+  background-color: var(--SECONDARY-BACKGROUND);
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  position: fixed;
+  /* bottom: 100%; */
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  z-index: 4;
 }
-.choice-popup-div-2 {
+
+/* .trans-div-2 {
+  position: relative;
+} */
+
+.trans-div-3, .trans-div-4, .trans-div-5, .trans-div-6, .trans-div-9 {
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.trans-div-9 {
+  position: relative;
+}
+
+
+
+/* .choice-popup-div-2 {
     position: absolute;
   bottom: 80%;
+} */
+
+.choice-popup-div-3 {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: absolute;
+  bottom: 100%;
+  background-color: var(--SECONDARY-BACKGROUND);
+  border: 1px solid darkgray;
+  border-radius: 5px;
+
 }
+
 .choice-popup-div.hidden {
   visibility: hidden;
   pointer-events: none;
 }
 
-.choice-popup-div-2.hidden {
+.choice-popup-div-3.hidden {
   visibility: hidden;
   pointer-events: none;
 }

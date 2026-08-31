@@ -31,7 +31,12 @@ cattle	somebody
 
 // TO DO:
 
-
+******** 
+update handleSpanToEngSentenceButtonClick to use choicePopupEl 
+*******
 
 // ============================
+A game could be to give the user "I AM" and to let him pick the correct next element.
+Also to leave "AM" on the board and have them slot in the 1st and third elements.
+
 =========================
