@@ -215,3 +215,14 @@ tr:nth-child(even) {
   pointer-events: none;
 }
 
+.trans-div-11, .trans-div-12 {
+  border: 1px solid red;
+  display: flex;
+  gap: 10px;
+}
+
+.chunk-slot {
+  padding: 8px 10px;
+  font-weight: bold;
+  border-radius: 3px;
+}

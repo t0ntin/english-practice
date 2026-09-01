@@ -73,4 +73,20 @@ export const toBeData = {
       {english: "It is late.", spanish: "Es tarde."},
     ]
   },
+  translate6: {
+    title: "Preguntas",
+    instructions: "Arrastre las palabras correctamente para hacer una pregunta.",
+    sentences: [
+      {
+        statement: "You are Colombian", 
+        question: "Are you Colombian?",
+        chunks: [
+          {text: "you ", role: 'subject-2'},
+          {text: "are", role: 'verb-2'},
+          {text: "Colombian", role: 'adjective-2'},
+
+        ]
+      },
+    ]
+  },
 };

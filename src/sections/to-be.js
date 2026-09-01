@@ -33,37 +33,44 @@ export const renderToBe = () => {
       const transWrapper2 = makeElement('div', 'trans-div-2', wrapper3b);
       renderButtons(transWrapper2, 'spanish', 'practice-pronoun-button', toBeData.subjectPronouns.pairs, handlePracticePronounButtonClick2);
 
-    const wrapper4b = makeElement('div', 'wrapper-3-c', thirdSectionWrapper);
-      const translateTitleEl3 = makeElement('h2', 'translate-title-h2', wrapper4b, toBeData.translate3.title);
-      const translateInstructionsEl3 = makeElement('p', 'translate-instructions-p', wrapper4b, toBeData.translate3.instructions);
-      const transWrapper3 = makeElement('div', 'trans-div-3', wrapper4b);
+    const wrapper3c = makeElement('div', 'wrapper-3-c', thirdSectionWrapper);
+      const translateTitleEl3 = makeElement('h2', 'translate-title-h2', wrapper3c, toBeData.translate3.title);
+      const translateInstructionsEl3 = makeElement('p', 'translate-instructions-p', wrapper3c, toBeData.translate3.instructions);
+      const transWrapper3 = makeElement('div', 'trans-div-3', wrapper3c);
         renderButtons(transWrapper3, 'english', 'practice-pronoun-button', toBeData.verbToBe.pairs, handleVerbToBeButtonClick);
-      const transWrapper4 = makeElement('div', 'trans-div-4', wrapper4b);
+      const transWrapper4 = makeElement('div', 'trans-div-4', wrapper3c);
         renderButtons(transWrapper4, 'spanish', 'practice-pronoun-button', toBeData.verbToBe.pairs, handleVerbToBeButtonClick2);
 
-    const wrapper5b = makeElement('div', 'wrapper-3-d', thirdSectionWrapper);
-      const translateTitleEl4 = makeElement('h2', 'translate-title-h2', wrapper5b, toBeData.translate4.title);
-      const translateInstructionsEl4 = makeElement('p', 'translate-instructions-p', wrapper5b, toBeData.translate4.instructions);
-      const transWrapper5 = makeElement('div', 'trans-div-5', wrapper5b);
+    const wrapper3d = makeElement('div', 'wrapper-3-d', thirdSectionWrapper);
+      const translateTitleEl4 = makeElement('h2', 'translate-title-h2', wrapper3d, toBeData.translate4.title);
+      const translateInstructionsEl4 = makeElement('p', 'translate-instructions-p', wrapper3d, toBeData.translate4.instructions);
+      const transWrapper5 = makeElement('div', 'trans-div-5', wrapper3d);
         renderButtons(transWrapper5, 'spanish', 'practice-pronoun-button', toBeData.verbToBe.pairs, handleVerbToBeButtonClick3);
-      const transWrapper6 = makeElement('div', 'trans-div-6', wrapper5b);
+      const transWrapper6 = makeElement('div', 'trans-div-6', wrapper3d);
         renderButtons(transWrapper6, 'english', 'practice-pronoun-button', toBeData.verbToBe.pairs,  handleVerbToBeButtonClick4);
 
-    const wrapper6b = makeElement('div', 'wrapper-3-e', thirdSectionWrapper);
-      const translateTitleEl5 = makeElement('h2', 'translate-title-h2', wrapper6b, toBeData.translate5.title);
-      const translateInstructionsEl5 = makeElement('p', 'translate-instructions-p', wrapper6b, toBeData.translate5.instructions);
-      const transWrapper7 = makeElement('div', 'trans-div-7', wrapper6b);
+    const wrapper3e = makeElement('div', 'wrapper-3-e', thirdSectionWrapper);
+      const translateTitleEl5 = makeElement('h2', 'translate-title-h2', wrapper3e, toBeData.translate5.title);
+      const translateInstructionsEl5 = makeElement('p', 'translate-instructions-p', wrapper3e, toBeData.translate5.instructions);
+      const transWrapper7 = makeElement('div', 'trans-div-7', wrapper3e);
         const instructionsEl2 = makeElement('span', 'instructions-span', transWrapper7, 'Traduzca: ')
         const engToSpanButton = makeElement('button', 'eng-to-span-button', transWrapper7, 'Ing➔Esp', handleEngToSpanButtonClick);
         const spanToEngButton = makeElement('button', 'span-to-eng-button', transWrapper7, 'Esp➔Ing', handleSpanToEngButtonClick);
       const transWrapper8 = makeElement('div', 'trans-div-8', transWrapper7);
         const transWrapper9 = makeElement('div', 'trans-div-9', transWrapper8);
         const transWrapper10 = makeElement('div', 'trans-div-10', transWrapper8);
-    
-      // renderButtons(transWrapper7, )
-  const choicePopupEl = makeElement('div', 'choice-popup-div', document.body); 
-  const clearOverlay = makeElement('div', 'clear-overlay', document.body, '', handleClearOverlayClick); 
+    const wrapper3f = makeElement('div', 'wrapper-3-f', thirdSectionWrapper);
+      const translateTitleEl6 = makeElement('h2', 'translate-title-h2', wrapper3e, toBeData.translate5.title);
+      const translateInstructionsEl6 = makeElement('p', 'translate-instructions-p', wrapper3f, toBeData.translate6.instructions);
+      const transWrapper11 = makeElement('div', 'trans-div-11', wrapper3f);
+      const transWrapper12 = makeElement('div', 'trans-div-12', wrapper3f);
+      renderSpans(transWrapper11, transWrapper12)
+
+  createPopupAndOverlay();
+  addListeners();
 }
+
+
 
 const renderButtons = (element, language, className, obj, clickHandler) => {
   shuffleArray(obj);
@@ -78,9 +85,89 @@ const renderButtons = (element, language, className, obj, clickHandler) => {
   });
 };
 
+const renderSpans = (wrapper, wrapper2) => {
+  const currentSentenceEl = makeElement('span', 'current-sentence', wrapper, toBeData.translate6.sentences[0].statement);
+  // const transWrapper12 = makeElement('div', 'trans-div-12', wrapper);
+  
+  toBeData.translate6.sentences[0].chunks.forEach(chunk => {
+    const chunkEl = makeElement('span', chunk.role, wrapper, chunk.text);
+    chunkEl.draggable = true;
+    chunkEl.id = chunk.text;
+    // chunkEl.addEventListener('dragstart', handleDragStart);
+    const chunkSlot = makeElement('span', 'chunk-slot', wrapper2, '____')
+  });
+
+}
+
+const addListeners = () => {
+
+
+  const transWrapper11 = document.querySelector('.trans-div-11');
+  const transWrapper12 = document.querySelector('.trans-div-12');
+  [...transWrapper11.children].forEach(span => {
+    span.addEventListener('dragstart', handleDragStart);
+  });
+
+  [...transWrapper11.children].forEach(span => {
+    span.addEventListener('dragend', handleDragEnd);
+  })
+
+  transWrapper12.addEventListener('dragover', handleDragOver);
+  transWrapper12.addEventListener('dragleave', handleDragLeave);
+  transWrapper12.addEventListener('drop', handleDrop);
+
+}
+
+const handleDragStart = (event) => {
+  event.dataTransfer.setData('text/plain', event.target.id);
+  event.target.style.opacity = '0.5';
+};
+
+const handleDragEnd = (event) => {
+  event.target.style.opacity = 1;
+};
+
+const handleDragOver = (event) => {
+  event.preventDefault();
+  if (event.target.matches('.chunk-slot')) {
+    event.target.style.backgroundColor = 'red';
+  }  
+};
+
+const handleDragLeave = (event) => {
+  event.preventDefault();
+  if (event.target.classList.contains('chunk-slot')) {
+    event.target.style.backgroundColor = 'green';
+  }
+};
+const handleDrop = (event) => {
+  const chunkSlot = event.target;
+  if (chunkSlot.matches('.chunk-slot')) {
+    chunkSlot.style.backgroundColor = 'lightblue';
+    const data = event.dataTransfer.getData('text/plain');
+    const draggedElement = document.getElementById(data);
+    draggedElement.remove();
+    chunkSlot.innerHTML = '';
+    chunkSlot.append(draggedElement)
+  }
+};
+
+
 const handlePronounButtonClick = (event) => {
   speak(event.target.textContent);
+
 };
+
+const createPopupAndOverlay = () => {
+  let choicePopupEl = document.querySelector('.choice-poup-div');
+  let clearOverlay = document.querySelector('.clear-overlay');
+  if (!choicePopupEl) {
+    choicePopupEl = makeElement('div', 'choice-popup-div', document.body); 
+  }
+  if (!clearOverlay) {
+    clearOverlay = makeElement('div', 'clear-overlay', document.body, '', handleClearOverlayClick); 
+  }
+}
 
 const handlePracticePronounButtonClick = (event) => {
   const transWrapper1 = document.querySelector('.trans-div-1');
@@ -235,7 +322,6 @@ const handlePopupSentenceTranslationButton = (event) => {
     selectedButton.done = true;
     choicePopupEl.classList.toggle('hidden');
     clearOverlay.classList.toggle('clear-overlay-active');
-    console.log('testing');
     toggleButtonState(transWrapper9Els);
   }
 

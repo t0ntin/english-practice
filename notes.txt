@@ -32,7 +32,14 @@ cattle	somebody
 // TO DO:
 
 ******** 
-update handleSpanToEngSentenceButtonClick to use choicePopupEl 
+Ask questions, make negations
+My sister is from France --> movable elements.
+place them in the right order to ask a question.
+
+Negate:
+My sister is from france. (Place the word "NOT" in the right place.)
+
+
 *******
 
 // ============================
