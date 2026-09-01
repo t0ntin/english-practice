@@ -101,20 +101,18 @@ const renderSpans = (wrapper, wrapper2) => {
 
 const addListeners = () => {
 
-
+  
+  const wrapper3f = document.querySelector('.wrapper-3-f');
   const transWrapper11 = document.querySelector('.trans-div-11');
   const transWrapper12 = document.querySelector('.trans-div-12');
   [...transWrapper11.children].forEach(span => {
     span.addEventListener('dragstart', handleDragStart);
+    span.addEventListener('dragend', handleDragEnd);
   });
 
-  [...transWrapper11.children].forEach(span => {
-    span.addEventListener('dragend', handleDragEnd);
-  })
-
-  transWrapper12.addEventListener('dragover', handleDragOver);
   transWrapper12.addEventListener('dragleave', handleDragLeave);
-  transWrapper12.addEventListener('drop', handleDrop);
+  wrapper3f.addEventListener('dragover', handleDragOver);
+  wrapper3f.addEventListener('drop', handleDrop);
 
 }
 
@@ -141,14 +139,23 @@ const handleDragLeave = (event) => {
   }
 };
 const handleDrop = (event) => {
+  const data = event.dataTransfer.getData('text/plain');
+  const draggedElement = document.getElementById(data);
   const chunkSlot = event.target;
+   if (!draggedElement) return;
   if (chunkSlot.matches('.chunk-slot')) {
     chunkSlot.style.backgroundColor = 'lightblue';
-    const data = event.dataTransfer.getData('text/plain');
-    const draggedElement = document.getElementById(data);
     draggedElement.remove();
     chunkSlot.innerHTML = '';
-    chunkSlot.append(draggedElement)
+    chunkSlot.append(draggedElement);
+    return;
+  }
+
+  const transWrapper11 = event.target.closest('.trans-div-11');
+
+  if (transWrapper11) {
+    transWrapper11.append(draggedElement);
+    return;
   }
 };
 
