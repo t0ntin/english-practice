@@ -77,16 +77,164 @@ export const toBeData = {
     title: "Preguntas",
     instructions: "Arrastre las palabras correctamente para hacer una pregunta.",
     sentences: [
-      {
-        statement: "You are Colombian", 
-        question: "Are you Colombian?",
+            {
+        statement: "It is late.",
+        question: "is it late?",
         chunks: [
-          {text: "you ", role: 'subject-2'},
+          {text: "It", role: "subject-2"},
+          {text: "is", role: "verb-2"},
+          {text: "late", role: "adjective-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "He is happy.",
+        question: "is he happy?",
+        chunks: [
+          {text: "He", role: "subject-2"},
+          {text: "is", role: "verb-2"},
+          {text: "happy", role: "adjective-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "You are in the office.",
+        question: "are you in the office?",
+        chunks: [
+          {text: "You", role: "subject-2"},
+          {text: "are", role: "verb-2"},
+          {text: "in the office", role: "prep-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "She is a doctor.",
+        question: "is she a doctor?",
+        chunks: [
+          {text: "She", role: "subject-2"},
+          {text: "is", role: "verb-2"},
+          {text: "a doctor", role: "noun-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "They are from Japan.",
+        question: "are they from japan?",
+        chunks: [
+          {text: "They", role: "subject-2"},
+          {text: "are", role: "verb-2"},
+          {text: "from Japan", role: "prep-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "I am John.",
+        question: "am i john?",
+        chunks: [
+          {text: "I", role: "subject-2"},
+          {text: "am", role: "verb-2"},
+          {text: "John", role: "noun-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "We are 30 years old.",
+        question: "are we 30 years old?",
+        chunks: [
+          {text: "We", role: "subject-2"},
+          {text: "are", role: "verb-2"},
+          {text: "30 years old", role: "adjective-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "You are Colombian.", 
+        question: "are you colombian?",
+        chunks: [
+          {text: "you", role: 'subject-2'},
           {text: "are", role: 'verb-2'},
           {text: "Colombian", role: 'adjective-2'},
+          {text: "?", role: 'question-mark'},
+        ]
+      },
+      {
+        statement: "I am in the office", 
+        question: "am i in the office?",
+        chunks: [
+          {text: "I", role: 'subject-2'},
+          {text: "am", role: 'verb-2'},
+          {text: "in the office", role: 'prep-phrase-2'},
+          {text: "?", role: 'question-mark'},
 
         ]
       },
+      {
+        statement: "John is sad.",
+        question: "is john sad?",
+        chunks: [
+          {text: "John", role: "subject-2"},
+          {text: "is", role: "verb-2"},
+          {text: "sad", role: "adjective-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "It is important.",
+        question: "is it important?",
+        chunks: [
+          {text: "It", role: "subject-2"},
+          {text: "is", role: "verb-2"},
+          {text: "important", role: "adjective-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "John and Lee are from Peru.",
+        question: "are john and lee from peru?",
+        chunks: [
+          {text: "John and Lee", role: "subject-2"},
+          {text: "are", role: "verb-2"},
+          {text: "from Peru", role: "prep-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "Mary is a pilot.",
+        question: "is mary a pilot?",
+        chunks: [
+          {text: "Mary", role: "subject-2"},
+          {text: "is", role: "verb-2"},
+          {text: "a pilot", role: "noun-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "They are at home.",
+        question: "are they at home?",
+        chunks: [
+          {text: "They", role: "subject-2"},
+          {text: "are", role: "verb-2"},
+          {text: "at home", role: "prep-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+      {
+        statement: "He is 20 years old.",
+        question: "is he 20 years old?",
+        chunks: [
+          {text: "He", role: "subject-2"},
+          {text: "is", role: "verb-2"},
+          {text: "20 years old", role: "adjective-phrase-2"},
+          {text: "?", role: "question-mark"}
+        ]
+      },
+
     ]
   },
+  
 };
+
+export const toBeFlags = {
+  currentQuestion: 0,
+
+}

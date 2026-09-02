@@ -1,5 +1,5 @@
-import { toBeData } from "../components/data/to-be-data.js";
-import { makeElement, showNotification, shuffleArray, speak } from "../components/reusableUI.js";
+import { toBeData, toBeFlags } from "../components/data/to-be-data.js";
+import { makeElement, showNotification, shuffleArray, speak, transitionContent } from "../components/reusableUI.js";
 
 export const renderToBe = () => {
   const contentSection = document.querySelector('.content-section');
@@ -60,14 +60,17 @@ export const renderToBe = () => {
         const transWrapper9 = makeElement('div', 'trans-div-9', transWrapper8);
         const transWrapper10 = makeElement('div', 'trans-div-10', transWrapper8);
     const wrapper3f = makeElement('div', 'wrapper-3-f', thirdSectionWrapper);
-      const translateTitleEl6 = makeElement('h2', 'translate-title-h2', wrapper3e, toBeData.translate5.title);
+      const translateTitleEl6 = makeElement('h2', 'translate-title-h2', wrapper3f, toBeData.translate6.title);
       const translateInstructionsEl6 = makeElement('p', 'translate-instructions-p', wrapper3f, toBeData.translate6.instructions);
       const transWrapper11 = makeElement('div', 'trans-div-11', wrapper3f);
       const transWrapper12 = makeElement('div', 'trans-div-12', wrapper3f);
       renderSpans(transWrapper11, transWrapper12)
+      const transWrapper13 = makeElement('div', 'trans-div-13', wrapper3f);
+      const checkQuestionButton = makeElement('button', 'check-question-button', transWrapper13, 'Revisar', handleCheckQuestionButton);
+      const nextQuestionButton = makeElement('button', 'next-question-button', transWrapper13, 'Siguiente', handleNextQuestionButtonClick);
 
   createPopupAndOverlay();
-  addListeners();
+  // addListeners();
 }
 
 
@@ -86,17 +89,20 @@ const renderButtons = (element, language, className, obj, clickHandler) => {
 };
 
 const renderSpans = (wrapper, wrapper2) => {
-  const currentSentenceEl = makeElement('span', 'current-sentence', wrapper, toBeData.translate6.sentences[0].statement);
-  // const transWrapper12 = makeElement('div', 'trans-div-12', wrapper);
+  if (toBeFlags.currentQuestion === toBeData.translate6.sentences.length) {
+    return;
+  }
+  wrapper.innerHTML = '';
+  wrapper2.innerHTML = '';
+  const currentSentenceEl = makeElement('p', 'current-sentence-p', wrapper, toBeData.translate6.sentences[toBeFlags.currentQuestion].statement);
   
-  toBeData.translate6.sentences[0].chunks.forEach(chunk => {
+  toBeData.translate6.sentences[toBeFlags.currentQuestion].chunks.forEach(chunk => {
     const chunkEl = makeElement('span', chunk.role, wrapper, chunk.text);
     chunkEl.draggable = true;
     chunkEl.id = chunk.text;
-    // chunkEl.addEventListener('dragstart', handleDragStart);
     const chunkSlot = makeElement('span', 'chunk-slot', wrapper2, '____')
   });
-
+  addListeners();
 }
 
 const addListeners = () => {
@@ -142,11 +148,14 @@ const handleDrop = (event) => {
   const data = event.dataTransfer.getData('text/plain');
   const draggedElement = document.getElementById(data);
   const chunkSlot = event.target;
-   if (!draggedElement) return;
+  if (!draggedElement) return;
   if (chunkSlot.matches('.chunk-slot')) {
+    if (chunkSlot.children.length > 0) return;
     chunkSlot.style.backgroundColor = 'lightblue';
     draggedElement.remove();
-    chunkSlot.innerHTML = '';
+    if (chunkSlot.innerHTML === '____') {
+      chunkSlot.innerHTML = '';
+    }
     chunkSlot.append(draggedElement);
     return;
   }
@@ -340,6 +349,45 @@ const handleClearOverlayClick = (event) => {
     choicePopupEl.classList.add('hidden');
     event.target.classList.toggle('clear-overlay-active');
   }
+}
+
+const handleCheckQuestionButton = () => {
+  if (toBeFlags.currentQuestion === toBeData.translate6.sentences.length) {
+    return;
+  }
+  const transWrapper12 = document.querySelector('.trans-div-12');
+  let sentenceArray = [];
+  let sentence = '';
+  [...transWrapper12.children].forEach(span => {
+    sentenceArray.push(span.textContent);
+  })
+  sentence = sentenceArray.join(' ').toLowerCase();
+  sentence = sentence.replace(/\s\?/g, '?');
+  const sentenceObj = toBeData.translate6.sentences[toBeFlags.currentQuestion];
+  if (sentence === sentenceObj.question) {
+    transWrapper12.classList.add('show-check');
+    transWrapper12.classList.remove('show-x');
+
+  }else {
+    transWrapper12.classList.remove('show-check');
+    transWrapper12.classList.add('show-x');
+    console.log(sentence);
+    console.log(sentenceObj.question);
+  }
+
+}
+
+const handleNextQuestionButtonClick = () => {
+  if (toBeFlags.currentQuestion === toBeData.translate6.sentences.length) {
+    return;
+  }
+  const transWrapper11 = document.querySelector('.trans-div-11');
+  const transWrapper12 = document.querySelector('.trans-div-12');
+  toBeFlags.currentQuestion++;
+  renderSpans(transWrapper11, transWrapper12);
+  transWrapper12.classList.remove('show-check');
+  transWrapper12.classList.remove('show-x');
+
 }
 
 const toggleButtonState = (element) => {

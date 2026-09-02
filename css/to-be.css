@@ -38,7 +38,7 @@ tr:nth-child(even) {
 
 /* ==========  BUTTONS ============ */
 
-.pronoun-button, .practice-pronoun-button, .popup-pronoun-button, .practice-sentence-button, .eng-to-span-button, .span-to-eng-button, .popup-sentence-translation {
+.pronoun-button, .practice-pronoun-button, .popup-pronoun-button, .practice-sentence-button, .eng-to-span-button, .span-to-eng-button, .popup-sentence-translation, .check-question-button, .next-question-button {
   padding: 10px 15px;
   background-color: var(--COMMON-ERRORS-BLUE);
   color: white;
@@ -48,16 +48,16 @@ tr:nth-child(even) {
   transition: transform 0.3s ease;
 }
 
-.pronoun-button:hover, .practice-pronoun-button:hover, .popup-pronoun-button:hover, .practice-sentence-button:hover, .eng-to-span-button:hover, .span-to-eng-button:hover, .popup-sentence-translation:hover {
+.pronoun-button:hover, .practice-pronoun-button:hover, .popup-pronoun-button:hover, .practice-sentence-button:hover, .eng-to-span-button:hover, .span-to-eng-button:hover, .popup-sentence-translation:hover, .check-question-button:hover, .next-question-button:hover {
   background-color: var(--COMMON-ERRORS-BLUE-LIGHTER);
 }
 
-.pronoun-button:active, .practice-pronoun-button:active, .popup-pronoun-button:active, .practice-sentence-button:active, .eng-to-span-button:active, .span-to-eng-button:active, .popup-sentence-translation:active {
+.pronoun-button:active, .practice-pronoun-button:active, .popup-pronoun-button:active, .practice-sentence-button:active, .eng-to-span-button:active, .span-to-eng-button:active, .popup-sentence-translation:active, .check-question-button:active, .next-question-button:active {
   opacity: 0.6;
   transform: scale(0.95);
 }
 
-.pronoun-button:focus, .practice-pronoun-button:focus, .popup-pronoun-button:focus, .practice-sentence-button:focus, .eng-to-span-button:focus, .span-to-eng-button:focus, .popup-sentence-translation:focus {
+.pronoun-button:focus, .practice-pronoun-button:focus, .popup-pronoun-button:focus, .practice-sentence-button:focus, .eng-to-span-button:focus, .span-to-eng-button:focus, .popup-sentence-translation:focus, .check-question-button:focus, .next-question-button:focus {
   outline: 2px solid #333;
   outline-offset: 2px;
 }
@@ -216,12 +216,106 @@ tr:nth-child(even) {
 }
 
 .trans-div-11, .trans-div-12 {
+  /* height: fit-content; */
   border: 1px solid red;
+  /* display: flex; */
+  
+}
+
+.trans-div-11 {
+  padding: 8px 0 8px 8px;
+}
+
+.trans-div-11 > .subject-2, .verb-2, .adjective-2, .question-mark {
+  margin: 0 8px 0 0;
+}
+
+.trans-div-12 {
+  padding: 10px 5px 10px 10px;
   display: flex;
-  gap: 10px;
+  justify-content: stat;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+.trans-div-12.show-check::before {
+  content: '✔';
+  visibility: visible;
+  position: absolute;
+  font-weight: bold;
+  color: #4A7FB5;
+  z-index: 1;
+  top: -5px;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #4A7FB5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.588);
+  transform: scale(2);
+  transition: transform 0.3s ease, opacity 0.9s ease;
+  opacity: 1;
+}
+
+.trans-div-12::before {
+  visibility: hidden;
+  opacity: 0;
+  content: '';
+  transform: scale(0);
+}
+.trans-div-12.show-x::after {
+  content: '✕';
+  visibility: visible;
+  position: absolute;
+  font-weight: bold;
+  color: red;
+  z-index: 1;
+  top: -5px;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  border: 3px solid red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.588);
+  transform: scale(2);
+  transition: transform 0.3s ease, opacity 0.9s ease;
+  opacity: 1;
+}
+
+.trans-div-12::after {
+  visibility: hidden;
+  opacity: 0;
+  content: '';
+  transform: scale(0);
+}
+
+.trans-div-13 {
+  padding: 5px 10px;
+  display: flex;
+  gap: 20px;
+}
+
+.adjective-2 {
+  background-color: green;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.current-sentence-p {
+  margin: 0 0 15px 0;
 }
 
 .chunk-slot {
+  padding: 10px 15px;
+  background-color: darkgrey;
   padding: 8px 10px;
   font-weight: bold;
   border-radius: 3px;
