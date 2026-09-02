@@ -109,7 +109,7 @@ tr:nth-child(even) {
   grid-column: 1/5;
 }
 
-.wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e {
+.wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e, .wrapper-3-f {
   padding: 0 0 0 8px;
   border-left: 1px solid darkgray;
   border-radius: 5px;
@@ -171,7 +171,7 @@ tr:nth-child(even) {
   position: relative;
 } */
 
-.trans-div-3, .trans-div-4, .trans-div-5, .trans-div-6, .trans-div-9 {
+.trans-div-3, .trans-div-4, .trans-div-5, .trans-div-6, .trans-div-9, .trans-div-11, .trans-div-12 {
   margin: 5px 0;
   padding: 5px;
   border: 1px solid darkgray;
@@ -217,25 +217,33 @@ tr:nth-child(even) {
 
 .trans-div-11, .trans-div-12 {
   /* height: fit-content; */
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* display: flex; */
   
 }
 
 .trans-div-11 {
-  padding: 8px 0 8px 8px;
+  min-height: 61px;
+  /* padding: 8px 0 8px 8px; */
+  display: flex;
+  gap: 8px;
 }
 
 .trans-div-11 > .subject-2, .verb-2, .adjective-2, .question-mark {
-  margin: 0 8px 0 0;
+  /* margin: 0 8px 0 0; */
 }
+
+/* .current-sentence-p {
+  margin: 0 0 15px 0;
+  font-weight: bold;
+} */
 
 .trans-div-12 {
   padding: 10px 5px 10px 10px;
   display: flex;
   justify-content: stat;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   position: relative;
 }
 
@@ -267,6 +275,7 @@ tr:nth-child(even) {
   content: '';
   transform: scale(0);
 }
+
 .trans-div-12.show-x::after {
   content: '✕';
   visibility: visible;
@@ -304,19 +313,49 @@ tr:nth-child(even) {
 
 .adjective-2 {
   background-color: green;
-  padding: 10px;
+  padding: 10px 15px;
+  font-size: clamp(0.9rem, 2.3vw, 1.2rem);
   font-weight: bold;
   border-radius: 3px;
+  align-content: center;
 }
 
-.current-sentence-p {
-  margin: 0 0 15px 0;
+.noun-phrase {
+  background-color: #00cc47;
+  padding: 10px 15px;
+  font-size: clamp(0.9rem, 2.3vw, 1.2rem);
+  font-weight: bold;
+  border-radius: 3px;
+  align-content: center;
+}
+
+.question-mark {
+  background-color: #535353;
+  padding: 10px 15px;
+  font-size: clamp(0.9rem, 2.3vw, 1.2rem);
+  font-weight: bold;
+  border-radius: 3px;
+  align-content: center;
+}
+
+.adjective-phrase {
+    background-color: #861313;
+  padding: 10px 15px;
+  font-size: clamp(0.9rem, 2.3vw, 1.2rem);
+  font-weight: bold;
+  border-radius: 3px;
+  align-content: center;
 }
 
 .chunk-slot {
+  min-width: 55px;
+  min-height: 43px;
   padding: 10px 15px;
-  background-color: darkgrey;
+  background-color: rgb(84, 84, 84);
   padding: 8px 10px;
   font-weight: bold;
   border-radius: 3px;
+  border-bottom: 2px solid red;
+  padding-bottom: 13px;
+  text-align: center;
 }

@@ -103,7 +103,7 @@ export const toBeData = {
         chunks: [
           {text: "You", role: "subject-2"},
           {text: "are", role: "verb-2"},
-          {text: "in the office", role: "prep-phrase-2"},
+          {text: "in the office", role: "prep-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },
@@ -113,7 +113,7 @@ export const toBeData = {
         chunks: [
           {text: "She", role: "subject-2"},
           {text: "is", role: "verb-2"},
-          {text: "a doctor", role: "noun-phrase-2"},
+          {text: "a doctor", role: "noun-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },
@@ -123,7 +123,7 @@ export const toBeData = {
         chunks: [
           {text: "They", role: "subject-2"},
           {text: "are", role: "verb-2"},
-          {text: "from Japan", role: "prep-phrase-2"},
+          {text: "from Japan", role: "prep-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },
@@ -133,7 +133,7 @@ export const toBeData = {
         chunks: [
           {text: "I", role: "subject-2"},
           {text: "am", role: "verb-2"},
-          {text: "John", role: "noun-phrase-2"},
+          {text: "John", role: "noun-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },
@@ -143,7 +143,7 @@ export const toBeData = {
         chunks: [
           {text: "We", role: "subject-2"},
           {text: "are", role: "verb-2"},
-          {text: "30 years old", role: "adjective-phrase-2"},
+          {text: "30 years old", role: "adjective-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },
@@ -163,7 +163,7 @@ export const toBeData = {
         chunks: [
           {text: "I", role: 'subject-2'},
           {text: "am", role: 'verb-2'},
-          {text: "in the office", role: 'prep-phrase-2'},
+          {text: "in the office", role: 'prep-phrase'},
           {text: "?", role: 'question-mark'},
 
         ]
@@ -194,7 +194,7 @@ export const toBeData = {
         chunks: [
           {text: "John and Lee", role: "subject-2"},
           {text: "are", role: "verb-2"},
-          {text: "from Peru", role: "prep-phrase-2"},
+          {text: "from Peru", role: "prep-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },
@@ -204,7 +204,7 @@ export const toBeData = {
         chunks: [
           {text: "Mary", role: "subject-2"},
           {text: "is", role: "verb-2"},
-          {text: "a pilot", role: "noun-phrase-2"},
+          {text: "a pilot", role: "noun-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },
@@ -214,7 +214,7 @@ export const toBeData = {
         chunks: [
           {text: "They", role: "subject-2"},
           {text: "are", role: "verb-2"},
-          {text: "at home", role: "prep-phrase-2"},
+          {text: "at home", role: "prep-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },
@@ -224,7 +224,7 @@ export const toBeData = {
         chunks: [
           {text: "He", role: "subject-2"},
           {text: "is", role: "verb-2"},
-          {text: "20 years old", role: "adjective-phrase-2"},
+          {text: "20 years old", role: "adjective-phrase"},
           {text: "?", role: "question-mark"}
         ]
       },

@@ -59,6 +59,8 @@ export const renderToBe = () => {
       const transWrapper8 = makeElement('div', 'trans-div-8', transWrapper7);
         const transWrapper9 = makeElement('div', 'trans-div-9', transWrapper8);
         const transWrapper10 = makeElement('div', 'trans-div-10', transWrapper8);
+        renderButtons(transWrapper9, 'english', 'practice-sentence-button', toBeData.translate5.sentences, handleEngToSpanSentenceButtonClick);
+
     const wrapper3f = makeElement('div', 'wrapper-3-f', thirdSectionWrapper);
       const translateTitleEl6 = makeElement('h2', 'translate-title-h2', wrapper3f, toBeData.translate6.title);
       const translateInstructionsEl6 = makeElement('p', 'translate-instructions-p', wrapper3f, toBeData.translate6.instructions);
@@ -70,7 +72,6 @@ export const renderToBe = () => {
       const nextQuestionButton = makeElement('button', 'next-question-button', transWrapper13, 'Siguiente', handleNextQuestionButtonClick);
 
   createPopupAndOverlay();
-  // addListeners();
 }
 
 
@@ -89,13 +90,8 @@ const renderButtons = (element, language, className, obj, clickHandler) => {
 };
 
 const renderSpans = (wrapper, wrapper2) => {
-  if (toBeFlags.currentQuestion === toBeData.translate6.sentences.length) {
-    return;
-  }
   wrapper.innerHTML = '';
-  wrapper2.innerHTML = '';
-  const currentSentenceEl = makeElement('p', 'current-sentence-p', wrapper, toBeData.translate6.sentences[toBeFlags.currentQuestion].statement);
-  
+  wrapper2.innerHTML = ''; 
   toBeData.translate6.sentences[toBeFlags.currentQuestion].chunks.forEach(chunk => {
     const chunkEl = makeElement('span', chunk.role, wrapper, chunk.text);
     chunkEl.draggable = true;
@@ -141,7 +137,7 @@ const handleDragOver = (event) => {
 const handleDragLeave = (event) => {
   event.preventDefault();
   if (event.target.classList.contains('chunk-slot')) {
-    event.target.style.backgroundColor = 'green';
+    event.target.style.backgroundColor = 'transparent';
   }
 };
 const handleDrop = (event) => {
@@ -151,7 +147,7 @@ const handleDrop = (event) => {
   if (!draggedElement) return;
   if (chunkSlot.matches('.chunk-slot')) {
     if (chunkSlot.children.length > 0) return;
-    chunkSlot.style.backgroundColor = 'lightblue';
+    chunkSlot.style.backgroundColor = 'transparent';
     draggedElement.remove();
     if (chunkSlot.innerHTML === '____') {
       chunkSlot.innerHTML = '';
@@ -284,17 +280,17 @@ const handleVerbToBeButtonClick4 = (event) => {
 
 const handleEngToSpanButtonClick = () => {
   const transWrapper9 = document.querySelector('.trans-div-9');
-  const transWrapper10 = document.querySelector('.trans-div-10');
+  // const transWrapper10 = document.querySelector('.trans-div-10');
   transWrapper9.innerHTML = '';
-  transWrapper10.innerHTML = '';
+  // transWrapper10.innerHTML = '';
   renderButtons(transWrapper9, 'english', 'practice-sentence-button', toBeData.translate5.sentences, handleEngToSpanSentenceButtonClick);
 }
 
 const handleSpanToEngButtonClick = (event) => {
   const transWrapper9 = document.querySelector('.trans-div-9');
-  const transWrapper10 = document.querySelector('.trans-div-10');
+  // const transWrapper10 = document.querySelector('.trans-div-10');
   transWrapper9.innerHTML = '';
-  transWrapper10.innerHTML = '';
+  // transWrapper10.innerHTML = '';
   renderButtons(transWrapper9, 'spanish', 'practice-sentence-button',toBeData.translate5.sentences, handleSpanToEngSentenceButtonClick);
 }
 
@@ -352,9 +348,7 @@ const handleClearOverlayClick = (event) => {
 }
 
 const handleCheckQuestionButton = () => {
-  if (toBeFlags.currentQuestion === toBeData.translate6.sentences.length) {
-    return;
-  }
+  console.log(toBeFlags.currentQuestion);
   const transWrapper12 = document.querySelector('.trans-div-12');
   let sentenceArray = [];
   let sentence = '';
@@ -378,7 +372,7 @@ const handleCheckQuestionButton = () => {
 }
 
 const handleNextQuestionButtonClick = () => {
-  if (toBeFlags.currentQuestion === toBeData.translate6.sentences.length) {
+  if (toBeFlags.currentQuestion >= toBeData.translate6.sentences.length -1) {
     return;
   }
   const transWrapper11 = document.querySelector('.trans-div-11');
