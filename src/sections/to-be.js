@@ -1,5 +1,9 @@
 import { toBeData, toBeFlags } from "../components/data/to-be-data.js";
-import { makeElement, showNotification, shuffleArray, speak, transitionContent } from "../components/reusableUI.js";
+import { makeElement, showNotification, shuffleArray, speak } from "../components/reusableUI.js";
+import correctSoundFile from '../sounds/correct.mp3';
+import incorrectSoundFile from '../sounds/incorrect.mp3';
+const correctSound = new Audio(correctSoundFile);
+const incorrectSound = new Audio(incorrectSoundFile);
 
 export const renderToBe = () => {
   const contentSection = document.querySelector('.content-section');
@@ -229,14 +233,14 @@ const handlePopupPronounButtonClick = (event) => {
   const clearOverlay = document.querySelector('.clear-overlay');
   const choicePopupEl = document.querySelector('.choice-popup-div');
   if (event.target.pronounClicked.textContent === event.target.translation) {
-    showNotification('Correct!', thirdSectionWrapper, 20, 30);
+    correctSound.play();
     choicePopupEl.classList.toggle('hidden');
     clearOverlay.classList.toggle('clear-overlay-active')
     event.target.pronounClicked.style.backgroundColor = 'white';
     event.target.pronounClicked.disabled = true;
     event.target.classList.add('correct');
   } else {
-    showNotification('Try again!', thirdSectionWrapper, 20, 30);
+    incorrectSound.play();
   }
 }
 
@@ -260,14 +264,14 @@ const handleVerbToBeButtonClick2 = (event) => {
     event.target.style.backgroundColor = 'white'; //CHANGES SPANISH TRANSLATION BUTTON
     event.target.done = true;
     event.target.style.color = 'black';
-    showNotification('Correct!', transWrapper3, 50, 50);
+    correctSound.play();
     tappedButton.selected = false;
     disableButtonIfDone([...transWrapper4.children]);
     toggleButtonState([...transWrapper3.children]);
 
   } else {
     event.target.style.backgroundColor = '';
-    showNotification('Try again', transWrapper3, 50, 50);
+    incorrectSound.play();
   }
 }
 
@@ -291,13 +295,13 @@ const handleVerbToBeButtonClick4 = (event) => {
   if (tappedButton.selected === true && tappedButton.textContent === event.target.translation) {
       event.target.style.backgroundColor = 'white';
       event.target.style.color = 'black';
-      showNotification('Correct!', transWrapper5, 50, 50);
+      correctSound.play();
       tappedButton.selected = false;
       toggleButtonState(spanishEls);
       disableButtonIfDone([...transWrapper6.children]);
     } else {
       event.target.style.backgroundColor = '';
-      showNotification('Try again', transWrapper5, 50, 50);
+      incorrectSound.play();
     }
 }
 
@@ -350,13 +354,15 @@ const handlePopupSentenceTranslationButton = (event) => {
   const clearOverlay = document.querySelector('.clear-overlay');
   const selectedButton = [...allButtons].find(button => button.selected);
   if (selectedButton.selected === true && event.target.textContent === selectedButton.translation) {
+    correctSound.play();
     selectedButton.selected = false;
     selectedButton.disabled = true;
     selectedButton.done = true;
     choicePopupEl.classList.toggle('hidden');
     clearOverlay.classList.toggle('clear-overlay-active');
+  } else {
+    incorrectSound.play();
   }
-
 }
 
 const handleClearOverlayClick = (event) => {
@@ -388,10 +394,12 @@ const handleCheckQuestionButton = () => {
   sentence = sentence.replace(/\s\?/g, '?');
   const sentenceObj = toBeData.translate6.sentences[toBeFlags.currentQuestion];
   if (sentence === sentenceObj.question) {
+    correctSound.play();
     transWrapper12.classList.add('show-check');
     transWrapper12.classList.remove('show-x');
 
   } else {
+    incorrectSound.play();
     transWrapper12.classList.remove('show-check');
     transWrapper12.classList.remove('show-x');
     void transWrapper12.offsetWidth;
@@ -403,11 +411,12 @@ const handleCheckQuestionButton = () => {
 }
 
 const handleNextQuestionButtonClick = () => {
-  if (toBeFlags.currentQuestion >= toBeData.translate6.sentences.length -1) {
-    return;
-  }
   const transWrapper11 = document.querySelector('.trans-div-11');
   const transWrapper12 = document.querySelector('.trans-div-12');
+  if (toBeFlags.currentQuestion >= toBeData.translate6.sentences.length -1) {
+    transWrapper11.textContent = "No hay más oraciones."
+    return;
+  }
   toBeFlags.currentQuestion++;
   renderSpans(transWrapper11, transWrapper12);
   transWrapper12.classList.remove('show-check');

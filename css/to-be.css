@@ -156,6 +156,7 @@ tr:nth-child(even) {
 .choice-popup-div {
   padding: 10px;
   width: 80%;
+  max-width: fit-content;
   background-color: var(--SECONDARY-BACKGROUND);
   border: 1px solid darkgray;
   border-radius: 5px;
@@ -167,10 +168,6 @@ tr:nth-child(even) {
   z-index: 4;
 }
 
-/* .trans-div-2 {
-  position: relative;
-} */
-
 .trans-div-3, .trans-div-4, .trans-div-5, .trans-div-6, .trans-div-9, .trans-div-11, .trans-div-12 {
   margin: 5px 0;
   padding: 5px;
@@ -180,30 +177,6 @@ tr:nth-child(even) {
   gap: 8px;
   flex-wrap: wrap;
 }
-
-/* .trans-div-9 {
-  position: relative;
-} */
-
-
-
-/* .choice-popup-div-2 {
-    position: absolute;
-  bottom: 80%;
-} */
-
-/* .choice-popup-div-3 {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  position: absolute;
-  bottom: 100%;
-  background-color: var(--SECONDARY-BACKGROUND);
-  border: 1px solid darkgray;
-  border-radius: 5px;
-
-} */
 
 .choice-popup-div.hidden {
   visibility: hidden;
@@ -215,28 +188,10 @@ tr:nth-child(even) {
   pointer-events: none;
 }
 
-.trans-div-11, .trans-div-12 {
-  /* height: fit-content; */
-  /* border: 1px solid red; */
-  /* display: flex; */
-  
-}
-
 .trans-div-11 {
   min-height: 61px;
-  /* padding: 8px 0 8px 8px; */
-  display: flex;
-  gap: 8px;
+  padding-left: 20px;
 }
-
-.trans-div-11 > .subject-2, .verb-2, .adjective-2, .question-mark {
-  /* margin: 0 8px 0 0; */
-}
-
-/* .current-sentence-p {
-  margin: 0 0 15px 0;
-  font-weight: bold;
-} */
 
 .trans-div-12 {
   padding: 10px 5px 10px 10px;
@@ -311,40 +266,28 @@ tr:nth-child(even) {
   gap: 20px;
 }
 
-.adjective-2 {
-  background-color: green;
+.adjective-2, .noun-phrase, .question-mark, .adjective-phrase {
   padding: 10px 15px;
   font-size: clamp(0.9rem, 2.3vw, 1.2rem);
   font-weight: bold;
   border-radius: 3px;
   align-content: center;
+}
+
+.adjective-2 {
+  background-color: green;
 }
 
 .noun-phrase {
   background-color: #00cc47;
-  padding: 10px 15px;
-  font-size: clamp(0.9rem, 2.3vw, 1.2rem);
-  font-weight: bold;
-  border-radius: 3px;
-  align-content: center;
 }
 
 .question-mark {
   background-color: #535353;
-  padding: 10px 15px;
-  font-size: clamp(0.9rem, 2.3vw, 1.2rem);
-  font-weight: bold;
-  border-radius: 3px;
-  align-content: center;
 }
 
 .adjective-phrase {
-    background-color: #861313;
-  padding: 10px 15px;
-  font-size: clamp(0.9rem, 2.3vw, 1.2rem);
-  font-weight: bold;
-  border-radius: 3px;
-  align-content: center;
+  background-color: #861313;
 }
 
 .chunk-slot {
