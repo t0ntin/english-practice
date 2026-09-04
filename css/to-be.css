@@ -252,13 +252,13 @@ tr:nth-child(even) {
   visibility: visible;
   position: absolute;
   font-weight: bold;
-  color: #4A7FB5;
+  color: var(--COMMON-ERRORS-BLUE-LIGHTER);
   z-index: 1;
   top: -5px;
   left: 50%;
   width: 24px;
   height: 24px;
-  border: 3px solid #4A7FB5;
+  border: 3px solid var(--COMMON-ERRORS-BLUE);
   border-radius: 50%;
   display: flex;
   justify-content: center;

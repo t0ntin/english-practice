@@ -47,3 +47,14 @@ A game could be to give the user "I AM" and to let him pick the correct next ele
 Also to leave "AM" on the board and have them slot in the 1st and third elements.
 
 =========================
+
+working on first activity. It's saying 
+Uncaught TypeError: Cannot read properties of undefined (reading 'done')  to-be.js:347 
+when I click on the overlay.
+
+
+
+popup containers are not resizing well
+if the answer is right, a sound should be played.
+
+"traduzca del ingles al espanol" exercise items are not being shuffled.

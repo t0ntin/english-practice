@@ -74,8 +74,6 @@ export const renderToBe = () => {
   createPopupAndOverlay();
 }
 
-
-
 const renderButtons = (element, language, className, obj, clickHandler) => {
   shuffleArray(obj);
   obj.forEach((pair, i) => {
@@ -102,8 +100,6 @@ const renderSpans = (wrapper, wrapper2) => {
 }
 
 const addListeners = () => {
-
-  
   const wrapper3f = document.querySelector('.wrapper-3-f');
   const transWrapper11 = document.querySelector('.trans-div-11');
   const transWrapper12 = document.querySelector('.trans-div-12');
@@ -115,7 +111,6 @@ const addListeners = () => {
   transWrapper12.addEventListener('dragleave', handleDragLeave);
   wrapper3f.addEventListener('dragover', handleDragOver);
   wrapper3f.addEventListener('drop', handleDrop);
-
 }
 
 const handleDragStart = (event) => {
@@ -140,6 +135,7 @@ const handleDragLeave = (event) => {
     event.target.style.backgroundColor = 'transparent';
   }
 };
+
 const handleDrop = (event) => {
   const data = event.dataTransfer.getData('text/plain');
   const draggedElement = document.getElementById(data);
@@ -164,7 +160,6 @@ const handleDrop = (event) => {
   }
 };
 
-
 const handlePronounButtonClick = (event) => {
   speak(event.target.textContent);
 
@@ -181,12 +176,14 @@ const createPopupAndOverlay = () => {
   }
 }
 
+// Traduzca del inglés al español (first section)
 const handlePracticePronounButtonClick = (event) => {
+  assignButtonToOverlay(event);
   const transWrapper1 = document.querySelector('.trans-div-1');
   const choicePopupEl = document.querySelector('.choice-popup-div');
+  event.target.style.backgroundColor = 'red';
   handlePopupAndOverlayOnClick(transWrapper1, choicePopupEl);
   shuffleArray(toBeData.subjectPronouns.pairs);
-
   toBeData.subjectPronouns.pairs.forEach((pair, i) => {
     const popupPronounButtons = makeElement('button', 'popup-pronoun-button', choicePopupEl, pair.spanish, handlePopupPronounButtonClick);
     popupPronounButtons.pronounClicked = event.target; 
@@ -205,9 +202,18 @@ const handlePopupAndOverlayOnClick = (wrapper, choicePopupEl) => {
   choicePopupEl.innerHTML = '';
 }
 
+const assignButtonToOverlay = (event) => {
+  const clearOverlay = document.querySelector('.clear-overlay');
+  clearOverlay.clickedButton = event.target;
+  clearOverlay.clickedButton.selected = true;
+}
+
+// Traduzca del español al inglés (first section)
 const handlePracticePronounButtonClick2 = (event) => {
   const transWrapper2 = document.querySelector('.trans-div-2');
   const choicePopupEl = document.querySelector('.choice-popup-div');
+  assignButtonToOverlay(event);
+  event.target.style.backgroundColor = 'red';
   handlePopupAndOverlayOnClick(transWrapper2, choicePopupEl);
   shuffleArray(toBeData.subjectPronouns.pairs);
 
@@ -226,98 +232,114 @@ const handlePopupPronounButtonClick = (event) => {
     showNotification('Correct!', thirdSectionWrapper, 20, 30);
     choicePopupEl.classList.toggle('hidden');
     clearOverlay.classList.toggle('clear-overlay-active')
-    event.target.pronounClicked.style.backgroundColor = 'red';
+    event.target.pronounClicked.style.backgroundColor = 'white';
+    event.target.pronounClicked.disabled = true;
     event.target.classList.add('correct');
   } else {
     showNotification('Try again!', thirdSectionWrapper, 20, 30);
   }
 }
 
+// Traduzca del inglés al español (second section)
 const handleVerbToBeButtonClick = (event) => {
-  event.target.style.backgroundColor = 'red';
+  const transWrapper4 = document.querySelector('.trans-div-4');
+  event.target.style.backgroundColor = 'white';
+  event.target.style.color = 'black';
   event.target.selected = true;
   const englishPronouns = event.target.closest('.trans-div-3').querySelectorAll('.practice-pronoun-button');
   toggleButtonState(englishPronouns);
+  enableButtonIfNotDone([...transWrapper4.children]);
 }
 
 const handleVerbToBeButtonClick2 = (event) => {
   const transWrapper3 = document.querySelector('.trans-div-3');
+  const transWrapper4 = document.querySelector('.trans-div-4');
   const tappedButton = [...transWrapper3.children].find(button => (button.selected === true));
 
   if (tappedButton.selected === true && tappedButton.textContent === event.target.translation) {
-    event.target.style.backgroundColor = 'red';
+    event.target.style.backgroundColor = 'white'; //CHANGES SPANISH TRANSLATION BUTTON
     event.target.done = true;
+    event.target.style.color = 'black';
     showNotification('Correct!', transWrapper3, 50, 50);
     tappedButton.selected = false;
+    disableButtonIfDone([...transWrapper4.children]);
     toggleButtonState([...transWrapper3.children]);
+
   } else {
-    event.target.style.backgroundColor = 'none';
+    event.target.style.backgroundColor = '';
     showNotification('Try again', transWrapper3, 50, 50);
   }
 }
 
+// Traduzca del español al inglés (second section)
 const handleVerbToBeButtonClick3 = (event) => {
+  const transWrapper6 = document.querySelector('.trans-div-6');
   const spanishPronouns = event.target.closest('.trans-div-5').querySelectorAll('.practice-pronoun-button');
-  event.target.style.backgroundColor = 'red';
+  event.target.style.backgroundColor = 'white';
+  event.target.style.color = 'black';
   event.target.selected = true;
   toggleButtonState(spanishPronouns);
+  enableButtonIfNotDone([...transWrapper6.children]);
+
 }
 
 const handleVerbToBeButtonClick4 = (event) => {
   const transWrapper5 = document.querySelector('.trans-div-5');
+  const transWrapper6 = document.querySelector('.trans-div-6');
   const spanishEls = transWrapper5.querySelectorAll('.practice-pronoun-button');
   const tappedButton = [...spanishEls].find(button => (button.selected === true));
   if (tappedButton.selected === true && tappedButton.textContent === event.target.translation) {
-      event.target.style.backgroundColor = 'red';
+      event.target.style.backgroundColor = 'white';
+      event.target.style.color = 'black';
       showNotification('Correct!', transWrapper5, 50, 50);
       tappedButton.selected = false;
       toggleButtonState(spanishEls);
+      disableButtonIfDone([...transWrapper6.children]);
     } else {
-      event.target.style.backgroundColor = 'none';
+      event.target.style.backgroundColor = '';
       showNotification('Try again', transWrapper5, 50, 50);
     }
 }
 
+// Oraciones
 const handleEngToSpanButtonClick = () => {
   const transWrapper9 = document.querySelector('.trans-div-9');
-  // const transWrapper10 = document.querySelector('.trans-div-10');
   transWrapper9.innerHTML = '';
-  // transWrapper10.innerHTML = '';
   renderButtons(transWrapper9, 'english', 'practice-sentence-button', toBeData.translate5.sentences, handleEngToSpanSentenceButtonClick);
 }
 
 const handleSpanToEngButtonClick = (event) => {
   const transWrapper9 = document.querySelector('.trans-div-9');
-  // const transWrapper10 = document.querySelector('.trans-div-10');
   transWrapper9.innerHTML = '';
-  // transWrapper10.innerHTML = '';
   renderButtons(transWrapper9, 'spanish', 'practice-sentence-button',toBeData.translate5.sentences, handleSpanToEngSentenceButtonClick);
 }
 
 const handleEngToSpanSentenceButtonClick = (event) => {
+  const clearOverlay = document.querySelector('.clear-overlay');
   const parent = event.target.parentElement;
   const choicePopupEl = document.querySelector('.choice-popup-div');
-  const sentenceButtons = parent.querySelectorAll('.practice-sentence-button');
-
+  choicePopupEl.selectedButton = event.target;
   handlePopupAndOverlayOnClick(parent, choicePopupEl)
-  event.target.style.backgroundColor = 'red';
+  event.target.style.backgroundColor = 'white';
+  event.target.style.color = 'black';
   event.target.selected = true;
+  clearOverlay.clickedButton = event.target;
   renderButtons(choicePopupEl, 'spanish', 'popup-sentence-translation', toBeData.translate5.sentences, handlePopupSentenceTranslationButton);
-  toggleButtonState(sentenceButtons);
-
 }
 
 const handleSpanToEngSentenceButtonClick = (event) => {
+  const clearOverlay = document.querySelector('.clear-overlay');
   const parent = event.target.parentElement;
   console.log(parent);
   const choicePopupEl = document.querySelector('.choice-popup-div');
   const sentenceButtons = parent.querySelectorAll('.practice-sentence-button');
-
-  handlePopupAndOverlayOnClick(parent, choicePopupEl)
-  event.target.style.backgroundColor = 'red';
+  handlePopupAndOverlayOnClick(parent, choicePopupEl);
+  clearOverlay.clickedButton = event.target;
+  event.target.style.backgroundColor = 'white';
+  event.target.style.color = 'black';
   event.target.selected = true;
   renderButtons(choicePopupEl, 'english', 'popup-sentence-translation', toBeData.translate5.sentences, handlePopupSentenceTranslationButton);
-  toggleButtonState(sentenceButtons);
+  // toggleButtonState(sentenceButtons);
 }
 
 const handlePopupSentenceTranslationButton = (event) => {
@@ -328,13 +350,11 @@ const handlePopupSentenceTranslationButton = (event) => {
   const clearOverlay = document.querySelector('.clear-overlay');
   const selectedButton = [...allButtons].find(button => button.selected);
   if (selectedButton.selected === true && event.target.textContent === selectedButton.translation) {
-    event.target.style.backgroundColor = 'red';
     selectedButton.selected = false;
     selectedButton.disabled = true;
     selectedButton.done = true;
     choicePopupEl.classList.toggle('hidden');
     clearOverlay.classList.toggle('clear-overlay-active');
-    toggleButtonState(transWrapper9Els);
   }
 
 }
@@ -342,6 +362,15 @@ const handlePopupSentenceTranslationButton = (event) => {
 const handleClearOverlayClick = (event) => {
   const choicePopupEl = document.querySelector('.choice-popup-div')
   if (event.target.matches('.clear-overlay')) {
+    console.log(event.target.clickedButton);
+  if (!event.target.clickedButton.done) {
+    event.target.clickedButton.style.color = 'black';
+    event.target.clickedButton.style.backgroundColor = 'white';
+  }
+    if (event.target.clickedButton.selected === true) {
+      event.target.clickedButton.style.backgroundColor = '';
+      event.target.clickedButton.selected = false;
+    }
     choicePopupEl.classList.add('hidden');
     event.target.classList.toggle('clear-overlay-active');
   }
@@ -362,8 +391,10 @@ const handleCheckQuestionButton = () => {
     transWrapper12.classList.add('show-check');
     transWrapper12.classList.remove('show-x');
 
-  }else {
+  } else {
     transWrapper12.classList.remove('show-check');
+    transWrapper12.classList.remove('show-x');
+    void transWrapper12.offsetWidth;
     transWrapper12.classList.add('show-x');
     console.log(sentence);
     console.log(sentenceObj.question);
@@ -382,6 +413,20 @@ const handleNextQuestionButtonClick = () => {
   transWrapper12.classList.remove('show-check');
   transWrapper12.classList.remove('show-x');
 
+}
+
+const disableButtonIfDone = (element) => {
+ element.forEach(item => {
+    item.disabled = true;
+ })
+}
+
+const enableButtonIfNotDone = (element) => {
+  element.forEach(item => {
+    if (!item.done) {
+      item.disabled = false;
+    }
+  })
 }
 
 const toggleButtonState = (element) => {
