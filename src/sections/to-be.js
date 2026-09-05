@@ -75,6 +75,13 @@ export const renderToBe = () => {
       const checkQuestionButton = makeElement('button', 'check-question-button', transWrapper13, 'Revisar', handleCheckQuestionButton);
       const nextQuestionButton = makeElement('button', 'next-question-button', transWrapper13, 'Siguiente', handleNextQuestionButtonClick);
 
+    const wrapper3g = makeElement('div', 'wrapper-3-g', thirdSectionWrapper);
+      const translateTitleEl7 = makeElement('h2', 'translate-title-h2', wrapper3g, toBeData.translate7.title);
+      const translateInstructionsEl7 = makeElement('p', 'translate-instructions-p', wrapper3g, toBeData.translate7.instructions);
+      const statementEl = makeElement('p', 'negation-statement-p', wrapper3g);
+      const transWrapper14 = makeElement('div', 'trans-div-14', wrapper3g);
+      renderNegations(transWrapper14);
+      const nextNegationButton = makeElement('button', 'next-negation-button', wrapper3g, 'Siguiente', handleNextNegationButtonClick);
   createPopupAndOverlay();
 }
 
@@ -90,6 +97,16 @@ const renderButtons = (element, language, className, obj, clickHandler) => {
     }
   });
 };
+
+const renderNegations = (transWrapper14) => {
+  const statementEl = document.querySelector('.negation-statement-p');
+  const obj =  toBeData.translate7.negations[toBeFlags.currentNegation];
+  statementEl.innerHTML = '';
+  statementEl.textContent = obj.statement;
+  obj.negations.forEach(negation => {
+    const negationEl = makeElement('button', negation.class, transWrapper14, negation.negation, handleNegationButtonClick);
+  });
+}
 
 const renderSpans = (wrapper, wrapper2) => {
   wrapper.innerHTML = '';
@@ -193,6 +210,7 @@ const handlePracticePronounButtonClick = (event) => {
     popupPronounButtons.pronounClicked = event.target; 
     popupPronounButtons.translation = pair.english; 
   });
+  speak(event.target.textContent);
 }
 
 const handlePopupAndOverlayOnClick = (wrapper, choicePopupEl) => {
@@ -251,6 +269,7 @@ const handleVerbToBeButtonClick = (event) => {
   event.target.style.color = 'black';
   event.target.selected = true;
   const englishPronouns = event.target.closest('.trans-div-3').querySelectorAll('.practice-pronoun-button');
+  speak(event.target.textContent);
   toggleButtonState(englishPronouns);
   enableButtonIfNotDone([...transWrapper4.children]);
 }
@@ -323,6 +342,7 @@ const handleEngToSpanSentenceButtonClick = (event) => {
   const parent = event.target.parentElement;
   const choicePopupEl = document.querySelector('.choice-popup-div');
   choicePopupEl.selectedButton = event.target;
+  speak(event.target.textContent);
   handlePopupAndOverlayOnClick(parent, choicePopupEl)
   event.target.style.backgroundColor = 'white';
   event.target.style.color = 'black';
@@ -383,7 +403,6 @@ const handleClearOverlayClick = (event) => {
 }
 
 const handleCheckQuestionButton = () => {
-  console.log(toBeFlags.currentQuestion);
   const transWrapper12 = document.querySelector('.trans-div-12');
   let sentenceArray = [];
   let sentence = '';
@@ -397,7 +416,9 @@ const handleCheckQuestionButton = () => {
     correctSound.play();
     transWrapper12.classList.add('show-check');
     transWrapper12.classList.remove('show-x');
-
+    setTimeout(() => {
+      speak(sentence);
+    }, 600);
   } else {
     incorrectSound.play();
     transWrapper12.classList.remove('show-check');
@@ -421,8 +442,20 @@ const handleNextQuestionButtonClick = () => {
   renderSpans(transWrapper11, transWrapper12);
   transWrapper12.classList.remove('show-check');
   transWrapper12.classList.remove('show-x');
-
 }
+
+const handleNegationButtonClick = (event) => {
+  speak(event.target.textContent);
+}
+
+const handleNextNegationButtonClick = () => {
+  const transWrapper14 = document.querySelector('.trans-div-14');
+  transWrapper14.innerHTML = '';
+  toBeFlags.currentNegation++;
+  renderNegations(transWrapper14);
+}
+
+
 
 const disableButtonIfDone = (element) => {
  element.forEach(item => {

@@ -38,7 +38,7 @@ tr:nth-child(even) {
 
 /* ==========  BUTTONS ============ */
 
-.pronoun-button, .practice-pronoun-button, .popup-pronoun-button, .practice-sentence-button, .eng-to-span-button, .span-to-eng-button, .popup-sentence-translation, .check-question-button, .next-question-button {
+.pronoun-button, .practice-pronoun-button, .popup-pronoun-button, .practice-sentence-button, .eng-to-span-button, .span-to-eng-button, .popup-sentence-translation, .check-question-button, .next-question-button, .negation-button, .next-negation-button {
   padding: 10px 15px;
   background-color: var(--COMMON-ERRORS-BLUE);
   color: white;
@@ -48,16 +48,16 @@ tr:nth-child(even) {
   transition: transform 0.3s ease;
 }
 
-.pronoun-button:hover, .practice-pronoun-button:hover, .popup-pronoun-button:hover, .practice-sentence-button:hover, .eng-to-span-button:hover, .span-to-eng-button:hover, .popup-sentence-translation:hover, .check-question-button:hover, .next-question-button:hover {
+.pronoun-button:hover, .practice-pronoun-button:hover, .popup-pronoun-button:hover, .practice-sentence-button:hover, .eng-to-span-button:hover, .span-to-eng-button:hover, .popup-sentence-translation:hover, .check-question-button:hover, .next-question-button:hover, .negation-button:hover, .next-negation-button:hover {
   background-color: var(--COMMON-ERRORS-BLUE-LIGHTER);
 }
 
-.pronoun-button:active, .practice-pronoun-button:active, .popup-pronoun-button:active, .practice-sentence-button:active, .eng-to-span-button:active, .span-to-eng-button:active, .popup-sentence-translation:active, .check-question-button:active, .next-question-button:active {
+.pronoun-button:active, .practice-pronoun-button:active, .popup-pronoun-button:active, .practice-sentence-button:active, .eng-to-span-button:active, .span-to-eng-button:active, .popup-sentence-translation:active, .check-question-button:active, .next-question-button:active, .negation-button:active, .next-negation-button:active {
   opacity: 0.6;
   transform: scale(0.95);
 }
 
-.pronoun-button:focus, .practice-pronoun-button:focus, .popup-pronoun-button:focus, .practice-sentence-button:focus, .eng-to-span-button:focus, .span-to-eng-button:focus, .popup-sentence-translation:focus, .check-question-button:focus, .next-question-button:focus {
+.pronoun-button:focus, .practice-pronoun-button:focus, .popup-pronoun-button:focus, .practice-sentence-button:focus, .eng-to-span-button:focus, .span-to-eng-button:focus, .popup-sentence-translation:focus, .check-question-button:focus, .next-question-button:focus, .negation-button:focus, .next-negation-button:focus {
   outline: 2px solid #333;
   outline-offset: 2px;
 }
@@ -109,7 +109,7 @@ tr:nth-child(even) {
   grid-column: 1/5;
 }
 
-.wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e, .wrapper-3-f {
+.wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e, .wrapper-3-f, .wrapper-3-g {
   padding: 0 0 0 8px;
   border-left: 1px solid darkgray;
   border-radius: 5px;
@@ -301,4 +301,44 @@ tr:nth-child(even) {
   border-bottom: 2px solid red;
   padding-bottom: 13px;
   text-align: center;
+}
+
+.wrapper-3-g {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.trans-div-14 {
+  margin: 0 0 10px 0;
+  padding: 10px 0;
+  border-bottom: 3px solid var(--COMMON-ERRORS-BLUE-LIGHTER);
+  border-top: 3px solid var(--COMMON-ERRORS-BLUE-LIGHTER);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.negation-statement-p {
+  margin: 10px 0 10px 0px;
+  height: 50px;
+  font-size: 1.2rem;
+  background: #141414;
+  background: linear-gradient(0deg, rgba(20, 20, 20, 1) 0%, rgba(43, 43, 43, 1) 50%, rgba(84, 84, 84, 1) 100%);
+  grid-column: 1/6;
+  text-align: center;
+  font-weight: bold;
+  align-content: center;
+}
+
+.negation-button {
+  place-self: center;
+  grid-column: 1/6;
+  width: fit-content;
+}
+
+.next-negation-button {
+  /* grid-column: 1/6; */
+  width: fit-content;
+  place-self: center;
 }

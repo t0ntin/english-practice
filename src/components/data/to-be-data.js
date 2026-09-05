@@ -62,7 +62,7 @@ export const toBeData = {
   },
   translate5: {
     title: "Oraciones",
-    instructions: "Cree oraciones cortas, escúchelas, tradúzcalas, dígalas, agréguelas a la seccion de práctica.",
+    instructions: "Cree oraciones cortas, escúchelas, dígalas, tradúzcalas.",
     sentences: [
       {english: "I am John.", spanish: "Yo soy John."},
       {english: "She is a Doctor.", spanish: "Ella es doctora."},
@@ -231,10 +231,128 @@ export const toBeData = {
 
     ]
   },
+  translate7: {
+    title: "Negations",
+    instructions: "Toque los botones para escuchar las tres formas de negar.",
+    negations: [
+      {
+        statement: "It is late.",
+        negations: [
+          { negation: "It is not late.", class: "negation-button" },
+          { negation: "It's not late.", class: "negation-button" },
+          { negation: "It isn't late.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "He is happy.",
+        negations: [
+          { negation: "He is not happy.", class: "negation-button" },
+          { negation: "He's not happy.", class: "negation-button" },
+          { negation: "He isn't happy.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "You are in the office.",
+        negations: [
+          { negation: "You are not in the office.", class: "negation-button" },
+          { negation: "You're not in the office.", class: "negation-button" },
+          { negation: "You aren't in the office.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "She is a doctor.",
+        negations: [
+          { negation: "She is not a doctor.", class: "negation-button" },
+          { negation: "She's not a doctor.", class: "negation-button" },
+          { negation: "She isn't a doctor.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "They are from Japan.",
+        negations: [
+          { negation: "They are not from Japan.", class: "negation-button" },
+          { negation: "They're not from Japan.", class: "negation-button" },
+          { negation: "They aren't from Japan.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "I am John.",
+        negations: [
+          { negation: "I am not John.", class: "negation-button" },
+          { negation: "I'm not John.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "We are 30 years old.",
+        negations: [
+          { negation: "We are not 30 years old.", class: "negation-button" },
+          { negation: "We're not 30 years old.", class: "negation-button" },
+          { negation: "We aren't 30 years old.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "You are Colombian.",
+        negations: [
+          { negation: "You are not Colombian.", class: "negation-button" },
+          { negation: "You're not Colombian.", class: "negation-button" },
+          { negation: "You aren't Colombian.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "John is sad.",
+        negations: [
+          { negation: "John is not sad.", class: "negation-button" },
+          { negation: "John's not sad.", class: "negation-button" },
+          { negation: "John isn't sad.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "It is important.",
+        negations: [
+          { negation: "It is not important.", class: "negation-button" },
+          { negation: "It's not important.", class: "negation-button" },
+          { negation: "It isn't important.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "John and Lee are from Peru.",
+        negations: [
+          { negation: "John and Lee are not from Peru.", class: "negation-button" },
+          { negation: "John and Lee're not from Peru.", class: "negation-button" },
+          { negation: "John and Lee aren't from Peru.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "Mary is a pilot.",
+        negations: [
+          { negation: "Mary is not a pilot.", class: "negation-button" },
+          { negation: "Mary's not a pilot.", class: "negation-button" },
+          { negation: "Mary isn't a pilot.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "They are at home.",
+        negations: [
+          { negation: "They are not at home.", class: "negation-button" },
+          { negation: "They're not at home.", class: "negation-button" },
+          { negation: "They aren't at home.", class: "negation-button" }
+        ]
+      },
+      {
+        statement: "He is 20 years old.",
+        negations: [
+          { negation: "He is not 20 years old.", class: "negation-button" },
+          { negation: "He's not 20 years old.", class: "negation-button" },
+          { negation: "He isn't 20 years old.", class: "negation-button" }
+        ]
+      }
+    ]
+  }
   
 };
 
 export const toBeFlags = {
   currentQuestion: 0,
+  currentNegation: 0,
 
 }
