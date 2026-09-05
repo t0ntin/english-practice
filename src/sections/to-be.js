@@ -10,10 +10,10 @@ export const renderToBe = () => {
   contentSection.innerHTML = '';
   const firstSectionWrapper = makeElement('div', 'first-section-div', contentSection);
 
-  // firstSectionWrapper.innerHTML = 
-  //   renderTable(toBeData.subjectPronouns) +
-  //   renderTable(toBeData.verbToBe) +
-  //   renderTable(toBeData.contractions);
+  firstSectionWrapper.innerHTML = 
+    renderTable(toBeData.subjectPronouns) +
+    renderTable(toBeData.verbToBe) +
+    renderTable(toBeData.contractions);
 
   const pronounButtons = document.querySelectorAll('.pronoun-button');
   pronounButtons.forEach(button => {
@@ -81,7 +81,20 @@ export const renderToBe = () => {
       const statementEl = makeElement('p', 'negation-statement-p', wrapper3g);
       const transWrapper14 = makeElement('div', 'trans-div-14', wrapper3g);
       renderNegations(transWrapper14);
-      const nextNegationButton = makeElement('button', 'next-negation-button', wrapper3g, 'Siguiente', handleNextNegationButtonClick);
+      const transWrapper15 = makeElement('div', 'trans-div-15', wrapper3g);
+        const previousNegationButton = makeElement('button', 'previous-negation-button', transWrapper15, 'Anterior', handlePreviousNegationButtonClick);
+        const nextNegationButton = makeElement('button', 'next-negation-button', transWrapper15, 'Siguiente', handleNextNegationButtonClick);
+
+    const wrapper3h = makeElement('div', 'wrapper-3-h', thirdSectionWrapper);
+      const translateTitleEl8 = makeElement('h2', 'translate-title-h2', wrapper3h, toBeData.translate8.title);
+      const translateInstructionsEl8 = makeElement('p', 'translate-instructions-p', wrapper3h, toBeData.translate8.instructions);
+      const statementEl2 = makeElement('p', 'negation-statement-2-p', wrapper3h);
+      const transWrapper16 = makeElement('div', 'trans-div-16', wrapper3h);
+      const transWrapper17 = makeElement('div', 'trans-div-17', wrapper3h);
+        const previousNegationButton2 = makeElement('button', 'previous-negation-button-2', transWrapper17, 'Anterior', handlePreviousNegationButtonClick2);
+        const nextNegationButton2 = makeElement('button', 'next-negation-button-2', transWrapper17, 'Siguiente', handleNextNegationButtonClick2);
+        renderNegations2(statementEl2, transWrapper16);
+
   createPopupAndOverlay();
 }
 
@@ -105,6 +118,19 @@ const renderNegations = (transWrapper14) => {
   statementEl.textContent = obj.statement;
   obj.negations.forEach(negation => {
     const negationEl = makeElement('button', negation.class, transWrapper14, negation.negation, handleNegationButtonClick);
+  });
+}
+
+const renderNegations2 = (statementEl2, transWrapper16) => {
+  statementEl2.innerHTML = '';
+  transWrapper16.innerHTML = '';
+  const obj = toBeData.translate8.sentences[toBeFlags.currentNegation2].negations;
+  statementEl2.textContent = toBeData.translate8.sentences[toBeFlags.currentNegation2].statement;
+  console.log(statementEl2.textContent);
+  shuffleArray(obj);
+  obj.forEach(negation => {
+    const negationButtonEl = makeElement('button', 'negation-button-2', transWrapper16, negation.negation, handleNegationButtonClick2);
+    negationButtonEl.correct = negation.correct;
   });
 }
 
@@ -431,6 +457,20 @@ const handleCheckQuestionButton = () => {
 
 }
 
+const handleNegationButtonClick = (event) => {
+  speak(event.target.textContent);
+}
+
+const handlePreviousNegationButtonClick = () => {
+  if (toBeFlags.currentNegation <= 0) {
+    return;
+  }
+  const transWrapper14 = document.querySelector('.trans-div-14');
+  transWrapper14.innerHTML = '';
+  toBeFlags.currentNegation--;
+  renderNegations(transWrapper14);
+}
+
 const handleNextQuestionButtonClick = () => {
   const transWrapper11 = document.querySelector('.trans-div-11');
   const transWrapper12 = document.querySelector('.trans-div-12');
@@ -444,18 +484,61 @@ const handleNextQuestionButtonClick = () => {
   transWrapper12.classList.remove('show-x');
 }
 
-const handleNegationButtonClick = (event) => {
-  speak(event.target.textContent);
+const handleNegationButtonClick2 = (event) => {
+  const transWrapper16 = document.querySelector('.trans-div-16');
+  if (event.target.correct === true) {
+    correctSound.play();
+    toBeFlags.correctPossibilities++;
+    event.target.style.backgroundColor = 'white';
+    event.target.style.color = 'black';
+    setTimeout(() => {
+      speak(event.target.textContent);
+    }, 700);
+    if (toBeFlags.correctPossibilities === toBeData.translate8.sentences[toBeFlags.currentNegation2].correctPossibilities) {
+      toBeFlags.correctPossibilities = 0;
+      transWrapper16.classList.add('show-larger-party-emoji');
+      console.log('testing');
+      setTimeout(() => {
+      transWrapper16.classList.remove('show-larger-party-emoji');
+      transWrapper16.classList.add('show-party-emoji');
+      }, 200);
+    }
+  } else {
+    incorrectSound.play();
+  }
 }
 
 const handleNextNegationButtonClick = () => {
+  if (toBeFlags.currentNegation >= toBeData.translate7.negations.length -1) {
+    return;
+  }
   const transWrapper14 = document.querySelector('.trans-div-14');
   transWrapper14.innerHTML = '';
   toBeFlags.currentNegation++;
   renderNegations(transWrapper14);
 }
 
+const handlePreviousNegationButtonClick2 = () => {
+  if (toBeFlags.currentNegation2 <= 0) return;
+  const transWrapper16 = document.querySelector('.trans-div-16');
+  const statementEl2 = document.querySelector('.negation-statement-2-p');
+  transWrapper16.innerHTML = '';
+  toBeFlags.currentNegation2--;
+  renderNegations2(statementEl2, transWrapper16);
 
+}
+
+const handleNextNegationButtonClick2 = () => {
+  const transWrapper16 = document.querySelector('.trans-div-16');
+  const statementEl2 = document.querySelector('.negation-statement-2-p');
+  if (toBeFlags.currentNegation2 >= toBeData.translate8.sentences.length -1) {
+    statementEl2.textContent = "No hay más oraciones."
+    return;
+  }
+  toBeFlags.currentNegation2++;
+  renderNegations2(statementEl2, transWrapper16);
+  transWrapper16.classList.remove('show-party-emoji');
+}
 
 const disableButtonIfDone = (element) => {
  element.forEach(item => {

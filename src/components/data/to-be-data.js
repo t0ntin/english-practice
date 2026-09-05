@@ -232,7 +232,7 @@ export const toBeData = {
     ]
   },
   translate7: {
-    title: "Negations",
+    title: "Negaciones",
     instructions: "Toque los botones para escuchar las tres formas de negar.",
     negations: [
       {
@@ -347,12 +347,202 @@ export const toBeData = {
         ]
       }
     ]
-  }
+  }, 
+  translate8: {
+    title: "Más negaciones",
+    instructions: "Toque las formas correctas de negar.",
+    sentences: [
+      {
+        statement: "No es tarde.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "It's not late.", correct: true},
+          {negation: "It is not late.", correct: true},
+          {negation: "It isn't late.", correct: true},
+          {negation: "It's no late.", correct: false},
+          {negation: "Is not late.", correct: false},
+          {negation: "No is late.", correct: false},
+          {negation: "No isn't late.", correct: false},
+        ]
+      },
+      {
+        statement: "Él está feliz.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "He's not happy.", correct: true},
+          {negation: "He is not happy.", correct: true},
+          {negation: "He isn't happy.", correct: true},
+          {negation: "He's no happy.", correct: false},
+          {negation: "He not happy.", correct: false},
+          {negation: "No is happy.", correct: false},
+          {negation: "No isn't happy.", correct: false},
+        ]
+      },
+      {
+        statement: "Tú estás en la oficina.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "You're not in the office.", correct: true},
+          {negation: "You are not in the office.", correct: true},
+          {negation: "You aren't in the office.", correct: true},
+          {negation: "You're no in the office.", correct: false},
+          {negation: "You not in the office.", correct: false},
+          {negation: "No are in the office.", correct: false},
+          {negation: "No aren't in the office.", correct: false},
+        ]
+      },
+      {
+        statement: "Ella es doctora.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "She's not a doctor.", correct: true},
+          {negation: "She is not a doctor.", correct: true},
+          {negation: "She isn't a doctor.", correct: true},
+          {negation: "She's no a doctor.", correct: false},
+          {negation: "She not a doctor.", correct: false},
+          {negation: "No is a doctor.", correct: false},
+          {negation: "No isn't a doctor.", correct: false},
+        ]
+      },
+      {
+        statement: "Ellos son de Japón.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "They're not from Japan.", correct: true},
+          {negation: "They are not from Japan.", correct: true},
+          {negation: "They aren't from Japan.", correct: true},
+          {negation: "They're no from Japan.", correct: false},
+          {negation: "They not from Japan.", correct: false},
+          {negation: "No are from Japan.", correct: false},
+          {negation: "No aren't from Japan.", correct: false},
+        ]
+      },
+      {
+        statement: "Yo soy John.",
+        correctPossibilities: 2,
+        negations: [
+          {negation: "I'm not John.", correct: true},
+          {negation: "I am not John.", correct: true},
+          {negation: "I'm no John.", correct: false},
+          {negation: "I not John.", correct: false},
+          {negation: "No am John.", correct: false},
+          {negation: "No I'm John.", correct: false},
+        ]
+      },
+      {
+        statement: "Nosotros tenemos 30 años.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "We're not 30 years old.", correct: true},
+          {negation: "We are not 30 years old.", correct: true},
+          {negation: "We aren't 30 years old.", correct: true},
+          {negation: "We're no 30 years old.", correct: false},
+          {negation: "We not 30 years old.", correct: false},
+          {negation: "No are 30 years old.", correct: false},
+          {negation: "No aren't 30 years old.", correct: false},
+        ]
+      },
+      {
+        statement: "Tú eres colombiano.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "You're not Colombian.", correct: true},
+          {negation: "You are not Colombian.", correct: true},
+          {negation: "You aren't Colombian.", correct: true},
+          {negation: "You're no Colombian.", correct: false},
+          {negation: "You not Colombian.", correct: false},
+          {negation: "No are Colombian.", correct: false},
+          {negation: "No aren't Colombian.", correct: false},
+        ]
+      },
+      {
+        statement: "John está triste.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "John's not sad.", correct: true},
+          {negation: "John is not sad.", correct: true},
+          {negation: "John isn't sad.", correct: true},
+          {negation: "John's no sad.", correct: false},
+          {negation: "John not sad.", correct: false},
+          {negation: "No is sad.", correct: false},
+          {negation: "No isn't sad.", correct: false},
+        ]
+      },
+      {
+        statement: "Es importante.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "It's not important.", correct: true},
+          {negation: "It is not important.", correct: true},
+          {negation: "It isn't important.", correct: true},
+          {negation: "It's no important.", correct: false},
+          {negation: "It not important.", correct: false},
+          {negation: "No is important.", correct: false},
+          {negation: "No isn't important.", correct: false},
+        ]
+      },
+      {
+        statement: "John y Lee son de Perú.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "John and Lee're not from Peru.", correct: true},
+          {negation: "John and Lee are not from Peru.", correct: true},
+          {negation: "John and Lee aren't from Peru.", correct: true},
+          {negation: "John and Lee're no from Peru.", correct: false},
+          {negation: "John and Lee not from Peru.", correct: false},
+          {negation: "No are from Peru.", correct: false},
+          {negation: "No aren't from Peru.", correct: false},
+        ]
+      },
+      {
+        statement: "Mary es piloto.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "Mary's not a pilot.", correct: true},
+          {negation: "Mary is not a pilot.", correct: true},
+          {negation: "Mary isn't a pilot.", correct: true},
+          {negation: "Mary's no a pilot.", correct: false},
+          {negation: "Mary not a pilot.", correct: false},
+          {negation: "No is a pilot.", correct: false},
+          {negation: "No isn't a pilot.", correct: false},
+        ]
+      },
+      {
+        statement: "Ellos están en casa.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "They're not at home.", correct: true},
+          {negation: "They are not at home.", correct: true},
+          {negation: "They aren't at home.", correct: true},
+          {negation: "They're no at home.", correct: false},
+          {negation: "They not at home.", correct: false},
+          {negation: "No are at home.", correct: false},
+          {negation: "No aren't at home.", correct: false},
+        ]
+      },
+      {
+        statement: "Él tiene 20 años.",
+        correctPossibilities: 3,
+        negations: [
+          {negation: "He's not 20 years old.", correct: true},
+          {negation: "He is not 20 years old.", correct: true},
+          {negation: "He isn't 20 years old.", correct: true},
+          {negation: "He's no 20 years old.", correct: false},
+          {negation: "He not 20 years old.", correct: false},
+          {negation: "No is 20 years old.", correct: false},
+          {negation: "No isn't 20 years old.", correct: false},
+        ]
+      }
+    ]
+  },
+  
   
 };
 
 export const toBeFlags = {
   currentQuestion: 0,
   currentNegation: 0,
-
+  currentNegation2: 0,
+  correctPossibilities: 0,
+  
 }

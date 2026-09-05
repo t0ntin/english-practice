@@ -38,7 +38,7 @@ tr:nth-child(even) {
 
 /* ==========  BUTTONS ============ */
 
-.pronoun-button, .practice-pronoun-button, .popup-pronoun-button, .practice-sentence-button, .eng-to-span-button, .span-to-eng-button, .popup-sentence-translation, .check-question-button, .next-question-button, .negation-button, .next-negation-button {
+.pronoun-button, .practice-pronoun-button, .popup-pronoun-button, .practice-sentence-button, .eng-to-span-button, .span-to-eng-button, .popup-sentence-translation, .check-question-button, .next-question-button, .negation-button, .next-negation-button, .previous-negation-button, .negation-button-2, .previous-negation-button-2, .next-negation-button-2 {
   padding: 10px 15px;
   background-color: var(--COMMON-ERRORS-BLUE);
   color: white;
@@ -48,16 +48,16 @@ tr:nth-child(even) {
   transition: transform 0.3s ease;
 }
 
-.pronoun-button:hover, .practice-pronoun-button:hover, .popup-pronoun-button:hover, .practice-sentence-button:hover, .eng-to-span-button:hover, .span-to-eng-button:hover, .popup-sentence-translation:hover, .check-question-button:hover, .next-question-button:hover, .negation-button:hover, .next-negation-button:hover {
+.pronoun-button:hover, .practice-pronoun-button:hover, .popup-pronoun-button:hover, .practice-sentence-button:hover, .eng-to-span-button:hover, .span-to-eng-button:hover, .popup-sentence-translation:hover, .check-question-button:hover, .next-question-button:hover, .negation-button:hover, .next-negation-button:hover, .previous-negation-button:hover, .negation-button-2:hover, .previous-negation-button-2:hover, .next-negation-button-2:hover {
   background-color: var(--COMMON-ERRORS-BLUE-LIGHTER);
 }
 
-.pronoun-button:active, .practice-pronoun-button:active, .popup-pronoun-button:active, .practice-sentence-button:active, .eng-to-span-button:active, .span-to-eng-button:active, .popup-sentence-translation:active, .check-question-button:active, .next-question-button:active, .negation-button:active, .next-negation-button:active {
+.pronoun-button:active, .practice-pronoun-button:active, .popup-pronoun-button:active, .practice-sentence-button:active, .eng-to-span-button:active, .span-to-eng-button:active, .popup-sentence-translation:active, .check-question-button:active, .next-question-button:active, .negation-button:active, .next-negation-button:active, .previous-negation-button:active, .negation-button-2:active, .previous-negation-button-2:active, .next-negation-button-2:active {
   opacity: 0.6;
   transform: scale(0.95);
 }
 
-.pronoun-button:focus, .practice-pronoun-button:focus, .popup-pronoun-button:focus, .practice-sentence-button:focus, .eng-to-span-button:focus, .span-to-eng-button:focus, .popup-sentence-translation:focus, .check-question-button:focus, .next-question-button:focus, .negation-button:focus, .next-negation-button:focus {
+.pronoun-button:focus, .practice-pronoun-button:focus, .popup-pronoun-button:focus, .practice-sentence-button:focus, .eng-to-span-button:focus, .span-to-eng-button:focus, .popup-sentence-translation:focus, .check-question-button:focus, .next-question-button:focus, .negation-button:focus, .next-negation-button:focus, .previous-negation-button:focus, .negation-button-2:focus, .previous-negation-button-2:focus, .next-negation-button-2:focus {
   outline: 2px solid #333;
   outline-offset: 2px;
 }
@@ -109,7 +109,7 @@ tr:nth-child(even) {
   grid-column: 1/5;
 }
 
-.wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e, .wrapper-3-f, .wrapper-3-g {
+.wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e, .wrapper-3-f, .wrapper-3-g, .wrapper-3-h {
   padding: 0 0 0 8px;
   border-left: 1px solid darkgray;
   border-radius: 5px;
@@ -229,6 +229,7 @@ tr:nth-child(even) {
   opacity: 0;
   content: '';
   transform: scale(0);
+  position: absolute;
 }
 
 .trans-div-12.show-x::after {
@@ -303,13 +304,15 @@ tr:nth-child(even) {
   text-align: center;
 }
 
-.wrapper-3-g {
+.wrapper-3-g, .wrapper-3-h {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  gap: 15px;
+  /* align-content: center; */
+  /* align-items: center; */
 }
 
-.trans-div-14 {
+.trans-div-14, .trans-div-16 {
   margin: 0 0 10px 0;
   padding: 10px 0;
   border-bottom: 3px solid var(--COMMON-ERRORS-BLUE-LIGHTER);
@@ -319,7 +322,7 @@ tr:nth-child(even) {
   gap: 10px;
 }
 
-.negation-statement-p {
+.negation-statement-p, .negation-statement-2-p {
   margin: 10px 0 10px 0px;
   height: 50px;
   font-size: 1.2rem;
@@ -337,8 +340,46 @@ tr:nth-child(even) {
   width: fit-content;
 }
 
-.next-negation-button {
-  /* grid-column: 1/6; */
-  width: fit-content;
-  place-self: center;
+.trans-div-15, .trans-div-17 {
+  margin: 0 auto;
+  display: flex;
+  gap: 15px;
+}
+
+
+.trans-div-16 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position:relative;
+}
+
+.trans-div-16.show-party-emoji::before {
+  content:'🎉';
+  width: 27px;
+  height: 27px;
+  position: absolute;
+  visibility: visible;
+  transform: scale(3);
+  transition: transform 0.3s ease;
+  opacity: 1;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  border: 2px solid var(--COMMON-ERRORS-BLUE-LIGHTER);
+  border-radius: 50%;
+  text-align: center;
+  align-content: center;
+  background-color: rgba(0, 0, 0, 0.664);
+}
+.trans-div-16.show-larger-party-emoji::before {
+  transform: scale(4.1);
+}
+
+.trans-div-16::before {
+  visibility: hidden;
+  opacity: 0;
+  content: '';
+  position: absolute;
+  transform: scale(0);
 }
